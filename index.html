@@ -137,11 +137,11 @@ document.getElementById("products").innerHTML=ps
 (p.place||p[3]||""))
 .toLowerCase().includes(q)
 )
-.map(p=>{
+.map(p:>{
 let n=p.name||p[0];
-let price=p.price||p[1];
-let cat=p.category||p[2];
-let place=p.place||p[3];
+let price=p.Price||p[1];
+let cat=p.Category||p[2];
+let place=p.Place||p[3];
 let icon=p[4]||"🛍️";
 
 return `<div class="card">
