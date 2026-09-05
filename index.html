@@ -159,7 +159,10 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
-
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+); 
 let ps = [];
 
 
