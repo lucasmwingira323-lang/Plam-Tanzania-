@@ -499,7 +499,39 @@ x !== id
 // START
 // ==============================
 
-loadProducts();
+loadProducts();loadProducts();
+
+async function registerUser() {
+  const fullName = document.getElementById("fullName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!fullName || !phone || !email || !password) {
+    alert("Tafadhali jaza taarifa zote.");
+    return;
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: {
+        full_name: fullName,
+        phone: phone
+      }
+    }
+  });
+
+  if (error) {
+    alert("Usajili umeshindikana: " + error.message);
+    return;
+  }
+
+  alert("Akaunti imefunguliwa! Angalia email yako kwa uthibitisho.");
+}
+
+</script>
 
 </script>
 
