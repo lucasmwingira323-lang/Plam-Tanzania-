@@ -461,7 +461,11 @@ show("home");
 console.log(error);
 
 alert(
-"Bidhaa haijahifadhiwa. Angalia Supabase RLS policy."
+
+);console.log("SUPABASE ERROR:", error);
+
+alert(
+"Bidhaa haijahifadhiwa: " + (error?.message || "Kuna kosa.")
 );
 
 }
