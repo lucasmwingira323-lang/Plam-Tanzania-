@@ -1,7 +1,14 @@
 <!doctype html>
+<html lang="sw">
 
-<html lang="sw"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 
 *{
 box-sizing:border-box;
@@ -202,6 +209,19 @@ background:#128c7e;
 flex:1;
 }
 
+.phone-label{
+display:block;
+font-weight:bold;
+margin-top:12px;
+margin-bottom:4px;
+}
+
+.phone-help{
+font-size:13px;
+color:#666;
+margin-top:0;
+}
+
 @media(min-width:650px){
 
 .cats{
@@ -214,11 +234,31 @@ grid-template-columns:repeat(3,1fr);
 
 }
 
-</style></head><body><!-- ================= HEADER ================= --><header><div class="title">
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="title">
 🇹🇿 PLAM TANZANIA
-</div><div class="subtitle">
+</div>
+
+<div class="subtitle">
 Jenga biashara yako. Fikia wateja zaidi.
-</div></header><!-- ================= TOP BUTTONS ================= --><div class="top-buttons"><button
+</div>
+
+</header>
+
+
+<!-- TOP BUTTONS -->
+
+<div class="top-buttons">
+
+<button
 type="button"
 onclick="openRegister()">
 👤 Fungua Akaunti
@@ -236,217 +276,379 @@ onclick="openAddProduct()">
 ➕ Weka Bidhaa
 </button>
 
-</div><main class="wrap"><!-- ================= HOME ================= --><section id="home"><input
+</div>
+
+
+<main class="wrap">
+
+
+<!-- HOME -->
+
+<section id="home">
+
+<input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
+>
 
-«»
+<h2>📂 Categories</h2>
 
-<h2>📂 Categories</h2><div class="cats"><div class="cat" data-category="Mavazi">
+<div class="cats">
+
+<div class="cat" data-category="Mavazi">
 <span class="icon">👕</span>
 Mavazi
-</div><div class="cat" data-category="Electronics">
+</div>
+
+<div class="cat" data-category="Electronics">
 <span class="icon">📱</span>
 Electronics
-</div><div class="cat" data-category="Nyumba">
+</div>
+
+<div class="cat" data-category="Nyumba">
 <span class="icon">🏠</span>
 Nyumba
-</div><div class="cat" data-category="Magari">
+</div>
+
+<div class="cat" data-category="Magari">
 <span class="icon">🚗</span>
 Magari
-</div><div class="cat" data-category="Kilimo">
+</div>
+
+<div class="cat" data-category="Kilimo">
 <span class="icon">🌾</span>
 Kilimo
-</div><div class="cat" data-category="Urembo">
+</div>
+
+<div class="cat" data-category="Urembo">
 <span class="icon">💄</span>
 Urembo
-</div><div class="cat" data-category="Elimu">
+</div>
+
+<div class="cat" data-category="Elimu">
 <span class="icon">📚</span>
 Elimu
-</div><div class="cat" data-category="Huduma">
+</div>
+
+<div class="cat" data-category="Huduma">
 <span class="icon">🔧</span>
 Huduma
-</div></div><h2>🔥 Bidhaa</h2><div id="products" class="products"></div></section><!-- ================= ADD PRODUCT ================= --><section id="add" class="hidden"><h2 class="add-title">
+</div>
+
+</div>
+
+
+<h2>🔥 Bidhaa</h2>
+
+<div id="products" class="products"></div>
+
+</section>
+
+
+<!-- ADD PRODUCT -->
+
+<section id="add" class="hidden">
+
+<h2 class="add-title">
 ➕ Weka Bidhaa Yako
-</h2><div class="form"><label>Jina la bidhaa</label>
+</h2>
+
+
+<div class="form">
+
+<label>
+Jina la bidhaa
+</label>
 
 <input
 id="name"
 type="text"
 placeholder="Mfano: Samsung A05"
+>
 
-«»
 
-<label>Bei</label>
+<label>
+Bei
+</label>
 
 <input
 id="price"
 type="number"
 placeholder="Mfano: 250000"
+>
 
-«»
 
-<label>Kategoria</label>
+<label>
+Kategoria
+</label>
 
-<select id="category"><option value="Mavazi">Mavazi</option>
+<select id="category">
+
+<option value="Mavazi">Mavazi</option>
 <option value="Electronics">Electronics</option>
 <option value="Nyumba">Nyumba</option>
 <option value="Magari">Magari</option>
 <option value="Kilimo">Kilimo</option>
 <option value="Urembo">Urembo</option>
 <option value="Elimu">Elimu</option>
-<option value="Huduma">Huduma</option></select><label>Eneo</label>
+<option value="Huduma">Huduma</option>
+
+</select>
+
+
+<label>
+Eneo
+</label>
 
 <input
 id="place"
 type="text"
 placeholder="Mfano: Mbeya"
+>
 
-«»
 
-<label>📞 Namba ya simu ya muuzaji</label>
+<!-- SIMU YA MUUZAJI -->
+
+<label class="phone-label">
+📞 Namba ya simu ya muuzaji
+</label>
 
 <input
 id="sellerPhone"
 type="tel"
+inputmode="tel"
+autocomplete="tel"
 placeholder="Mfano: 0712345678"
+>
 
-«»
+<p class="phone-help">
+Weka namba ambayo mnunuzi atatumia kukupigia au kukutumia WhatsApp.
+</p>
 
-<label>Maelezo ya bidhaa</label>
+
+<label>
+Maelezo ya bidhaa
+</label>
 
 <textarea
 id="desc"
 placeholder="Andika maelezo ya bidhaa yako hapa..."
-></textarea><button
+></textarea>
+
+
+<button
 type="button"
 class="publish-button"
 onclick="addProduct()">
+
 📢 Chapisha Bidhaa
+
 </button>
+
 
 <button
 type="button"
 onclick="showSection('home')"
 class="back-button">
+
 ⬅️ Rudi Home
+
 </button>
 
-</div></section><!-- ================= ACCOUNT ================= --><section id="account" class="hidden"><h2 class="account-title">
+</div>
+
+</section>
+
+
+<!-- ACCOUNT -->
+
+<section id="account" class="hidden">
+
+<h2 class="account-title">
 👤 Akaunti
-</h2><!-- REGISTER --><div id="registerBox" class="form"><h3>Fungua Akaunti</h3><input
+</h2>
+
+
+<!-- REGISTER -->
+
+<div id="registerBox" class="form">
+
+<h3>
+Fungua Akaunti
+</h3>
+
+<input
 id="fullName"
 type="text"
 placeholder="Jina kamili"
-
-«»
+>
 
 <input
 id="phone"
 type="tel"
 placeholder="Namba ya simu"
-
-«»
+>
 
 <input
 id="email"
 type="email"
 placeholder="Barua pepe"
-
-«»
+>
 
 <input
 id="password"
 type="password"
 placeholder="Password"
-
-«»
+>
 
 <button
 type="button"
 onclick="registerUser()">
+
 Jisajili
+
 </button>
 
 <p class="small-text">
 Baada ya kujisajili, utatakiwa kuthibitisha email yako.
-</p><button
+</p>
+
+<button
 type="button"
 onclick="openLogin()">
+
 Nina akaunti tayari
+
 </button>
 
-</div><!-- LOGIN --><div id="loginBox" class="form hidden"><h3>Ingia kwenye Akaunti</h3><input
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="form hidden">
+
+<h3>
+Ingia kwenye Akaunti
+</h3>
+
+<input
 id="loginEmail"
 type="email"
 placeholder="Barua pepe"
-
-«»
+>
 
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
-
-«»
+>
 
 <button
 type="button"
 onclick="loginUser()">
+
 Ingia
+
 </button>
 
-<br><br>
+<br>
+<br>
 
 <button
 type="button"
 onclick="openRegister()">
+
 Fungua Akaunti Mpya
+
 </button>
 
-</div><!-- USER --><div id="userBox" class="form hidden"><h3>✅ Umeingia</h3><p id="userEmail"></p><button
+</div>
+
+
+<!-- USER -->
+
+<div id="userBox" class="form hidden">
+
+<h3>
+✅ Umeingia
+</h3>
+
+<p id="userEmail"></p>
+
+<button
 type="button"
 onclick="logoutUser()">
+
 Toka
+
 </button>
 
-</div></section></main><!-- ================= BOTTOM NAV ================= --><nav><button
+</div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav>
+
+<button
 type="button"
 onclick="showSection('home')">
+
 🏠<br>
 Home
+
 </button>
+
 
 <button
 type="button"
 onclick="searchPage()">
+
 🔍<br>
 Tafuta
+
 </button>
+
 
 <button
 type="button"
 onclick="openAddProduct()">
+
 ➕<br>
 Weka Bidhaa
+
 </button>
+
 
 <button
 type="button"
 onclick="messagePage()">
+
 💬<br>
 Ujumbe
+
 </button>
+
 
 <button
 type="button"
 onclick="openRegister()">
+
 👤<br>
 Akaunti
+
 </button>
 
-</nav><script>
+</nav>
+
+
+<script>
 
 
 // ======================================================
@@ -915,6 +1117,7 @@ String(product.phone || "")
 const phoneButton =
 phone
 ?
+
 `
 
 <div class="contact-buttons">
@@ -923,20 +1126,27 @@ phone
 type="button"
 class="call-button"
 onclick="callSeller('${escapeJS(phone)}')">
+
 📞 Piga Simu
+
 </button>
+
 
 <button
 type="button"
 class="whatsapp-button"
 onclick="openWhatsApp('${escapeJS(phone)}','${escapeJS(product.name || "")}')">
+
 💬 WhatsApp
+
 </button>
 
 </div>
 
 `
+
 :
+
 `
 
 <p class="small-text">
@@ -1565,4 +1775,7 @@ loadProducts();
 
 checkSession();
 
-</script></body></html>
+</script>
+
+</body>
+</html>
