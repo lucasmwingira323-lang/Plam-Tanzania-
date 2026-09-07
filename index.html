@@ -1,8 +1,16 @@
 <!doctype html>
-
 <html lang="sw">
-<head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 
 *{
 box-sizing:border-box;
@@ -81,20 +89,11 @@ box-shadow:0 2px 5px #ddd;
 cursor:pointer;
 }
 
-/* ==============================
-   PRODUCTS
-   KILA BIDHAA INA UPANA WOTE
-============================== */
-
 .products{
 display:grid;
 grid-template-columns:1fr;
 gap:15px;
 }
-
-/* ==============================
-   PRODUCT CARD
-============================== */
 
 .card{
 width:100%;
@@ -104,22 +103,13 @@ overflow:hidden;
 box-shadow:0 2px 8px #ddd;
 }
 
-/* ==============================
-   PRODUCT IMAGE
-   INAJAA UPANA WOTE
-============================== */
-
 .product-image{
 width:100%;
-height:auto;
+max-height:500px;
 display:block;
 object-fit:contain;
 background:#eee;
 }
-
-/* ==============================
-   NO IMAGE
-============================== */
 
 .no-image{
 width:100%;
@@ -176,7 +166,7 @@ color:white;
 }
 
 .hidden{
-display:none;
+display:none !important;
 }
 
 .form-box{
@@ -190,12 +180,27 @@ margin-top:15px;
 .form-box input,
 .form-box textarea,
 .form-box select{
+display:block;
 width:100%;
 padding:13px;
-margin:7px 0;
+margin:10px 0;
 border:1px solid #ccc;
 border-radius:8px;
-font-size:15px;
+font-size:16px;
+background:white;
+color:#222;
+}
+
+.form-box input:focus,
+.form-box textarea:focus,
+.form-box select:focus{
+outline:none;
+border:2px solid #008000;
+}
+
+.form-box input[type="file"]{
+padding:10px;
+cursor:pointer;
 }
 
 .form-box button{
@@ -210,17 +215,20 @@ cursor:pointer;
 margin-top:8px;
 }
 
-/* ==============================
-   IMAGE PREVIEW
-============================== */
+.form-box button:disabled{
+background:#777;
+cursor:not-allowed;
+}
 
 .image-preview{
 width:100%;
-height:auto;
+max-height:350px;
+object-fit:contain;
 border-radius:10px;
 margin-top:10px;
 display:none;
 background:#eee;
+border:1px solid #ddd;
 }
 
 .account-buttons{
@@ -238,10 +246,6 @@ padding:25px;
 color:#777;
 }
 
-/* ==============================
-   SIMU
-============================== */
-
 @media(max-width:600px){
 
 .categories{
@@ -256,173 +260,349 @@ font-size:12px;
 grid-template-columns:1fr;
 }
 
-.card{
-width:100%;
 }
 
-.product-image{
-width:100%;
-height:auto;
-}
+</style>
 
-.image-preview{
-width:100%;
-height:auto;
-}
+</head>
 
-}
+<body>
 
-</style></head><body><header><h1>🇹🇿 PLAM TANZANIA</h1><p>
+<header>
+
+<h1>🇹🇿 PLAM TANZANIA</h1>
+
+<p>
 Jenga biashara yako. Fikia wateja zaidi.
-</p></header><nav><button onclick="show('home')">
+</p>
+
+</header>
+
+
+<nav>
+
+<button onclick="show('home')">
 🏠 Mwanzo
-</button><button onclick="show('home');document.getElementById('search').focus()">
+</button>
+
+<button onclick="show('home');focusSearch()">
 🔍 Tafuta
-</button><button onclick="openAddProduct()">
+</button>
+
+<button onclick="openAddProduct()">
 ➕ Weka Bidhaa
-</button><button onclick="show('account')">
+</button>
+
+<button onclick="show('account')">
 👤 Akaunti
-</button></nav><main class="wrap"><!-- HOME --><section id="home"><input
+</button>
+
+</nav>
+
+
+<main class="wrap">
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section id="home">
+
+<input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()"
+>
 
-«»
+<div class="categories">
 
-<div class="categories"><button onclick="filterCategory('')">
+<button onclick="filterCategory('')">
 🌐 Zote
-</button><button onclick="filterCategory('Mavazi')">
-👕 Mavazi
-</button><button onclick="filterCategory('Electronics')">
-📱 Electronics
-</button><button onclick="filterCategory('Nyumba')">
-🏠 Nyumba
-</button><button onclick="filterCategory('Magari')">
-🚗 Magari
-</button><button onclick="filterCategory('Kilimo')">
-🌾 Kilimo
-</button><button onclick="filterCategory('Urembo')">
-💄 Urembo
-</button><button onclick="filterCategory('Elimu')">
-📚 Elimu
-</button><button onclick="filterCategory('Huduma')">
-🛠️ Huduma
-</button></div><div id="products" class="products"></div></section><!-- ADD PRODUCT --><section id="add" class="hidden"><div class="form-box"><h2>➕ Weka Bidhaa</h2><input
-id="name"
-placeholder="Jina la bidhaa"
+</button>
 
-«»
+<button onclick="filterCategory('Mavazi')">
+👕 Mavazi
+</button>
+
+<button onclick="filterCategory('Electronics')">
+📱 Electronics
+</button>
+
+<button onclick="filterCategory('Nyumba')">
+🏠 Nyumba
+</button>
+
+<button onclick="filterCategory('Magari')">
+🚗 Magari
+</button>
+
+<button onclick="filterCategory('Kilimo')">
+🌾 Kilimo
+</button>
+
+<button onclick="filterCategory('Urembo')">
+💄 Urembo
+</button>
+
+<button onclick="filterCategory('Elimu')">
+📚 Elimu
+</button>
+
+<button onclick="filterCategory('Huduma')">
+🛠️ Huduma
+</button>
+
+</div>
+
+<div id="products" class="products"></div>
+
+</section>
+
+
+<!-- =========================
+     ADD PRODUCT
+========================= -->
+
+<section id="add" class="hidden">
+
+<div class="form-box">
+
+<h2>➕ Weka Bidhaa</h2>
+
+
+<label>Jina la bidhaa</label>
+
+<input
+id="name"
+type="text"
+placeholder="Mfano: Samsung A05"
+autocomplete="off"
+>
+
+
+<label>Bei</label>
 
 <input
 id="price"
 type="number"
 placeholder="Bei kwa TZS"
+inputmode="numeric"
+>
 
-«»
 
-<select id="category"><option value="">
+<label>Kundi la bidhaa</label>
+
+<select id="category">
+
+<option value="">
 Chagua kundi
-</option><option>Mavazi</option>
-<option>Electronics</option>
-<option>Nyumba</option>
-<option>Magari</option>
-<option>Kilimo</option>
-<option>Urembo</option>
-<option>Elimu</option>
-<option>Huduma</option></select><input
-id="place"
-placeholder="Mahali bidhaa ilipo"
+</option>
 
-«»
+<option value="Mavazi">
+Mavazi
+</option>
+
+<option value="Electronics">
+Electronics
+</option>
+
+<option value="Nyumba">
+Nyumba
+</option>
+
+<option value="Magari">
+Magari
+</option>
+
+<option value="Kilimo">
+Kilimo
+</option>
+
+<option value="Urembo">
+Urembo
+</option>
+
+<option value="Elimu">
+Elimu
+</option>
+
+<option value="Huduma">
+Huduma
+</option>
+
+</select>
+
+
+<label>Mahali bidhaa ilipo</label>
+
+<input
+id="place"
+type="text"
+placeholder="Mfano: Mbeya"
+autocomplete="off"
+>
+
+
+<label>Namba ya simu ya muuzaji</label>
 
 <input
 id="sellerPhone"
 type="tel"
-placeholder="Namba ya simu ya muuzaji"
+placeholder="Mfano: 0712345678"
+inputmode="tel"
+autocomplete="tel"
+>
 
-«»
+
+<label>Maelezo ya bidhaa</label>
 
 <textarea
 id="desc"
-placeholder="Maelezo ya bidhaa"
+placeholder="Andika maelezo ya bidhaa..."
 rows="4"
-></textarea><label><b>
-🖼️ Chagua picha ya bidhaa
-</b></label><input
+></textarea>
+
+
+<label>
+<b>🖼️ Chagua picha ya bidhaa</b>
+</label>
+
+<input
 id="productImage"
 type="file"
-accept="image/*"
-onchange="previewImage(event)"
+accept="image/jpeg,image/png,image/webp"
+>
 
-«»
 
 <img
 id="imagePreview"
 class="image-preview"
+alt="Preview ya bidhaa"
+>
 
-«»
 
-<button onclick="addProduct()">💾 Hifadhi Bidhaa
+<button
+id="saveProductButton"
+type="button"
+onclick="addProduct()"
+>
+💾 Hifadhi Bidhaa
+</button>
 
-</button></div></section><!-- ACCOUNT --><section id="account" class="hidden"><div class="form-box"><h2>
-👤 Akaunti
-</h2><div class="account-buttons"><button onclick="openRegister()">
+</div>
+
+</section>
+
+
+<!-- =========================
+     ACCOUNT
+========================= -->
+
+<section id="account" class="hidden">
+
+<div class="form-box">
+
+<h2>👤 Akaunti</h2>
+
+<div class="account-buttons">
+
+<button
+type="button"
+onclick="openRegister()"
+>
 Fungua Akaunti
-</button><button onclick="openLogin()">
-Ingia
-</button></div><div id="registerForm" class="hidden"><h3>
-📝 Fungua Akaunti
-</h3><input
-id="fullName"
-placeholder="Jina kamili"
+</button>
 
-«»
+<button
+type="button"
+onclick="openLogin()"
+>
+Ingia
+</button>
+
+</div>
+
+
+<div id="registerForm" class="hidden">
+
+<h3>📝 Fungua Akaunti</h3>
+
+<input
+id="fullName"
+type="text"
+placeholder="Jina kamili"
+>
 
 <input
 id="phone"
 type="tel"
 placeholder="Namba ya simu"
-
-«»
+>
 
 <input
 id="email"
 type="email"
 placeholder="Email"
-
-«»
+>
 
 <input
 id="password"
 type="password"
 placeholder="Password"
+>
 
-«»
+<button
+type="button"
+onclick="register()"
+>
+Fungua Akaunti
+</button>
 
-<button onclick="register()">Fungua Akaunti
+</div>
 
-</button></div><div id="loginForm" class="hidden"><h3>
-🔐 Ingia
-</h3><input
+
+<div id="loginForm" class="hidden">
+
+<h3>🔐 Ingia</h3>
+
+<input
 id="loginEmail"
 type="email"
 placeholder="Email"
-
-«»
+>
 
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
+>
 
-«»
+<button
+type="button"
+onclick="login()"
+>
+Ingia
+</button>
 
-<button onclick="login()">Ingia
+</div>
 
-</button></div></div></section></main><footer>PLAM TANZANIA © 2026
+</div>
 
-</footer><script>
+</section>
+
+</main>
+
+
+<footer>
+
+PLAM TANZANIA © 2026
+
+</footer>
+
+
+<script>
 
 /* ==============================
    SUPABASE
@@ -433,7 +613,6 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
-
 
 const supabaseClient =
 window.supabase.createClient(
@@ -464,9 +643,7 @@ method:"GET",
 
 headers:{
 "apikey":SUPABASE_KEY,
-
-"Authorization":
-"Bearer " + SUPABASE_KEY
+"Authorization":"Bearer " + SUPABASE_KEY
 }
 
 }
@@ -485,15 +662,19 @@ throw new Error(
 ps =
 await response.json();
 
-
 render();
 
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Load products error:",
+error
+);
 
-document.getElementById("products").innerHTML =
+document.getElementById(
+"products"
+).innerHTML =
 "<p>Imeshindikana kupakia bidhaa.</p>";
 
 }
@@ -502,7 +683,7 @@ document.getElementById("products").innerHTML =
 
 
 /* ==============================
-   RENDER PRODUCTS
+   RENDER
 ============================== */
 
 function render(){
@@ -510,12 +691,12 @@ function render(){
 const box =
 document.getElementById("products");
 
-
 const search =
 (
 document.getElementById("search")?.value || ""
 )
-.toLowerCase();
+.toLowerCase()
+.trim();
 
 
 const filtered =
@@ -534,18 +715,12 @@ const text =
 .toLowerCase();
 
 
-const matchSearch =
-text.includes(search);
-
-
-const matchCategory =
-!selectedCategory ||
-p.category === selectedCategory;
-
-
 return (
-matchSearch &&
-matchCategory
+text.includes(search) &&
+(
+!selectedCategory ||
+p.category === selectedCategory
+)
 );
 
 });
@@ -569,23 +744,25 @@ let imageHTML = "";
 
 if(p.image_url){
 
-imageHTML =
-`
+imageHTML = `
+
 <img
 class="product-image"
 src="${escapeHTML(p.image_url)}"
 alt="${escapeHTML(p.name || "Bidhaa")}"
 loading="lazy"
 >
+
 `;
 
 }else{
 
-imageHTML =
-`
+imageHTML = `
+
 <div class="no-image">
 📦
 </div>
+
 `;
 
 }
@@ -599,12 +776,14 @@ const callButton =
 phone
 ?
 `
+
 <button
 class="call"
 onclick="callSeller('${escapeJS(phone)}')"
 >
 📞 Piga Simu
 </button>
+
 `
 :
 "";
@@ -614,6 +793,7 @@ const whatsappButton =
 phone
 ?
 `
+
 <button
 class="whatsapp"
 onclick="openWhatsApp(
@@ -623,6 +803,7 @@ onclick="openWhatsApp(
 >
 💬 WhatsApp
 </button>
+
 `
 :
 "";
@@ -634,41 +815,27 @@ return `
 
 ${imageHTML}
 
-
 <div class="card-body">
 
 <h3>
 ${escapeHTML(p.name || "Bidhaa")}
 </h3>
 
-
 <div class="price">
-
 TZS ${escapeHTML(p.price || "")}
-
 </div>
 
-
 <div class="small">
-
 📂 ${escapeHTML(p.category || "")}
-
 </div>
 
-
 <div class="small">
-
 📍 ${escapeHTML(p.place || "")}
-
 </div>
-
 
 <div class="small">
-
 ${escapeHTML(p.description || "")}
-
 </div>
-
 
 <div class="card-buttons">
 
@@ -677,7 +844,6 @@ ${callButton}
 ${whatsappButton}
 
 </div>
-
 
 </div>
 
@@ -705,7 +871,7 @@ render();
 
 
 /* ==============================
-   SHOW SECTION
+   SHOW
 ============================== */
 
 function show(id){
@@ -719,7 +885,6 @@ function show(id){
 
 const el =
 document.getElementById(x);
-
 
 if(el){
 
@@ -736,6 +901,24 @@ x !== id
 
 
 /* ==============================
+   SEARCH
+============================== */
+
+function focusSearch(){
+
+const search =
+document.getElementById("search");
+
+if(search){
+
+search.focus();
+
+}
+
+}
+
+
+/* ==============================
    ADD PRODUCT
 ============================== */
 
@@ -743,9 +926,18 @@ function openAddProduct(){
 
 show("add");
 
-document
-.getElementById("name")
-.focus();
+setTimeout(()=>{
+
+const name =
+document.getElementById("name");
+
+if(name){
+
+name.focus();
+
+}
+
+},100);
 
 }
 
@@ -760,7 +952,6 @@ document
 .getElementById("registerForm")
 .classList
 .remove("hidden");
-
 
 document
 .getElementById("loginForm")
@@ -777,7 +968,6 @@ document
 .classList
 .remove("hidden");
 
-
 document
 .getElementById("registerForm")
 .classList
@@ -790,11 +980,14 @@ document
    IMAGE PREVIEW
 ============================== */
 
-function previewImage(event){
+document
+.getElementById("productImage")
+.addEventListener(
+"change",
+function(){
 
 const file =
-event.target.files[0];
-
+this.files[0];
 
 const preview =
 document.getElementById(
@@ -803,6 +996,8 @@ document.getElementById(
 
 
 if(!file){
+
+preview.src = "";
 
 preview.style.display =
 "none";
@@ -815,10 +1010,12 @@ return;
 if(!file.type.startsWith("image/")){
 
 alert(
-"Tafadhali chagua picha."
+"Tafadhali chagua picha sahihi."
 );
 
-event.target.value = "";
+this.value = "";
+
+preview.src = "";
 
 preview.style.display =
 "none";
@@ -828,16 +1025,15 @@ return;
 }
 
 
-if(
-file.size >
-5 * 1024 * 1024
-){
+if(file.size > 5 * 1024 * 1024){
 
 alert(
 "Picha isiwe kubwa kuliko 5MB."
 );
 
-event.target.value = "";
+this.value = "";
+
+preview.src = "";
 
 preview.style.display =
 "none";
@@ -847,14 +1043,25 @@ return;
 }
 
 
-preview.src =
-URL.createObjectURL(file);
+const reader =
+new FileReader();
 
+
+reader.onload =
+function(e){
+
+preview.src =
+e.target.result;
 
 preview.style.display =
 "block";
 
-}
+};
+
+
+reader.readAsDataURL(file);
+
+});
 
 
 /* ==============================
@@ -910,42 +1117,64 @@ document
 .files[0];
 
 
-if(
-!name ||
-!price ||
-!place ||
-!phone
-){
+if(!name){
 
-alert(
-"Jaza jina, bei, mahali na namba ya simu."
-);
+alert("Andika jina la bidhaa.");
+
+document.getElementById("name").focus();
 
 return;
 
 }
 
 
-if(
-Number(price) <= 0
-){
+if(!price){
 
-alert(
-"Weka bei sahihi."
-);
+alert("Weka bei ya bidhaa.");
+
+document.getElementById("price").focus();
 
 return;
 
 }
 
 
-if(
-phone.length < 9
-){
+if(Number(price) <= 0){
 
-alert(
-"Weka namba sahihi ya simu."
-);
+alert("Weka bei sahihi.");
+
+return;
+
+}
+
+
+if(!category){
+
+alert("Chagua kundi la bidhaa.");
+
+document.getElementById("category").focus();
+
+return;
+
+}
+
+
+if(!place){
+
+alert("Andika mahali bidhaa ilipo.");
+
+document.getElementById("place").focus();
+
+return;
+
+}
+
+
+if(!phone){
+
+alert("Weka namba ya simu ya muuzaji.");
+
+document.getElementById("sellerPhone").focus();
 
 return;
 
@@ -953,14 +1182,12 @@ return;
 
 
 const button =
-document.querySelector(
-"#add .form-box button"
+document.getElementById(
+"saveProductButton"
 );
 
 
-button.disabled =
-true;
-
+button.disabled = true;
 
 button.innerText =
 "⏳ Inahifadhi...";
@@ -971,16 +1198,17 @@ try{
 let imageUrl = null;
 
 
-/* UPLOAD IMAGE */
+/* ==============================
+   UPLOAD IMAGE
+============================== */
 
 if(imageFile){
 
-const safeName =
+const extension =
 imageFile.name
-.replace(
-/[^a-zA-Z0-9._-]/g,
-"_"
-);
+.split(".")
+.pop()
+.toLowerCase();
 
 
 const filePath =
@@ -989,8 +1217,8 @@ Date.now() +
 Math.random()
 .toString(36)
 .substring(2) +
-"-" +
-safeName;
+"." +
+extension;
 
 
 const uploadResult =
@@ -1001,19 +1229,19 @@ await supabaseClient
 filePath,
 imageFile,
 {
-contentType:
-imageFile.type,
-
+cacheControl:"3600",
+contentType:imageFile.type,
 upsert:false
 }
 );
 
 
-if(
-uploadResult.error
-){
+if(uploadResult.error){
 
-throw uploadResult.error;
+throw new Error(
+"Picha haijapakiwa: " +
+uploadResult.error.message
+);
 
 }
 
@@ -1035,7 +1263,9 @@ publicResult
 }
 
 
-/* SAVE TO DATABASE */
+/* ==============================
+   SAVE DATABASE
+============================== */
 
 const response =
 await fetch(
@@ -1046,8 +1276,7 @@ method:"POST",
 
 headers:{
 
-"apikey":
-SUPABASE_KEY,
+"apikey":SUPABASE_KEY,
 
 "Authorization":
 "Bearer " +
@@ -1084,15 +1313,13 @@ image_url:imageUrl
 );
 
 
-if(
-!response.ok
-){
+if(!response.ok){
 
 const errorText =
 await response.text();
 
-
 throw new Error(
+"Database error: " +
 errorText
 );
 
@@ -1104,51 +1331,47 @@ alert(
 );
 
 
-/* CLEAR FORM */
+/* CLEAR */
 
-document
-.getElementById("name")
-.value = "";
+document.getElementById(
+"name"
+).value = "";
 
+document.getElementById(
+"price"
+).value = "";
 
-document
-.getElementById("price")
-.value = "";
+document.getElementById(
+"category"
+).value = "";
 
+document.getElementById(
+"place"
+).value = "";
 
-document
-.getElementById("category")
-.value = "";
+document.getElementById(
+"sellerPhone"
+).value = "";
 
+document.getElementById(
+"desc"
+).value = "";
 
-document
-.getElementById("place")
-.value = "";
+document.getElementById(
+"productImage"
+).value = "";
 
+document.getElementById(
+"imagePreview"
+).src = "";
 
-document
-.getElementById("sellerPhone")
-.value = "";
-
-
-document
-.getElementById("desc")
-.value = "";
-
-
-document
-.getElementById("productImage")
-.value = "";
-
-
-document
-.getElementById("imagePreview")
-.style
-.display = "none";
+document.getElementById(
+"imagePreview"
+).style.display =
+"none";
 
 
 await loadProducts();
-
 
 show("home");
 
@@ -1157,18 +1380,15 @@ show("home");
 
 console.error(error);
 
-
 alert(
 "Bidhaa haijahifadhiwa.\n\n" +
-"Sababu: " +
+"Sababu:\n" +
 (error.message || error)
 );
 
 }finally{
 
-button.disabled =
-false;
-
+button.disabled = false;
 
 button.innerText =
 "💾 Hifadhi Bidhaa";
@@ -1179,7 +1399,7 @@ button.innerText =
 
 
 /* ==============================
-   PHONE FORMAT
+   PHONE
 ============================== */
 
 function formatPhone(phone){
@@ -1191,27 +1411,21 @@ String(phone || "")
 .replace(/-/g,"");
 
 
-if(
-phone.startsWith("+255")
-){
+if(phone.startsWith("+255")){
 
 return phone;
 
 }
 
 
-if(
-phone.startsWith("255")
-){
+if(phone.startsWith("255")){
 
 return "+" + phone;
 
 }
 
 
-if(
-phone.startsWith("0")
-){
+if(phone.startsWith("0")){
 
 return "+255" +
 phone.substring(1);
@@ -1225,14 +1439,13 @@ return phone;
 
 
 /* ==============================
-   CALL SELLER
+   CALL
 ============================== */
 
 function callSeller(phone){
 
 const number =
 formatPhone(phone);
-
 
 window.location.href =
 "tel:" + number;
@@ -1264,9 +1477,7 @@ const url =
 "https://wa.me/" +
 number +
 "?text=" +
-encodeURIComponent(
-message
-);
+encodeURIComponent(message);
 
 
 window.open(
@@ -1359,7 +1570,7 @@ throw error;
 
 alert(
 "Akaunti imefunguliwa! 🎉\n" +
-"Angalia email yako kwa uthibitisho kama umeombwa."
+"Angalia email yako kwa uthibitisho."
 );
 
 
@@ -1455,68 +1666,26 @@ error.message
 
 function escapeHTML(value){
 
-return String(
-value ?? ""
-)
+return String(value ?? "")
 
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
 function escapeJS(value){
 
-return String(
-value ?? ""
-)
+return String(value ?? "")
 
-.replace(
-/\\/g,
-"\\\\"
-)
-
-.replace(
-/'/g,
-"\\'"
-)
-
-.replace(
-/"/g,
-'\\"'
-)
-
-.replace(
-/\n/g,
-"\\n"
-)
-
-.replace(
-/\r/g,
-"\\r"
-);
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/"/g,'\\"')
+.replace(/\n/g,"\\n")
+.replace(/\r/g,"\\r");
 
 }
 
@@ -1527,5 +1696,7 @@ value ?? ""
 
 loadProducts();
 
-</script></body>
+</script>
+
+</body>
 </html>
