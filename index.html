@@ -211,7 +211,8 @@ grid-template-columns:repeat(3,1fr);
 
 <body>
 
-<!-- HEADER -->
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -226,13 +227,13 @@ Jenga biashara yako. Fikia wateja zaidi.
 </header>
 
 
-<!-- TOP BUTTONS -->
+<!-- ================= TOP BUTTONS ================= -->
 
 <div class="top-buttons">
 
 <button
 type="button"
-onclick="showSection('account')">
+onclick="openRegister()">
 Fungua Akaunti
 </button>
 
@@ -254,7 +255,7 @@ onclick="showSection('add')">
 <main class="wrap">
 
 
-<!-- HOME -->
+<!-- ================= HOME ================= -->
 
 <section id="home">
 
@@ -318,7 +319,7 @@ Huduma
 </section>
 
 
-<!-- ADD PRODUCT -->
+<!-- ================= ADD PRODUCT ================= -->
 
 <section id="add" class="hidden">
 
@@ -398,7 +399,7 @@ class="back-button">
 </section>
 
 
-<!-- ACCOUNT -->
+<!-- ================= ACCOUNT ================= -->
 
 <section id="account" class="hidden">
 
@@ -415,11 +416,13 @@ class="back-button">
 
 <input
 id="fullName"
+type="text"
 placeholder="Jina kamili"
 >
 
 <input
 id="phone"
+type="tel"
 placeholder="Namba ya simu"
 >
 
@@ -510,7 +513,7 @@ Toka
 </main>
 
 
-<!-- BOTTOM NAVIGATION -->
+<!-- ================= BOTTOM NAV ================= -->
 
 <nav>
 
@@ -548,7 +551,7 @@ Ujumbe
 
 <button
 type="button"
-onclick="showSection('account')">
+onclick="openRegister()">
 👤<br>
 Akaunti
 </button>
@@ -569,11 +572,33 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-const supabase =
+let supabaseClient = null;
+
+try{
+
+if(
+window.supabase &&
+typeof window.supabase.createClient === "function"
+){
+
+supabaseClient =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
+
+console.log("Supabase imeunganishwa.");
+
+}
+
+}catch(error){
+
+console.log(
+"Supabase error:",
+error
+);
+
+}
 
 
 // ======================================================
@@ -638,7 +663,49 @@ window.scrollTo(0,0);
 
 
 // ======================================================
-// SEARCH PAGE
+// REGISTER
+// ======================================================
+
+function openRegister(){
+
+showSection("account");
+
+document
+.getElementById("registerBox")
+.classList
+.remove("hidden");
+
+document
+.getElementById("loginBox")
+.classList
+.add("hidden");
+
+}
+
+
+// ======================================================
+// LOGIN
+// ======================================================
+
+function openLogin(){
+
+showSection("account");
+
+document
+.getElementById("registerBox")
+.classList
+.add("hidden");
+
+document
+.getElementById("loginBox")
+.classList
+.remove("hidden");
+
+}
+
+
+// ======================================================
+// SEARCH
 // ======================================================
 
 function searchPage(){
@@ -668,52 +735,19 @@ alert(
 
 
 // ======================================================
-// REGISTER PAGE
-// ======================================================
-
-function openRegister(){
-
-showSection("account");
-
-document
-.getElementById("registerBox")
-.classList
-.remove("hidden");
-
-document
-.getElementById("loginBox")
-.classList
-.add("hidden");
-
-}
-
-
-// ======================================================
-// LOGIN PAGE
-// ======================================================
-
-function openLogin(){
-
-showSection("account");
-
-document
-.getElementById("registerBox")
-.classList
-.add("hidden");
-
-document
-.getElementById("loginBox")
-.classList
-.remove("hidden");
-
-}
-
-
-// ======================================================
 // LOAD PRODUCTS
 // ======================================================
 
 async function loadProducts(){
+
+if(!supabaseClient){
+
+showSampleProducts();
+
+return;
+
+}
+
 
 try{
 
@@ -745,15 +779,9 @@ SUPABASE_KEY
 
 if(!response.ok){
 
-const error =
-await response.text();
-
-console.log(
-"Supabase error:",
-error
+throw new Error(
+await response.text()
 );
-
-throw new Error("Database error");
 
 }
 
@@ -771,6 +799,18 @@ console.log(
 error
 );
 
+showSampleProducts();
+
+}
+
+}
+
+
+// ======================================================
+// SAMPLE PRODUCTS
+// ======================================================
+
+function showSampleProducts(){
 
 ps = [
 
@@ -779,6 +819,7 @@ name:"Samsung A05",
 price:250000,
 category:"Electronics",
 place:"Mbeya",
+description:"Samsung A05 nzuri.",
 icon:"📱"
 },
 
@@ -787,6 +828,7 @@ name:"Viatu vya Michezo",
 price:45000,
 category:"Mavazi",
 place:"Mbinga",
+description:"Viatu vizuri vya michezo.",
 icon:"👟"
 },
 
@@ -795,6 +837,7 @@ name:"Sofa Set",
 price:650000,
 category:"Nyumba",
 place:"Mbeya",
+description:"Sofa nzuri kwa matumizi ya nyumbani.",
 icon:"🛋️"
 },
 
@@ -803,6 +846,7 @@ name:"Mbegu za Mahindi",
 price:12000,
 category:"Kilimo",
 place:"Ruvuma",
+description:"Mbegu bora za mahindi.",
 icon:"🌾"
 }
 
@@ -812,11 +856,9 @@ render();
 
 }
 
-}
-
 
 // ======================================================
-// RENDER
+// RENDER PRODUCTS
 // ======================================================
 
 function render(){
@@ -847,7 +889,7 @@ String(product.description || "")
 .toLowerCase();
 
 
-return (
+return(
 
 name.includes(search) ||
 category.includes(search) ||
@@ -911,6 +953,7 @@ ${escapeHTML(product.description || "")}
 </p>
 
 <button
+type="button"
 class="contactBtn"
 data-product="${escapeHTML(product.name || "")}">
 Wasiliana na Muuzaji
@@ -927,9 +970,7 @@ document
 .querySelectorAll(".contactBtn")
 .forEach(button => {
 
-button.addEventListener(
-"click",
-function(){
+button.onclick = function(){
 
 const productName =
 this.getAttribute("data-product");
@@ -940,7 +981,7 @@ productName +
 " yatafunguliwa hapa."
 );
 
-});
+};
 
 });
 
@@ -984,9 +1025,7 @@ document
 .querySelectorAll(".cat")
 .forEach(category => {
 
-category.addEventListener(
-"click",
-function(){
+category.onclick = function(){
 
 const value =
 this.getAttribute("data-category");
@@ -998,7 +1037,7 @@ showSection("home");
 
 render();
 
-});
+};
 
 });
 
@@ -1054,6 +1093,17 @@ if(Number(price) <= 0){
 
 alert(
 "⚠️ Weka bei sahihi."
+);
+
+return;
+
+}
+
+
+if(!supabaseClient){
+
+alert(
+"❌ Supabase haijaunganishwa."
 );
 
 return;
@@ -1160,8 +1210,7 @@ error
 
 alert(
 "❌ Bidhaa haijahifadhiwa.\n\n" +
-(error.message ||
-"Kuna kosa kwenye database.")
+error.message
 );
 
 }
@@ -1170,10 +1219,21 @@ alert(
 
 
 // ======================================================
-// REGISTER
+// REGISTER USER
 // ======================================================
 
 async function registerUser(){
+
+if(!supabaseClient){
+
+alert(
+"❌ Supabase haijaunganishwa."
+);
+
+return;
+
+}
+
 
 const fullName =
 document
@@ -1229,7 +1289,7 @@ return;
 try{
 
 const result =
-await supabase.auth.signUp({
+await supabaseClient.auth.signUp({
 
 email:email,
 
@@ -1284,10 +1344,21 @@ alert(
 
 
 // ======================================================
-// LOGIN
+// LOGIN USER
 // ======================================================
 
 async function loginUser(){
+
+if(!supabaseClient){
+
+alert(
+"❌ Supabase haijaunganishwa."
+);
+
+return;
+
+}
+
 
 const email =
 document
@@ -1315,7 +1386,7 @@ return;
 try{
 
 const result =
-await supabase.auth.signInWithPassword({
+await supabaseClient.auth.signInWithPassword({
 
 email:email,
 
@@ -1341,8 +1412,9 @@ alert(
 );
 
 
-showUser(result.data.user);
-
+showUser(
+result.data.user
+);
 
 }catch(error){
 
@@ -1394,7 +1466,11 @@ document
 
 async function logoutUser(){
 
-await supabase.auth.signOut();
+if(supabaseClient){
+
+await supabaseClient.auth.signOut();
+
+}
 
 
 document
@@ -1425,8 +1501,15 @@ alert(
 
 async function checkSession(){
 
+if(!supabaseClient){
+
+return;
+
+}
+
+
 const result =
-await supabase.auth.getSession();
+await supabaseClient.auth.getSession();
 
 
 if(result.data.session){
@@ -1441,7 +1524,7 @@ result.data.session.user
 
 
 // ======================================================
-// START
+// START PLAM
 // ======================================================
 
 showSection("home");
@@ -1449,6 +1532,7 @@ showSection("home");
 loadProducts();
 
 checkSession();
+
 
 </script>
 
