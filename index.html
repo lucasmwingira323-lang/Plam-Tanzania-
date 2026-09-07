@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="sw">
 
@@ -184,6 +183,10 @@ font-size:13px;
 color:#666;
 }
 
+.add-title{
+text-align:center;
+}
+
 @media(min-width:650px){
 
 .cats{
@@ -229,6 +232,10 @@ Fungua Akaunti
 
 <button id="openLogin">
 Ingia
+</button>
+
+<button onclick="show('add')">
+➕ Weka Bidhaa
 </button>
 
 </div>
@@ -308,20 +315,31 @@ Huduma
 
 <section id="add" class="hidden">
 
-<h2>➕ Weka Bidhaa Yako</h2>
+<h2 class="add-title">
+➕ Weka Bidhaa Yako
+</h2>
 
 <div class="form">
 
+<label>Jina la bidhaa</label>
+
 <input
 id="name"
-placeholder="Jina la bidhaa"
+type="text"
+placeholder="Mfano: Samsung A05"
 >
+
+
+<label>Bei</label>
 
 <input
 id="price"
 type="number"
-placeholder="Bei (TSh)"
+placeholder="Mfano: 250000"
 >
+
+
+<label>Category</label>
 
 <select id="category">
 
@@ -336,17 +354,39 @@ placeholder="Bei (TSh)"
 
 </select>
 
+
+<label>Eneo</label>
+
 <input
 id="place"
-placeholder="Eneo, mfano Mbeya"
+type="text"
+placeholder="Mfano: Mbeya"
 >
+
+
+<label>Maelezo ya bidhaa</label>
 
 <textarea
 id="desc"
-placeholder="Maelezo ya bidhaa"></textarea>
+placeholder="Andika maelezo ya bidhaa yako hapa..."
+></textarea>
 
-<button id="addProductBtn">
-Chapisha Bidhaa
+
+<button
+id="addProductBtn"
+type="button"
+>
+📢 Chapisha Bidhaa
+</button>
+
+
+<br><br>
+
+<button
+type="button"
+onclick="show('home')"
+>
+⬅️ Rudi Home
 </button>
 
 </div>
@@ -462,27 +502,42 @@ Toka
 
 <nav>
 
-<button id="navHome">
+<button
+id="navHome"
+onclick="show('home')"
+>
 🏠<br>
 Home
 </button>
 
-<button id="navSearch">
+<button
+id="navSearch"
+onclick="show('home');document.getElementById('search').focus()"
+>
 🔍<br>
 Tafuta
 </button>
 
-<button id="navAdd">
+<button
+id="navAdd"
+onclick="show('add')"
+>
 ➕<br>
 Weka Bidhaa
 </button>
 
-<button id="navMessage">
+<button
+id="navMessage"
+onclick="alert('💬 Ujumbe wa mnunuzi na muuzaji utaongezwa hapa.')"
+>
 💬<br>
 Ujumbe
 </button>
 
-<button id="navAccount">
+<button
+id="navAccount"
+onclick="show('account')"
+>
 👤<br>
 Akaunti
 </button>
@@ -519,7 +574,7 @@ let ps = [];
 
 
 // ======================================================
-// GET ELEMENT
+// GET ELEMENTS
 // ======================================================
 
 const home =
@@ -539,7 +594,7 @@ document.getElementById("search");
 
 
 // ======================================================
-// NAVIGATION
+// SHOW SECTION
 // ======================================================
 
 function show(id){
@@ -560,6 +615,7 @@ section.classList.remove("hidden");
 
 }
 
+
 window.scrollTo({
 top:0,
 behavior:"smooth"
@@ -569,65 +625,14 @@ behavior:"smooth"
 
 
 // ======================================================
-// NAVIGATION BUTTONS
-// ======================================================
-
-document
-.getElementById("navHome")
-.addEventListener("click",function(){
-
-show("home");
-
-});
-
-
-document
-.getElementById("navSearch")
-.addEventListener("click",function(){
-
-show("home");
-
-searchInput.focus();
-
-});
-
-
-document
-.getElementById("navAdd")
-.addEventListener("click",function(){
-
-show("add");
-
-});
-
-
-document
-.getElementById("navMessage")
-.addEventListener("click",function(){
-
-alert(
-"💬 Ujumbe wa mnunuzi na muuzaji utaongezwa hapa."
-);
-
-});
-
-
-document
-.getElementById("navAccount")
-.addEventListener("click",function(){
-
-show("account");
-
-});
-
-
-// ======================================================
 // TOP ACCOUNT BUTTONS
 // ======================================================
 
 document
 .getElementById("openRegister")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
 show("account");
 
@@ -646,7 +651,9 @@ document
 
 document
 .getElementById("openLogin")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
 show("account");
 
@@ -729,8 +736,6 @@ error
 );
 
 
-// Sample products
-
 ps = [
 
 {
@@ -775,7 +780,7 @@ render();
 
 
 // ======================================================
-// RENDER
+// RENDER PRODUCTS
 // ======================================================
 
 function render(){
@@ -824,7 +829,6 @@ description.includes(search)
 if(filtered.length === 0){
 
 productsBox.innerHTML =
-
 "<div class='message'>" +
 "Hakuna bidhaa zilizopatikana." +
 "</div>";
@@ -873,8 +877,10 @@ TSh ${price}
 ${escapeHTML(product.description || "")}
 </p>
 
-<button class="contactBtn"
-data-product="${escapeHTML(product.name || "")}">
+<button
+class="contactBtn"
+data-product="${escapeHTML(product.name || "")}"
+>
 Wasiliana na Muuzaji
 </button>
 
@@ -1140,7 +1146,7 @@ alert(
 
 
 // ======================================================
-// REGISTER USER
+// REGISTER
 // ======================================================
 
 document
@@ -1448,7 +1454,7 @@ document
 
 
 // ======================================================
-// CHECK EXISTING SESSION
+// CHECK SESSION
 // ======================================================
 
 async function checkSession(){
