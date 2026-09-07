@@ -1,15 +1,8 @@
 <!doctype html>
+
 <html lang="sw">
-<head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>PLAM TANZANIA</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
 
 *{
 box-sizing:border-box;
@@ -88,13 +81,23 @@ box-shadow:0 2px 5px #ddd;
 cursor:pointer;
 }
 
+/* ==============================
+   PRODUCTS
+   KILA BIDHAA INA UPANA WOTE
+============================== */
+
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:1fr;
 gap:15px;
 }
 
+/* ==============================
+   PRODUCT CARD
+============================== */
+
 .card{
+width:100%;
 background:white;
 border-radius:12px;
 overflow:hidden;
@@ -102,23 +105,25 @@ box-shadow:0 2px 8px #ddd;
 }
 
 /* ==============================
-   PICHA YA BIDHAA
-   INAJAA UPANA WOTE WA CARD
+   PRODUCT IMAGE
+   INAJAA UPANA WOTE
 ============================== */
 
 .product-image{
 width:100%;
 height:auto;
 display:block;
+object-fit:contain;
 background:#eee;
 }
 
 /* ==============================
-   KAMA HAKUNA PICHA
+   NO IMAGE
 ============================== */
 
 .no-image{
-height:190px;
+width:100%;
+height:220px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -206,7 +211,7 @@ margin-top:8px;
 }
 
 /* ==============================
-   PICHA INAYOONEKANA KABLA YA KUHIFADHI
+   IMAGE PREVIEW
 ============================== */
 
 .image-preview{
@@ -233,6 +238,10 @@ padding:25px;
 color:#777;
 }
 
+/* ==============================
+   SIMU
+============================== */
+
 @media(max-width:600px){
 
 .categories{
@@ -241,6 +250,14 @@ grid-template-columns:repeat(2,1fr);
 
 nav button{
 font-size:12px;
+}
+
+.products{
+grid-template-columns:1fr;
+}
+
+.card{
+width:100%;
 }
 
 .product-image{
@@ -255,320 +272,157 @@ height:auto;
 
 }
 
-</style>
-</head>
-
-<body>
-
-<header>
-
-<h1>🇹🇿 PLAM TANZANIA</h1>
-
-<p>
+</style></head><body><header><h1>🇹🇿 PLAM TANZANIA</h1><p>
 Jenga biashara yako. Fikia wateja zaidi.
-</p>
-
-</header>
-
-
-<nav>
-
-<button onclick="show('home')">
+</p></header><nav><button onclick="show('home')">
 🏠 Mwanzo
-</button>
-
-<button onclick="show('home');document.getElementById('search').focus()">
+</button><button onclick="show('home');document.getElementById('search').focus()">
 🔍 Tafuta
-</button>
-
-<button onclick="openAddProduct()">
+</button><button onclick="openAddProduct()">
 ➕ Weka Bidhaa
-</button>
-
-<button onclick="show('account')">
+</button><button onclick="show('account')">
 👤 Akaunti
-</button>
-
-</nav>
-
-
-<main class="wrap">
-
-
-<!-- ==========================
-     HOME
-========================== -->
-
-<section id="home">
-
-<input
+</button></nav><main class="wrap"><!-- HOME --><section id="home"><input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()"
->
 
+«»
 
-<div class="categories">
-
-<button onclick="filterCategory('')">
+<div class="categories"><button onclick="filterCategory('')">
 🌐 Zote
-</button>
-
-<button onclick="filterCategory('Mavazi')">
+</button><button onclick="filterCategory('Mavazi')">
 👕 Mavazi
-</button>
-
-<button onclick="filterCategory('Electronics')">
+</button><button onclick="filterCategory('Electronics')">
 📱 Electronics
-</button>
-
-<button onclick="filterCategory('Nyumba')">
+</button><button onclick="filterCategory('Nyumba')">
 🏠 Nyumba
-</button>
-
-<button onclick="filterCategory('Magari')">
+</button><button onclick="filterCategory('Magari')">
 🚗 Magari
-</button>
-
-<button onclick="filterCategory('Kilimo')">
+</button><button onclick="filterCategory('Kilimo')">
 🌾 Kilimo
-</button>
-
-<button onclick="filterCategory('Urembo')">
+</button><button onclick="filterCategory('Urembo')">
 💄 Urembo
-</button>
-
-<button onclick="filterCategory('Elimu')">
+</button><button onclick="filterCategory('Elimu')">
 📚 Elimu
-</button>
-
-<button onclick="filterCategory('Huduma')">
+</button><button onclick="filterCategory('Huduma')">
 🛠️ Huduma
-</button>
-
-</div>
-
-
-<div id="products" class="products"></div>
-
-</section>
-
-
-<!-- ==========================
-     ADD PRODUCT
-========================== -->
-
-<section id="add" class="hidden">
-
-<div class="form-box">
-
-<h2>➕ Weka Bidhaa</h2>
-
-
-<input
+</button></div><div id="products" class="products"></div></section><!-- ADD PRODUCT --><section id="add" class="hidden"><div class="form-box"><h2>➕ Weka Bidhaa</h2><input
 id="name"
 placeholder="Jina la bidhaa"
->
 
+«»
 
 <input
 id="price"
 type="number"
 placeholder="Bei kwa TZS"
->
 
+«»
 
-<select id="category">
-
-<option value="">
+<select id="category"><option value="">
 Chagua kundi
-</option>
-
-<option>Mavazi</option>
+</option><option>Mavazi</option>
 <option>Electronics</option>
 <option>Nyumba</option>
 <option>Magari</option>
 <option>Kilimo</option>
 <option>Urembo</option>
 <option>Elimu</option>
-<option>Huduma</option>
-
-</select>
-
-
-<input
+<option>Huduma</option></select><input
 id="place"
 placeholder="Mahali bidhaa ilipo"
->
 
+«»
 
 <input
 id="sellerPhone"
 type="tel"
 placeholder="Namba ya simu ya muuzaji"
->
 
+«»
 
 <textarea
 id="desc"
 placeholder="Maelezo ya bidhaa"
 rows="4"
-></textarea>
-
-
-<label>
-
-<b>
+></textarea><label><b>
 🖼️ Chagua picha ya bidhaa
-</b>
-
-</label>
-
-
-<input
+</b></label><input
 id="productImage"
 type="file"
 accept="image/*"
 onchange="previewImage(event)"
->
 
+«»
 
 <img
 id="imagePreview"
 class="image-preview"
->
 
+«»
 
-<button onclick="addProduct()">
+<button onclick="addProduct()">💾 Hifadhi Bidhaa
 
-💾 Hifadhi Bidhaa
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- ==========================
-     ACCOUNT
-========================== -->
-
-<section id="account" class="hidden">
-
-<div class="form-box">
-
-<h2>
+</button></div></section><!-- ACCOUNT --><section id="account" class="hidden"><div class="form-box"><h2>
 👤 Akaunti
-</h2>
-
-
-<div class="account-buttons">
-
-<button onclick="openRegister()">
-
+</h2><div class="account-buttons"><button onclick="openRegister()">
 Fungua Akaunti
-
-</button>
-
-
-<button onclick="openLogin()">
-
+</button><button onclick="openLogin()">
 Ingia
-
-</button>
-
-</div>
-
-
-<div id="registerForm" class="hidden">
-
-<h3>
+</button></div><div id="registerForm" class="hidden"><h3>
 📝 Fungua Akaunti
-</h3>
-
-
-<input
+</h3><input
 id="fullName"
 placeholder="Jina kamili"
->
 
+«»
 
 <input
 id="phone"
 type="tel"
 placeholder="Namba ya simu"
->
 
+«»
 
 <input
 id="email"
 type="email"
 placeholder="Email"
->
 
+«»
 
 <input
 id="password"
 type="password"
 placeholder="Password"
->
 
+«»
 
-<button onclick="register()">
+<button onclick="register()">Fungua Akaunti
 
-Fungua Akaunti
-
-</button>
-
-</div>
-
-
-<div id="loginForm" class="hidden">
-
-<h3>
+</button></div><div id="loginForm" class="hidden"><h3>
 🔐 Ingia
-</h3>
-
-
-<input
+</h3><input
 id="loginEmail"
 type="email"
 placeholder="Email"
->
 
+«»
 
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
->
 
+«»
 
-<button onclick="login()">
+<button onclick="login()">Ingia
 
-Ingia
+</button></div></div></section></main><footer>PLAM TANZANIA © 2026
 
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-PLAM TANZANIA © 2026
-
-</footer>
-
-
-<script>
+</footer><script>
 
 /* ==============================
    SUPABASE
@@ -882,7 +736,7 @@ x !== id
 
 
 /* ==============================
-   OPEN ADD PRODUCT
+   ADD PRODUCT
 ============================== */
 
 function openAddProduct(){
@@ -1004,7 +858,7 @@ preview.style.display =
 
 
 /* ==============================
-   ADD PRODUCT
+   SAVE PRODUCT
 ============================== */
 
 async function addProduct(){
@@ -1117,9 +971,7 @@ try{
 let imageUrl = null;
 
 
-/* ==========================
-   UPLOAD IMAGE
-========================== */
+/* UPLOAD IMAGE */
 
 if(imageFile){
 
@@ -1183,9 +1035,7 @@ publicResult
 }
 
 
-/* ==========================
-   SAVE PRODUCT
-========================== */
+/* SAVE TO DATABASE */
 
 const response =
 await fetch(
@@ -1254,9 +1104,7 @@ alert(
 );
 
 
-/* ==========================
-   CLEAR FORM
-========================== */
+/* CLEAR FORM */
 
 document
 .getElementById("name")
@@ -1331,7 +1179,7 @@ button.innerText =
 
 
 /* ==============================
-   PHONE
+   PHONE FORMAT
 ============================== */
 
 function formatPhone(phone){
@@ -1377,7 +1225,7 @@ return phone;
 
 
 /* ==============================
-   CALL
+   CALL SELLER
 ============================== */
 
 function callSeller(phone){
@@ -1679,7 +1527,5 @@ value ?? ""
 
 loadProducts();
 
-</script>
-
-</body>
+</script></body>
 </html>
