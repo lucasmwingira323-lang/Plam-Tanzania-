@@ -1,7 +1,20 @@
 <!doctype html>
 
-<html lang="sw"><head>
-<meta 
+<html lang="sw"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f4f6f8;
+color:#17202a;
+padding-bottom:80px;
+}
+
 header{
 background:#0b6b3a;
 color:white;
@@ -60,7 +73,52 @@ font-size:15px;
 cursor:pointer;
 }
 
+button:hover{
+opacity:.9;
+}
 
+.cats,
+.products{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.cat,
+.card,
+.form{
+background:white;
+padding:15px;
+border-radius:14px;
+box-shadow:0 2px 8px #0001;
+}
+
+.cat{
+text-align:center;
+font-weight:bold;
+cursor:pointer;
+}
+
+.cat .icon{
+display:block;
+font-size:35px;
+margin-bottom:6px;
+}
+
+.pic{
+height:100px;
+background:#e9eef0;
+border-radius:10px;
+display:grid;
+place-items:center;
+font-size:42px;
+}
+
+.price{
+font-weight:bold;
+font-size:18px;
+color:#0b6b3a;
+margin:8px 0;
 }
 
 .card h3{
@@ -98,11 +156,6 @@ font-size:13px;
 padding:6px;
 }
 
-nav button.active{
-color:#0b6b3a;
-font-weight:bold;
-}
-
 .account-title{
 margin-top:0;
 }
@@ -133,6 +186,22 @@ font-weight:bold;
 margin-top:12px;
 }
 
+.contact-buttons{
+display:flex;
+gap:8px;
+margin-top:12px;
+}
+
+.call-button{
+background:#0b6b3a;
+flex:1;
+}
+
+.whatsapp-button{
+background:#128c7e;
+flex:1;
+}
+
 @media(min-width:650px){
 
 .cats{
@@ -145,14 +214,103 @@ grid-template-columns:repeat(3,1fr);
 
 }
 
-</style></head><body><header><div class="title">
+</style></head><body><!-- ================= HEADER ================= --><header><div class="title">
 🇹🇿 PLAM TANZANIA
-tion></select><label>Eneo</label>
+</div><div class="subtitle">
+Jenga biashara yako. Fikia wateja zaidi.
+</div></header><!-- ================= TOP BUTTONS ================= --><div class="top-buttons"><button
+type="button"
+onclick="openRegister()">
+👤 Fungua Akaunti
+</button>
+
+<button
+type="button"
+onclick="openLogin()">
+🔐 Ingia
+</button>
+
+<button
+type="button"
+onclick="openAddProduct()">
+➕ Weka Bidhaa
+</button>
+
+</div><main class="wrap"><!-- ================= HOME ================= --><section id="home"><input
+id="search"
+class="search"
+placeholder="🔍 Tafuta bidhaa au huduma..."
+
+«»
+
+<h2>📂 Categories</h2><div class="cats"><div class="cat" data-category="Mavazi">
+<span class="icon">👕</span>
+Mavazi
+</div><div class="cat" data-category="Electronics">
+<span class="icon">📱</span>
+Electronics
+</div><div class="cat" data-category="Nyumba">
+<span class="icon">🏠</span>
+Nyumba
+</div><div class="cat" data-category="Magari">
+<span class="icon">🚗</span>
+Magari
+</div><div class="cat" data-category="Kilimo">
+<span class="icon">🌾</span>
+Kilimo
+</div><div class="cat" data-category="Urembo">
+<span class="icon">💄</span>
+Urembo
+</div><div class="cat" data-category="Elimu">
+<span class="icon">📚</span>
+Elimu
+</div><div class="cat" data-category="Huduma">
+<span class="icon">🔧</span>
+Huduma
+</div></div><h2>🔥 Bidhaa</h2><div id="products" class="products"></div></section><!-- ================= ADD PRODUCT ================= --><section id="add" class="hidden"><h2 class="add-title">
+➕ Weka Bidhaa Yako
+</h2><div class="form"><label>Jina la bidhaa</label>
+
+<input
+id="name"
+type="text"
+placeholder="Mfano: Samsung A05"
+
+«»
+
+<label>Bei</label>
+
+<input
+id="price"
+type="number"
+placeholder="Mfano: 250000"
+
+«»
+
+<label>Kategoria</label>
+
+<select id="category"><option value="Mavazi">Mavazi</option>
+<option value="Electronics">Electronics</option>
+<option value="Nyumba">Nyumba</option>
+<option value="Magari">Magari</option>
+<option value="Kilimo">Kilimo</option>
+<option value="Urembo">Urembo</option>
+<option value="Elimu">Elimu</option>
+<option value="Huduma">Huduma</option></select><label>Eneo</label>
 
 <input
 id="place"
 type="text"
 placeholder="Mfano: Mbeya"
+
+«»
+
+<label>📞 Namba ya simu ya muuzaji</label>
+
+<input
+id="sellerPhone"
+type="tel"
+placeholder="Mfano: 0712345678"
 
 «»
 
@@ -290,6 +448,7 @@ Akaunti
 
 </nav><script>
 
+
 // ======================================================
 // SUPABASE
 // ======================================================
@@ -360,7 +519,6 @@ function showSection(id){
 home.classList.add("hidden");
 addSection.classList.add("hidden");
 account.classList.add("hidden");
-
 
 if(id === "home"){
 home.classList.remove("hidden");
@@ -555,7 +713,8 @@ price:250000,
 category:"Electronics",
 place:"Mbeya",
 description:"Samsung A05 nzuri.",
-icon:"📱"
+icon:"📱",
+phone:"0712345678"
 },
 
 {
@@ -564,7 +723,8 @@ price:45000,
 category:"Mavazi",
 place:"Mbinga",
 description:"Viatu vizuri vya michezo.",
-icon:"👟"
+icon:"👟",
+phone:"0712345678"
 },
 
 {
@@ -573,7 +733,8 @@ price:650000,
 category:"Nyumba",
 place:"Mbeya",
 description:"Sofa nzuri kwa matumizi ya nyumbani.",
-icon:"🛋️"
+icon:"🛋️",
+phone:"0712345678"
 },
 
 {
@@ -582,7 +743,8 @@ price:12000,
 category:"Kilimo",
 place:"Ruvuma",
 description:"Mbegu bora za mahindi.",
-icon:"🌾"
+icon:"🌾",
+phone:"0712345678"
 }
 
 ];
@@ -593,7 +755,99 @@ render();
 
 
 // ======================================================
-// RENDER
+// PHONE FORMAT
+// ======================================================
+
+function formatPhone(phone){
+
+let value =
+String(phone || "")
+.trim()
+.replace(/\s+/g,"");
+
+if(value.startsWith("+255")){
+return value;
+}
+
+if(value.startsWith("255")){
+return "+" + value;
+}
+
+if(value.startsWith("0")){
+return "+255" + value.substring(1);
+}
+
+return value;
+
+}
+
+
+// ======================================================
+// WHATSAPP
+// ======================================================
+
+function openWhatsApp(phone,productName){
+
+const number =
+formatPhone(phone)
+.replace(/\+/g,"");
+
+if(!number){
+
+alert(
+"⚠️ Namba ya muuzaji haijawekwa."
+);
+
+return;
+
+}
+
+const message =
+"Habari, nimeiona bidhaa " +
+productName +
+" kwenye PLAM TANZANIA. Bado inapatikana?";
+
+const url =
+"https://wa.me/" +
+number +
+"?text=" +
+encodeURIComponent(message);
+
+window.open(
+url,
+"_blank"
+);
+
+}
+
+
+// ======================================================
+// CALL SELLER
+// ======================================================
+
+function callSeller(phone){
+
+const number =
+formatPhone(phone);
+
+if(!number){
+
+alert(
+"⚠️ Namba ya muuzaji haijawekwa."
+);
+
+return;
+
+}
+
+window.location.href =
+"tel:" + number;
+
+}
+
+
+// ======================================================
+// RENDER PRODUCTS
 // ======================================================
 
 function render(){
@@ -654,6 +908,44 @@ const price =
 Number(product.price || 0)
 .toLocaleString("sw-TZ");
 
+const phone =
+String(product.phone || "")
+.trim();
+
+const phoneButton =
+phone
+?
+`
+
+<div class="contact-buttons">
+
+<button
+type="button"
+class="call-button"
+onclick="callSeller('${escapeJS(phone)}')">
+📞 Piga Simu
+</button>
+
+<button
+type="button"
+class="whatsapp-button"
+onclick="openWhatsApp('${escapeJS(phone)}','${escapeJS(product.name || "")}')">
+💬 WhatsApp
+</button>
+
+</div>
+
+`
+:
+`
+
+<p class="small-text">
+📞 Muuzaji hajaweka namba ya simu.
+</p>
+
+`;
+
+
 return `
 
 <div class="card">
@@ -682,38 +974,13 @@ TSh ${price}
 ${escapeHTML(product.description || "")}
 </p>
 
-<button
-type="button"
-class="contactBtn"
-data-product="${escapeHTML(product.name || "")}">
-Wasiliana na Muuzaji
-</button>
+${phoneButton}
 
 </div>
 
 `;
 
 }).join("");
-
-
-document
-.querySelectorAll(".contactBtn")
-.forEach(button => {
-
-button.onclick = function(){
-
-const productName =
-this.getAttribute("data-product");
-
-alert(
-"Mawasiliano na muuzaji wa " +
-productName +
-" yatafunguliwa hapa."
-);
-
-};
-
-});
 
 }
 
@@ -730,6 +997,22 @@ return String(value)
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
+
+}
+
+
+// ======================================================
+// ESCAPE JAVASCRIPT
+// ======================================================
+
+function escapeJS(value){
+
+return String(value)
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/"/g,'\\"')
+.replace(/\n/g,"\\n")
+.replace(/\r/g,"\\r");
 
 }
 
@@ -801,6 +1084,12 @@ document
 .value
 .trim();
 
+const sellerPhone =
+document
+.getElementById("sellerPhone")
+.value
+.trim();
+
 const description =
 document
 .getElementById("desc")
@@ -808,10 +1097,15 @@ document
 .trim();
 
 
-if(!name || !price || !place){
+if(
+!name ||
+!price ||
+!place ||
+!sellerPhone
+){
 
 alert(
-"⚠️ Jaza jina, bei na eneo."
+"⚠️ Jaza jina, bei, eneo na namba ya simu."
 );
 
 return;
@@ -823,6 +1117,17 @@ if(Number(price) <= 0){
 
 alert(
 "⚠️ Weka bei sahihi."
+);
+
+return;
+
+}
+
+
+if(sellerPhone.length < 9){
+
+alert(
+"⚠️ Weka namba sahihi ya simu."
 );
 
 return;
@@ -844,4 +1149,420 @@ return;
 try{
 
 const response =
-await 
+await fetch(
+
+SUPABASE_URL +
+"/rest/v1/Production",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+SUPABASE_KEY,
+
+"Prefer":
+"return=minimal"
+
+},
+
+body:JSON.stringify({
+
+name:name,
+
+price:Number(price),
+
+category:category,
+
+place:place,
+
+description:description,
+
+phone:sellerPhone
+
+})
+
+}
+
+);
+
+
+if(!response.ok){
+
+const error =
+await response.text();
+
+console.log(
+"Supabase insert error:",
+error
+);
+
+throw new Error(error);
+
+}
+
+
+alert(
+"🎉 Bidhaa imehifadhiwa kwenye PLAM!"
+);
+
+
+document
+.getElementById("name")
+.value="";
+
+document
+.getElementById("price")
+.value="";
+
+document
+.getElementById("place")
+.value="";
+
+document
+.getElementById("sellerPhone")
+.value="";
+
+document
+.getElementById("desc")
+.value="";
+
+
+await loadProducts();
+
+showSection("home");
+
+
+}catch(error){
+
+console.log(
+"ADD PRODUCT ERROR:",
+error
+);
+
+alert(
+"❌ Bidhaa haijahifadhiwa.\n\n" +
+error.message
+);
+
+}
+
+}
+
+
+// ======================================================
+// REGISTER USER
+// ======================================================
+
+async function registerUser(){
+
+if(!supabaseClient){
+
+alert(
+"❌ Supabase haijaunganishwa."
+);
+
+return;
+
+}
+
+
+const fullName =
+document
+.getElementById("fullName")
+.value
+.trim();
+
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+const email =
+document
+.getElementById("email")
+.value
+.trim();
+
+const password =
+document
+.getElementById("password")
+.value;
+
+
+if(
+!fullName ||
+!phone ||
+!email ||
+!password
+){
+
+alert(
+"⚠️ Tafadhali jaza taarifa zote."
+);
+
+return;
+
+}
+
+
+if(password.length < 6){
+
+alert(
+"⚠️ Password iwe na angalau herufi 6."
+);
+
+return;
+
+}
+
+
+try{
+
+const result =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+
+data:{
+
+full_name:
+fullName,
+
+phone:
+phone
+
+}
+
+}
+
+});
+
+
+if(result.error){
+
+alert(
+"❌ Usajili umeshindikana:\n\n" +
+result.error.message
+);
+
+return;
+
+}
+
+
+alert(
+"✅ Akaunti imefunguliwa!\n\n" +
+"Angalia email yako kwa uthibitisho."
+);
+
+}catch(error){
+
+console.log(error);
+
+alert(
+"❌ Kuna tatizo wakati wa usajili."
+);
+
+}
+
+}
+
+
+// ======================================================
+// LOGIN
+// ======================================================
+
+async function loginUser(){
+
+if(!supabaseClient){
+
+alert(
+"❌ Supabase haijaunganishwa."
+);
+
+return;
+
+}
+
+
+const email =
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
+const password =
+document
+.getElementById("loginPassword")
+.value;
+
+
+if(!email || !password){
+
+alert(
+"⚠️ Weka email na password."
+);
+
+return;
+
+}
+
+
+try{
+
+const result =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(result.error){
+
+alert(
+"❌ Kuingia kumeshindikana:\n\n" +
+result.error.message
+);
+
+return;
+
+}
+
+
+alert(
+"✅ Umefanikiwa kuingia kwenye PLAM!"
+);
+
+showUser(
+result.data.user
+);
+
+}catch(error){
+
+console.log(error);
+
+alert(
+"❌ Kuna tatizo wakati wa kuingia."
+);
+
+}
+
+}
+
+
+// ======================================================
+// SHOW USER
+// ======================================================
+
+function showUser(user){
+
+document
+.getElementById("registerBox")
+.classList
+.add("hidden");
+
+document
+.getElementById("loginBox")
+.classList
+.add("hidden");
+
+document
+.getElementById("userBox")
+.classList
+.remove("hidden");
+
+document
+.getElementById("userEmail")
+.textContent =
+"📧 " +
+(user.email || "");
+
+}
+
+
+// ======================================================
+// LOGOUT
+// ======================================================
+
+async function logoutUser(){
+
+if(supabaseClient){
+
+await supabaseClient.auth.signOut();
+
+}
+
+document
+.getElementById("userBox")
+.classList
+.add("hidden");
+
+document
+.getElementById("registerBox")
+.classList
+.remove("hidden");
+
+showSection("home");
+
+alert(
+"Umetoka kwenye akaunti."
+);
+
+}
+
+
+// ======================================================
+// SESSION
+// ======================================================
+
+async function checkSession(){
+
+if(!supabaseClient){
+
+return;
+
+}
+
+const result =
+await supabaseClient.auth.getSession();
+
+if(result.data.session){
+
+showUser(
+result.data.session.user
+);
+
+}
+
+}
+
+
+// ======================================================
+// START PLAM
+// ======================================================
+
+showSection("home");
+
+loadProducts();
+
+checkSession();
+
+</script></body></html>
