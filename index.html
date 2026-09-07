@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sw">
 
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PLAM TANZANIA</title>
 
@@ -17,8 +17,8 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial,sans-serif;
 margin:0;
+font-family:Arial,sans-serif;
 background:#f4f6f8;
 color:#222;
 }
@@ -26,8 +26,8 @@ color:#222;
 header{
 background:#008000;
 color:white;
-padding:18px;
 text-align:center;
+padding:18px;
 }
 
 header h1{
@@ -36,25 +36,26 @@ font-size:28px;
 }
 
 header p{
-margin:6px 0 0;
+margin:7px 0 0;
 }
 
 nav{
 display:flex;
 justify-content:space-around;
+align-items:center;
 background:white;
 padding:10px;
 position:sticky;
 top:0;
-z-index:10;
+z-index:100;
 box-shadow:0 2px 6px #ccc;
 }
 
 nav button{
-border:0;
 background:white;
+border:0;
+padding:10px 8px;
 font-size:14px;
-padding:8px;
 cursor:pointer;
 }
 
@@ -63,6 +64,12 @@ max-width:1000px;
 margin:auto;
 padding:15px;
 }
+
+.hidden{
+display:none !important;
+}
+
+/* SEARCH */
 
 .search{
 width:100%;
@@ -73,6 +80,8 @@ font-size:16px;
 margin-bottom:15px;
 }
 
+/* CATEGORIES */
+
 .categories{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -81,13 +90,15 @@ margin-bottom:20px;
 }
 
 .categories button{
-padding:12px 5px;
 border:0;
-border-radius:10px;
 background:white;
+padding:12px 5px;
+border-radius:10px;
 box-shadow:0 2px 5px #ddd;
 cursor:pointer;
 }
+
+/* PRODUCTS */
 
 .products{
 display:grid;
@@ -138,7 +149,7 @@ font-size:18px;
 .small{
 font-size:14px;
 color:#666;
-margin:5px 0;
+margin:6px 0;
 }
 
 .card-buttons{
@@ -149,9 +160,9 @@ margin-top:12px;
 
 .card-buttons button{
 flex:1;
-padding:10px 5px;
 border:0;
 border-radius:8px;
+padding:10px;
 cursor:pointer;
 }
 
@@ -165,71 +176,92 @@ background:#25D366;
 color:white;
 }
 
-.hidden{
-display:none !important;
-}
+/* FORM */
 
 .form-box{
+width:100%;
 background:white;
-padding:18px;
+padding:20px;
 border-radius:12px;
 box-shadow:0 2px 8px #ddd;
 margin-top:15px;
 }
 
+.form-box h2{
+margin-top:0;
+margin-bottom:20px;
+}
+
+.form-box label{
+display:block;
+font-weight:bold;
+margin-top:14px;
+margin-bottom:6px;
+}
+
 .form-box input,
-.form-box textarea,
-.form-box select{
+.form-box select,
+.form-box textarea{
 display:block;
 width:100%;
-padding:13px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:8px;
+padding:14px;
+border:1px solid #bbb;
+border-radius:9px;
 font-size:16px;
 background:white;
 color:#222;
 }
 
 .form-box input:focus,
-.form-box textarea:focus,
-.form-box select:focus{
+.form-box select:focus,
+.form-box textarea:focus{
 outline:none;
 border:2px solid #008000;
 }
 
+.form-box textarea{
+resize:vertical;
+min-height:100px;
+}
+
 .form-box input[type="file"]{
 padding:10px;
+background:#fafafa;
 cursor:pointer;
 }
 
-.form-box button{
+.save-button{
 width:100%;
-padding:13px;
+padding:15px;
+margin-top:20px;
 border:0;
-border-radius:8px;
+border-radius:9px;
 background:#008000;
 color:white;
-font-size:16px;
+font-size:17px;
+font-weight:bold;
 cursor:pointer;
-margin-top:8px;
 }
 
-.form-box button:disabled{
+.save-button:disabled{
 background:#777;
 cursor:not-allowed;
 }
 
+/* IMAGE PREVIEW */
+
 .image-preview{
+display:none;
 width:100%;
 max-height:350px;
 object-fit:contain;
+margin-top:12px;
 border-radius:10px;
-margin-top:10px;
-display:none;
 background:#eee;
 border:1px solid #ddd;
 }
+
+/* ACCOUNT */
 
 .account-buttons{
 display:flex;
@@ -238,13 +270,28 @@ gap:10px;
 
 .account-buttons button{
 flex:1;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#008000;
+color:white;
+font-size:15px;
+cursor:pointer;
 }
+
+.account-form{
+margin-top:20px;
+}
+
+/* FOOTER */
 
 footer{
 text-align:center;
 padding:25px;
 color:#777;
 }
+
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -254,10 +301,11 @@ grid-template-columns:repeat(2,1fr);
 
 nav button{
 font-size:12px;
+padding:8px 4px;
 }
 
-.products{
-grid-template-columns:1fr;
+.form-box{
+padding:16px;
 }
 
 }
@@ -267,6 +315,9 @@ grid-template-columns:1fr;
 </head>
 
 <body>
+
+
+<!-- HEADER -->
 
 <header>
 
@@ -279,13 +330,15 @@ Jenga biashara yako. Fikia wateja zaidi.
 </header>
 
 
+<!-- NAVIGATION -->
+
 <nav>
 
 <button onclick="show('home')">
 🏠 Mwanzo
 </button>
 
-<button onclick="show('home');focusSearch()">
+<button onclick="goSearch()">
 🔍 Tafuta
 </button>
 
@@ -303,15 +356,16 @@ Jenga biashara yako. Fikia wateja zaidi.
 <main class="wrap">
 
 
-<!-- =========================
+<!-- ==========================
      HOME
-========================= -->
+========================== -->
 
 <section id="home">
 
 <input
 id="search"
 class="search"
+type="text"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()"
 >
@@ -356,14 +410,18 @@ oninput="render()"
 
 </div>
 
-<div id="products" class="products"></div>
+<div
+id="products"
+class="products"
+>
+</div>
 
 </section>
 
 
-<!-- =========================
+<!-- ==========================
      ADD PRODUCT
-========================= -->
+========================== -->
 
 <section id="add" class="hidden">
 
@@ -372,7 +430,9 @@ oninput="render()"
 <h2>➕ Weka Bidhaa</h2>
 
 
-<label>Jina la bidhaa</label>
+<label for="name">
+Jina la bidhaa
+</label>
 
 <input
 id="name"
@@ -382,17 +442,21 @@ autocomplete="off"
 >
 
 
-<label>Bei</label>
+<label for="price">
+Bei kwa TZS
+</label>
 
 <input
 id="price"
 type="number"
-placeholder="Bei kwa TZS"
+placeholder="Mfano: 50000"
 inputmode="numeric"
 >
 
 
-<label>Kundi la bidhaa</label>
+<label for="category">
+Chagua kundi
+</label>
 
 <select id="category">
 
@@ -435,7 +499,9 @@ Huduma
 </select>
 
 
-<label>Mahali bidhaa ilipo</label>
+<label for="place">
+Mahali bidhaa ilipo
+</label>
 
 <input
 id="place"
@@ -445,46 +511,50 @@ autocomplete="off"
 >
 
 
-<label>Namba ya simu ya muuzaji</label>
+<label for="sellerPhone">
+Namba ya simu ya muuzaji
+</label>
 
 <input
 id="sellerPhone"
 type="tel"
 placeholder="Mfano: 0712345678"
 inputmode="tel"
-autocomplete="tel"
 >
 
 
-<label>Maelezo ya bidhaa</label>
+<label for="desc">
+Maelezo ya bidhaa
+</label>
 
 <textarea
 id="desc"
-placeholder="Andika maelezo ya bidhaa..."
 rows="4"
+placeholder="Andika maelezo ya bidhaa hapa..."
 ></textarea>
 
 
-<label>
-<b>🖼️ Chagua picha ya bidhaa</b>
+<label for="productImage">
+🖼️ Chagua picha ya bidhaa
 </label>
 
 <input
 id="productImage"
 type="file"
-accept="image/jpeg,image/png,image/webp"
+accept="image/*"
 >
 
 
 <img
 id="imagePreview"
 class="image-preview"
-alt="Preview ya bidhaa"
+alt="Picha ya bidhaa"
 >
 
 
 <button
 id="saveProductButton"
+class="save-button"
 type="button"
 onclick="addProduct()"
 >
@@ -496,9 +566,9 @@ onclick="addProduct()"
 </section>
 
 
-<!-- =========================
+<!-- ==========================
      ACCOUNT
-========================= -->
+========================== -->
 
 <section id="account" class="hidden">
 
@@ -525,27 +595,53 @@ Ingia
 </div>
 
 
-<div id="registerForm" class="hidden">
+<!-- REGISTER -->
 
-<h3>📝 Fungua Akaunti</h3>
+<div
+id="registerForm"
+class="account-form hidden"
+>
+
+<h3>
+📝 Fungua Akaunti
+</h3>
+
+<label>
+Jina kamili
+</label>
 
 <input
 id="fullName"
 type="text"
-placeholder="Jina kamili"
+placeholder="Jina lako kamili"
 >
+
+
+<label>
+Namba ya simu
+</label>
 
 <input
 id="phone"
 type="tel"
-placeholder="Namba ya simu"
+placeholder="0712345678"
 >
+
+
+<label>
+Email
+</label>
 
 <input
 id="email"
 type="email"
-placeholder="Email"
+placeholder="mfano@email.com"
 >
+
+
+<label>
+Password
+</label>
 
 <input
 id="password"
@@ -553,7 +649,9 @@ type="password"
 placeholder="Password"
 >
 
+
 <button
+class="save-button"
 type="button"
 onclick="register()"
 >
@@ -563,9 +661,20 @@ Fungua Akaunti
 </div>
 
 
-<div id="loginForm" class="hidden">
+<!-- LOGIN -->
 
-<h3>🔐 Ingia</h3>
+<div
+id="loginForm"
+class="account-form hidden"
+>
+
+<h3>
+🔐 Ingia
+</h3>
+
+<label>
+Email
+</label>
 
 <input
 id="loginEmail"
@@ -573,13 +682,20 @@ type="email"
 placeholder="Email"
 >
 
+
+<label>
+Password
+</label>
+
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
 >
 
+
 <button
+class="save-button"
 type="button"
 onclick="login()"
 >
@@ -604,9 +720,9 @@ PLAM TANZANIA © 2026
 
 <script>
 
-/* ==============================
+/* ==========================
    SUPABASE
-============================== */
+========================== */
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -626,9 +742,107 @@ let ps = [];
 let selectedCategory = "";
 
 
-/* ==============================
+/* ==========================
+   SHOW SECTION
+========================== */
+
+function show(id){
+
+const sections = [
+"home",
+"add",
+"account"
+];
+
+sections.forEach(function(section){
+
+const element =
+document.getElementById(section);
+
+if(element){
+
+if(section === id){
+
+element.classList.remove("hidden");
+
+}else{
+
+element.classList.add("hidden");
+
+}
+
+}
+
+});
+
+}
+
+
+/* ==========================
+   OPEN ADD PRODUCT
+========================== */
+
+function openAddProduct(){
+
+show("add");
+
+setTimeout(function(){
+
+const nameInput =
+document.getElementById("name");
+
+if(nameInput){
+
+nameInput.focus();
+
+}
+
+},100);
+
+}
+
+
+/* ==========================
+   SEARCH
+========================== */
+
+function goSearch(){
+
+show("home");
+
+setTimeout(function(){
+
+const search =
+document.getElementById("search");
+
+if(search){
+
+search.focus();
+
+}
+
+},100);
+
+}
+
+
+/* ==========================
+   CATEGORY
+========================== */
+
+function filterCategory(category){
+
+selectedCategory =
+category;
+
+render();
+
+}
+
+
+/* ==========================
    LOAD PRODUCTS
-============================== */
+========================== */
 
 async function loadProducts(){
 
@@ -643,7 +857,9 @@ method:"GET",
 
 headers:{
 "apikey":SUPABASE_KEY,
-"Authorization":"Bearer " + SUPABASE_KEY
+
+"Authorization":
+"Bearer " + SUPABASE_KEY
 }
 
 }
@@ -682,14 +898,21 @@ document.getElementById(
 }
 
 
-/* ==============================
-   RENDER
-============================== */
+/* ==========================
+   RENDER PRODUCTS
+========================== */
 
 function render(){
 
 const box =
 document.getElementById("products");
+
+if(!box){
+
+return;
+
+}
+
 
 const search =
 (
@@ -700,7 +923,7 @@ document.getElementById("search")?.value || ""
 
 
 const filtered =
-ps.filter(p=>{
+ps.filter(function(p){
 
 const text =
 (
@@ -715,18 +938,22 @@ const text =
 .toLowerCase();
 
 
-return (
-text.includes(search) &&
-(
+const searchMatch =
+text.includes(search);
+
+
+const categoryMatch =
 !selectedCategory ||
-p.category === selectedCategory
-)
-);
+p.category === selectedCategory;
+
+
+return searchMatch &&
+categoryMatch;
 
 });
 
 
-if(!filtered.length){
+if(filtered.length === 0){
 
 box.innerHTML =
 "<p>Hakuna bidhaa iliyopatikana.</p>";
@@ -737,7 +964,7 @@ return;
 
 
 box.innerHTML =
-filtered.map(p=>{
+filtered.map(function(p){
 
 let imageHTML = "";
 
@@ -772,10 +999,14 @@ const phone =
 p.phone || "";
 
 
-const callButton =
-phone
-?
-`
+let callButton = "";
+
+let whatsappButton = "";
+
+
+if(phone){
+
+callButton = `
 
 <button
 class="call"
@@ -784,15 +1015,10 @@ onclick="callSeller('${escapeJS(phone)}')"
 📞 Piga Simu
 </button>
 
-`
-:
-"";
+`;
 
 
-const whatsappButton =
-phone
-?
-`
+whatsappButton = `
 
 <button
 class="whatsapp"
@@ -804,9 +1030,9 @@ onclick="openWhatsApp(
 💬 WhatsApp
 </button>
 
-`
-:
-"";
+`;
+
+}
 
 
 return `
@@ -856,129 +1082,9 @@ ${whatsappButton}
 }
 
 
-/* ==============================
-   CATEGORY
-============================== */
-
-function filterCategory(category){
-
-selectedCategory =
-category;
-
-render();
-
-}
-
-
-/* ==============================
-   SHOW
-============================== */
-
-function show(id){
-
-[
-"home",
-"add",
-"account"
-]
-.forEach(x=>{
-
-const el =
-document.getElementById(x);
-
-if(el){
-
-el.classList.toggle(
-"hidden",
-x !== id
-);
-
-}
-
-});
-
-}
-
-
-/* ==============================
-   SEARCH
-============================== */
-
-function focusSearch(){
-
-const search =
-document.getElementById("search");
-
-if(search){
-
-search.focus();
-
-}
-
-}
-
-
-/* ==============================
-   ADD PRODUCT
-============================== */
-
-function openAddProduct(){
-
-show("add");
-
-setTimeout(()=>{
-
-const name =
-document.getElementById("name");
-
-if(name){
-
-name.focus();
-
-}
-
-},100);
-
-}
-
-
-/* ==============================
-   ACCOUNT
-============================== */
-
-function openRegister(){
-
-document
-.getElementById("registerForm")
-.classList
-.remove("hidden");
-
-document
-.getElementById("loginForm")
-.classList
-.add("hidden");
-
-}
-
-
-function openLogin(){
-
-document
-.getElementById("loginForm")
-.classList
-.remove("hidden");
-
-document
-.getElementById("registerForm")
-.classList
-.add("hidden");
-
-}
-
-
-/* ==============================
+/* ==========================
    IMAGE PREVIEW
-============================== */
+========================== */
 
 document
 .getElementById("productImage")
@@ -1010,7 +1116,7 @@ return;
 if(!file.type.startsWith("image/")){
 
 alert(
-"Tafadhali chagua picha sahihi."
+"Tafadhali chagua picha."
 );
 
 this.value = "";
@@ -1048,10 +1154,10 @@ new FileReader();
 
 
 reader.onload =
-function(e){
+function(event){
 
 preview.src =
-e.target.result;
+event.target.result;
 
 preview.style.display =
 "block";
@@ -1064,64 +1170,55 @@ reader.readAsDataURL(file);
 });
 
 
-/* ==============================
-   SAVE PRODUCT
-============================== */
+/* ==========================
+   ADD PRODUCT
+========================== */
 
 async function addProduct(){
 
 const name =
-document
-.getElementById("name")
+document.getElementById("name")
 .value
 .trim();
 
 
 const price =
-document
-.getElementById("price")
+document.getElementById("price")
 .value
 .trim();
 
 
 const category =
-document
-.getElementById("category")
+document.getElementById("category")
 .value;
 
 
 const place =
-document
-.getElementById("place")
+document.getElementById("place")
 .value
 .trim();
 
 
 const phone =
-document
-.getElementById("sellerPhone")
+document.getElementById("sellerPhone")
 .value
 .trim();
 
 
 const description =
-document
-.getElementById("desc")
+document.getElementById("desc")
 .value
 .trim();
 
 
 const imageFile =
-document
-.getElementById("productImage")
+document.getElementById("productImage")
 .files[0];
 
 
 if(!name){
 
 alert("Andika jina la bidhaa.");
-
-document.getElementById("name").focus();
 
 return;
 
@@ -1132,17 +1229,6 @@ if(!price){
 
 alert("Weka bei ya bidhaa.");
 
-document.getElementById("price").focus();
-
-return;
-
-}
-
-
-if(Number(price) <= 0){
-
-alert("Weka bei sahihi.");
-
 return;
 
 }
@@ -1151,8 +1237,6 @@ return;
 if(!category){
 
 alert("Chagua kundi la bidhaa.");
-
-document.getElementById("category").focus();
 
 return;
 
@@ -1163,8 +1247,6 @@ if(!place){
 
 alert("Andika mahali bidhaa ilipo.");
 
-document.getElementById("place").focus();
-
 return;
 
 }
@@ -1173,8 +1255,6 @@ return;
 if(!phone){
 
 alert("Weka namba ya simu ya muuzaji.");
-
-document.getElementById("sellerPhone").focus();
 
 return;
 
@@ -1198,9 +1278,9 @@ try{
 let imageUrl = null;
 
 
-/* ==============================
+/* ==========================
    UPLOAD IMAGE
-============================== */
+========================== */
 
 if(imageFile){
 
@@ -1221,7 +1301,7 @@ Math.random()
 extension;
 
 
-const uploadResult =
+const upload =
 await supabaseClient
 .storage
 .from("product-images")
@@ -1236,17 +1316,17 @@ upsert:false
 );
 
 
-if(uploadResult.error){
+if(upload.error){
 
 throw new Error(
 "Picha haijapakiwa: " +
-uploadResult.error.message
+upload.error.message
 );
 
 }
 
 
-const publicResult =
+const publicUrl =
 supabaseClient
 .storage
 .from("product-images")
@@ -1256,16 +1336,14 @@ filePath
 
 
 imageUrl =
-publicResult
-.data
-.publicUrl;
+publicUrl.data.publicUrl;
 
 }
 
 
-/* ==============================
+/* ==========================
    SAVE DATABASE
-============================== */
+========================== */
 
 const response =
 await fetch(
@@ -1279,8 +1357,7 @@ headers:{
 "apikey":SUPABASE_KEY,
 
 "Authorization":
-"Bearer " +
-SUPABASE_KEY,
+"Bearer " + SUPABASE_KEY,
 
 "Content-Type":
 "application/json",
@@ -1319,7 +1396,6 @@ const errorText =
 await response.text();
 
 throw new Error(
-"Database error: " +
 errorText
 );
 
@@ -1331,44 +1407,25 @@ alert(
 );
 
 
-/* CLEAR */
+/* CLEAR FORM */
 
-document.getElementById(
-"name"
-).value = "";
+document.getElementById("name").value = "";
 
-document.getElementById(
-"price"
-).value = "";
+document.getElementById("price").value = "";
 
-document.getElementById(
-"category"
-).value = "";
+document.getElementById("category").value = "";
 
-document.getElementById(
-"place"
-).value = "";
+document.getElementById("place").value = "";
 
-document.getElementById(
-"sellerPhone"
-).value = "";
+document.getElementById("sellerPhone").value = "";
 
-document.getElementById(
-"desc"
-).value = "";
+document.getElementById("desc").value = "";
 
-document.getElementById(
-"productImage"
-).value = "";
+document.getElementById("productImage").value = "";
 
-document.getElementById(
-"imagePreview"
-).src = "";
+document.getElementById("imagePreview").src = "";
 
-document.getElementById(
-"imagePreview"
-).style.display =
-"none";
+document.getElementById("imagePreview").style.display = "none";
 
 
 await loadProducts();
@@ -1398,9 +1455,9 @@ button.innerText =
 }
 
 
-/* ==============================
-   PHONE
-============================== */
+/* ==========================
+   PHONE FORMAT
+========================== */
 
 function formatPhone(phone){
 
@@ -1417,13 +1474,11 @@ return phone;
 
 }
 
-
 if(phone.startsWith("255")){
 
 return "+" + phone;
 
 }
-
 
 if(phone.startsWith("0")){
 
@@ -1432,15 +1487,14 @@ phone.substring(1);
 
 }
 
-
 return phone;
 
 }
 
 
-/* ==============================
-   CALL
-============================== */
+/* ==========================
+   CALL SELLER
+========================== */
 
 function callSeller(phone){
 
@@ -1453,9 +1507,9 @@ window.location.href =
 }
 
 
-/* ==============================
+/* ==========================
    WHATSAPP
-============================== */
+========================== */
 
 function openWhatsApp(
 phone,
@@ -1488,36 +1542,66 @@ url,
 }
 
 
-/* ==============================
+/* ==========================
    REGISTER
-============================== */
+========================== */
+
+function openRegister(){
+
+document
+.getElementById("registerForm")
+.classList
+.remove("hidden");
+
+document
+.getElementById("loginForm")
+.classList
+.add("hidden");
+
+}
+
+
+function openLogin(){
+
+document
+.getElementById("loginForm")
+.classList
+.remove("hidden");
+
+document
+.getElementById("registerForm")
+.classList
+.add("hidden");
+
+}
+
+
+/* ==========================
+   REGISTER ACCOUNT
+========================== */
 
 async function register(){
 
 const name =
-document
-.getElementById("fullName")
+document.getElementById("fullName")
 .value
 .trim();
 
 
 const phone =
-document
-.getElementById("phone")
+document.getElementById("phone")
 .value
 .trim();
 
 
 const email =
-document
-.getElementById("email")
+document.getElementById("email")
 .value
 .trim();
 
 
 const password =
-document
-.getElementById("password")
+document.getElementById("password")
 .value;
 
 
@@ -1539,10 +1623,7 @@ return;
 
 try{
 
-const {
-data,
-error
-} =
+const result =
 await supabaseClient
 .auth
 .signUp({
@@ -1561,15 +1642,15 @@ phone:phone
 });
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
 
 alert(
-"Akaunti imefunguliwa! 🎉\n" +
+"Akaunti imefunguliwa! 🎉\n\n" +
 "Angalia email yako kwa uthibitisho."
 );
 
@@ -1586,22 +1667,20 @@ error.message
 }
 
 
-/* ==============================
+/* ==========================
    LOGIN
-============================== */
+========================== */
 
 async function login(){
 
 const email =
-document
-.getElementById("loginEmail")
+document.getElementById("loginEmail")
 .value
 .trim();
 
 
 const password =
-document
-.getElementById("loginPassword")
+document.getElementById("loginPassword")
 .value;
 
 
@@ -1621,10 +1700,7 @@ return;
 
 try{
 
-const {
-data,
-error
-} =
+const result =
 await supabaseClient
 .auth
 .signInWithPassword({
@@ -1636,9 +1712,9 @@ password:password
 });
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
@@ -1660,9 +1736,9 @@ error.message
 }
 
 
-/* ==============================
+/* ==========================
    SECURITY
-============================== */
+========================== */
 
 function escapeHTML(value){
 
@@ -1690,13 +1766,16 @@ return String(value ?? "")
 }
 
 
-/* ==============================
+/* ==========================
    START
-============================== */
+========================== */
+
+show("home");
 
 loadProducts();
 
 </script>
 
 </body>
+
 </html>
