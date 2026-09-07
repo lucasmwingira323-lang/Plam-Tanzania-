@@ -211,7 +211,6 @@ grid-template-columns:repeat(3,1fr);
 
 <body>
 
-
 <!-- HEADER -->
 
 <header>
@@ -231,15 +230,21 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 <div class="top-buttons">
 
-<button id="openRegister">
+<button
+type="button"
+onclick="showSection('account')">
 Fungua Akaunti
 </button>
 
-<button id="openLogin">
+<button
+type="button"
+onclick="openLogin()">
 Ingia
 </button>
 
-<button id="topAdd">
+<button
+type="button"
+onclick="showSection('add')">
 ➕ Weka Bidhaa
 </button>
 
@@ -305,6 +310,7 @@ Huduma
 
 </div>
 
+
 <h2>🔥 Bidhaa</h2>
 
 <div id="products" class="products"></div>
@@ -330,6 +336,7 @@ type="text"
 placeholder="Mfano: Samsung A05"
 >
 
+
 <label>Bei</label>
 
 <input
@@ -337,6 +344,7 @@ id="price"
 type="number"
 placeholder="Mfano: 250000"
 >
+
 
 <label>Category</label>
 
@@ -353,6 +361,7 @@ placeholder="Mfano: 250000"
 
 </select>
 
+
 <label>Eneo</label>
 
 <input
@@ -361,6 +370,7 @@ type="text"
 placeholder="Mfano: Mbeya"
 >
 
+
 <label>Maelezo ya bidhaa</label>
 
 <textarea
@@ -368,11 +378,18 @@ id="desc"
 placeholder="Andika maelezo ya bidhaa yako hapa..."
 ></textarea>
 
-<button id="addProductBtn" type="button">
+
+<button
+type="button"
+onclick="addProduct()">
 📢 Chapisha Bidhaa
 </button>
 
-<button id="backHomeBtn" type="button" class="back-button">
+
+<button
+type="button"
+onclick="showSection('home')"
+class="back-button">
 ⬅️ Rudi Home
 </button>
 
@@ -418,7 +435,9 @@ type="password"
 placeholder="Password"
 >
 
-<button id="registerBtn">
+<button
+type="button"
+onclick="registerUser()">
 Jisajili
 </button>
 
@@ -426,7 +445,9 @@ Jisajili
 Baada ya kujisajili, utatakiwa kuthibitisha email yako.
 </p>
 
-<button id="showLoginBtn" type="button">
+<button
+type="button"
+onclick="openLogin()">
 Nina akaunti tayari
 </button>
 
@@ -451,13 +472,17 @@ type="password"
 placeholder="Password"
 >
 
-<button id="loginBtn">
+<button
+type="button"
+onclick="loginUser()">
 Ingia
 </button>
 
 <br><br>
 
-<button id="showRegisterBtn" type="button">
+<button
+type="button"
+onclick="openRegister()">
 Fungua Akaunti Mpya
 </button>
 
@@ -472,7 +497,9 @@ Fungua Akaunti Mpya
 
 <p id="userEmail"></p>
 
-<button id="logoutBtn">
+<button
+type="button"
+onclick="logoutUser()">
 Toka
 </button>
 
@@ -487,27 +514,41 @@ Toka
 
 <nav>
 
-<button id="navHome">
+<button
+type="button"
+onclick="showSection('home')">
 🏠<br>
 Home
 </button>
 
-<button id="navSearch">
+
+<button
+type="button"
+onclick="searchPage()">
 🔍<br>
 Tafuta
 </button>
 
-<button id="navAdd">
+
+<button
+type="button"
+onclick="showSection('add')">
 ➕<br>
 Weka Bidhaa
 </button>
 
-<button id="navMessage">
+
+<button
+type="button"
+onclick="messagePage()">
 💬<br>
 Ujumbe
 </button>
 
-<button id="navAccount">
+
+<button
+type="button"
+onclick="showSection('account')">
 👤<br>
 Akaunti
 </button>
@@ -541,11 +582,6 @@ SUPABASE_KEY
 
 let ps = [];
 
-
-// ======================================================
-// SECTIONS
-// ======================================================
-
 const home =
 document.getElementById("home");
 
@@ -576,16 +612,25 @@ account.classList.add("hidden");
 
 
 if(id === "home"){
+
 home.classList.remove("hidden");
+
 }
+
 
 if(id === "add"){
+
 addSection.classList.remove("hidden");
+
 }
 
+
 if(id === "account"){
+
 account.classList.remove("hidden");
+
 }
+
 
 window.scrollTo(0,0);
 
@@ -593,107 +638,40 @@ window.scrollTo(0,0);
 
 
 // ======================================================
-// HOME
+// SEARCH PAGE
 // ======================================================
 
-document
-.getElementById("navHome")
-.addEventListener("click",function(){
+function searchPage(){
 
 showSection("home");
 
-});
-
-
-// ======================================================
-// SEARCH
-// ======================================================
-
-document
-.getElementById("navSearch")
-.addEventListener("click",function(){
-
-showSection("home");
+setTimeout(function(){
 
 searchInput.focus();
 
-});
+},100);
 
-
-// ======================================================
-// ADD PRODUCT NAV
-// ======================================================
-
-document
-.getElementById("navAdd")
-.addEventListener("click",function(){
-
-showSection("add");
-
-});
-
-
-// ======================================================
-// TOP ADD PRODUCT
-// ======================================================
-
-document
-.getElementById("topAdd")
-.addEventListener("click",function(){
-
-showSection("add");
-
-});
-
-
-// ======================================================
-// BACK HOME
-// ======================================================
-
-document
-.getElementById("backHomeBtn")
-.addEventListener("click",function(){
-
-showSection("home");
-
-});
+}
 
 
 // ======================================================
 // MESSAGE
 // ======================================================
 
-document
-.getElementById("navMessage")
-.addEventListener("click",function(){
+function messagePage(){
 
 alert(
 "💬 Ujumbe wa mnunuzi na muuzaji utaongezwa hapa."
 );
 
-});
+}
 
 
 // ======================================================
-// ACCOUNT
+// REGISTER PAGE
 // ======================================================
 
-document
-.getElementById("navAccount")
-.addEventListener("click",function(){
-
-showSection("account");
-
-});
-
-
-// ======================================================
-// OPEN REGISTER
-// ======================================================
-
-document
-.getElementById("openRegister")
-.addEventListener("click",function(){
+function openRegister(){
 
 showSection("account");
 
@@ -707,16 +685,14 @@ document
 .classList
 .add("hidden");
 
-});
+}
 
 
 // ======================================================
-// OPEN LOGIN
+// LOGIN PAGE
 // ======================================================
 
-document
-.getElementById("openLogin")
-.addEventListener("click",function(){
+function openLogin(){
 
 showSection("account");
 
@@ -730,7 +706,7 @@ document
 .classList
 .remove("hidden");
 
-});
+}
 
 
 // ======================================================
@@ -936,8 +912,7 @@ ${escapeHTML(product.description || "")}
 
 <button
 class="contactBtn"
-data-product="${escapeHTML(product.name || "")}"
->
+data-product="${escapeHTML(product.name || "")}">
 Wasiliana na Muuzaji
 </button>
 
@@ -952,7 +927,9 @@ document
 .querySelectorAll(".contactBtn")
 .forEach(button => {
 
-button.addEventListener("click",function(){
+button.addEventListener(
+"click",
+function(){
 
 const productName =
 this.getAttribute("data-product");
@@ -1030,15 +1007,7 @@ render();
 // ADD PRODUCT
 // ======================================================
 
-document
-.getElementById("addProductBtn")
-.addEventListener(
-"click",
-add
-);
-
-
-async function add(){
+async function addProduct(){
 
 const name =
 document
@@ -1204,14 +1173,6 @@ alert(
 // REGISTER
 // ======================================================
 
-document
-.getElementById("registerBtn")
-.addEventListener(
-"click",
-registerUser
-);
-
-
 async function registerUser(){
 
 const fullName =
@@ -1326,14 +1287,6 @@ alert(
 // LOGIN
 // ======================================================
 
-document
-.getElementById("loginBtn")
-.addEventListener(
-"click",
-loginUser
-);
-
-
 async function loginUser(){
 
 const email =
@@ -1439,77 +1392,31 @@ document
 // LOGOUT
 // ======================================================
 
-document
-.getElementById("logoutBtn")
-.addEventListener(
-"click",
-async function(){
+async function logoutUser(){
 
 await supabase.auth.signOut();
+
 
 document
 .getElementById("userBox")
 .classList
 .add("hidden");
 
+
 document
 .getElementById("registerBox")
 .classList
 .remove("hidden");
 
+
 showSection("home");
+
 
 alert(
 "Umetoka kwenye akaunti."
 );
 
-});
-
-
-// ======================================================
-// SWITCH LOGIN
-// ======================================================
-
-document
-.getElementById("showLoginBtn")
-.addEventListener(
-"click",
-function(){
-
-document
-.getElementById("registerBox")
-.classList
-.add("hidden");
-
-document
-.getElementById("loginBox")
-.classList
-.remove("hidden");
-
-});
-
-
-// ======================================================
-// SWITCH REGISTER
-// ======================================================
-
-document
-.getElementById("showRegisterBtn")
-.addEventListener(
-"click",
-function(){
-
-document
-.getElementById("loginBox")
-.classList
-.add("hidden");
-
-document
-.getElementById("registerBox")
-.classList
-.remove("hidden");
-
-});
+}
 
 
 // ======================================================
@@ -1520,6 +1427,7 @@ async function checkSession(){
 
 const result =
 await supabase.auth.getSession();
+
 
 if(result.data.session){
 
@@ -1536,6 +1444,8 @@ result.data.session.user
 // START
 // ======================================================
 
+showSection("home");
+
 loadProducts();
 
 checkSession();
@@ -1545,4 +1455,3 @@ checkSession();
 </body>
 
 </html>
-
