@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="sw">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>PLAM TANZANIA</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{box-sizing:border-box}
 
 body{
@@ -207,6 +210,59 @@ color:white
 .purple{
 background:#6a1b9a;
 color:white
+}
+
+/* FAVORITES */
+
+.favorite{
+background:#ffe4e6;
+color:#b00020;
+font-weight:bold
+}
+
+.favorite.active{
+background:#d62828;
+color:white
+}
+
+.favorite-box{
+background:#fff5f6;
+border:1px solid #ffd4d9;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px
+}
+
+.favorite-card{
+background:white;
+border:1px solid #eee;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px;
+box-shadow:0 2px 6px rgba(0,0,0,.05)
+}
+
+.favorite-image{
+width:100%;
+max-height:230px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:10px;
+cursor:pointer
+}
+
+.favorite-count{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#d62828;
+color:white;
+min-width:24px;
+height:24px;
+padding:0 7px;
+border-radius:20px;
+font-size:12px;
+margin-left:5px
 }
 
 .hidden{
@@ -572,6 +628,7 @@ margin-right:auto
 }
 
 }
+
 </style>
 </head>
 
@@ -629,9 +686,11 @@ id="notificationPanel"
 class="notification-panel hidden">
 
 <div id="notifications">
+
 <p class="small">
 Hakuna taarifa mpya.
 </p>
+
 </div>
 
 <button
@@ -829,6 +888,7 @@ class="grid">
 
 </section>
 
+
 <section id="add" class="hidden">
 
 <div class="form-box">
@@ -984,6 +1044,7 @@ onclick="resetProductForm()">
 
 </section>
 
+
 <section id="account" class="hidden">
 
 <div class="account-box">
@@ -1068,6 +1129,7 @@ onclick="login()">
 
 </div>
 
+
 <div id="accountLoggedIn" class="hidden">
 
 <h2>
@@ -1088,6 +1150,7 @@ onclick="logout()">
 
 <hr>
 
+
 <!-- SELLER PROFILE -->
 
 <h3>
@@ -1095,7 +1158,11 @@ onclick="logout()">
 </h3>
 
 <div id="sellerProfileDisplay">
-<p>⏳ Inapakia wasifu...</p>
+
+<p>
+⏳ Inapakia wasifu...
+</p>
+
 </div>
 
 <button
@@ -1210,40 +1277,83 @@ onclick="hideSellerProfileForm()">
 
 </div>
 
+
 <hr>
+
+
+<!-- FAVORITES -->
+
+<div class="favorite-box">
+
+<h3>
+❤️ Bidhaa Nilizohifadhi
+<span
+id="favoriteCount"
+class="favorite-count">
+0
+</span>
+</h3>
+
+<p class="small">
+Bidhaa unazozipenda unaweza kuzihifadhi hapa na kuzitazama tena wakati wowote.
+</p>
+
+<div id="myFavorites">
+
+<p>
+⏳ Inapakia...
+</p>
+
+</div>
+
+</div>
+
+
+<hr>
+
 
 <h3>
 📦 Bidhaa Zangu
 </h3>
 
 <div id="myProducts">
+
 <p>
 ⏳ Inapakia...
 </p>
+
 </div>
 
+
 <hr>
+
 
 <h3>
 🛍️ Oda Zangu
 </h3>
 
 <div id="myOrders">
+
 <p>
 ⏳ Inapakia...
 </p>
+
 </div>
 
+
 <hr>
+
 
 <h3>
 🛍️ Oda za Wateja
 </h3>
 
 <div id="sellerOrders">
+
 <p>
 ⏳ Inapakia...
 </p>
+
 </div>
 
 </div>
@@ -1251,6 +1361,7 @@ onclick="hideSellerProfileForm()">
 </div>
 
 </section>
+
 
 <section id="admin" class="hidden">
 
@@ -1269,30 +1380,39 @@ Karibu kwenye usimamizi wa PLAM TANZANIA.
 <div class="admin-stats">
 
 <div class="admin-stat">
+
 <div>📦 Jumla ya Bidhaa</div>
+
 <div
 id="adminProductCount"
 class="admin-stat-number">
 0
 </div>
+
 </div>
 
 <div class="admin-stat">
+
 <div>🛒 Jumla ya Oda</div>
+
 <div
 id="adminOrderCount"
 class="admin-stat-number">
 0
 </div>
+
 </div>
 
 <div class="admin-stat">
+
 <div>👥 Watumiaji</div>
+
 <div
 id="adminUserCount"
 class="admin-stat-number">
 0
 </div>
+
 </div>
 
 <div class="admin-stat">
@@ -1310,6 +1430,7 @@ style="margin-top:10px;font-size:13px;word-break:break-word;">
 </div>
 
 </div>
+
 
 <div class="admin-section">
 
@@ -1330,6 +1451,7 @@ onclick="showAdminDashboard()">
 
 </div>
 
+
 <div class="admin-section">
 
 <h2>
@@ -1337,12 +1459,15 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminUsers">
+
 <p>
 ⏳ Inapakia watumiaji...
 </p>
+
 </div>
 
 </div>
+
 
 <div class="admin-section">
 
@@ -1351,12 +1476,15 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminProfiles">
+
 <p>
 ⏳ Inapakia wasifu...
 </p>
+
 </div>
 
 </div>
+
 
 <div class="admin-section">
 
@@ -1365,12 +1493,15 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminProducts">
+
 <p>
 ⏳ Inapakia bidhaa...
 </p>
+
 </div>
 
 </div>
+
 
 <div class="admin-section">
 
@@ -1379,9 +1510,11 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminOrders">
+
 <p>
 ⏳ Inapakia oda...
 </p>
+
 </div>
 
 </div>
@@ -1389,6 +1522,9 @@ onclick="showAdminDashboard()">
 </section>
 
 </main>
+
+
+<!-- ORDER MODAL -->
 
 <div
 id="orderModal"
@@ -1474,9 +1610,11 @@ onclick="closeOrderModal()">
 
 </div>
 
+
 <footer>
 
 🇹🇿 PLAM TANZANIA
+
 <br>
 
 <span class="small">
@@ -1485,12 +1623,14 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 </footer>
 
+
 <script>
 
 "use strict";
 
+
 /* =====================================================
-   SUPABASE
+SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -1505,20 +1645,28 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+
 let ps=[];
 let currentUser=null;
 let isAdmin=false;
 let currentCategory="all";
+
 let selectedImage1=null;
 let selectedImage2=null;
+
 let selectedProfileLogo=null;
 let sellerProfile=null;
 
+/* FAVORITES */
+
+let favoriteProductIds=new Set();
+
+
 /* =====================================================
-   TANZANIA REGIONS
+TANZANIA REGIONS
 ===================================================== */
 
-const TANZANIA_REGIONS = {
+const TANZANIA_REGIONS={
 
 "Dodoma":[
 "Bahi","Chamwino","Chemba","Dodoma Mjini",
@@ -1672,13 +1820,15 @@ const TANZANIA_REGIONS = {
 
 };
 
+
 /* =====================================================
-   GENERAL
+GENERAL
 ===================================================== */
 
 function $(id){
 return document.getElementById(id);
 }
+
 
 function escapeHtml(value){
 
@@ -1691,6 +1841,7 @@ return String(value??"")
 
 }
 
+
 function formatPrice(value){
 
 const n=Number(value||0);
@@ -1700,6 +1851,7 @@ return new Intl.NumberFormat("sw-TZ")
 
 }
 
+
 function cleanPhone(phone){
 
 return String(phone||"")
@@ -1707,8 +1859,9 @@ return String(phone||"")
 
 }
 
+
 /* =====================================================
-   REGIONS
+REGIONS
 ===================================================== */
 
 function fillRegionSelect(id,current=""){
@@ -1732,10 +1885,13 @@ select.appendChild(option);
 });
 
 if(current){
+
 select.value=current;
+
 }
 
 }
+
 
 function loadRegions(){
 
@@ -1753,6 +1909,7 @@ updateDistricts();
 updateProfileDistricts();
 
 }
+
 
 function updateDistricts(){
 
@@ -1781,6 +1938,7 @@ district.appendChild(option);
 });
 
 }
+
 
 function updateProfileDistricts(){
 
@@ -1811,13 +1969,16 @@ district.appendChild(option);
 });
 
 if(oldValue){
+
 district.value=oldValue;
+
 }
 
 }
+
 
 /* =====================================================
-   SHOW
+SHOW
 ===================================================== */
 
 function show(id){
@@ -1844,6 +2005,7 @@ section!==id
 
 });
 
+
 if(id==="account"){
 
 updateAccountUI();
@@ -1852,6 +2014,7 @@ if(currentUser){
 
 loadSellerProfile();
 showMyProducts();
+showMyFavorites();
 showMyOrders();
 showSellerOrders();
 
@@ -1859,9 +2022,13 @@ showSellerOrders();
 
 }
 
+
 if(id==="admin"){
+
 refreshAdminDashboard();
+
 }
+
 
 window.scrollTo({
 top:0,
@@ -1870,8 +2037,9 @@ behavior:"smooth"
 
 }
 
+
 /* =====================================================
-   AUTH FORMS
+AUTH FORMS
 ===================================================== */
 
 function showRegisterForm(){
@@ -1884,6 +2052,7 @@ $("homeLoginForm")
 
 }
 
+
 function showLoginForm(){
 
 $("homeLoginForm")
@@ -1893,6 +2062,7 @@ $("homeRegisterForm")
 .classList.add("hidden");
 
 }
+
 
 function hideAuthForms(){
 
@@ -1904,6 +2074,7 @@ $("homeLoginForm")
 
 }
 
+
 function showRegisterFormAccount(){
 
 $("accountRegisterForm")
@@ -1914,6 +2085,7 @@ $("accountLoginForm")
 
 }
 
+
 function showLoginFormAccount(){
 
 $("accountLoginForm")
@@ -1923,6 +2095,7 @@ $("accountRegisterForm")
 .classList.add("hidden");
 
 }
+
 
 function setMessage(id,message,success=false){
 
@@ -1940,8 +2113,9 @@ el.textContent=message;
 
 }
 
+
 /* =====================================================
-   REGISTER
+REGISTER
 ===================================================== */
 
 async function registerFromHome(){
@@ -2006,6 +2180,7 @@ setMessage(
 
 }
 
+
 async function register(){
 
 const email=
@@ -2052,8 +2227,9 @@ alert("❌ "+error.message);
 
 }
 
+
 /* =====================================================
-   LOGIN
+LOGIN
 ===================================================== */
 
 async function loginFromHome(){
@@ -2098,8 +2274,8 @@ $("homeLoginPassword").value="";
 hideAuthForms();
 
 await checkAdmin();
-
 await loadSellerProfile();
+await loadFavorites();
 
 updateAccountUI();
 
@@ -2120,6 +2296,7 @@ setMessage(
 }
 
 }
+
 
 async function login(){
 
@@ -2153,6 +2330,7 @@ $("loginPassword").value="";
 
 await checkAdmin();
 await loadSellerProfile();
+await loadFavorites();
 
 updateAccountUI();
 
@@ -2168,8 +2346,9 @@ alert("❌ "+error.message);
 
 }
 
+
 /* =====================================================
-   LOGOUT
+LOGOUT
 ===================================================== */
 
 async function logout(){
@@ -2181,9 +2360,12 @@ await supabaseClient.auth.signOut();
 currentUser=null;
 isAdmin=false;
 sellerProfile=null;
+favoriteProductIds=new Set();
 
 updateAccountUI();
 updateAdminUI();
+
+render();
 
 show("home");
 
@@ -2203,8 +2385,9 @@ alert(
 
 }
 
+
 /* =====================================================
-   ACCOUNT
+ACCOUNT
 ===================================================== */
 
 function updateAccountUI(){
@@ -2233,6 +2416,7 @@ currentUser.email||"";
 
 }
 
+
 function updateAdminUI(){
 
 const nav=$("adminNav");
@@ -2246,8 +2430,9 @@ nav.classList.toggle(
 
 }
 
+
 /* =====================================================
-   CHECK USER
+CHECK USER
 ===================================================== */
 
 async function checkUser(){
@@ -2267,7 +2452,12 @@ await checkAdmin();
 if(currentUser){
 
 await loadSellerProfile();
+await loadFavorites();
 renderNotifications();
+
+}else{
+
+favoriteProductIds=new Set();
 
 }
 
@@ -2285,8 +2475,9 @@ error
 
 }
 
+
 /* =====================================================
-   CHECK ADMIN
+CHECK ADMIN
 ===================================================== */
 
 async function checkAdmin(){
@@ -2336,8 +2527,9 @@ return isAdmin;
 
 }
 
+
 /* =====================================================
-   SELLER PROFILE
+SELLER PROFILE
 ===================================================== */
 
 async function loadSellerProfile(){
@@ -2377,6 +2569,7 @@ return null;
 }
 
 }
+
 
 function renderSellerProfile(){
 
@@ -2479,6 +2672,7 @@ sellerProfile.description||
 
 }
 
+
 function showSellerProfileForm(){
 
 if(!currentUser){
@@ -2526,6 +2720,7 @@ sellerProfile.logo_url
 class="profile-logo"
 src="${escapeHtml(sellerProfile.logo_url)}"
 alt="Logo ya sasa">
+
 <p class="small">Logo ya sasa</p>
 `
 :
@@ -2537,8 +2732,10 @@ $("profileBusinessName").value="";
 $("profileOwnerName").value="";
 $("profilePhone").value="";
 $("profileRegion").value="";
+
 $("profileDistrict").innerHTML=
 '<option value="">Chagua Wilaya</option>';
+
 $("profileDescription").value="";
 $("profileLogoPreview").innerHTML="";
 
@@ -2546,12 +2743,14 @@ $("profileLogoPreview").innerHTML="";
 
 }
 
+
 function hideSellerProfileForm(){
 
 $("sellerProfileForm")
 .classList.add("hidden");
 
 }
+
 
 function previewProfileLogo(input){
 
@@ -2579,6 +2778,7 @@ Logo mpya
 `;
 
 }
+
 
 async function saveSellerProfile(){
 
@@ -2715,6 +2915,7 @@ button.textContent="💾 Hifadhi Wasifu";
 
 }
 
+
 async function uploadProfileLogo(
 file,
 userId
@@ -2761,8 +2962,451 @@ return data.publicUrl;
 
 }
 
+
 /* =====================================================
-   LOAD PRODUCTS
+FAVORITES
+===================================================== */
+
+async function loadFavorites(){
+
+if(!currentUser){
+
+favoriteProductIds=new Set();
+
+updateFavoriteCount();
+
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("favorites")
+.select("product_id")
+.eq(
+"user_id",
+currentUser.id
+);
+
+if(error)throw error;
+
+favoriteProductIds=
+new Set(
+(data||[])
+.map(item=>String(item.product_id))
+);
+
+updateFavoriteCount();
+
+render();
+
+if($("myFavorites")){
+
+showMyFavorites();
+
+}
+
+}catch(error){
+
+console.error(
+"LOAD FAVORITES:",
+error
+);
+
+favoriteProductIds=new Set();
+
+updateFavoriteCount();
+
+}
+
+}
+
+
+function updateFavoriteCount(){
+
+const count=$("favoriteCount");
+
+if(!count)return;
+
+count.textContent=
+String(favoriteProductIds.size);
+
+}
+
+
+async function toggleFavorite(productId){
+
+if(!currentUser){
+
+alert(
+"⚠️ Ingia kwenye akaunti kwanza ili kuhifadhi bidhaa."
+);
+
+show("account");
+
+return;
+
+}
+
+const id=String(productId);
+
+const numericId=Number(productId);
+
+if(!Number.isFinite(numericId)){
+
+alert(
+"❌ Bidhaa hii haijatambulika."
+);
+
+return;
+
+}
+
+try{
+
+if(favoriteProductIds.has(id)){
+
+const {error}=
+await supabaseClient
+.from("favorites")
+.delete()
+.eq(
+"user_id",
+currentUser.id
+)
+.eq(
+"product_id",
+numericId
+);
+
+if(error)throw error;
+
+favoriteProductIds.delete(id);
+
+}else{
+
+const {error}=
+await supabaseClient
+.from("favorites")
+.insert({
+
+user_id:currentUser.id,
+
+product_id:numericId
+
+});
+
+if(error)throw error;
+
+favoriteProductIds.add(id);
+
+}
+
+updateFavoriteCount();
+
+render();
+
+await showMyFavorites();
+
+}catch(error){
+
+console.error(
+"TOGGLE FAVORITE:",
+error
+);
+
+if(
+String(error.message||"")
+.toLowerCase()
+.includes("duplicate")
+){
+
+favoriteProductIds.add(id);
+
+updateFavoriteCount();
+
+render();
+
+return;
+
+}
+
+alert(
+"❌ Imeshindikana kubadilisha Favorites.\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+async function showMyFavorites(){
+
+const box=$("myFavorites");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML=
+"<p>Ingia kwanza.</p>";
+
+updateFavoriteCount();
+
+return;
+
+}
+
+box.innerHTML=
+"<p>⏳ Inapakia Favorites...</p>";
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("favorites")
+.select(
+"product_id,created_at"
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error)throw error;
+
+const favorites=data||[];
+
+favoriteProductIds=
+new Set(
+favorites.map(
+item=>String(item.product_id)
+)
+);
+
+updateFavoriteCount();
+
+if(!favorites.length){
+
+box.innerHTML=`
+
+<div class="favorite-card">
+
+<p>
+❤️ Bado hujahifadhi bidhaa yoyote.
+</p>
+
+<p class="small">
+Nenda Nyumbani, tafuta bidhaa unayoipenda kisha bonyeza ❤️ Hifadhi.
+</p>
+
+<button
+type="button"
+class="green"
+onclick="show('home')">
+🏠 Tafuta Bidhaa
+</button>
+
+</div>
+
+`;
+
+return;
+
+}
+
+const favoriteProducts=[];
+
+favorites.forEach(item=>{
+
+const product=
+ps.find(
+p=>String(p.id)===
+String(item.product_id)
+);
+
+if(product){
+
+favoriteProducts.push(product);
+
+}
+
+});
+
+
+if(!favoriteProducts.length){
+
+box.innerHTML=`
+
+<div class="favorite-card">
+
+<p>
+📦 Bidhaa ulizohifadhi hazipatikani tena.
+</p>
+
+<p class="small">
+Huenda bidhaa hizo zimefutwa na wauzaji.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML=
+favoriteProducts
+.map(product=>{
+
+const isOwner=
+currentUser&&
+product.user_id===
+currentUser.id;
+
+let image="";
+
+if(product.image_url){
+
+image=`
+
+<img
+class="favorite-image"
+src="${escapeHtml(product.image_url)}"
+alt="${escapeHtml(product.name)}"
+onclick="openImage(this.src)">
+
+`;
+
+}else{
+
+image=`
+
+<div
+style="
+padding:40px;
+text-align:center;
+background:#f5f5f5;
+border-radius:10px">
+📦 Hakuna picha
+</div>
+
+`;
+
+}
+
+return `
+
+<div class="favorite-card">
+
+${image}
+
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<div class="price">
+${formatPrice(product.price)}
+</div>
+
+<p>
+<b>📂 Aina:</b>
+${escapeHtml(product.category||"-")}
+</p>
+
+<p>
+<b>📍 Mkoa:</b>
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+<b>🏘️ Wilaya:</b>
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+<b>📌 Eneo:</b>
+${escapeHtml(product.place||"-")}
+</p>
+
+${product.description
+?
+`
+<p>
+${escapeHtml(product.description)}
+</p>
+`
+:
+""
+}
+
+<div class="card-actions">
+
+<button
+type="button"
+class="favorite active"
+onclick="toggleFavorite('${product.id}')">
+💔 Ondoa
+</button>
+
+${
+!isOwner
+?
+`
+<button
+type="button"
+class="orange"
+onclick="openOrderModal('${product.id}')">
+🛒 Agiza
+</button>
+`
+:
+`
+<span class="small">
+Hii ni bidhaa yako.
+</span>
+`
+}
+
+</div>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}catch(error){
+
+console.error(
+"SHOW MY FAVORITES:",
+error
+);
+
+box.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia Favorites.<br>'+
+escapeHtml(error.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =====================================================
+LOAD PRODUCTS
 ===================================================== */
 
 async function loadProducts(){
@@ -2779,7 +3423,9 @@ await supabaseClient
 .select("*")
 .order(
 "created_at",
-{ascending:false}
+{
+ascending:false
+}
 );
 
 if(error)throw error;
@@ -2787,6 +3433,12 @@ if(error)throw error;
 ps=data||[];
 
 render();
+
+if(currentUser){
+
+updateFavoriteCount();
+
+}
 
 }catch(error){
 
@@ -2806,8 +3458,9 @@ escapeHtml(error.message)+
 
 }
 
+
 /* =====================================================
-   RENDER PRODUCTS
+RENDER PRODUCTS
 ===================================================== */
 
 function render(){
@@ -2849,6 +3502,7 @@ return matchesCategory&&matchesSearch;
 
 });
 
+
 if(!filtered.length){
 
 container.innerHTML=
@@ -2857,6 +3511,7 @@ container.innerHTML=
 return;
 
 }
+
 
 container.innerHTML=
 filtered.map(product=>{
@@ -2907,24 +3562,61 @@ images=
 
 }
 
+
 const isOwner=
 currentUser&&
 product.user_id===
 currentUser.id;
 
+
 const profile=
-product.user_id===currentUser?.id
+product.user_id===
+currentUser?.id
 ?
 sellerProfile
 :
 null;
+
+
+const isFavorite=
+favoriteProductIds.has(
+String(product.id)
+);
+
+
+let favoriteButton="";
+
+if(!isOwner){
+
+favoriteButton=`
+
+<button
+type="button"
+class="favorite ${isFavorite?"active":""}"
+onclick="toggleFavorite('${product.id}')">
+
+${isFavorite
+?
+"💔 Ondoa"
+:
+"❤️ Hifadhi"
+}
+
+</button>
+
+`;
+
+}
+
 
 return `
 
 <div class="card">
 
 <div class="product-gallery">
+
 ${images}
+
 </div>
 
 <h3>
@@ -2959,15 +3651,22 @@ ${escapeHtml(product.place)}
 ${escapeHtml(product.description||"")}
 </p>
 
+
 ${
+
 profile
 ?
+
 `
+
 <div class="profile-mini">
 
-<strong>🏪 ${escapeHtml(
-profile.business_name||"Biashara"
-)}</strong>
+<strong>
+🏪 ${escapeHtml(
+profile.business_name||
+"Biashara"
+)}
+</strong>
 
 <p>
 👤 ${escapeHtml(
@@ -2977,21 +3676,32 @@ profile.owner_name||"-"
 
 <p>
 📞 ${escapeHtml(
-profile.phone||product.phone||"-"
+profile.phone||
+product.phone||
+"-"
 )}
 </p>
 
 </div>
+
 `
+
 :
+
 ""
+
 }
 
+
 <div class="card-actions">
+
+${favoriteButton}
+
 
 ${
 product.phone
 ?
+
 `
 
 <button
@@ -3009,13 +3719,18 @@ onclick="whatsappSeller('${escapeHtml(product.phone)}','${escapeHtml(product.nam
 </button>
 
 `
+
 :
+
 ""
+
 }
+
 
 ${
 currentUser&&!isOwner
 ?
+
 `
 
 <button
@@ -3026,13 +3741,18 @@ onclick="openOrderModal('${product.id}')">
 </button>
 
 `
+
 :
+
 ""
+
 }
+
 
 ${
 isOwner
 ?
+
 `
 
 <button
@@ -3050,8 +3770,11 @@ onclick="deleteProduct('${product.id}')">
 </button>
 
 `
+
 :
+
 ""
+
 }
 
 </div>
@@ -3064,6 +3787,7 @@ onclick="deleteProduct('${product.id}')">
 
 }
 
+
 function filterCategory(category){
 
 currentCategory=category;
@@ -3072,8 +3796,9 @@ render();
 
 }
 
+
 /* =====================================================
-   IMAGE
+IMAGE
 ===================================================== */
 
 function openImage(src){
@@ -3132,6 +3857,7 @@ win.document.close();
 
 }
 
+
 function previewImage(input,number){
 
 const file=
@@ -3152,6 +3878,7 @@ selectedImage2=file;
 renderImagePreview();
 
 }
+
 
 function renderImagePreview(){
 
@@ -3189,8 +3916,9 @@ Picha ${index+1}
 
 }
 
+
 /* =====================================================
-   COMPRESS IMAGE
+COMPRESS IMAGE
 ===================================================== */
 
 async function compressImage(file){
@@ -3302,8 +4030,9 @@ reader.readAsDataURL(file);
 
 }
 
+
 /* =====================================================
-   UPLOAD PRODUCT IMAGE
+UPLOAD PRODUCT IMAGE
 ===================================================== */
 
 async function uploadProductImage(
@@ -3352,8 +4081,9 @@ return data.publicUrl;
 
 }
 
+
 /* =====================================================
-   SAVE PRODUCT
+SAVE PRODUCT
 ===================================================== */
 
 async function saveProduct(event){
@@ -3421,11 +4151,6 @@ button.textContent="⏳ Inahifadhi...";
 
 try{
 
-/*
-   Kama muuzaji ana profile,
-   tumia namba yake ya biashara.
-*/
-
 if(!sellerProfile){
 
 await loadSellerProfile();
@@ -3492,6 +4217,7 @@ payload.image_url_2=imageUrl2;
 
 }
 
+
 if(editId){
 
 const {error}=
@@ -3549,8 +4275,9 @@ button.textContent="💾 Hifadhi Bidhaa";
 
 }
 
+
 /* =====================================================
-   RESET PRODUCT
+RESET PRODUCT
 ===================================================== */
 
 function resetProductForm(){
@@ -3577,8 +4304,9 @@ updateDistricts();
 
 }
 
+
 /* =====================================================
-   MY PRODUCTS
+MY PRODUCTS
 ===================================================== */
 
 async function showMyProducts(){
@@ -3683,8 +4411,9 @@ box.innerHTML=
 
 }
 
+
 /* =====================================================
-   EDIT PRODUCT
+EDIT PRODUCT
 ===================================================== */
 
 async function editProduct(id){
@@ -3803,8 +4532,9 @@ show("add");
 
 }
 
+
 /* =====================================================
-   DELETE
+DELETE
 ===================================================== */
 
 async function deleteProduct(id){
@@ -3854,8 +4584,9 @@ error.message
 
 }
 
+
 /* =====================================================
-   CALL / WHATSAPP
+CALL / WHATSAPP
 ===================================================== */
 
 function callSeller(phone){
@@ -3873,6 +4604,7 @@ return;
 window.location.href="tel:"+clean;
 
 }
+
 
 function whatsappSeller(phone,name){
 
@@ -3911,8 +4643,9 @@ encodeURIComponent(message),
 
 }
 
+
 /* =====================================================
-   ORDER
+ORDER
 ===================================================== */
 
 function openOrderModal(productId){
@@ -3997,10 +4730,12 @@ ${
 product.phone
 ?
 `
+
 <p>
 📞 Muuzaji:
 ${escapeHtml(product.phone)}
 </p>
+
 `
 :
 ""
@@ -4020,6 +4755,7 @@ $("orderModal")
 
 }
 
+
 function closeOrderModal(){
 
 $("orderModal")
@@ -4027,8 +4763,9 @@ $("orderModal")
 
 }
 
+
 /* =====================================================
-   SUBMIT ORDER
+SUBMIT ORDER
 ===================================================== */
 
 async function submitOrder(){
@@ -4135,8 +4872,9 @@ error.message
 
 }
 
+
 /* =====================================================
-   MY ORDERS
+MY ORDERS
 ===================================================== */
 
 async function showMyOrders(){
@@ -4262,8 +5000,9 @@ box.innerHTML=
 
 }
 
+
 /* =====================================================
-   SELLER ORDERS
+SELLER ORDERS
 ===================================================== */
 
 async function showSellerOrders(){
@@ -4437,8 +5176,9 @@ box.innerHTML=
 
 }
 
+
 /* =====================================================
-   UPDATE ORDER
+UPDATE ORDER
 ===================================================== */
 
 async function updateOrderStatus(
@@ -4537,8 +5277,9 @@ error.message
 
 }
 
+
 /* =====================================================
-   NOTIFICATIONS
+NOTIFICATIONS
 ===================================================== */
 
 function notificationKey(){
@@ -4549,6 +5290,7 @@ return "plam_notifications_"+
 currentUser.id;
 
 }
+
 
 function getNotifications(){
 
@@ -4570,6 +5312,7 @@ return [];
 
 }
 
+
 function saveNotifications(list){
 
 const key=notificationKey();
@@ -4584,6 +5327,7 @@ list.slice(0,50)
 );
 
 }
+
 
 function addNotification(
 title,
@@ -4608,6 +5352,7 @@ saveNotifications(list);
 renderNotifications();
 
 }
+
 
 function renderNotifications(){
 
@@ -4662,6 +5407,7 @@ ${new Date(item.time)
 
 }
 
+
 function toggleNotifications(){
 
 const panel=$("notificationPanel");
@@ -4674,6 +5420,7 @@ renderNotifications();
 
 }
 
+
 function clearNotifications(){
 
 if(currentUser)
@@ -4683,8 +5430,9 @@ renderNotifications();
 
 }
 
+
 /* =====================================================
-   REALTIME
+REALTIME
 ===================================================== */
 
 function setupRealtime(){
@@ -4801,8 +5549,9 @@ error
 
 }
 
+
 /* =====================================================
-   ADMIN
+ADMIN
 ===================================================== */
 
 async function showAdminDashboard(){
@@ -4834,6 +5583,7 @@ return;
 show("admin");
 
 }
+
 
 async function refreshAdminDashboard(){
 
@@ -4895,16 +5645,9 @@ $("adminUserCount").textContent=
 users.length;
 
 $("adminSummary").innerHTML=
-`
-Mfumo una
-<b>${productCount}</b>
-bidhaa,
-<b>${orderCount}</b>
-oda,
-na
-<b>${users.length}</b>
-watumiaji.
-`;
+`Mfumo una <b>${productCount}</b> bidhaa,
+<b>${orderCount}</b> oda,
+na <b>${users.length}</b> watumiaji.`;
 
 renderAdminUsers(users);
 
@@ -4928,8 +5671,9 @@ escapeHtml(error.message)+
 
 }
 
+
 /* =====================================================
-   ADMIN USERS
+ADMIN USERS
 ===================================================== */
 
 function renderAdminUsers(users){
@@ -4964,9 +5708,11 @@ ${escapeHtml(user.email)}
 
 <p>
 <b>ID:</b>
+
 <span class="small">
 ${escapeHtml(user.id)}
 </span>
+
 </p>
 
 <p class="small">
@@ -4991,8 +5737,9 @@ user.created_at
 
 }
 
+
 /* =====================================================
-   ADMIN SELLER PROFILES
+ADMIN SELLER PROFILES
 ===================================================== */
 
 async function renderAdminProfiles(){
@@ -5076,8 +5823,9 @@ ${escapeHtml(profile.user_id||"-")}
 
 }
 
+
 /* =====================================================
-   ADMIN PRODUCTS
+ADMIN PRODUCTS
 ===================================================== */
 
 async function renderAdminProducts(){
@@ -5157,8 +5905,9 @@ ${escapeHtml(product.user_id||"-")}
 
 }
 
+
 /* =====================================================
-   ADMIN ORDERS
+ADMIN ORDERS
 ===================================================== */
 
 async function renderAdminOrders(){
@@ -5255,8 +6004,9 @@ ${escapeHtml(order.message||"-")}
 
 }
 
+
 /* =====================================================
-   AUTH STATE
+AUTH STATE
 ===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
@@ -5272,12 +6022,14 @@ if(currentUser){
 
 await checkAdmin();
 await loadSellerProfile();
+await loadFavorites();
 renderNotifications();
 
 }else{
 
 isAdmin=false;
 sellerProfile=null;
+favoriteProductIds=new Set();
 
 const badge=$("notificationBadge");
 
@@ -5287,6 +6039,10 @@ badge.classList.add("hidden");
 badge.textContent="0";
 
 }
+
+updateFavoriteCount();
+
+render();
 
 }
 
@@ -5299,8 +6055,9 @@ updateAdminUI();
 
 });
 
+
 /* =====================================================
-   FORM
+FORM
 ===================================================== */
 
 $("productForm")
@@ -5309,39 +6066,96 @@ $("productForm")
 saveProduct
 );
 
+
 /* =====================================================
-   WINDOW FUNCTIONS
+WINDOW FUNCTIONS
 ===================================================== */
 
 window.show=show;
-window.showRegisterForm=showRegisterForm;
-window.showLoginForm=showLoginForm;
-window.hideAuthForms=hideAuthForms;
-window.registerFromHome=registerFromHome;
-window.loginFromHome=loginFromHome;
-window.showRegisterFormAccount=showRegisterFormAccount;
-window.showLoginFormAccount=showLoginFormAccount;
-window.register=register;
-window.login=login;
-window.logout=logout;
-window.filterCategory=filterCategory;
-window.render=render;
-window.previewImage=previewImage;
-window.openImage=openImage;
-window.saveProduct=saveProduct;
-window.resetProductForm=resetProductForm;
-window.editProduct=editProduct;
-window.deleteProduct=deleteProduct;
-window.callSeller=callSeller;
-window.whatsappSeller=whatsappSeller;
-window.openOrderModal=openOrderModal;
-window.closeOrderModal=closeOrderModal;
-window.submitOrder=submitOrder;
-window.updateOrderStatus=updateOrderStatus;
-window.toggleNotifications=toggleNotifications;
-window.clearNotifications=clearNotifications;
-window.showAdminDashboard=showAdminDashboard;
-window.updateDistricts=updateDistricts;
+
+window.showRegisterForm=
+showRegisterForm;
+
+window.showLoginForm=
+showLoginForm;
+
+window.hideAuthForms=
+hideAuthForms;
+
+window.registerFromHome=
+registerFromHome;
+
+window.loginFromHome=
+loginFromHome;
+
+window.showRegisterFormAccount=
+showRegisterFormAccount;
+
+window.showLoginFormAccount=
+showLoginFormAccount;
+
+window.register=
+register;
+
+window.login=
+login;
+
+window.logout=
+logout;
+
+window.filterCategory=
+filterCategory;
+
+window.render=
+render;
+
+window.previewImage=
+previewImage;
+
+window.openImage=
+openImage;
+
+window.saveProduct=
+saveProduct;
+
+window.resetProductForm=
+resetProductForm;
+
+window.editProduct=
+editProduct;
+
+window.deleteProduct=
+deleteProduct;
+
+window.callSeller=
+callSeller;
+
+window.whatsappSeller=
+whatsappSeller;
+
+window.openOrderModal=
+openOrderModal;
+
+window.closeOrderModal=
+closeOrderModal;
+
+window.submitOrder=
+submitOrder;
+
+window.updateOrderStatus=
+updateOrderStatus;
+
+window.toggleNotifications=
+toggleNotifications;
+
+window.clearNotifications=
+clearNotifications;
+
+window.showAdminDashboard=
+showAdminDashboard;
+
+window.updateDistricts=
+updateDistricts;
 
 window.showSellerProfileForm=
 showSellerProfileForm;
@@ -5358,8 +6172,18 @@ previewProfileLogo;
 window.saveSellerProfile=
 saveSellerProfile;
 
+
+/* FAVORITES */
+
+window.toggleFavorite=
+toggleFavorite;
+
+window.showMyFavorites=
+showMyFavorites;
+
+
 /* =====================================================
-   START
+START
 ===================================================== */
 
 (async function(){
@@ -5377,6 +6201,7 @@ error
 
 }
 
+
 try{
 
 await checkUser();
@@ -5390,6 +6215,7 @@ error
 
 }
 
+
 try{
 
 await loadProducts();
@@ -5402,6 +6228,7 @@ error
 );
 
 }
+
 
 try{
 
@@ -5421,4 +6248,4 @@ error
 </script>
 
 </body>
-   </html>
+</html>
