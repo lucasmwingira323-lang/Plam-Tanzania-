@@ -1,6 +1,16 @@
 <!doctype html>
+<html lang="sw">
 
-<html lang="sw"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 
 *{
 box-sizing:border-box;
@@ -210,6 +220,35 @@ background:#777;
 color:white;
 }
 
+.whatsapp{
+background:#25D366;
+color:white;
+display:inline-block;
+padding:10px 14px;
+border-radius:7px;
+text-decoration:none;
+font-weight:bold;
+margin-top:8px;
+}
+
+.call-button{
+background:#0b7a3b;
+color:white;
+display:inline-block;
+padding:10px 14px;
+border-radius:7px;
+text-decoration:none;
+font-weight:bold;
+margin-top:8px;
+}
+
+.contact-buttons{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
 .success{
 color:#0b7a3b;
 font-weight:bold;
@@ -299,66 +338,172 @@ flex:1;
 padding:15px;
 }
 
+.contact-buttons{
+flex-direction:column;
 }
 
-</style></head><body><header><div class="header-inner"><div class="logo">
+.contact-buttons a{
+text-align:center;
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<div class="logo">
 🇹🇿 PLAM TANZANIA
-</div><nav><button type="button" onclick="show('home')">
+</div>
+
+<nav>
+
+<button type="button" onclick="show('home')">
 Nyumbani
-</button><button type="button" onclick="show('add')">
+</button>
+
+<button type="button" onclick="show('add')">
 ➕ Weka Bidhaa
-</button><button type="button" onclick="show('account')">
+</button>
+
+<button type="button" onclick="show('account')">
 👤 Akaunti
-</button></nav></div></header><main class="container"><!-- HOME --><section id="home"><div class="hero"><h1>
+</button>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- HOME -->
+
+<section id="home">
+
+<div class="hero">
+
+<h1>
 Jenga biashara yako. Fikia wateja zaidi.
-</h1><p>
+</h1>
+
+<p>
 PLAM TANZANIA ni jukwaa la biashara mtandaoni kwa Tanzania.
-</p><input
+</p>
+
+<input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()">
 
-</div><div class="categories"><div class="category" onclick="filterCategory('Simu')">
+</div>
+
+
+<div class="categories">
+
+<div class="category" onclick="filterCategory('Simu')">
 📱 Simu
-</div><div class="category" onclick="filterCategory('Nguo')">
+</div>
+
+<div class="category" onclick="filterCategory('Nguo')">
 👕 Nguo
-</div><div class="category" onclick="filterCategory('Viatu')">
+</div>
+
+<div class="category" onclick="filterCategory('Viatu')">
 👟 Viatu
-</div><div class="category" onclick="filterCategory('Samani')">
+</div>
+
+<div class="category" onclick="filterCategory('Samani')">
 🛋️ Samani
-</div><div class="category" onclick="filterCategory('Chakula')">
+</div>
+
+<div class="category" onclick="filterCategory('Chakula')">
 🍲 Chakula
-</div><div class="category" onclick="filterCategory('Huduma')">
+</div>
+
+<div class="category" onclick="filterCategory('Huduma')">
 🛠️ Huduma
-</div></div><h2>
+</div>
+
+</div>
+
+
+<h2>
 Bidhaa na Huduma
-</h2><div id="products" class="products"><p>
+</h2>
+
+<div id="products" class="products">
+
+<p>
 Inapakia bidhaa...
-</p></div></section><!-- ADD PRODUCT --><section id="add" class="hidden"><div class="form-box"><h2 id="formTitle">
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ADD PRODUCT -->
+
+<section id="add" class="hidden">
+
+<div class="form-box">
+
+<h2 id="formTitle">
 ➕ Weka Bidhaa
-</h2><div class="info">
+</h2>
+
+<div class="info">
 Ili kuweka bidhaa, lazima uwe umeingia kwenye akaunti.
-</div><form onsubmit="addProduct(event)"><label>
+</div>
+
+
+<form onsubmit="addProduct(event)">
+
+
+<label>
 Jina la bidhaa/huduma
-</label><input
+</label>
+
+<input
 id="name"
 required
 placeholder="Mfano: Samsung A05">
 
+
 <label>
 Bei
-</label><input
+</label>
+
+<input
 id="price"
 type="number"
 required
 placeholder="Mfano: 250000">
 
+
 <label>
 Kategoria
-</label><select id="category" required><option value="">
+</label>
+
+<select id="category" required>
+
+<option value="">
 Chagua kategoria
-</option><option>Simu</option>
+</option>
+
+<option>Simu</option>
 <option>Nguo</option>
 <option>Viatu</option>
 <option>Samani</option>
@@ -368,64 +513,120 @@ Chagua kategoria
 <option>Magari</option>
 <option>Nyumba</option>
 <option>Shamba</option>
-<option>Nyingine</option></select><label>
+<option>Nyingine</option>
+
+</select>
+
+
+<label>
 Eneo/Mkoa
-</label><input
+</label>
+
+<input
 id="place"
 required
 placeholder="Mfano: Mbeya">
 
+
 <label>
 Namba ya simu ya muuzaji
-</label><input
+</label>
+
+<input
 id="sellerPhone"
 type="tel"
 required
 placeholder="Mfano: 07XXXXXXXX">
 
+
 <label>
 Maelezo
-</label><textarea
+</label>
+
+<textarea
 id="desc"
 placeholder="Andika maelezo ya bidhaa...">
-</textarea><label>
+</textarea>
+
+
+<label>
 Picha ya kwanza
-</label><input
+</label>
+
+<input
 id="productImage1"
 type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus1')">
 
+
 <div id="imageStatus1" class="image-status">
-</div><label>
+</div>
+
+
+<label>
 Picha ya pili (hiari)
-</label><input
+</label>
+
+<input
 id="productImage2"
 type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus2')">
 
+
 <div id="imageStatus2" class="image-status">
-</div><button
+</div>
+
+
+<button
 id="saveButton"
 class="primary"
 type="submit">
 
 💾 Hifadhi Bidhaa
 
-</button></form></div></section><!-- ACCOUNT --><section id="account" class="hidden"><div class="account-box"><div id="loggedOut"><h2>
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- ACCOUNT -->
+
+<section id="account" class="hidden">
+
+<div class="account-box">
+
+
+<div id="loggedOut">
+
+<h2>
 👤 Akaunti ya PLAM
-</h2><p>
+</h2>
+
+<p>
 Fungua akaunti au ingia ili uweze kuweka na kusimamia bidhaa zako.
-</p><div class="account-section"><h3>
+</p>
+
+
+<div class="account-section">
+
+<h3>
 📝 Fungua Akaunti Mpya
-</h3><label>Email</label>
+</h3>
+
+<label>Email</label>
 
 <input
 id="registerEmail"
 type="email"
 autocomplete="email"
 placeholder="Mfano: jina@gmail.com">
+
 
 <label>Password</label>
 
@@ -435,6 +636,7 @@ type="password"
 autocomplete="new-password"
 placeholder="Weka password">
 
+
 <button
 type="button"
 class="primary"
@@ -442,15 +644,28 @@ onclick="register()">
 
 Fungua Akaunti
 
-</button></div><hr><div class="account-section"><h3>
+</button>
+
+</div>
+
+
+<hr>
+
+
+<div class="account-section">
+
+<h3>
 🔐 Ingia Kwenye Akaunti
-</h3><label>Email</label>
+</h3>
+
+<label>Email</label>
 
 <input
 id="loginEmail"
 type="email"
 autocomplete="email"
 placeholder="Weka email yako">
+
 
 <label>Password</label>
 
@@ -460,6 +675,7 @@ type="password"
 autocomplete="current-password"
 placeholder="Weka password yako">
 
+
 <button
 type="button"
 class="primary"
@@ -467,16 +683,33 @@ onclick="login()">
 
 Ingia
 
-</button></div></div><div id="loggedIn" class="hidden"><h2>
+</button>
+
+</div>
+
+</div>
+
+
+<div id="loggedIn" class="hidden">
+
+<h2>
 👤 Akaunti Yangu
-</h2><p id="userEmail"></p><button
+</h2>
+
+<p id="userEmail"></p>
+
+
+<button
 type="button"
 class="primary"
 onclick="show('add')">
 
 ➕ Weka Bidhaa
 
-</button><br><br>
+</button>
+
+<br><br>
+
 
 <button
 type="button"
@@ -485,7 +718,10 @@ onclick="showMyProducts()">
 
 📦 Bidhaa Zangu
 
-</button><br><br>
+</button>
+
+<br><br>
+
 
 <button
 type="button"
@@ -494,13 +730,33 @@ onclick="logout()">
 
 Toka
 
-</button><div id="myProducts"></div></div></div></section></main><footer>🇹🇿 PLAM TANZANIA
+</button>
+
+
+<div id="myProducts"></div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+🇹🇿 PLAM TANZANIA
 
 <br><br>
 
 Jenga biashara yako. Fikia wateja zaidi.
 
-</footer><script>
+</footer>
+
+
+<script>
+
 
 /* =====================================================
 SUPABASE
@@ -607,6 +863,65 @@ document.getElementById("products").innerHTML =
 
 
 /* =====================================================
+WHATSAPP NUMBER
+===================================================== */
+
+function getWhatsAppNumber(phone){
+
+let number =
+String(phone || "")
+.replace(/\s+/g,"")
+.replace(/-/g,"")
+.replace(/\(/g,"")
+.replace(/\)/g,"");
+
+
+if(number.startsWith("+")){
+
+number =
+number.substring(1);
+
+}
+
+
+if(number.startsWith("0")){
+
+number =
+"255" + number.substring(1);
+
+}
+
+
+return number;
+
+}
+
+
+/* =====================================================
+WHATSAPP LINK
+===================================================== */
+
+function getWhatsAppLink(phone, productName){
+
+const number =
+getWhatsAppNumber(phone);
+
+const message =
+"Habari, nimeona " +
+(productName || "bidhaa") +
+" kwenye PLAM TANZANIA. Naomba maelezo zaidi.";
+
+return (
+"https://wa.me/" +
+number +
+"?text=" +
+encodeURIComponent(message)
+);
+
+}
+
+
+/* =====================================================
 RENDER
 ===================================================== */
 
@@ -620,6 +935,7 @@ if(!container){
 return;
 
 }
+
 
 const search =
 (
@@ -643,6 +959,7 @@ const text = (
 (p.description || "")
 
 ).toLowerCase();
+
 
 return (
 
@@ -717,6 +1034,48 @@ imageHTML =
 }
 
 
+let contactHTML = "";
+
+
+if(p.phone){
+
+const whatsappLink =
+getWhatsAppLink(
+p.phone,
+p.name
+);
+
+
+contactHTML = `
+
+<div class="contact-buttons">
+
+<a
+class="call-button"
+href="tel:${escapeHtml(p.phone)}">
+
+📞 Piga Simu
+
+</a>
+
+
+<a
+class="whatsapp"
+href="${escapeHtml(whatsappLink)}"
+target="_blank"
+rel="noopener noreferrer">
+
+💬 WhatsApp
+
+</a>
+
+</div>
+
+`;
+
+}
+
+
 return `
 
 <div class="card">
@@ -729,37 +1088,29 @@ ${imageHTML}
 ${escapeHtml(p.name || "")}
 </h3>
 
+
 <div class="price">
 TZS ${Number(p.price || 0).toLocaleString()}
 </div>
+
 
 <p>
 <b>Kategoria:</b>
 ${escapeHtml(p.category || "")}
 </p>
 
+
 <p>
 📍 ${escapeHtml(p.place || "")}
 </p>
+
 
 <p>
 ${escapeHtml(p.description || "")}
 </p>
 
-${
-p.phone
-?
-`
-<p>
-📞
-<a href="tel:${escapeHtml(p.phone)}">
-${escapeHtml(p.phone)}
-</a>
-</p>
-`
-:
-""
-}
+
+${contactHTML}
 
 </div>
 
@@ -1985,6 +2336,7 @@ ${escapeHtml(p.place || "")}
 
 <br>
 
+
 <button
 type="button"
 class="primary"
@@ -1995,6 +2347,7 @@ onclick="editProduct('${p.id}')">
 </button>
 
 <br><br>
+
 
 <button
 type="button"
@@ -2220,4 +2573,7 @@ loadProducts();
 
 checkUser();
 
-</script></body></html>
+</script>
+
+</body>
+  </html>
