@@ -5837,7 +5837,11 @@ await supabaseClient
 .select("*")
 .order("created_at",{ascending:false});
 
-if(error)throw error;
+if(error){
+box.innerHTML="<p>❌ Imeshindikana kupakia bidhaa.</p>";
+console.error(error);
+return;
+}
 
 if(!data?.length){
 
@@ -5882,9 +5886,66 @@ ${escapeHtml(product.place||"-")}
 📞 ${escapeHtml(product.phone||"-")}
 </p>
 
+<button
+type="button"
+class="red"
+onclick="deleteAdminProduct('${product.id}')">
+🗑️ Futa Bidhaa
+</button>
+
 </div>
 
 `).join("");
+
+}
+
+
+/* =====================================================
+DELETE ADMIN PRODUCT
+===================================================== */
+
+async function deleteAdminProduct(productId){
+
+if(!isAdmin){
+
+alert("⛔ Huna ruhusa ya kufuta bidhaa.");
+
+return;
+
+}
+
+const confirmDelete=
+confirm(
+"⚠️ Una uhakika unataka kufuta bidhaa hii?\n\n" +
+"Kitendo hiki hakiwezi kurudishwa."
+);
+
+if(!confirmDelete)return;
+
+try{
+
+const {error}=
+await supabaseClient
+.from("Production")
+.delete()
+.eq("id",productId);
+
+if(error)throw error;
+
+alert("✅ Bidhaa imefutwa kikamilifu.");
+
+await renderAdminProducts();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Bidhaa haijafutwa.\n\n" +
+"Hakikisha Admin ana ruhusa ya DELETE kwenye Supabase."
+);
+
+}
 
 }
 
