@@ -51,18 +51,18 @@ gap:7px;
 flex-wrap:wrap;
 }
 
+nav button{
+background:white;
+color:#0b7a3b;
+font-weight:bold;
+}
+
 button{
 border:0;
 border-radius:8px;
 padding:10px 14px;
 cursor:pointer;
 font-size:14px;
-}
-
-nav button{
-background:white;
-color:#0b7a3b;
-font-weight:bold;
 }
 
 .container{
@@ -94,6 +94,20 @@ font-size:16px;
 margin:15px 0;
 }
 
+.auth-buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin:18px 0;
+}
+
+.auth-buttons button{
+font-size:15px;
+font-weight:bold;
+padding:12px 18px;
+}
+
 .categories{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -121,10 +135,7 @@ box-shadow:0 2px 8px rgba(0,0,0,.08);
 overflow:hidden;
 }
 
-/* =================================
-PICHA PANDE ZOTE — FULL WIDTH
-HAIKATWI
-================================= */
+/* PICHA PANDE ZOTE - PANDE KAMILI */
 
 .product-gallery{
 width:100%;
@@ -151,16 +162,7 @@ display:block;
 object-fit:contain;
 object-position:center;
 cursor:pointer;
-transition:transform .2s ease;
 }
-
-.product-image-wrap img:hover{
-transform:scale(1.01);
-}
-
-/* =================================
-TEXT
-================================= */
 
 .card h3{
 margin:8px 0 5px;
@@ -208,7 +210,8 @@ color:white;
 display:none!important;
 }
 
-.form-box{
+.form-box,
+.account-box{
 background:white;
 padding:20px;
 border-radius:12px;
@@ -219,7 +222,8 @@ box-shadow:0 2px 8px rgba(0,0,0,.08);
 
 .form-box input,
 .form-box textarea,
-.form-box select{
+.form-box select,
+.account-box input{
 width:100%;
 padding:12px;
 margin:7px 0 12px;
@@ -233,13 +237,35 @@ min-height:100px;
 resize:vertical;
 }
 
-.account-box{
-background:white;
-padding:20px;
+.auth-form{
+background:#f8faf9;
+border:1px solid #e1e8e3;
+padding:18px;
 border-radius:12px;
-max-width:650px;
-margin:auto;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
+margin-top:15px;
+text-align:left;
+}
+
+.auth-form h3{
+color:#0b7a3b;
+margin-top:0;
+}
+
+.auth-form label{
+font-weight:bold;
+display:block;
+margin-top:8px;
+}
+
+.auth-form input{
+background:white;
+}
+
+.auth-message{
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+display:none;
 }
 
 .orders{
@@ -391,20 +417,6 @@ background:#1976d2;
 color:white;
 }
 
-.error{
-color:#b00020;
-background:#ffe9ec;
-padding:10px;
-border-radius:8px;
-}
-
-.success{
-color:#155724;
-background:#d4edda;
-padding:10px;
-border-radius:8px;
-}
-
 .modal{
 position:fixed;
 inset:0;
@@ -467,10 +479,19 @@ font-size:13px;
 color:#666;
 }
 
+.error{
+color:#b00020;
+background:#ffe9ec;
+padding:10px;
+border-radius:8px;
+}
 
-/* =================================
-SIMU
-================================= */
+.success{
+color:#155724;
+background:#d4edda;
+padding:10px;
+border-radius:8px;
+}
 
 @media(max-width:600px){
 
@@ -491,11 +512,6 @@ grid-template-columns:1fr;
 padding:8px;
 }
 
-.product-image-wrap{
-width:100%;
-border-radius:10px;
-}
-
 .product-image-wrap img{
 width:100%;
 height:auto;
@@ -505,6 +521,14 @@ object-fit:contain;
 
 .notification-panel{
 right:-100px;
+}
+
+.auth-buttons{
+flex-direction:column;
+}
+
+.auth-buttons button{
+width:100%;
 }
 
 }
@@ -549,12 +573,15 @@ onclick="showAdminDashboard()">
 <button
 class="notification-button"
 onclick="toggleNotifications()">
+
 🔔 Taarifa
+
 <span
 id="notificationBadge"
 class="badge hidden">
 0
 </span>
+
 </button>
 
 <div
@@ -601,11 +628,150 @@ Jenga biashara yako. Fikia wateja zaidi.
 Karibu PLAM TANZANIA — soko la biashara mtandaoni kwa Tanzania nzima.
 </p>
 
+
+<!-- VITUTI VYA AKAUNTI -->
+
+<div
+id="homeAuthButtons"
+class="auth-buttons">
+
+<button
+class="green"
+onclick="showRegisterForm()">
+
+👤 Fungua Akaunti
+
+</button>
+
+<button
+class="blue"
+onclick="showLoginForm()">
+
+🔐 Ingia
+
+</button>
+
+</div>
+
+
+<!-- REGISTER FORM -->
+
+<div
+id="homeRegisterForm"
+class="auth-form hidden">
+
+<h3>
+📝 Fungua Akaunti
+</h3>
+
+<div
+id="registerMessage"
+class="auth-message">
+</div>
+
+<label>
+Email
+</label>
+
+<input
+id="homeRegisterEmail"
+type="email"
+placeholder="Weka email yako"
+autocomplete="email">
+
+<label>
+Password
+</label>
+
+<input
+id="homeRegisterPassword"
+type="password"
+placeholder="Weka password yako"
+autocomplete="new-password">
+
+<button
+class="green"
+onclick="registerFromHome()">
+
+✅ Jisajili
+
+</button>
+
+<button
+class="gray"
+onclick="hideAuthForms()">
+
+✖ Funga
+
+</button>
+
+<p class="small">
+Baada ya kufungua akaunti unaweza kuingia na kuanza kutumia PLAM.
+</p>
+
+</div>
+
+
+<!-- LOGIN FORM -->
+
+<div
+id="homeLoginForm"
+class="auth-form hidden">
+
+<h3>
+🔐 Ingia kwenye Akaunti
+</h3>
+
+<div
+id="loginMessage"
+class="auth-message">
+</div>
+
+<label>
+Email
+</label>
+
+<input
+id="homeLoginEmail"
+type="email"
+placeholder="Weka email yako"
+autocomplete="email">
+
+<label>
+Password
+</label>
+
+<input
+id="homeLoginPassword"
+type="password"
+placeholder="Weka password yako"
+autocomplete="current-password">
+
+<button
+class="blue"
+onclick="loginFromHome()">
+
+🔐 Ingia
+
+</button>
+
+<button
+class="gray"
+onclick="hideAuthForms()">
+
+✖ Funga
+
+</button>
+
+</div>
+
+
 <input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()">
+
 
 <div class="categories">
 
@@ -641,7 +807,10 @@ Zote
 
 </div>
 
-<div id="products" class="grid">
+
+<div
+id="products"
+class="grid">
 
 <div class="loading">
 ⏳ Inapakia bidhaa...
@@ -654,7 +823,9 @@ Zote
 
 <!-- ADD PRODUCT -->
 
-<section id="add" class="hidden">
+<section
+id="add"
+class="hidden">
 
 <div class="form-box">
 
@@ -691,7 +862,9 @@ placeholder="Mfano: 250000">
 Aina
 </label>
 
-<select id="productCategory" required>
+<select
+id="productCategory"
+required>
 
 <option value="">
 Chagua category
@@ -778,15 +951,47 @@ onclick="resetProductForm()">
 
 <!-- ACCOUNT -->
 
-<section id="account" class="hidden">
+<section
+id="account"
+class="hidden">
 
 <div class="account-box">
 
-<div id="accountLoggedOut">
+<div
+id="accountLoggedOut">
 
-<h2>👤 Akaunti</h2>
+<h2>
+👤 Akaunti
+</h2>
 
-<h3>Fungua Akaunti</h3>
+<p>
+Fungua akaunti au ingia kwenye PLAM TANZANIA.
+</p>
+
+<button
+class="green"
+onclick="showRegisterFormAccount()">
+
+👤 Fungua Akaunti
+
+</button>
+
+<button
+class="blue"
+onclick="showLoginFormAccount()">
+
+🔐 Ingia
+
+</button>
+
+
+<div
+id="accountRegisterForm"
+class="auth-form hidden">
+
+<h3>
+📝 Fungua Akaunti
+</h3>
 
 <input
 id="registerEmail"
@@ -802,13 +1007,21 @@ placeholder="Password">
 class="green"
 onclick="register()">
 
-Fungua Akaunti
+✅ Fungua Akaunti
 
 </button>
 
-<hr>
+</div>
 
-<h3>Ingia</h3>
+
+<div
+id="accountLoginForm"
+class="auth-form hidden">
+
+<h3>
+🔐 Ingia
+
+</h3>
 
 <input
 id="loginEmail"
@@ -824,9 +1037,11 @@ placeholder="Password">
 class="blue"
 onclick="login()">
 
-Ingia
+🔐 Ingia
 
 </button>
+
+</div>
 
 </div>
 
@@ -835,7 +1050,9 @@ Ingia
 id="accountLoggedIn"
 class="hidden">
 
-<h2>👤 Akaunti Yangu</h2>
+<h2>
+👤 Akaunti Yangu
+</h2>
 
 <p>
 <b>Email:</b>
@@ -852,7 +1069,9 @@ onclick="logout()">
 
 <hr>
 
-<h3>📦 Bidhaa Zangu</h3>
+<h3>
+📦 Bidhaa Zangu
+</h3>
 
 <div id="myProducts">
 <p>⏳ Inapakia...</p>
@@ -860,7 +1079,9 @@ onclick="logout()">
 
 <hr>
 
-<h3>🛍️ Oda Zangu</h3>
+<h3>
+🛍️ Oda Zangu
+</h3>
 
 <div id="myOrders">
 <p>⏳ Inapakia...</p>
@@ -868,7 +1089,9 @@ onclick="logout()">
 
 <hr>
 
-<h3>🛍️ Oda za Wateja</h3>
+<h3>
+🛍️ Oda za Wateja
+</h3>
 
 <div id="sellerOrders">
 <p>⏳ Inapakia...</p>
@@ -883,7 +1106,9 @@ onclick="logout()">
 
 <!-- ADMIN -->
 
-<section id="admin" class="hidden">
+<section
+id="admin"
+class="hidden">
 
 <div class="admin-header">
 
@@ -896,7 +1121,6 @@ Karibu kwenye usimamizi wa PLAM TANZANIA.
 </p>
 
 </div>
-
 
 <div class="admin-stats">
 
@@ -991,11 +1215,7 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminUsers">
-
-<p>
-⏳ Inapakia watumiaji...
-</p>
-
+<p>⏳ Inapakia watumiaji...</p>
 </div>
 
 </div>
@@ -1008,11 +1228,7 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminProducts">
-
-<p>
-⏳ Inapakia bidhaa...
-</p>
-
+<p>⏳ Inapakia bidhaa...</p>
 </div>
 
 </div>
@@ -1025,11 +1241,7 @@ onclick="showAdminDashboard()">
 </h2>
 
 <div id="adminOrders">
-
-<p>
-⏳ Inapakia oda...
-</p>
-
+<p>⏳ Inapakia oda...</p>
 </div>
 
 </div>
@@ -1147,6 +1359,222 @@ let selectedImage2=null;
 
 
 /* ==============================
+AUTH FORMS HOME
+============================== */
+
+function showRegisterForm(){
+
+document.getElementById(
+"homeRegisterForm"
+).classList.remove("hidden");
+
+document.getElementById(
+"homeLoginForm"
+).classList.add("hidden");
+
+document.getElementById(
+"homeRegisterEmail"
+).focus();
+
+}
+
+function showLoginForm(){
+
+document.getElementById(
+"homeLoginForm"
+).classList.remove("hidden");
+
+document.getElementById(
+"homeRegisterForm"
+).classList.add("hidden");
+
+document.getElementById(
+"homeLoginEmail"
+).focus();
+
+}
+
+function hideAuthForms(){
+
+document.getElementById(
+"homeRegisterForm"
+).classList.add("hidden");
+
+document.getElementById(
+"homeLoginForm"
+).classList.add("hidden");
+
+}
+
+function showRegisterFormAccount(){
+
+document.getElementById(
+"accountRegisterForm"
+).classList.remove("hidden");
+
+document.getElementById(
+"accountLoginForm"
+).classList.add("hidden");
+
+}
+
+function showLoginFormAccount(){
+
+document.getElementById(
+"accountLoginForm"
+).classList.remove("hidden");
+
+document.getElementById(
+"accountRegisterForm"
+).classList.add("hidden");
+
+}
+
+
+/* ==============================
+HOME REGISTER
+============================== */
+
+async function registerFromHome(){
+
+const email=
+document.getElementById(
+"homeRegisterEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"homeRegisterPassword"
+).value;
+
+const message=
+document.getElementById(
+"registerMessage"
+);
+
+if(!email||!password){
+
+message.style.display="block";
+message.className="auth-message error";
+message.innerText=
+"⚠️ Tafadhali jaza email na password.";
+
+return;
+
+}
+
+message.style.display="block";
+message.className="auth-message";
+message.style.background="#fff3cd";
+message.style.color="#856404";
+message.innerText=
+"⏳ Inafungua akaunti...";
+
+const result=
+await supabaseClient.auth.signUp({
+
+email:email,
+password:password
+
+});
+
+if(result.error){
+
+message.className="auth-message error";
+message.innerText=
+"❌ "+result.error.message;
+
+return;
+
+}
+
+message.className="auth-message success";
+message.innerText=
+"✅ Akaunti imefunguliwa. Sasa unaweza kuingia.";
+
+document.getElementById(
+"homeRegisterPassword"
+).value="";
+
+}
+
+
+async function loginFromHome(){
+
+const email=
+document.getElementById(
+"homeLoginEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"homeLoginPassword"
+).value;
+
+const message=
+document.getElementById(
+"loginMessage"
+);
+
+if(!email||!password){
+
+message.style.display="block";
+message.className="auth-message error";
+message.innerText=
+"⚠️ Tafadhali jaza email na password.";
+
+return;
+
+}
+
+message.style.display="block";
+message.className="auth-message";
+message.style.background="#fff3cd";
+message.style.color="#856404";
+message.innerText=
+"⏳ Inaingia...";
+
+const result=
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+if(result.error){
+
+message.className="auth-message error";
+message.innerText=
+"❌ Invalid login credentials.";
+
+return;
+
+}
+
+currentUser=result.data.user;
+
+await checkAdmin();
+
+updateAccountUI();
+renderNotifications();
+
+hideAuthForms();
+
+document.getElementById(
+"homeAuthButtons"
+).classList.add("hidden");
+
+alert(
+"✅ Umeingia kwenye PLAM TANZANIA."
+);
+
+await loadProducts();
+
+}
+
+
+/* ==============================
 NOTIFICATIONS
 ============================== */
 
@@ -1210,8 +1638,11 @@ renderNotifications();
 
 function renderNotifications(){
 
-const box=document.getElementById("notifications");
-const badge=document.getElementById("notificationBadge");
+const box=
+document.getElementById("notifications");
+
+const badge=
+document.getElementById("notificationBadge");
 
 if(!box)
 return;
@@ -1275,9 +1706,6 @@ document.getElementById(
 "notificationPanel"
 );
 
-if(!panel)
-return;
-
 panel.classList.toggle("hidden");
 
 const items=getNotifications();
@@ -1302,7 +1730,7 @@ renderNotifications();
 
 
 /* ==============================
-REALTIME ORDERS
+REALTIME
 ============================== */
 
 function setupRealtime(){
@@ -1448,7 +1876,7 @@ loadProducts();
 
 
 /* ==============================
-LOAD PRODUCTS
+PRODUCTS
 ============================== */
 
 async function loadProducts(){
@@ -1503,11 +1931,6 @@ ${escapeHtml(error.message)}
 }
 
 }
-
-
-/* ==============================
-RENDER PRODUCTS
-============================== */
 
 function render(){
 
@@ -1693,12 +2116,13 @@ return number.toLocaleString("sw-TZ");
 
 
 /* ==============================
-IMAGE FULLSCREEN
+IMAGE
 ============================== */
 
 function openImage(url){
 
-const old=document.getElementById("imageViewer");
+const old=
+document.getElementById("imageViewer");
 
 if(old)
 old.remove();
@@ -1716,7 +2140,6 @@ viewer.style.display="flex";
 viewer.style.alignItems="center";
 viewer.style.justifyContent="center";
 viewer.style.padding="15px";
-viewer.style.cursor="zoom-out";
 
 viewer.innerHTML=`
 
@@ -1728,7 +2151,6 @@ right:15px;
 background:white;
 color:#222;
 font-size:20px;
-z-index:5001;
 "
 onclick="document.getElementById('imageViewer').remove()">
 
@@ -1762,7 +2184,7 @@ document.body.appendChild(viewer);
 
 
 /* ==============================
-ESCAPE HTML
+HELPERS
 ============================== */
 
 function escapeHtml(value){
@@ -1775,11 +2197,6 @@ return String(value??"")
 .replace(/'/g,"&#039;");
 
 }
-
-
-/* ==============================
-PHONE / WHATSAPP
-============================== */
 
 function cleanPhone(phone){
 
@@ -1839,29 +2256,49 @@ selectedImage2=file;
 const preview=
 document.getElementById("imagePreview");
 
-if(!preview)
-return;
+preview.innerHTML="";
 
-const reader=new FileReader();
+if(selectedImage1){
 
-reader.onload=function(e){
+const reader1=new FileReader();
+
+reader1.onload=function(e){
 
 const img=document.createElement("img");
 
 img.src=e.target.result;
-img.dataset.number=number;
 
 preview.appendChild(img);
 
 };
 
-reader.readAsDataURL(file);
+reader1.readAsDataURL(selectedImage1);
+
+}
+
+if(selectedImage2){
+
+const reader2=new FileReader();
+
+reader2.onload=function(e){
+
+const img=document.createElement("img");
+
+img.src=e.target.result;
+
+preview.appendChild(img);
+
+};
+
+reader2.readAsDataURL(selectedImage2);
+
+}
 
 }
 
 
 /* ==============================
-COMPRESS IMAGE
+COMPRESS
 ============================== */
 
 async function compressImage(file){
@@ -1934,13 +2371,11 @@ reader.onerror=reject;
 
 reader.readAsDataURL(file);
 
-});
-
 }
 
 
 /* ==============================
-UPLOAD IMAGE
+UPLOAD
 ============================== */
 
 async function uploadImage(file){
@@ -2126,10 +2561,6 @@ button.innerText="💾 Hifadhi Bidhaa";
 }
 
 
-/* ==============================
-RESET PRODUCT FORM
-============================== */
-
 function resetProductForm(){
 
 document.getElementById("editProductId").value="";
@@ -2153,7 +2584,7 @@ document.getElementById(
 
 
 /* ==============================
-REGISTER
+REGISTER ACCOUNT PAGE
 ============================== */
 
 async function register(){
@@ -2202,7 +2633,7 @@ alert(
 
 
 /* ==============================
-LOGIN
+LOGIN ACCOUNT PAGE
 ============================== */
 
 async function login(){
@@ -2238,7 +2669,7 @@ password:password
 if(result.error){
 
 alert(
-"❌ Invalid login credentials au email/password si sahihi."
+"❌ Invalid login credentials."
 );
 
 return;
@@ -2252,7 +2683,15 @@ await checkAdmin();
 updateAccountUI();
 renderNotifications();
 
-show("home");
+document.getElementById(
+"accountRegisterForm"
+).classList.add("hidden");
+
+document.getElementById(
+"accountLoginForm"
+).classList.add("hidden");
+
+show("account");
 
 await loadProducts();
 
@@ -2272,6 +2711,10 @@ isAdmin=false;
 
 updateAdminUI();
 updateAccountUI();
+
+document.getElementById(
+"homeAuthButtons"
+).classList.remove("hidden");
 
 show("home");
 
@@ -2296,6 +2739,14 @@ await checkAdmin();
 updateAdminUI();
 updateAccountUI();
 renderNotifications();
+
+if(currentUser){
+
+document.getElementById(
+"homeAuthButtons"
+).classList.add("hidden");
+
+}
 
 }
 
@@ -2494,7 +2945,7 @@ onclick="deleteProduct('${String(p.id)}')">
 
 
 /* ==============================
-EDIT PRODUCT
+EDIT
 ============================== */
 
 async function editProduct(id){
@@ -2541,7 +2992,7 @@ show("add");
 
 
 /* ==============================
-DELETE PRODUCT
+DELETE
 ============================== */
 
 async function deleteProduct(id){
@@ -2549,12 +3000,9 @@ async function deleteProduct(id){
 if(!currentUser)
 return;
 
-const confirmDelete=
-confirm(
+if(!confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
-);
-
-if(!confirmDelete)
+))
 return;
 
 const result=
@@ -2585,7 +3033,7 @@ showMyProducts();
 
 
 /* ==============================
-ORDER MODAL
+ORDER
 ============================== */
 
 function openOrderModal(id){
@@ -2627,8 +3075,9 @@ return;
 
 document.getElementById("orderProductId").value=product.id;
 document.getElementById("orderSellerId").value=product.user_id;
+
 document.getElementById("buyerName").value="";
-document.getElementById("buyerPhone").value=currentUser.phone||"";
+document.getElementById("buyerPhone").value="";
 document.getElementById("orderQuantity").value=1;
 document.getElementById("orderMessage").value="";
 
@@ -2833,7 +3282,7 @@ return`
 </p>
 
 <p>
-📦 Bidhaa ID:
+📦 Product ID:
 ${escapeHtml(String(o.product_id||""))}
 </p>
 
@@ -3013,6 +3462,7 @@ ${escapeHtml(String(o.quantity||1))}
 </p>
 
 <p>
+
 <b>Status:</b>
 
 <span class="status ${
@@ -3059,7 +3509,7 @@ ${actions}
 
 
 /* ==============================
-UPDATE ORDER STATUS
+UPDATE ORDER
 ============================== */
 
 async function updateOrderStatus(id,status){
@@ -3091,8 +3541,6 @@ status:status
 
 if(result.error){
 
-console.error(result.error);
-
 alert(
 "❌ Imekataa kubadilisha oda.\n\n"+
 result.error.message
@@ -3122,7 +3570,7 @@ await showSellerOrders();
 
 
 /* ==============================
-ADMIN DASHBOARD
+ADMIN
 ============================== */
 
 async function showAdminDashboard(){
@@ -3156,10 +3604,6 @@ await refreshAdminDashboard();
 }
 
 
-/* ==============================
-REFRESH ADMIN DASHBOARD
-============================== */
-
 async function refreshAdminDashboard(){
 
 if(!isAdmin||!currentUser)
@@ -3192,43 +3636,19 @@ document.getElementById("adminUsers");
 if(emailBox)
 emailBox.innerText=currentUser.email||"-";
 
-if(productCount)
-productCount.innerText="⏳";
-
-if(orderCount)
-orderCount.innerText="⏳";
-
-if(userCount)
-userCount.innerText="⏳";
-
-if(productsBox)
-productsBox.innerHTML=
-"<p>⏳ Inapakia bidhaa...</p>";
-
-if(ordersBox)
-ordersBox.innerHTML=
-"<p>⏳ Inapakia oda...</p>";
-
-if(usersBox)
-usersBox.innerHTML=
-"<p>⏳ Inapakia watumiaji...</p>";
-
-
-/* USERS */
-
 let allUsers=[];
 
 try{
 
-const userResult=
+const result=
 await supabaseClient.rpc(
 "get_admin_users"
 );
 
-if(userResult.error)
-throw userResult.error;
+if(result.error)
+throw result.error;
 
-allUsers=userResult.data||[];
+allUsers=result.data||[];
 
 if(userCount)
 userCount.innerText=allUsers.length;
@@ -3254,27 +3674,22 @@ return`
 </h3>
 
 <p>
-<b>📧 Email:</b>
-${escapeHtml(user.email||"")}
+📧 ${escapeHtml(user.email||"")}
 </p>
 
 <p>
-<b>🆔 User ID:</b>
+🆔 User ID:
 <br>
 ${escapeHtml(String(user.id||""))}
 </p>
 
 <p>
-<b>📅 Akaunti ilifunguliwa:</b>
-<br>
-${
-user.created_at
+📅 ${user.created_at
 ?
 new Date(user.created_at)
 .toLocaleString("sw-TZ")
 :
-""
-}
+""}
 </p>
 
 </div>
@@ -3289,40 +3704,26 @@ new Date(user.created_at)
 
 }catch(error){
 
-console.error(
-"ADMIN USERS ERROR:",
-error
-);
-
 if(userCount)
 userCount.innerText="❌";
 
 if(usersBox){
 
-usersBox.innerHTML=`
-
-<p class="error">
-
-Imeshindikana kupakia watumiaji.
-
-<br><br>
-
-${escapeHtml(error.message)}
-
-</p>
-
-`;
+usersBox.innerHTML=
+"<p class='error'>"+
+escapeHtml(error.message)+
+"</p>";
 
 }
 
 }
 
 
-/* ADMIN PRODUCTS */
+/* PRODUCTS */
 
 try{
 
-const productResult=
+const result=
 await supabaseClient
 .from("Production")
 .select("*")
@@ -3331,26 +3732,17 @@ await supabaseClient
 {ascending:false}
 );
 
-if(productResult.error)
-throw productResult.error;
+if(result.error)
+throw result.error;
 
-const allProducts=
-productResult.data||[];
+const data=result.data||[];
 
-if(productCount)
-productCount.innerText=allProducts.length;
-
-if(productsBox){
-
-if(allProducts.length===0){
+productCount.innerText=data.length;
 
 productsBox.innerHTML=
-"<p>Hakuna bidhaa.</p>";
-
-}else{
-
-productsBox.innerHTML=
-allProducts.map(function(p){
+data.length
+?
+data.map(function(p){
 
 return`
 
@@ -3372,58 +3764,31 @@ return`
 📍 ${escapeHtml(p.place||"")}
 </p>
 
-<p>
-👤 Seller ID:
-<br>
-${escapeHtml(String(p.user_id||""))}
-</p>
-
 </div>
 
 `;
 
-}).join("");
-
-}
-
-}
+}).join("")
+:
+"<p>Hakuna bidhaa.</p>";
 
 }catch(error){
 
-console.error(
-"ADMIN PRODUCTS ERROR:",
-error
-);
-
-if(productCount)
 productCount.innerText="❌";
 
-if(productsBox){
-
-productsBox.innerHTML=`
-
-<p class="error">
-
-Imeshindikana kupakia bidhaa.
-
-<br><br>
-
-${escapeHtml(error.message)}
-
-</p>
-
-`;
-
-}
+productsBox.innerHTML=
+"<p class='error'>"+
+escapeHtml(error.message)+
+"</p>";
 
 }
 
 
-/* ADMIN ORDERS */
+/* ORDERS */
 
 try{
 
-const orderResult=
+const result=
 await supabaseClient
 .from("orders")
 .select("*")
@@ -3432,26 +3797,17 @@ await supabaseClient
 {ascending:false}
 );
 
-if(orderResult.error)
-throw orderResult.error;
+if(result.error)
+throw result.error;
 
-const allOrders=
-orderResult.data||[];
+const data=result.data||[];
 
-if(orderCount)
-orderCount.innerText=allOrders.length;
-
-if(ordersBox){
-
-if(allOrders.length===0){
+orderCount.innerText=data.length;
 
 ordersBox.innerHTML=
-"<p>Hakuna oda.</p>";
-
-}else{
-
-ordersBox.innerHTML=
-allOrders.map(function(o){
+data.length
+?
+data.map(function(o){
 
 return`
 
@@ -3462,13 +3818,11 @@ return`
 </h3>
 
 <p>
-👤 Buyer:
-${escapeHtml(o.buyer_name||"")}
+👤 ${escapeHtml(o.buyer_name||"")}
 </p>
 
 <p>
-📞 Simu:
-${escapeHtml(o.buyer_phone||"")}
+📞 ${escapeHtml(o.buyer_phone||"")}
 </p>
 
 <p>
@@ -3477,178 +3831,43 @@ ${escapeHtml(String(o.product_id||""))}
 </p>
 
 <p>
-👤 Buyer ID:
-<br>
-${escapeHtml(String(o.buyer_id||""))}
-</p>
-
-<p>
-🏪 Seller ID:
-<br>
-${escapeHtml(String(o.seller_id||""))}
-</p>
-
-<p>
 🔢 Quantity:
 ${escapeHtml(String(o.quantity||1))}
 </p>
 
 <p>
-💬 ${escapeHtml(o.message||"")}
-</p>
-
-<p>
-
-<b>Status:</b>
-
-<span class="status ${
-o.status==="accepted"
-?
-"status-accepted"
-:
-o.status==="rejected"
-?
-"status-rejected"
-:
-"status-pending"
-}">
-
-${
-o.status==="accepted"
-?
-"🟢 Accepted"
-:
-o.status==="rejected"
-?
-"🔴 Rejected"
-:
-"🟡 Pending"
-}
-
-</span>
-
-</p>
-
-<p class="small">
-
-${o.created_at
-?
-new Date(o.created_at)
-.toLocaleString("sw-TZ")
-:
-""}
-
+Status:
+<b>${escapeHtml(o.status||"pending")}</b>
 </p>
 
 </div>
 
 `;
 
-}).join("");
+}).join("")
+:
+"<p>Hakuna oda.</p>";
 
-}
-
-}
+summary.innerHTML=
+`
+📦 Bidhaa:
+<b>${document.getElementById("adminProductCount").innerText}</b>
+<br>
+🛒 Oda:
+<b>${document.getElementById("adminOrderCount").innerText}</b>
+<br>
+👥 Watumiaji:
+<b>${document.getElementById("adminUserCount").innerText}</b>
+`;
 
 }catch(error){
 
-console.error(
-"ADMIN ORDERS ERROR:",
-error
-);
-
-if(orderCount)
 orderCount.innerText="❌";
 
-if(ordersBox){
-
-ordersBox.innerHTML=`
-
-<p class="error">
-
-Imeshindikana kupakia oda.
-
-<br><br>
-
-${escapeHtml(error.message)}
-
-</p>
-
-`;
-
-}
-
-}
-
-
-/* ADMIN SUMMARY */
-
-try{
-
-const productResult=
-await supabaseClient
-.from("Production")
-.select("id");
-
-const orderResult=
-await supabaseClient
-.from("orders")
-.select("id,status");
-
-const products=productResult.data||[];
-const orders=orderResult.data||[];
-
-const pending=
-orders.filter(
-o=>o.status==="pending"
-).length;
-
-const accepted=
-orders.filter(
-o=>o.status==="accepted"
-).length;
-
-const rejected=
-orders.filter(
-o=>o.status==="rejected"
-).length;
-
-if(summary){
-
-summary.innerHTML=`
-
-📦 Bidhaa:
-<b>${products.length}</b>
-
-<br>
-
-🛒 Oda:
-<b>${orders.length}</b>
-
-<br>
-
-🟡 Pending:
-<b>${pending}</b>
-
-<br>
-
-🟢 Accepted:
-<b>${accepted}</b>
-
-<br>
-
-🔴 Rejected:
-<b>${rejected}</b>
-
-`;
-
-}
-
-}catch(error){
-
-if(summary)
-summary.innerText=
-"Imeshindikana kupata muhtasari.";
+ordersBox.innerHTML=
+"<p class='error'>"+
+escapeHtml(error.message)+
+"</p>";
 
 }
 
@@ -3669,9 +3888,17 @@ if(currentUser){
 
 await checkAdmin();
 
+document.getElementById(
+"homeAuthButtons"
+)?.classList.add("hidden");
+
 }else{
 
 isAdmin=false;
+
+document.getElementById(
+"homeAuthButtons"
+)?.classList.remove("hidden");
 
 }
 
