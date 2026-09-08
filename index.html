@@ -116,38 +116,54 @@ gap:18px;
 .card{
 background:white;
 border-radius:14px;
-padding:14px;
+padding:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.08);
 overflow:hidden;
 }
 
-/* ==============================
-PICHA KUBWA BILA KUKATWA
-============================== */
+/* =================================
+PICHA PANDE ZOTE — FULL WIDTH
+HAIKATWI
+================================= */
 
-.card img{
+.product-gallery{
 width:100%;
-height:auto;
-max-height:none;
-object-fit:contain;
-object-position:center;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.product-image-wrap{
+width:100%;
 background:#f5f5f5;
 border-radius:12px;
-margin-bottom:10px;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.product-image-wrap img{
+width:100%;
+height:auto;
+max-width:100%;
 display:block;
+object-fit:contain;
+object-position:center;
+cursor:pointer;
+transition:transform .2s ease;
 }
 
-/* Picha ya pili nayo itumie ukubwa wake vizuri */
-.card img + img{
-margin-top:10px;
+.product-image-wrap img:hover{
+transform:scale(1.01);
 }
 
-/* ==============================
-CARD
-============================== */
+/* =================================
+TEXT
+================================= */
 
 .card h3{
-margin:5px 0;
+margin:8px 0 5px;
 }
 
 .price{
@@ -452,9 +468,9 @@ color:#666;
 }
 
 
-/* ==============================
+/* =================================
 SIMU
-============================== */
+================================= */
 
 @media(max-width:600px){
 
@@ -471,22 +487,20 @@ font-size:12px;
 grid-template-columns:1fr;
 }
 
-/* PICHA KUBWA KWENYE SIMU BILA KUKATWA */
-
 .card{
-padding:12px;
+padding:8px;
 }
 
-.card img{
+.product-image-wrap{
+width:100%;
+border-radius:10px;
+}
+
+.product-image-wrap img{
 width:100%;
 height:auto;
-max-height:none;
+max-width:100%;
 object-fit:contain;
-object-position:center;
-background:#f5f5f5;
-border-radius:12px;
-display:block;
-margin-bottom:10px;
 }
 
 .notification-panel{
@@ -591,7 +605,7 @@ Karibu PLAM TANZANIA — soko la biashara mtandaoni kwa Tanzania nzima.
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
-oninput="render">
+oninput="render()">
 
 <div class="categories">
 
@@ -1125,15 +1139,10 @@ SUPABASE_KEY
 );
 
 let ps=[];
-
 let currentUser=null;
-
 let isAdmin=false;
-
 let currentCategory="all";
-
 let selectedImage1=null;
-
 let selectedImage2=null;
 
 
@@ -1151,7 +1160,6 @@ return currentUser
 
 }
 
-
 function getNotifications(){
 
 try{
@@ -1168,7 +1176,6 @@ return [];
 
 }
 
-
 function saveNotifications(items){
 
 localStorage.setItem(
@@ -1177,7 +1184,6 @@ JSON.stringify(items)
 );
 
 }
-
 
 function addNotification(title,message){
 
@@ -1189,13 +1195,9 @@ const items=getNotifications();
 items.unshift({
 
 id:Date.now()+"_"+Math.random(),
-
 title:title,
-
 message:message,
-
 time:new Date().toISOString(),
-
 read:false
 
 });
@@ -1206,14 +1208,10 @@ renderNotifications();
 
 }
 
-
 function renderNotifications(){
 
-const box=
-document.getElementById("notifications");
-
-const badge=
-document.getElementById("notificationBadge");
+const box=document.getElementById("notifications");
+const badge=document.getElementById("notificationBadge");
 
 if(!box)
 return;
@@ -1270,7 +1268,6 @@ ${new Date(item.time).toLocaleString("sw-TZ")}
 
 }
 
-
 function toggleNotifications(){
 
 const panel=
@@ -1281,16 +1278,12 @@ document.getElementById(
 if(!panel)
 return;
 
-panel.classList.toggle(
-"hidden"
-);
+panel.classList.toggle("hidden");
 
 const items=getNotifications();
 
 items.forEach(function(x){
-
 x.read=true;
-
 });
 
 saveNotifications(items);
@@ -1298,7 +1291,6 @@ saveNotifications(items);
 renderNotifications();
 
 }
-
 
 function clearNotifications(){
 
@@ -1414,10 +1406,7 @@ SHOW
 
 function show(id){
 
-if(
-id==="admin" &&
-!isAdmin
-){
+if(id==="admin"&&!isAdmin){
 
 alert(
 "⚠️ Huna ruhusa ya kufungua Admin Dashboard."
@@ -1436,8 +1425,7 @@ return;
 "admin"
 ].forEach(function(x){
 
-const el=
-document.getElementById(x);
+const el=document.getElementById(x);
 
 if(el){
 
@@ -1450,17 +1438,11 @@ x!==id
 
 });
 
-if(id==="account"){
-
+if(id==="account")
 updateAccountUI();
 
-}
-
-if(id==="home"){
-
+if(id==="home")
 loadProducts();
-
-}
 
 }
 
@@ -1542,7 +1524,7 @@ document.getElementById("search")?.value||""
 .toLowerCase()
 .trim();
 
-let data=
+const data=
 ps.filter(function(p){
 
 const matchesSearch=
@@ -1568,7 +1550,6 @@ return matchesSearch&&matchesCategory;
 
 });
 
-
 if(data.length===0){
 
 box.innerHTML=
@@ -1578,21 +1559,26 @@ return;
 
 }
 
-
 box.innerHTML=
 data.map(function(p){
 
 const image1=
 p.image_url||
-"https://via.placeholder.com/700x500?text=PLAM+TANZANIA";
+"https://via.placeholder.com/900x700?text=PLAM+TANZANIA";
 
 let imageHtml=`
+
+<div class="product-gallery">
+
+<div class="product-image-wrap">
 
 <img
 src="${escapeHtml(image1)}"
 alt="${escapeHtml(p.name||"Bidhaa")}"
 loading="lazy"
->
+onclick="openImage('${escapeHtml(image1)}')">
+
+</div>
 
 `;
 
@@ -1600,15 +1586,21 @@ if(p.image_url_2){
 
 imageHtml+=`
 
+<div class="product-image-wrap">
+
 <img
 src="${escapeHtml(p.image_url_2)}"
 alt="${escapeHtml(p.name||"Bidhaa")}"
 loading="lazy"
->
+onclick="openImage('${escapeHtml(p.image_url_2)}')">
+
+</div>
 
 `;
 
 }
+
+imageHtml+=`</div>`;
 
 return`
 
@@ -1680,7 +1672,6 @@ onclick="whatsappSeller('${escapeHtml(p.phone)}','${escapeHtml(p.name||"Bidhaa")
 
 }
 
-
 function filterCategory(category){
 
 currentCategory=category;
@@ -1689,16 +1680,83 @@ render();
 
 }
 
-
 function formatPrice(price){
 
-const number=
-Number(price);
+const number=Number(price);
 
 if(Number.isNaN(number))
 return escapeHtml(String(price||""));
 
 return number.toLocaleString("sw-TZ");
+
+}
+
+
+/* ==============================
+IMAGE FULLSCREEN
+============================== */
+
+function openImage(url){
+
+const old=document.getElementById("imageViewer");
+
+if(old)
+old.remove();
+
+const viewer=
+document.createElement("div");
+
+viewer.id="imageViewer";
+
+viewer.style.position="fixed";
+viewer.style.inset="0";
+viewer.style.background="rgba(0,0,0,.92)";
+viewer.style.zIndex="5000";
+viewer.style.display="flex";
+viewer.style.alignItems="center";
+viewer.style.justifyContent="center";
+viewer.style.padding="15px";
+viewer.style.cursor="zoom-out";
+
+viewer.innerHTML=`
+
+<button
+style="
+position:absolute;
+top:15px;
+right:15px;
+background:white;
+color:#222;
+font-size:20px;
+z-index:5001;
+"
+onclick="document.getElementById('imageViewer').remove()">
+
+✖
+
+</button>
+
+<img
+src="${escapeHtml(url)}"
+style="
+max-width:100%;
+max-height:95vh;
+width:auto;
+height:auto;
+object-fit:contain;
+border-radius:10px;
+">
+
+`;
+
+viewer.onclick=function(e){
+
+if(e.target===viewer)
+viewer.remove();
+
+};
+
+document.body.appendChild(viewer);
 
 }
 
@@ -1730,35 +1788,25 @@ String(phone||"")
 .replace(/\s+/g,"")
 .replace(/-/g,"");
 
-if(p.startsWith("0")){
-
+if(p.startsWith("0"))
 p="255"+p.substring(1);
 
-}
-
-if(p.startsWith("+")){
-
+if(p.startsWith("+"))
 p=p.substring(1);
-
-}
 
 return p;
 
 }
 
-
 function callSeller(phone){
 
-window.location.href=
-"tel:"+phone;
+window.location.href="tel:"+phone;
 
 }
 
-
 function whatsappSeller(phone,name){
 
-const number=
-cleanPhone(phone);
+const number=cleanPhone(phone);
 
 const text=
 "Habari, nimeiona bidhaa '"+name+"' kwenye PLAM TANZANIA.";
@@ -1783,15 +1831,10 @@ const file=input.files?.[0];
 if(!file)
 return;
 
-if(number===1){
-
+if(number===1)
 selectedImage1=file;
-
-}else{
-
+else
 selectedImage2=file;
-
-}
 
 const preview=
 document.getElementById("imagePreview");
@@ -1799,16 +1842,13 @@ document.getElementById("imagePreview");
 if(!preview)
 return;
 
-const reader=
-new FileReader();
+const reader=new FileReader();
 
 reader.onload=function(e){
 
-const img=
-document.createElement("img");
+const img=document.createElement("img");
 
 img.src=e.target.result;
-
 img.dataset.number=number;
 
 preview.appendChild(img);
@@ -1828,40 +1868,32 @@ async function compressImage(file){
 
 return new Promise(function(resolve,reject){
 
-const reader=
-new FileReader();
+const reader=new FileReader();
 
 reader.onload=function(){
 
-const img=
-new Image();
+const img=new Image();
 
 img.onload=function(){
 
 const max=1600;
 
 let width=img.width;
-
 let height=img.height;
 
 if(width>max){
 
-height=
-height*(max/width);
-
+height=height*(max/width);
 width=max;
 
 }
 
-const canvas=
-document.createElement("canvas");
+const canvas=document.createElement("canvas");
 
 canvas.width=width;
-
 canvas.height=height;
 
-const ctx=
-canvas.getContext("2d");
+const ctx=canvas.getContext("2d");
 
 ctx.drawImage(
 img,
@@ -1894,7 +1926,6 @@ resolve(blob);
 };
 
 img.onerror=reject;
-
 img.src=reader.result;
 
 };
@@ -1904,7 +1935,6 @@ reader.onerror=reject;
 reader.readAsDataURL(file);
 
 });
-
 
 }
 
@@ -1998,42 +2028,27 @@ const button=
 document.getElementById("saveProductButton");
 
 button.disabled=true;
-
 button.innerText="⏳ Inahifadhi...";
 
 try{
 
 let imageUrl=null;
-
 let imageUrl2=null;
 
-if(selectedImage1){
+if(selectedImage1)
+imageUrl=await uploadImage(selectedImage1);
 
-imageUrl=
-await uploadImage(selectedImage1);
-
-}
-
-if(selectedImage2){
-
-imageUrl2=
-await uploadImage(selectedImage2);
-
-}
-
+if(selectedImage2)
+imageUrl2=await uploadImage(selectedImage2);
 
 if(id){
 
 const updateData={
 
 name:name,
-
 price:Number(price),
-
 category:category,
-
 place:place,
-
 description:description
 
 };
@@ -2066,21 +2081,13 @@ await supabaseClient
 .insert({
 
 name:name,
-
 price:Number(price),
-
 category:category,
-
 place:place,
-
 description:description,
-
 phone:currentUser.phone||"",
-
 image_url:imageUrl,
-
 image_url_2:imageUrl2,
-
 user_id:currentUser.id
 
 });
@@ -2112,7 +2119,6 @@ error.message
 }finally{
 
 button.disabled=false;
-
 button.innerText="💾 Hifadhi Bidhaa";
 
 }
@@ -2126,44 +2132,17 @@ RESET PRODUCT FORM
 
 function resetProductForm(){
 
-document.getElementById(
-"editProductId"
-).value="";
-
-document.getElementById(
-"productName"
-).value="";
-
-document.getElementById(
-"productPrice"
-).value="";
-
-document.getElementById(
-"productCategory"
-).value="";
-
-document.getElementById(
-"productPlace"
-).value="";
-
-document.getElementById(
-"productDescription"
-).value="";
-
-document.getElementById(
-"productImage"
-).value="";
-
-document.getElementById(
-"productImage2"
-).value="";
-
-document.getElementById(
-"imagePreview"
-).innerHTML="";
+document.getElementById("editProductId").value="";
+document.getElementById("productName").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productCategory").value="";
+document.getElementById("productPlace").value="";
+document.getElementById("productDescription").value="";
+document.getElementById("productImage").value="";
+document.getElementById("productImage2").value="";
+document.getElementById("imagePreview").innerHTML="";
 
 selectedImage1=null;
-
 selectedImage2=null;
 
 document.getElementById(
@@ -2203,16 +2182,13 @@ const result=
 await supabaseClient.auth.signUp({
 
 email:email,
-
 password:password
 
 });
 
 if(result.error){
 
-alert(
-"❌ "+result.error.message
-);
+alert("❌ "+result.error.message);
 
 return;
 
@@ -2255,7 +2231,6 @@ const result=
 await supabaseClient.auth.signInWithPassword({
 
 email:email,
-
 password:password
 
 });
@@ -2270,13 +2245,11 @@ return;
 
 }
 
-currentUser=
-result.data.user;
+currentUser=result.data.user;
 
 await checkAdmin();
 
 updateAccountUI();
-
 renderNotifications();
 
 show("home");
@@ -2295,11 +2268,9 @@ async function logout(){
 await supabaseClient.auth.signOut();
 
 currentUser=null;
-
 isAdmin=false;
 
 updateAdminUI();
-
 updateAccountUI();
 
 show("home");
@@ -2319,16 +2290,11 @@ await supabaseClient.auth.getUser();
 currentUser=
 result.data.user||null;
 
-if(currentUser){
-
+if(currentUser)
 await checkAdmin();
 
-}
-
 updateAdminUI();
-
 updateAccountUI();
-
 renderNotifications();
 
 }
@@ -2354,11 +2320,8 @@ await supabaseClient
 .eq("user_id",currentUser.id)
 .maybeSingle();
 
-if(!result.error && result.data){
-
+if(!result.error&&result.data)
 isAdmin=true;
-
-}
 
 }catch(error){
 
@@ -2402,19 +2365,14 @@ ACCOUNT UI
 function updateAccountUI(){
 
 const loggedOut=
-document.getElementById(
-"accountLoggedOut"
-);
+document.getElementById("accountLoggedOut");
 
 const loggedIn=
-document.getElementById(
-"accountLoggedIn"
-);
+document.getElementById("accountLoggedIn");
 
 if(!currentUser){
 
 loggedOut?.classList.remove("hidden");
-
 loggedIn?.classList.add("hidden");
 
 return;
@@ -2422,23 +2380,16 @@ return;
 }
 
 loggedOut?.classList.add("hidden");
-
 loggedIn?.classList.remove("hidden");
 
 const email=
 document.getElementById("currentEmail");
 
-if(email){
-
-email.innerText=
-currentUser.email||"";
-
-}
+if(email)
+email.innerText=currentUser.email||"";
 
 showMyProducts();
-
 showMyOrders();
-
 showSellerOrders();
 
 }
@@ -2483,8 +2434,7 @@ return;
 
 }
 
-const data=
-result.data||[];
+const data=result.data||[];
 
 if(data.length===0){
 
@@ -2559,9 +2509,7 @@ await supabaseClient
 
 if(result.error){
 
-alert(
-"❌ "+result.error.message
-);
+alert("❌ "+result.error.message);
 
 return;
 
@@ -2569,37 +2517,18 @@ return;
 
 const p=result.data;
 
-document.getElementById(
-"editProductId"
-).value=p.id;
-
-document.getElementById(
-"productName"
-).value=p.name||"";
-
-document.getElementById(
-"productPrice"
-).value=p.price||"";
-
-document.getElementById(
-"productCategory"
-).value=p.category||"";
-
-document.getElementById(
-"productPlace"
-).value=p.place||"";
-
-document.getElementById(
-"productDescription"
-).value=p.description||"";
+document.getElementById("editProductId").value=p.id;
+document.getElementById("productName").value=p.name||"";
+document.getElementById("productPrice").value=p.price||"";
+document.getElementById("productCategory").value=p.category||"";
+document.getElementById("productPlace").value=p.place||"";
+document.getElementById("productDescription").value=p.description||"";
 
 document.getElementById(
 "productFormTitle"
-).innerText=
-"✏️ Hariri Bidhaa";
+).innerText="✏️ Hariri Bidhaa";
 
 selectedImage1=null;
-
 selectedImage2=null;
 
 document.getElementById(
@@ -2646,9 +2575,7 @@ return;
 
 }
 
-alert(
-"✅ Bidhaa imefutwa."
-);
+alert("✅ Bidhaa imefutwa.");
 
 await loadProducts();
 
@@ -2682,17 +2609,13 @@ p=>String(p.id)===String(id)
 
 if(!product){
 
-alert(
-"❌ Bidhaa haijapatikana."
-);
+alert("❌ Bidhaa haijapatikana.");
 
 return;
 
 }
 
-if(
-product.user_id===currentUser.id
-){
+if(product.user_id===currentUser.id){
 
 alert(
 "⚠️ Huwezi kuagiza bidhaa yako mwenyewe."
@@ -2702,29 +2625,12 @@ return;
 
 }
 
-document.getElementById(
-"orderProductId"
-).value=product.id;
-
-document.getElementById(
-"orderSellerId"
-).value=product.user_id;
-
-document.getElementById(
-"buyerName"
-).value="";
-
-document.getElementById(
-"buyerPhone"
-).value=currentUser.phone||"";
-
-document.getElementById(
-"orderQuantity"
-).value=1;
-
-document.getElementById(
-"orderMessage"
-).value="";
+document.getElementById("orderProductId").value=product.id;
+document.getElementById("orderSellerId").value=product.user_id;
+document.getElementById("buyerName").value="";
+document.getElementById("buyerPhone").value=currentUser.phone||"";
+document.getElementById("orderQuantity").value=1;
+document.getElementById("orderMessage").value="";
 
 document.getElementById(
 "orderProductInfo"
@@ -2766,9 +2672,7 @@ async function submitOrder(){
 
 if(!currentUser){
 
-alert(
-"⚠️ Ingia kwanza."
-);
+alert("⚠️ Ingia kwanza.");
 
 return;
 
@@ -2827,19 +2731,12 @@ await supabaseClient
 .insert({
 
 buyer_name:buyerName,
-
 buyer_phone:buyerPhone,
-
 product_id:Number(productId),
-
 seller_id:sellerId,
-
 buyer_id:currentUser.id,
-
 quantity:quantity,
-
 message:message,
-
 status:"pending"
 
 });
@@ -2905,8 +2802,7 @@ return;
 
 }
 
-const data=
-result.data||[];
+const data=result.data||[];
 
 if(data.length===0){
 
@@ -3001,9 +2897,7 @@ if(!currentUser)
 return;
 
 const box=
-document.getElementById(
-"sellerOrders"
-);
+document.getElementById("sellerOrders");
 
 if(!box)
 return;
@@ -3032,8 +2926,7 @@ return;
 
 }
 
-const data=
-result.data||[];
+const data=result.data||[];
 
 if(data.length===0){
 
@@ -3102,4 +2995,709 @@ ${escapeHtml(o.buyer_name||"")}
 
 <p>
 📞 <b>Simu:</b>
-${escapeHtml(o.buyer_phone||
+${escapeHtml(o.buyer_phone||"")}
+</p>
+
+<p>
+📦 <b>Product ID:</b>
+${escapeHtml(String(o.product_id||""))}
+</p>
+
+<p>
+🔢 <b>Idadi:</b>
+${escapeHtml(String(o.quantity||1))}
+</p>
+
+<p>
+💬 ${escapeHtml(o.message||"")}
+</p>
+
+<p>
+<b>Status:</b>
+
+<span class="status ${
+o.status==="accepted"
+?
+"status-accepted"
+:
+o.status==="rejected"
+?
+"status-rejected"
+:
+"status-pending"
+}">
+
+${
+o.status==="accepted"
+?
+"🟢 Imekubaliwa"
+:
+o.status==="rejected"
+?
+"🔴 Imekataliwa"
+:
+"🟡 Pending"
+}
+
+</span>
+
+</p>
+
+<div class="card-actions">
+
+${actions}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* ==============================
+UPDATE ORDER STATUS
+============================== */
+
+async function updateOrderStatus(id,status){
+
+if(!currentUser){
+
+alert("⚠️ Ingia kwanza.");
+
+return;
+
+}
+
+if(!id){
+
+alert("❌ ID ya oda haipo.");
+
+return;
+
+}
+
+const result=
+await supabaseClient
+.from("orders")
+.update({
+status:status
+})
+.eq("id",id)
+.eq("seller_id",currentUser.id);
+
+if(result.error){
+
+console.error(result.error);
+
+alert(
+"❌ Imekataa kubadilisha oda.\n\n"+
+result.error.message
+);
+
+return;
+
+}
+
+if(status==="accepted"){
+
+alert("🟢 Oda imekubaliwa.");
+
+}else if(status==="rejected"){
+
+alert("🔴 Oda imekataliwa.");
+
+}else{
+
+alert("🟡 Oda imerudishwa Pending.");
+
+}
+
+await showSellerOrders();
+
+}
+
+
+/* ==============================
+ADMIN DASHBOARD
+============================== */
+
+async function showAdminDashboard(){
+
+if(!currentUser){
+
+alert(
+"⚠️ Tafadhali ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+if(!isAdmin){
+
+alert(
+"⚠️ Huna ruhusa ya kufungua Admin Dashboard."
+);
+
+return;
+
+}
+
+show("admin");
+
+await refreshAdminDashboard();
+
+}
+
+
+/* ==============================
+REFRESH ADMIN DASHBOARD
+============================== */
+
+async function refreshAdminDashboard(){
+
+if(!isAdmin||!currentUser)
+return;
+
+const productCount=
+document.getElementById("adminProductCount");
+
+const orderCount=
+document.getElementById("adminOrderCount");
+
+const userCount=
+document.getElementById("adminUserCount");
+
+const emailBox=
+document.getElementById("adminEmail");
+
+const summary=
+document.getElementById("adminSummary");
+
+const productsBox=
+document.getElementById("adminProducts");
+
+const ordersBox=
+document.getElementById("adminOrders");
+
+const usersBox=
+document.getElementById("adminUsers");
+
+if(emailBox)
+emailBox.innerText=currentUser.email||"-";
+
+if(productCount)
+productCount.innerText="⏳";
+
+if(orderCount)
+orderCount.innerText="⏳";
+
+if(userCount)
+userCount.innerText="⏳";
+
+if(productsBox)
+productsBox.innerHTML=
+"<p>⏳ Inapakia bidhaa...</p>";
+
+if(ordersBox)
+ordersBox.innerHTML=
+"<p>⏳ Inapakia oda...</p>";
+
+if(usersBox)
+usersBox.innerHTML=
+"<p>⏳ Inapakia watumiaji...</p>";
+
+
+/* USERS */
+
+let allUsers=[];
+
+try{
+
+const userResult=
+await supabaseClient.rpc(
+"get_admin_users"
+);
+
+if(userResult.error)
+throw userResult.error;
+
+allUsers=userResult.data||[];
+
+if(userCount)
+userCount.innerText=allUsers.length;
+
+if(usersBox){
+
+if(allUsers.length===0){
+
+usersBox.innerHTML=
+"<p>Hakuna watumiaji bado.</p>";
+
+}else{
+
+usersBox.innerHTML=
+allUsers.map(function(user){
+
+return`
+
+<div class="admin-order">
+
+<h3>
+👤 ${escapeHtml(user.email||"Hakuna email")}
+</h3>
+
+<p>
+<b>📧 Email:</b>
+${escapeHtml(user.email||"")}
+</p>
+
+<p>
+<b>🆔 User ID:</b>
+<br>
+${escapeHtml(String(user.id||""))}
+</p>
+
+<p>
+<b>📅 Akaunti ilifunguliwa:</b>
+<br>
+${
+user.created_at
+?
+new Date(user.created_at)
+.toLocaleString("sw-TZ")
+:
+""
+}
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+}
+
+}catch(error){
+
+console.error(
+"ADMIN USERS ERROR:",
+error
+);
+
+if(userCount)
+userCount.innerText="❌";
+
+if(usersBox){
+
+usersBox.innerHTML=`
+
+<p class="error">
+
+Imeshindikana kupakia watumiaji.
+
+<br><br>
+
+${escapeHtml(error.message)}
+
+</p>
+
+`;
+
+}
+
+}
+
+
+/* ADMIN PRODUCTS */
+
+try{
+
+const productResult=
+await supabaseClient
+.from("Production")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(productResult.error)
+throw productResult.error;
+
+const allProducts=
+productResult.data||[];
+
+if(productCount)
+productCount.innerText=allProducts.length;
+
+if(productsBox){
+
+if(allProducts.length===0){
+
+productsBox.innerHTML=
+"<p>Hakuna bidhaa.</p>";
+
+}else{
+
+productsBox.innerHTML=
+allProducts.map(function(p){
+
+return`
+
+<div class="admin-order">
+
+<h3>
+📦 ${escapeHtml(p.name||"")}
+</h3>
+
+<p>
+💰 TSh ${formatPrice(p.price)}
+</p>
+
+<p>
+📂 ${escapeHtml(p.category||"")}
+</p>
+
+<p>
+📍 ${escapeHtml(p.place||"")}
+</p>
+
+<p>
+👤 Seller ID:
+<br>
+${escapeHtml(String(p.user_id||""))}
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+}
+
+}catch(error){
+
+console.error(
+"ADMIN PRODUCTS ERROR:",
+error
+);
+
+if(productCount)
+productCount.innerText="❌";
+
+if(productsBox){
+
+productsBox.innerHTML=`
+
+<p class="error">
+
+Imeshindikana kupakia bidhaa.
+
+<br><br>
+
+${escapeHtml(error.message)}
+
+</p>
+
+`;
+
+}
+
+}
+
+
+/* ADMIN ORDERS */
+
+try{
+
+const orderResult=
+await supabaseClient
+.from("orders")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(orderResult.error)
+throw orderResult.error;
+
+const allOrders=
+orderResult.data||[];
+
+if(orderCount)
+orderCount.innerText=allOrders.length;
+
+if(ordersBox){
+
+if(allOrders.length===0){
+
+ordersBox.innerHTML=
+"<p>Hakuna oda.</p>";
+
+}else{
+
+ordersBox.innerHTML=
+allOrders.map(function(o){
+
+return`
+
+<div class="admin-order">
+
+<h3>
+🛒 Oda #${escapeHtml(String(o.id))}
+</h3>
+
+<p>
+👤 Buyer:
+${escapeHtml(o.buyer_name||"")}
+</p>
+
+<p>
+📞 Simu:
+${escapeHtml(o.buyer_phone||"")}
+</p>
+
+<p>
+📦 Product ID:
+${escapeHtml(String(o.product_id||""))}
+</p>
+
+<p>
+👤 Buyer ID:
+<br>
+${escapeHtml(String(o.buyer_id||""))}
+</p>
+
+<p>
+🏪 Seller ID:
+<br>
+${escapeHtml(String(o.seller_id||""))}
+</p>
+
+<p>
+🔢 Quantity:
+${escapeHtml(String(o.quantity||1))}
+</p>
+
+<p>
+💬 ${escapeHtml(o.message||"")}
+</p>
+
+<p>
+
+<b>Status:</b>
+
+<span class="status ${
+o.status==="accepted"
+?
+"status-accepted"
+:
+o.status==="rejected"
+?
+"status-rejected"
+:
+"status-pending"
+}">
+
+${
+o.status==="accepted"
+?
+"🟢 Accepted"
+:
+o.status==="rejected"
+?
+"🔴 Rejected"
+:
+"🟡 Pending"
+}
+
+</span>
+
+</p>
+
+<p class="small">
+
+${o.created_at
+?
+new Date(o.created_at)
+.toLocaleString("sw-TZ")
+:
+""}
+
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+}
+
+}catch(error){
+
+console.error(
+"ADMIN ORDERS ERROR:",
+error
+);
+
+if(orderCount)
+orderCount.innerText="❌";
+
+if(ordersBox){
+
+ordersBox.innerHTML=`
+
+<p class="error">
+
+Imeshindikana kupakia oda.
+
+<br><br>
+
+${escapeHtml(error.message)}
+
+</p>
+
+`;
+
+}
+
+}
+
+
+/* ADMIN SUMMARY */
+
+try{
+
+const productResult=
+await supabaseClient
+.from("Production")
+.select("id");
+
+const orderResult=
+await supabaseClient
+.from("orders")
+.select("id,status");
+
+const products=productResult.data||[];
+const orders=orderResult.data||[];
+
+const pending=
+orders.filter(
+o=>o.status==="pending"
+).length;
+
+const accepted=
+orders.filter(
+o=>o.status==="accepted"
+).length;
+
+const rejected=
+orders.filter(
+o=>o.status==="rejected"
+).length;
+
+if(summary){
+
+summary.innerHTML=`
+
+📦 Bidhaa:
+<b>${products.length}</b>
+
+<br>
+
+🛒 Oda:
+<b>${orders.length}</b>
+
+<br>
+
+🟡 Pending:
+<b>${pending}</b>
+
+<br>
+
+🟢 Accepted:
+<b>${accepted}</b>
+
+<br>
+
+🔴 Rejected:
+<b>${rejected}</b>
+
+`;
+
+}
+
+}catch(error){
+
+if(summary)
+summary.innerText=
+"Imeshindikana kupata muhtasari.";
+
+}
+
+}
+
+
+/* ==============================
+AUTH STATE
+============================== */
+
+supabaseClient.auth.onAuthStateChange(
+async function(event,session){
+
+currentUser=
+session?.user||null;
+
+if(currentUser){
+
+await checkAdmin();
+
+}else{
+
+isAdmin=false;
+
+}
+
+updateAdminUI();
+updateAccountUI();
+renderNotifications();
+
+}
+);
+
+
+/* ==============================
+START
+============================== */
+
+(async function(){
+
+await checkUser();
+
+await loadProducts();
+
+setupRealtime();
+
+})();
+
+</script>
+
+</body>
+  </html>
