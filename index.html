@@ -1,18 +1,6 @@
 <!doctype html>
-<html lang="sw">
 
-<head>
-
-<meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>PLAM TANZANIA</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
+<html lang="sw"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
 
 *{
 box-sizing:border-box;
@@ -313,334 +301,125 @@ padding:15px;
 
 }
 
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<div class="header-inner">
-
-<div class="logo">
+</style></head><body><header><div class="header-inner"><div class="logo">
 🇹🇿 PLAM TANZANIA
-</div>
-
-<nav>
-
-<button type="button"
-onclick="show('home')">
+</div><nav><button type="button" onclick="show('home')">
 Nyumbani
-</button>
-
-<button type="button"
-onclick="show('add')">
+</button><button type="button" onclick="show('add')">
 ➕ Weka Bidhaa
-</button>
-
-<button type="button"
-onclick="show('account')">
+</button><button type="button" onclick="show('account')">
 👤 Akaunti
-</button>
-
-</nav>
-
-</div>
-
-</header>
-
-
-<main class="container">
-
-
-<!-- =========================
-HOME
-========================= -->
-
-<section id="home">
-
-<div class="hero">
-
-<h1>
+</button></nav></div></header><main class="container"><!-- HOME --><section id="home"><div class="hero"><h1>
 Jenga biashara yako. Fikia wateja zaidi.
-</h1>
-
-<p>
+</h1><p>
 PLAM TANZANIA ni jukwaa la biashara mtandaoni kwa Tanzania.
-</p>
-
-<input
+</p><input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
 oninput="render()">
 
-</div>
-
-
-<div class="categories">
-
-<div class="category"
-onclick="filterCategory('Simu')">
+</div><div class="categories"><div class="category" onclick="filterCategory('Simu')">
 📱 Simu
-</div>
-
-<div class="category"
-onclick="filterCategory('Nguo')">
+</div><div class="category" onclick="filterCategory('Nguo')">
 👕 Nguo
-</div>
-
-<div class="category"
-onclick="filterCategory('Viatu')">
+</div><div class="category" onclick="filterCategory('Viatu')">
 👟 Viatu
-</div>
-
-<div class="category"
-onclick="filterCategory('Samani')">
+</div><div class="category" onclick="filterCategory('Samani')">
 🛋️ Samani
-</div>
-
-<div class="category"
-onclick="filterCategory('Chakula')">
+</div><div class="category" onclick="filterCategory('Chakula')">
 🍲 Chakula
-</div>
-
-<div class="category"
-onclick="filterCategory('Huduma')">
+</div><div class="category" onclick="filterCategory('Huduma')">
 🛠️ Huduma
-</div>
-
-</div>
-
-
-<h2>
+</div></div><h2>
 Bidhaa na Huduma
-</h2>
-
-<div id="products"
-class="products">
-
-<p>
+</h2><div id="products" class="products"><p>
 Inapakia bidhaa...
-</p>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-ADD PRODUCT
-========================= -->
-
-<section id="add"
-class="hidden">
-
-<div class="form-box">
-
-<h2 id="formTitle">
+</p></div></section><!-- ADD PRODUCT --><section id="add" class="hidden"><div class="form-box"><h2 id="formTitle">
 ➕ Weka Bidhaa
-</h2>
-
-<div class="info">
+</h2><div class="info">
 Ili kuweka bidhaa, lazima uwe umeingia kwenye akaunti.
-</div>
-
-<form onsubmit="addProduct(event)">
-
-<label>
+</div><form onsubmit="addProduct(event)"><label>
 Jina la bidhaa/huduma
-</label>
-
-<input
+</label><input
 id="name"
 required
 placeholder="Mfano: Samsung A05">
 
-
 <label>
 Bei
-</label>
-
-<input
+</label><input
 id="price"
 type="number"
 required
 placeholder="Mfano: 250000">
 
-
 <label>
 Kategoria
-</label>
-
-<select
-id="category"
-required>
-
-<option value="">
+</label><select id="category" required><option value="">
 Chagua kategoria
-</option>
-
-<option>
-Simu
-</option>
-
-<option>
-Nguo
-</option>
-
-<option>
-Viatu
-</option>
-
-<option>
-Samani
-</option>
-
-<option>
-Chakula
-</option>
-
-<option>
-Huduma
-</option>
-
-<option>
-Elektroniki
-</option>
-
-<option>
-Magari
-</option>
-
-<option>
-Nyumba
-</option>
-
-<option>
-Shamba
-</option>
-
-<option>
-Nyingine
-</option>
-
-</select>
-
-
-<label>
+</option><option>Simu</option>
+<option>Nguo</option>
+<option>Viatu</option>
+<option>Samani</option>
+<option>Chakula</option>
+<option>Huduma</option>
+<option>Elektroniki</option>
+<option>Magari</option>
+<option>Nyumba</option>
+<option>Shamba</option>
+<option>Nyingine</option></select><label>
 Eneo/Mkoa
-</label>
-
-<input
+</label><input
 id="place"
 required
 placeholder="Mfano: Mbeya">
 
-
 <label>
 Namba ya simu ya muuzaji
-</label>
-
-<input
+</label><input
 id="sellerPhone"
 type="tel"
 required
 placeholder="Mfano: 07XXXXXXXX">
 
-
 <label>
 Maelezo
-</label>
-
-<textarea
+</label><textarea
 id="desc"
 placeholder="Andika maelezo ya bidhaa...">
-</textarea>
-
-
-<label>
+</textarea><label>
 Picha ya kwanza
-</label>
-
-<input
+</label><input
 id="productImage1"
 type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus1')">
 
-<div
-id="imageStatus1"
-class="image-status">
-</div>
-
-
-<label>
+<div id="imageStatus1" class="image-status">
+</div><label>
 Picha ya pili (hiari)
-</label>
-
-<input
+</label><input
 id="productImage2"
 type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus2')">
 
-<div
-id="imageStatus2"
-class="image-status">
-</div>
-
-
-<button
+<div id="imageStatus2" class="image-status">
+</div><button
 id="saveButton"
 class="primary"
 type="submit">
 
 💾 Hifadhi Bidhaa
 
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-ACCOUNT
-========================= -->
-
-<section id="account"
-class="hidden">
-
-<div class="account-box">
-
-<!-- LOGGED OUT -->
-
-<div id="loggedOut">
-
-<h2>
+</button></form></div></section><!-- ACCOUNT --><section id="account" class="hidden"><div class="account-box"><div id="loggedOut"><h2>
 👤 Akaunti ya PLAM
-</h2>
-
-<p>
+</h2><p>
 Fungua akaunti au ingia ili uweze kuweka na kusimamia bidhaa zako.
-</p>
-
-
-<!-- REGISTER -->
-
-<div class="account-section">
-
-<h3>
+</p><div class="account-section"><h3>
 📝 Fungua Akaunti Mpya
-</h3>
-
-<label>
-Email
-</label>
+</h3><label>Email</label>
 
 <input
 id="registerEmail"
@@ -648,17 +427,13 @@ type="email"
 autocomplete="email"
 placeholder="Mfano: jina@gmail.com">
 
-
-<label>
-Password
-</label>
+<label>Password</label>
 
 <input
 id="registerPassword"
 type="password"
 autocomplete="new-password"
 placeholder="Weka password">
-
 
 <button
 type="button"
@@ -667,25 +442,9 @@ onclick="register()">
 
 Fungua Akaunti
 
-</button>
-
-</div>
-
-
-<hr>
-
-
-<!-- LOGIN -->
-
-<div class="account-section">
-
-<h3>
+</button></div><hr><div class="account-section"><h3>
 🔐 Ingia Kwenye Akaunti
-</h3>
-
-<label>
-Email
-</label>
+</h3><label>Email</label>
 
 <input
 id="loginEmail"
@@ -693,17 +452,13 @@ type="email"
 autocomplete="email"
 placeholder="Weka email yako">
 
-
-<label>
-Password
-</label>
+<label>Password</label>
 
 <input
 id="loginPassword"
 type="password"
 autocomplete="current-password"
 placeholder="Weka password yako">
-
 
 <button
 type="button"
@@ -712,37 +467,16 @@ onclick="login()">
 
 Ingia
 
-</button>
-
-</div>
-
-</div>
-
-
-<!-- LOGGED IN -->
-
-<div
-id="loggedIn"
-class="hidden">
-
-<h2>
+</button></div></div><div id="loggedIn" class="hidden"><h2>
 👤 Akaunti Yangu
-</h2>
-
-<p id="userEmail"></p>
-
-
-<button
+</h2><p id="userEmail"></p><button
 type="button"
 class="primary"
 onclick="show('add')">
 
 ➕ Weka Bidhaa
 
-</button>
-
-<br><br>
-
+</button><br><br>
 
 <button
 type="button"
@@ -751,10 +485,7 @@ onclick="showMyProducts()">
 
 📦 Bidhaa Zangu
 
-</button>
-
-<br><br>
-
+</button><br><br>
 
 <button
 type="button"
@@ -763,32 +494,13 @@ onclick="logout()">
 
 Toka
 
-</button>
-
-
-<div id="myProducts"></div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-🇹🇿 PLAM TANZANIA
+</button><div id="myProducts"></div></div></div></section></main><footer>🇹🇿 PLAM TANZANIA
 
 <br><br>
 
 Jenga biashara yako. Fikia wateja zaidi.
 
-</footer>
-
-
-<script>
+</footer><script>
 
 /* =====================================================
 SUPABASE
@@ -800,25 +512,11 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-
-let supabaseClient;
-
-
-if(window.supabase){
-
-supabaseClient =
+const supabaseClient =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
-
-}else{
-
-alert(
-"Supabase haijapakia. Tafadhali refresh ukurasa."
-);
-
-}
 
 
 /* =====================================================
@@ -835,35 +533,26 @@ let selectedCategory = "";
 
 
 /* =====================================================
-SHOW SECTION
+SHOW
 ===================================================== */
 
 function show(id){
 
-const sections =
-["home","add","account"];
-
-sections.forEach(function(x){
+["home","add","account"].forEach(function(x){
 
 const el =
 document.getElementById(x);
 
 if(el){
 
-if(x === id){
-
-el.classList.remove("hidden");
-
-}else{
-
-el.classList.add("hidden");
-
-}
+el.classList.toggle(
+"hidden",
+x !== id
+);
 
 }
 
 });
-
 
 if(id === "account"){
 
@@ -880,12 +569,6 @@ LOAD PRODUCTS
 
 async function loadProducts(){
 
-if(!supabaseClient){
-
-return;
-
-}
-
 try{
 
 const result =
@@ -898,8 +581,6 @@ await supabaseClient
 );
 
 if(result.error){
-
-console.error(result.error);
 
 throw result.error;
 
@@ -917,15 +598,8 @@ console.error(
 error
 );
 
-const products =
-document.getElementById("products");
-
-if(products){
-
-products.innerHTML =
+document.getElementById("products").innerHTML =
 "<p class='error'>Imeshindikana kupakia bidhaa.</p>";
-
-}
 
 }
 
@@ -933,7 +607,7 @@ products.innerHTML =
 
 
 /* =====================================================
-RENDER PRODUCTS
+RENDER
 ===================================================== */
 
 function render(){
@@ -968,8 +642,7 @@ const text = (
 " " +
 (p.description || "")
 
-)
-.toLowerCase();
+).toLowerCase();
 
 return (
 
@@ -1037,8 +710,7 @@ ${images}
 }else{
 
 imageHTML =
-`<div
-style="padding:50px;text-align:center">
+`<div style="padding:50px;text-align:center">
 📦 Hakuna picha
 </div>`;
 
@@ -1160,26 +832,8 @@ const file =
 input.files[0];
 
 
-const maxSize =
-10 * 1024 * 1024;
-
-
-if(file.size > maxSize){
-
-input.value = "";
-
-status.className =
-"image-status error";
-
-status.innerText =
-"❌ Picha imezidi 10MB.";
-
-return;
-
-}
-
-
 if(
+!file.type ||
 !file.type.startsWith("image/")
 ){
 
@@ -1207,6 +861,188 @@ file.name;
 
 
 /* =====================================================
+COMPRESS IMAGE FOR PHONE
+===================================================== */
+
+function compressImage(file){
+
+return new Promise(function(resolve,reject){
+
+const reader =
+new FileReader();
+
+
+reader.onload = function(e){
+
+const img =
+new Image();
+
+
+img.onload = function(){
+
+let width =
+img.naturalWidth;
+
+let height =
+img.naturalHeight;
+
+
+if(!width || !height){
+
+reject(
+new Error(
+"Simu imeshindwa kusoma vipimo vya picha."
+)
+);
+
+return;
+
+}
+
+
+const maxSize =
+1600;
+
+
+if(width > maxSize ||
+height > maxSize){
+
+if(width > height){
+
+height =
+Math.round(
+height * maxSize / width
+);
+
+width =
+maxSize;
+
+}else{
+
+width =
+Math.round(
+width * maxSize / height
+);
+
+height =
+maxSize;
+
+}
+
+}
+
+
+const canvas =
+document.createElement("canvas");
+
+canvas.width =
+width;
+
+canvas.height =
+height;
+
+
+const context =
+canvas.getContext("2d");
+
+
+if(!context){
+
+reject(
+new Error(
+"Simu haikuweza kuandaa picha."
+)
+);
+
+return;
+
+}
+
+
+context.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+
+canvas.toBlob(
+function(blob){
+
+if(!blob){
+
+reject(
+new Error(
+"Imeshindikana kupunguza picha."
+)
+);
+
+return;
+
+}
+
+
+const newFile =
+new File(
+[blob],
+"product-" +
+Date.now() +
+".jpg",
+{
+type:"image/jpeg",
+lastModified:Date.now()
+}
+);
+
+
+resolve(newFile);
+
+},
+"image/jpeg",
+0.82
+);
+
+};
+
+
+img.onerror = function(){
+
+reject(
+new Error(
+"Imeshindikana kusoma picha hii kwenye simu."
+)
+);
+
+};
+
+
+img.src =
+e.target.result;
+
+};
+
+
+reader.onerror = function(){
+
+reject(
+new Error(
+"Imeshindikana kusoma picha kutoka kwenye simu."
+)
+);
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =====================================================
 UPLOAD IMAGE
 ===================================================== */
 
@@ -1219,30 +1055,8 @@ return null;
 }
 
 
-const extension =
-(
-file.name
-.split(".")
-.pop()
-.toLowerCase()
-);
-
-
-const allowed = [
-"jpg",
-"jpeg",
-"png",
-"webp",
-"gif"
-];
-
-
-const ext =
-allowed.includes(extension)
-?
-extension
-:
-"jpg";
+const compressedFile =
+await compressImage(file);
 
 
 const fileName =
@@ -1252,8 +1066,7 @@ Date.now() +
 Math.random()
 .toString(36)
 .substring(2,10) +
-"." +
-ext;
+".jpg";
 
 
 try{
@@ -1264,11 +1077,10 @@ await supabaseClient
 .from("product-images")
 .upload(
 fileName,
-file,
+compressedFile,
 {
 cacheControl:"3600",
-contentType:
-file.type || "image/jpeg",
+contentType:"image/jpeg",
 upsert:false
 }
 );
@@ -1281,10 +1093,13 @@ throw result.error;
 }
 
 
-if(!result.data){
+if(
+!result.data ||
+!result.data.path
+){
 
 throw new Error(
-"Storage haikurudisha taarifa ya picha."
+"Supabase haikurudisha njia ya picha."
 );
 
 }
@@ -1299,20 +1114,20 @@ result.data.path
 );
 
 
-const publicUrl =
-publicResult.data.publicUrl;
-
-
-if(!publicUrl){
+if(
+!publicResult ||
+!publicResult.data ||
+!publicResult.data.publicUrl
+){
 
 throw new Error(
-"Public URL haijapatikana."
+"URL ya picha haijapatikana."
 );
 
 }
 
 
-return publicUrl;
+return publicResult.data.publicUrl;
 
 
 }catch(error){
@@ -1324,7 +1139,7 @@ error
 
 throw new Error(
 "Picha haijapakiwa: " +
-error.message
+(error.message || "Hitilafu isiyojulikana")
 );
 
 }
@@ -1431,44 +1246,66 @@ document
 || null;
 
 
-saveButton.disabled = true;
-
-saveButton.innerText =
-"Picha inapakiwa...";
+saveButton.disabled =
+true;
 
 
-let imageUrl = null;
+let imageUrl =
+null;
 
-let imageUrl2 = null;
+let imageUrl2 =
+null;
 
+
+/* =========================
+PICTURE 1
+========================= */
 
 if(image1){
 
 document
 .getElementById("imageStatus1")
-.innerText =
-"⏳ Inapakia picha...";
-
-imageUrl =
-await uploadImage(image1);
+.className =
+"image-status success";
 
 document
 .getElementById("imageStatus1")
 .innerText =
-"✅ Picha imepakiwa.";
+"⏳ Inasoma na kupakia picha...";
+
+
+imageUrl =
+await uploadImage(image1);
+
+
+document
+.getElementById("imageStatus1")
+.innerText =
+"✅ Picha ya kwanza imepakiwa.";
 
 }
 
+
+/* =========================
+PICTURE 2
+========================= */
 
 if(image2){
 
 document
 .getElementById("imageStatus2")
+.className =
+"image-status success";
+
+document
+.getElementById("imageStatus2")
 .innerText =
-"⏳ Inapakia picha ya pili...";
+"⏳ Inasoma na kupakia picha ya pili...";
+
 
 imageUrl2 =
 await uploadImage(image2);
+
 
 document
 .getElementById("imageStatus2")
@@ -1478,7 +1315,9 @@ document
 }
 
 
-/* UPDATE */
+/* =========================
+UPDATE PRODUCT
+========================= */
 
 if(editingProductId){
 
@@ -1552,13 +1391,16 @@ alert(
 );
 
 
-editingProductId = null;
+editingProductId =
+null;
 
 
 }else{
 
 
-/* INSERT */
+/* =========================
+INSERT PRODUCT
+========================= */
 
 saveButton.innerText =
 "Inahifadhi bidhaa...";
@@ -1620,7 +1462,9 @@ alert(
 }
 
 
-/* RESET */
+/* =========================
+RESET
+========================= */
 
 document
 .querySelector("#add form")
@@ -1629,12 +1473,14 @@ document
 
 document
 .getElementById("imageStatus1")
-.innerHTML = "";
+.innerHTML =
+"";
 
 
 document
 .getElementById("imageStatus2")
-.innerHTML = "";
+.innerHTML =
+"";
 
 
 document
@@ -1647,7 +1493,8 @@ saveButton.innerText =
 "💾 Hifadhi Bidhaa";
 
 
-editingProductId = null;
+editingProductId =
+null;
 
 
 await loadProducts();
@@ -1670,7 +1517,8 @@ alert(
 
 }finally{
 
-saveButton.disabled = false;
+saveButton.disabled =
+false;
 
 saveButton.innerText =
 "💾 Hifadhi Bidhaa";
@@ -1766,9 +1614,11 @@ alert(
 "🎉 Akaunti imefunguliwa na umeingia."
 );
 
+
 updateAccountUI();
 
 show("home");
+
 
 }else{
 
@@ -1907,7 +1757,8 @@ console.error(error);
 
 }
 
-currentUser = null;
+currentUser =
+null;
 
 updateAccountUI();
 
@@ -1932,7 +1783,8 @@ await supabaseClient
 
 if(result.error){
 
-currentUser = null;
+currentUser =
+null;
 
 }else{
 
@@ -1952,7 +1804,8 @@ console.error(
 error
 );
 
-currentUser = null;
+currentUser =
+null;
 
 updateAccountUI();
 
@@ -2015,8 +1868,6 @@ loggedIn.classList.add("hidden");
 AUTH LISTENER
 ===================================================== */
 
-if(supabaseClient){
-
 supabaseClient
 .auth
 .onAuthStateChange(
@@ -2029,8 +1880,6 @@ updateAccountUI();
 
 }
 );
-
-}
 
 
 /* =====================================================
@@ -2371,8 +2220,4 @@ loadProducts();
 
 checkUser();
 
-</script>
-
-</body>
-
-</html>
+</script></body></html>
