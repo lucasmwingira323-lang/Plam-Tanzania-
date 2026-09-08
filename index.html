@@ -1,8 +1,18 @@
 <!doctype html>
-
 <html lang="sw">
-<head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 
 *{
 box-sizing:border-box;
@@ -129,13 +139,6 @@ display:block;
 flex-shrink:0;
 }
 
-.single-image{
-width:100%;
-height:420px;
-object-fit:cover;
-display:block;
-}
-
 .card-body{
 padding:15px;
 }
@@ -158,6 +161,33 @@ border-radius:12px;
 max-width:650px;
 margin:auto;
 box-shadow:0 2px 8px #ddd;
+}
+
+.account-box{
+background:white;
+padding:25px;
+border-radius:12px;
+max-width:650px;
+margin:auto;
+box-shadow:0 2px 8px #ddd;
+}
+
+.account-section{
+border:1px solid #ddd;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.account-section h3{
+color:#0b7a3b;
+margin-top:0;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:8px;
 }
 
 input,
@@ -202,16 +232,15 @@ color:#d62828;
 font-weight:bold;
 }
 
-.hidden{
-display:none !important;
+.info{
+background:#eef8f1;
+padding:12px;
+border-radius:8px;
+margin-bottom:15px;
 }
 
-.account-box{
-background:white;
-padding:20px;
-border-radius:12px;
-max-width:650px;
-margin:auto;
+.hidden{
+display:none !important;
 }
 
 .my-product{
@@ -236,12 +265,23 @@ align-items:center;
 gap:10px;
 }
 
+.image-status{
+margin-bottom:10px;
+font-size:14px;
+}
+
 footer{
 background:#0b7a3b;
 color:white;
 text-align:center;
 padding:25px;
 margin-top:30px;
+}
+
+hr{
+border:0;
+border-top:1px solid #ddd;
+margin:25px 0;
 }
 
 @media(max-width:600px){
@@ -252,10 +292,6 @@ padding:12px;
 
 .gallery img{
 height:300px;
-}
-
-.single-image{
-height:340px;
 }
 
 .header-inner{
@@ -271,195 +307,488 @@ nav button{
 flex:1;
 }
 
+.account-box{
+padding:15px;
 }
 
-</style></head><body><header><div class="header-inner"><div class="logo">
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<div class="logo">
 🇹🇿 PLAM TANZANIA
-</div><nav>
-<button onclick="show('home')">Nyumbani</button>
-<button onclick="show('add')">➕ Weka Bidhaa</button>
-<button onclick="show('account')">👤 Akaunti</button>
-</nav></div></header><main class="container"><section id="home"><div class="hero"><h1>Jenga biashara yako. Fikia wateja zaidi.</h1><p>
+</div>
+
+<nav>
+
+<button type="button"
+onclick="show('home')">
+Nyumbani
+</button>
+
+<button type="button"
+onclick="show('add')">
+➕ Weka Bidhaa
+</button>
+
+<button type="button"
+onclick="show('account')">
+👤 Akaunti
+</button>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================
+HOME
+========================= -->
+
+<section id="home">
+
+<div class="hero">
+
+<h1>
+Jenga biashara yako. Fikia wateja zaidi.
+</h1>
+
+<p>
 PLAM TANZANIA ni jukwaa la biashara mtandaoni kwa Tanzania.
-</p><input
+</p>
+
+<input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
-oninput="render()"
+oninput="render()">
 
-«»
+</div>
 
-</div><div class="categories"><div class="category" onclick="filterCategory('Simu')">
+
+<div class="categories">
+
+<div class="category"
+onclick="filterCategory('Simu')">
 📱 Simu
-</div><div class="category" onclick="filterCategory('Nguo')">
+</div>
+
+<div class="category"
+onclick="filterCategory('Nguo')">
 👕 Nguo
-</div><div class="category" onclick="filterCategory('Viatu')">
+</div>
+
+<div class="category"
+onclick="filterCategory('Viatu')">
 👟 Viatu
-</div><div class="category" onclick="filterCategory('Samani')">
+</div>
+
+<div class="category"
+onclick="filterCategory('Samani')">
 🛋️ Samani
-</div><div class="category" onclick="filterCategory('Chakula')">
+</div>
+
+<div class="category"
+onclick="filterCategory('Chakula')">
 🍲 Chakula
-</div><div class="category" onclick="filterCategory('Huduma')">
+</div>
+
+<div class="category"
+onclick="filterCategory('Huduma')">
 🛠️ Huduma
-</div></div><h2>Bidhaa na Huduma</h2><div id="products" class="products"><p>Inapakia bidhaa...</p></div></section><section id="add" class="hidden"><div class="form-box"><h2 id="formTitle">➕ Weka Bidhaa</h2><form onsubmit="addProduct(event)"><label>Jina la bidhaa/huduma</label>
+</div>
+
+</div>
+
+
+<h2>
+Bidhaa na Huduma
+</h2>
+
+<div id="products"
+class="products">
+
+<p>
+Inapakia bidhaa...
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ADD PRODUCT
+========================= -->
+
+<section id="add"
+class="hidden">
+
+<div class="form-box">
+
+<h2 id="formTitle">
+➕ Weka Bidhaa
+</h2>
+
+<div class="info">
+Ili kuweka bidhaa, lazima uwe umeingia kwenye akaunti.
+</div>
+
+<form onsubmit="addProduct(event)">
+
+<label>
+Jina la bidhaa/huduma
+</label>
 
 <input
 id="name"
 required
-placeholder="Mfano: Samsung A05"
+placeholder="Mfano: Samsung A05">
 
-«»
 
-<label>Bei</label>
+<label>
+Bei
+</label>
 
 <input
 id="price"
 type="number"
 required
-placeholder="Mfano: 250000"
+placeholder="Mfano: 250000">
 
-«»
 
-<label>Kategoria</label>
+<label>
+Kategoria
+</label>
 
-<select id="category" required><option value="">Chagua kategoria</option><option>Simu</option>
-<option>Nguo</option>
-<option>Viatu</option>
-<option>Samani</option>
-<option>Chakula</option>
-<option>Huduma</option>
-<option>Elektroniki</option>
-<option>Magari</option>
-<option>Nyumba</option>
-<option>Shamba</option>
-<option>Nyingine</option></select><label>Eneo/Mkoa</label>
+<select
+id="category"
+required>
+
+<option value="">
+Chagua kategoria
+</option>
+
+<option>
+Simu
+</option>
+
+<option>
+Nguo
+</option>
+
+<option>
+Viatu
+</option>
+
+<option>
+Samani
+</option>
+
+<option>
+Chakula
+</option>
+
+<option>
+Huduma
+</option>
+
+<option>
+Elektroniki
+</option>
+
+<option>
+Magari
+</option>
+
+<option>
+Nyumba
+</option>
+
+<option>
+Shamba
+</option>
+
+<option>
+Nyingine
+</option>
+
+</select>
+
+
+<label>
+Eneo/Mkoa
+</label>
 
 <input
 id="place"
 required
-placeholder="Mfano: Mbeya"
+placeholder="Mfano: Mbeya">
 
-«»
 
-<label>Namba ya simu ya muuzaji</label>
+<label>
+Namba ya simu ya muuzaji
+</label>
 
 <input
 id="sellerPhone"
 type="tel"
 required
-placeholder="Mfano: 07XXXXXXXX"
+placeholder="Mfano: 07XXXXXXXX">
 
-«»
 
-<label>Maelezo</label>
+<label>
+Maelezo
+</label>
 
 <textarea
 id="desc"
-placeholder="Andika maelezo ya bidhaa..."
-></textarea><label>Picha ya kwanza</label>
+placeholder="Andika maelezo ya bidhaa...">
+</textarea>
+
+
+<label>
+Picha ya kwanza
+</label>
 
 <input
 id="productImage1"
 type="file"
 accept="image/*"
-onchange="handleImageSelect(this,'imageStatus1')"
+onchange="handleImageSelect(this,'imageStatus1')">
 
-«»
+<div
+id="imageStatus1"
+class="image-status">
+</div>
 
-<div id="imageStatus1" class="image-status"></div><label>Picha ya pili (hiari)</label>
+
+<label>
+Picha ya pili (hiari)
+</label>
 
 <input
 id="productImage2"
 type="file"
 accept="image/*"
-onchange="handleImageSelect(this,'imageStatus2')"
+onchange="handleImageSelect(this,'imageStatus2')">
 
-«»
+<div
+id="imageStatus2"
+class="image-status">
+</div>
 
-<div id="imageStatus2" class="image-status"></div><button
+
+<button
 id="saveButton"
 class="primary"
-type="submit"
-
-«»
+type="submit">
 
 💾 Hifadhi Bidhaa
+
 </button>
 
-</form></div></section><section id="account" class="hidden"><div class="account-box"><div id="loggedOut"><h2>👤 Akaunti</h2><h3>Fungua Akaunti</h3><input
+</form>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ACCOUNT
+========================= -->
+
+<section id="account"
+class="hidden">
+
+<div class="account-box">
+
+<!-- LOGGED OUT -->
+
+<div id="loggedOut">
+
+<h2>
+👤 Akaunti ya PLAM
+</h2>
+
+<p>
+Fungua akaunti au ingia ili uweze kuweka na kusimamia bidhaa zako.
+</p>
+
+
+<!-- REGISTER -->
+
+<div class="account-section">
+
+<h3>
+📝 Fungua Akaunti Mpya
+</h3>
+
+<label>
+Email
+</label>
+
+<input
 id="registerEmail"
 type="email"
-placeholder="Email"
+autocomplete="email"
+placeholder="Mfano: jina@gmail.com">
 
-«»
+
+<label>
+Password
+</label>
 
 <input
 id="registerPassword"
 type="password"
-placeholder="Password"
+autocomplete="new-password"
+placeholder="Weka password">
 
-«»
 
 <button
+type="button"
 class="primary"
-onclick="register()"
-
-«»
+onclick="register()">
 
 Fungua Akaunti
+
 </button>
 
-<hr><h3>Ingia</h3><input
+</div>
+
+
+<hr>
+
+
+<!-- LOGIN -->
+
+<div class="account-section">
+
+<h3>
+🔐 Ingia Kwenye Akaunti
+</h3>
+
+<label>
+Email
+</label>
+
+<input
 id="loginEmail"
 type="email"
-placeholder="Email"
+autocomplete="email"
+placeholder="Weka email yako">
 
-«»
+
+<label>
+Password
+</label>
 
 <input
 id="loginPassword"
 type="password"
-placeholder="Password"
+autocomplete="current-password"
+placeholder="Weka password yako">
 
-«»
 
 <button
+type="button"
 class="primary"
-onclick="login()"
-
-«»
+onclick="login()">
 
 Ingia
+
 </button>
 
-</div><div id="loggedIn" class="hidden"><h2>👤 Akaunti Yangu</h2><p id="userEmail"></p><button
+</div>
+
+</div>
+
+
+<!-- LOGGED IN -->
+
+<div
+id="loggedIn"
+class="hidden">
+
+<h2>
+👤 Akaunti Yangu
+</h2>
+
+<p id="userEmail"></p>
+
+
+<button
+type="button"
 class="primary"
-onclick="showMyProducts()"
+onclick="show('add')">
 
-«»
+➕ Weka Bidhaa
 
-📦 Bidhaa Zangu
 </button>
 
 <br><br>
 
+
 <button
-class="secondary"
-onclick="logout()"
+type="button"
+class="primary"
+onclick="showMyProducts()">
 
-«»
+📦 Bidhaa Zangu
 
-Toka
 </button>
 
-<div id="myProducts"></div></div></div></section></main><footer>🇹🇿 PLAM TANZANIA
+<br><br>
+
+
+<button
+type="button"
+class="secondary"
+onclick="logout()">
+
+Toka
+
+</button>
+
+
+<div id="myProducts"></div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+🇹🇿 PLAM TANZANIA
 
 <br><br>
 
 Jenga biashara yako. Fikia wateja zaidi.
 
-</footer><script>
+</footer>
 
+
+<script>
 
 /* =====================================================
 SUPABASE
@@ -471,11 +800,25 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-const supabaseClient =
+
+let supabaseClient;
+
+
+if(window.supabase){
+
+supabaseClient =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
+
+}else{
+
+alert(
+"Supabase haijapakia. Tafadhali refresh ukurasa."
+);
+
+}
 
 
 /* =====================================================
@@ -492,26 +835,41 @@ let selectedCategory = "";
 
 
 /* =====================================================
-SHOW
+SHOW SECTION
 ===================================================== */
 
 function show(id){
 
-["home","add","account"].forEach(x=>{
+const sections =
+["home","add","account"];
+
+sections.forEach(function(x){
 
 const el =
 document.getElementById(x);
 
 if(el){
 
-el.classList.toggle(
-"hidden",
-x !== id
-);
+if(x === id){
+
+el.classList.remove("hidden");
+
+}else{
+
+el.classList.add("hidden");
+
+}
 
 }
 
 });
+
+
+if(id === "account"){
+
+updateAccountUI();
+
+}
 
 }
 
@@ -522,23 +880,33 @@ LOAD PRODUCTS
 
 async function loadProducts(){
 
-try{
+if(!supabaseClient){
 
-const {data,error} =
-await supabaseClient
-.from("Production")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-
-console.error(error);
-
-throw error;
+return;
 
 }
 
-ps = data || [];
+try{
+
+const result =
+await supabaseClient
+.from("Production")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(result.error){
+
+console.error(result.error);
+
+throw result.error;
+
+}
+
+ps =
+result.data || [];
 
 render();
 
@@ -549,8 +917,15 @@ console.error(
 error
 );
 
-document.getElementById("products").innerHTML =
+const products =
+document.getElementById("products");
+
+if(products){
+
+products.innerHTML =
 "<p class='error'>Imeshindikana kupakia bidhaa.</p>";
+
+}
 
 }
 
@@ -558,7 +933,7 @@ document.getElementById("products").innerHTML =
 
 
 /* =====================================================
-RENDER
+RENDER PRODUCTS
 ===================================================== */
 
 function render(){
@@ -566,16 +941,22 @@ function render(){
 const container =
 document.getElementById("products");
 
-if(!container)return;
+if(!container){
+
+return;
+
+}
 
 const search =
-(document.getElementById("search")?.value || "")
+(
+document.getElementById("search")?.value || ""
+)
 .toLowerCase()
 .trim();
 
 
 const filtered =
-ps.filter(p=>{
+ps.filter(function(p){
 
 const text = (
 
@@ -587,11 +968,15 @@ const text = (
 " " +
 (p.description || "")
 
-).toLowerCase();
+)
+.toLowerCase();
 
 return (
 
-(!search || text.includes(search)) &&
+(!search ||
+text.includes(search))
+
+&&
 
 (!selectedCategory ||
 p.category === selectedCategory)
@@ -612,35 +997,52 @@ return;
 
 
 container.innerHTML =
-filtered.map(p=>{
+filtered.map(function(p){
 
 let images = "";
+
 
 if(p.image_url){
 
 images +=
-`<img src="${escapeHtml(p.image_url)}"
+
+`<img
+src="${escapeHtml(p.image_url)}"
 alt="${escapeHtml(p.name || "Bidhaa")}">`;
 
 }
+
 
 if(p.image_url_2){
 
 images +=
-`<img src="${escapeHtml(p.image_url_2)}"
+
+`<img
+src="${escapeHtml(p.image_url_2)}"
 alt="${escapeHtml(p.name || "Bidhaa")}">`;
 
 }
 
 
-const imageHTML =
-images
-?
-`<div class="gallery">${images}</div>`
-:
-`<div style="padding:50px;text-align:center">
+let imageHTML;
+
+
+if(images){
+
+imageHTML =
+`<div class="gallery">
+${images}
+</div>`;
+
+}else{
+
+imageHTML =
+`<div
+style="padding:50px;text-align:center">
 📦 Hakuna picha
 </div>`;
+
+}
 
 
 return `
@@ -651,7 +1053,9 @@ ${imageHTML}
 
 <div class="card-body">
 
-<h3>${escapeHtml(p.name || "")}</h3>
+<h3>
+${escapeHtml(p.name || "")}
+</h3>
 
 <div class="price">
 TZS ${Number(p.price || 0).toLocaleString()}
@@ -673,11 +1077,14 @@ ${escapeHtml(p.description || "")}
 ${
 p.phone
 ?
-`<p>
-📞 <a href="tel:${escapeHtml(p.phone)}">
+`
+<p>
+📞
+<a href="tel:${escapeHtml(p.phone)}">
 ${escapeHtml(p.phone)}
 </a>
-</p>`
+</p>
+`
 :
 ""
 }
@@ -699,7 +1106,8 @@ CATEGORY
 
 function filterCategory(category){
 
-selectedCategory = category;
+selectedCategory =
+category;
 
 show("home");
 
@@ -709,7 +1117,7 @@ render();
 
 
 /* =====================================================
-ESCAPE
+ESCAPE HTML
 ===================================================== */
 
 function escapeHtml(value){
@@ -728,19 +1136,25 @@ return String(value ?? "")
 IMAGE SELECT
 ===================================================== */
 
-function handleImageSelect(input,statusId){
+function handleImageSelect(
+input,
+statusId
+){
 
 const status =
 document.getElementById(statusId);
 
-if(!input.files ||
-!input.files.length){
+if(
+!input.files ||
+!input.files.length
+){
 
 status.innerHTML = "";
 
 return;
 
 }
+
 
 const file =
 input.files[0];
@@ -765,7 +1179,9 @@ return;
 }
 
 
-if(!file.type.startsWith("image/")){
+if(
+!file.type.startsWith("image/")
+){
 
 input.value = "";
 
@@ -791,30 +1207,6 @@ file.name;
 
 
 /* =====================================================
-PREPARE IMAGE
-===================================================== */
-
-async function prepareImage(file){
-
-if(!file){
-
-return null;
-
-}
-
-
-/*
-Tunatumia File moja kwa moja.
-Hakuna FileReader.
-Hakuna preview.
-*/
-
-return file;
-
-}
-
-
-/* =====================================================
 UPLOAD IMAGE
 ===================================================== */
 
@@ -827,35 +1219,30 @@ return null;
 }
 
 
-try{
-
-
-const preparedFile =
-await prepareImage(file);
-
-
-const originalName =
-file.name || "image.jpg";
-
-
-let extension =
-originalName
+const extension =
+(
+file.name
 .split(".")
 .pop()
-.toLowerCase();
+.toLowerCase()
+);
 
 
-if(![
+const allowed = [
 "jpg",
 "jpeg",
 "png",
 "webp",
 "gif"
-].includes(extension)){
+];
 
-extension = "jpg";
 
-}
+const ext =
+allowed.includes(extension)
+?
+extension
+:
+"jpg";
 
 
 const fileName =
@@ -864,18 +1251,20 @@ Date.now() +
 "-" +
 Math.random()
 .toString(36)
-.substring(2,12) +
+.substring(2,10) +
 "." +
-extension;
+ext;
 
 
-const {data,error} =
+try{
+
+const result =
 await supabaseClient
 .storage
 .from("product-images")
 .upload(
 fileName,
-preparedFile,
+file,
 {
 cacheControl:"3600",
 contentType:
@@ -885,24 +1274,17 @@ upsert:false
 );
 
 
-if(error){
+if(result.error){
 
-console.error(
-"STORAGE UPLOAD ERROR:",
-error
-);
-
-throw new Error(
-error.message
-);
+throw result.error;
 
 }
 
 
-if(!data){
+if(!result.data){
 
 throw new Error(
-"Supabase haikurudisha taarifa ya picha."
+"Storage haikurudisha taarifa ya picha."
 );
 
 }
@@ -913,7 +1295,7 @@ supabaseClient
 .storage
 .from("product-images")
 .getPublicUrl(
-data.path
+result.data.path
 );
 
 
@@ -924,7 +1306,7 @@ publicResult.data.publicUrl;
 if(!publicUrl){
 
 throw new Error(
-"Public URL ya picha haijapatikana."
+"Public URL haijapatikana."
 );
 
 }
@@ -942,7 +1324,7 @@ error
 
 throw new Error(
 "Picha haijapakiwa: " +
-(error.message || "Hitilafu ya Storage")
+error.message
 );
 
 }
@@ -959,13 +1341,6 @@ async function addProduct(event){
 event.preventDefault();
 
 
-const saveButton =
-document.getElementById("saveButton");
-
-
-try{
-
-
 if(!currentUser){
 
 alert(
@@ -979,29 +1354,50 @@ return;
 }
 
 
+const saveButton =
+document.getElementById("saveButton");
+
+
+try{
+
 const name =
-document.getElementById("name")
-.value.trim();
+document
+.getElementById("name")
+.value
+.trim();
+
 
 const price =
-document.getElementById("price")
+document
+.getElementById("price")
 .value;
+
 
 const category =
-document.getElementById("category")
+document
+.getElementById("category")
 .value;
 
+
 const place =
-document.getElementById("place")
-.value.trim();
+document
+.getElementById("place")
+.value
+.trim();
+
 
 const phone =
-document.getElementById("sellerPhone")
-.value.trim();
+document
+.getElementById("sellerPhone")
+.value
+.trim();
+
 
 const description =
-document.getElementById("desc")
-.value.trim();
+document
+.getElementById("desc")
+.value
+.trim();
 
 
 if(
@@ -1022,12 +1418,17 @@ return;
 
 
 const image1 =
-document.getElementById("productImage1")
-.files[0] || null;
+document
+.getElementById("productImage1")
+.files[0]
+|| null;
+
 
 const image2 =
-document.getElementById("productImage2")
-.files[0] || null;
+document
+.getElementById("productImage2")
+.files[0]
+|| null;
 
 
 saveButton.disabled = true;
@@ -1041,49 +1442,43 @@ let imageUrl = null;
 let imageUrl2 = null;
 
 
-/* =========================
-IMAGE 1
-========================= */
-
 if(image1){
 
-document.getElementById("imageStatus1")
+document
+.getElementById("imageStatus1")
 .innerText =
 "⏳ Inapakia picha...";
 
 imageUrl =
 await uploadImage(image1);
 
-document.getElementById("imageStatus1")
-innerText =
+document
+.getElementById("imageStatus1")
+.innerText =
 "✅ Picha imepakiwa.";
 
 }
 
 
-/* =========================
-IMAGE 2
-========================= */
-
 if(image2){
 
-document.getElementById("imageStatus2")
+document
+.getElementById("imageStatus2")
 .innerText =
 "⏳ Inapakia picha ya pili...";
 
 imageUrl2 =
 await uploadImage(image2);
 
-document.getElementById("imageStatus2")
-innerText =
+document
+.getElementById("imageStatus2")
+.innerText =
 "✅ Picha ya pili imepakiwa.";
 
 }
 
 
-/* =========================
-UPDATE
-========================= */
+/* UPDATE */
 
 if(editingProductId){
 
@@ -1115,6 +1510,7 @@ imageUrl;
 
 }
 
+
 if(imageUrl2){
 
 updateData.image_url_2 =
@@ -1123,7 +1519,7 @@ imageUrl2;
 }
 
 
-const {data,error} =
+const result =
 await supabaseClient
 .from("Production")
 .update(updateData)
@@ -1132,15 +1528,17 @@ await supabaseClient
 .select();
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
 
-if(!data ||
-data.length === 0){
+if(
+!result.data ||
+result.data.length === 0
+){
 
 throw new Error(
 "Bidhaa haijapatikana au huna ruhusa ya kuihariri."
@@ -1160,9 +1558,7 @@ editingProductId = null;
 }else{
 
 
-/* =========================
-INSERT
-========================= */
+/* INSERT */
 
 saveButton.innerText =
 "Inahifadhi bidhaa...";
@@ -1191,22 +1587,24 @@ user_id:currentUser.id
 };
 
 
-const {data,error} =
+const result =
 await supabaseClient
 .from("Production")
 .insert([insertData])
 .select();
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
 
-if(!data ||
-data.length === 0){
+if(
+!result.data ||
+result.data.length === 0
+){
 
 throw new Error(
 "Bidhaa haikurudishwa baada ya kuhifadhiwa."
@@ -1222,22 +1620,25 @@ alert(
 }
 
 
-/* =========================
-RESET
-========================= */
+/* RESET */
 
-document.querySelector("#add form")
+document
+.querySelector("#add form")
 .reset();
 
 
-document.getElementById("imageStatus1")
+document
+.getElementById("imageStatus1")
 .innerHTML = "";
 
-document.getElementById("imageStatus2")
+
+document
+.getElementById("imageStatus2")
 .innerHTML = "";
 
 
-document.getElementById("formTitle")
+document
+.getElementById("formTitle")
 .innerText =
 "➕ Weka Bidhaa";
 
@@ -1263,7 +1664,7 @@ error
 
 alert(
 "❌ Bidhaa haijahifadhiwa.\n\n" +
-"Sababu halisi:\n" +
+"Sababu:\n" +
 (error.message || error)
 );
 
@@ -1280,314 +1681,50 @@ saveButton.innerText =
 
 
 /* =====================================================
-MY PRODUCTS
-===================================================== */
-
-async function showMyProducts(){
-
-if(!currentUser){
-
-alert(
-"Tafadhali ingia kwanza."
-);
-
-return;
-
-}
-
-
-const box =
-document.getElementById("myProducts");
-
-
-box.innerHTML =
-"<p>⏳ Inapakia bidhaa zako...</p>";
-
-
-try{
-
-
-const {data:products,error} =
-await supabaseClient
-.from("Production")
-.select("*")
-.eq("user_id",currentUser.id)
-.order("created_at",{ascending:false});
-
-
-if(error){
-
-throw error;
-
-}
-
-
-if(!products ||
-products.length === 0){
-
-box.innerHTML =
-"<p>Huna bidhaa ulizoweka bado.</p>";
-
-return;
-
-}
-
-
-box.innerHTML =
-products.map(p=>{
-
-return `
-
-<div class="my-product">
-
-<div class="my-product-row">
-
-${
-p.image_url
-?
-`<img src="${escapeHtml(p.image_url)}">`
-:
-`<div style="font-size:40px">📦</div>`
-}
-
-<div style="flex:1">
-
-<b>${escapeHtml(p.name)}</b>
-
-<br>
-
-TZS ${Number(p.price || 0).toLocaleString()}
-
-<br>
-
-${escapeHtml(p.place || "")}
-
-</div>
-
-</div>
-
-<br>
-
-<button
-class="primary"
-onclick="editProduct('${p.id}')"
->
-✏️ Hariri
-</button>
-
-<button
-class="danger"
-onclick="deleteProduct('${p.id}')"
->
-🗑️ Futa
-</button>
-
-</div>
-
-`;
-
-}).join("");
-
-
-}catch(error){
-
-console.error(
-"MY PRODUCTS ERROR:",
-error
-);
-
-box.innerHTML =
-`<p class="error">
-Imeshindikana kupakia bidhaa zako.<br>
-${escapeHtml(error.message)}
-</p>`;
-
-}
-
-}
-
-
-/* =====================================================
-EDIT
-===================================================== */
-
-function editProduct(id){
-
-const product =
-ps.find(
-p=>String(p.id) === String(id)
-);
-
-
-if(!product){
-
-alert(
-"Bidhaa haijapatikana."
-);
-
-return;
-
-}
-
-
-editingProductId =
-product.id;
-
-
-document.getElementById("name")
-.value =
-product.name || "";
-
-
-document.getElementById("price")
-.value =
-product.price || "";
-
-
-document.getElementById("category")
-.value =
-product.category || "";
-
-
-document.getElementById("place")
-.value =
-product.place || "";
-
-
-document.getElementById("sellerPhone")
-.value =
-product.phone || "";
-
-
-document.getElementById("desc")
-.value =
-product.description || "";
-
-
-document.getElementById("formTitle")
-.innerText =
-"✏️ Hariri Bidhaa";
-
-
-document.getElementById("saveButton")
-.innerText =
-"💾 Hifadhi Mabadiliko";
-
-
-show("add");
-
-}
-
-
-/* =====================================================
-DELETE
-===================================================== */
-
-async function deleteProduct(id){
-
-if(!currentUser){
-
-alert(
-"Tafadhali ingia kwanza."
-);
-
-return;
-
-}
-
-
-if(!confirm(
-"Una uhakika unataka kufuta bidhaa hii?"
-)){
-
-return;
-
-}
-
-
-try{
-
-
-const {data:deleted,error} =
-await supabaseClient
-.from("Production")
-.delete()
-.eq("id",id)
-.eq("user_id",currentUser.id)
-.select();
-
-
-if(error){
-
-throw error;
-
-}
-
-
-if(
-!deleted ||
-deleted.length === 0
-){
-
-throw new Error(
-"Supabase haikufuta bidhaa. Hakikisha RLS policy ya DELETE inaruhusu user kufuta bidhaa yake."
-);
-
-}
-
-
-alert(
-"🗑️ Bidhaa imefutwa."
-);
-
-
-ps =
-ps.filter(
-p=>String(p.id) !== String(id)
-);
-
-
-render();
-
-showMyProducts();
-
-
-}catch(error){
-
-console.error(
-"DELETE ERROR:",
-error
-);
-
-alert(
-"❌ Bidhaa haijafutwa.\n\n" +
-error.message
-);
-
-}
-
-}
-
-
-/* =====================================================
 REGISTER
 ===================================================== */
 
 async function register(){
 
 const email =
-document.getElementById("registerEmail")
-.value.trim();
+document
+.getElementById("registerEmail")
+.value
+.trim();
+
 
 const password =
-document.getElementById("registerPassword")
+document
+.getElementById("registerPassword")
 .value;
 
 
-if(!email || !password){
+if(!email){
 
 alert(
-"⚠️ Weka email na password."
+"⚠️ Weka email yako."
+);
+
+return;
+
+}
+
+
+if(!password){
+
+alert(
+"⚠️ Weka password."
+);
+
+return;
+
+}
+
+
+if(password.length < 6){
+
+alert(
+"⚠️ Password lazima iwe na angalau herufi 6."
 );
 
 return;
@@ -1597,9 +1734,10 @@ return;
 
 try{
 
-
-const {data,error} =
-await supabaseClient.auth.signUp({
+const result =
+await supabaseClient
+.auth
+.signUp({
 
 email:email,
 
@@ -1608,23 +1746,45 @@ password:password
 });
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
 
-if(data.user){
+if(
+result.data &&
+result.data.session
+){
+
+currentUser =
+result.data.user;
+
 
 alert(
-"✅ Akaunti imefunguliwa. Kama email confirmation imewashwa, angalia email yako."
+"🎉 Akaunti imefunguliwa na umeingia."
+);
+
+updateAccountUI();
+
+show("home");
+
+}else{
+
+alert(
+"✅ Akaunti imefunguliwa.\n\n" +
+"Angalia email yako kama Supabase inahitaji uthibitisho wa email."
 );
 
 }
 
-
 }catch(error){
+
+console.error(
+"REGISTER ERROR:",
+error
+);
 
 alert(
 "❌ Akaunti haijafunguliwa.\n\n" +
@@ -1643,18 +1803,33 @@ LOGIN
 async function login(){
 
 const email =
-document.getElementById("loginEmail")
-.value.trim();
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
 
 const password =
-document.getElementById("loginPassword")
+document
+.getElementById("loginPassword")
 .value;
 
 
-if(!email || !password){
+if(!email){
 
 alert(
-"⚠️ Weka email na password."
+"⚠️ Weka email yako."
+);
+
+return;
+
+}
+
+
+if(!password){
+
+alert(
+"⚠️ Weka password yako."
 );
 
 return;
@@ -1664,9 +1839,10 @@ return;
 
 try{
 
-
-const {data,error} =
-await supabaseClient.auth.signInWithPassword({
+const result =
+await supabaseClient
+.auth
+.signInWithPassword({
 
 email:email,
 
@@ -1675,15 +1851,15 @@ password:password
 });
 
 
-if(error){
+if(result.error){
 
-throw error;
+throw result.error;
 
 }
 
 
 currentUser =
-data.user;
+result.data.user;
 
 
 alert(
@@ -1697,6 +1873,11 @@ show("home");
 
 
 }catch(error){
+
+console.error(
+"LOGIN ERROR:",
+error
+);
 
 alert(
 "❌ Login imeshindikana.\n\n" +
@@ -1714,7 +1895,17 @@ LOGOUT
 
 async function logout(){
 
-await supabaseClient.auth.signOut();
+try{
+
+await supabaseClient
+.auth
+.signOut();
+
+}catch(error){
+
+console.error(error);
+
+}
 
 currentUser = null;
 
@@ -1733,19 +1924,20 @@ async function checkUser(){
 
 try{
 
+const result =
+await supabaseClient
+.auth
+.getUser();
 
-const {data,error} =
-await supabaseClient.auth.getUser();
 
-
-if(error){
+if(result.error){
 
 currentUser = null;
 
 }else{
 
 currentUser =
-data.user || null;
+result.data.user || null;
 
 }
 
@@ -1778,11 +1970,20 @@ function updateAccountUI(){
 const loggedOut =
 document.getElementById("loggedOut");
 
+
 const loggedIn =
 document.getElementById("loggedIn");
 
+
 const userEmail =
 document.getElementById("userEmail");
+
+
+if(!loggedOut || !loggedIn){
+
+return;
+
+}
 
 
 if(currentUser){
@@ -1791,8 +1992,13 @@ loggedOut.classList.add("hidden");
 
 loggedIn.classList.remove("hidden");
 
+
+if(userEmail){
+
 userEmail.innerText =
 "📧 " + currentUser.email;
+
+}
 
 }else{
 
@@ -1809,8 +2015,12 @@ loggedIn.classList.add("hidden");
 AUTH LISTENER
 ===================================================== */
 
-supabaseClient.auth.onAuthStateChange(
-(event,session)=>{
+if(supabaseClient){
+
+supabaseClient
+.auth
+.onAuthStateChange(
+function(event,session){
 
 currentUser =
 session?.user || null;
@@ -1819,6 +2029,336 @@ updateAccountUI();
 
 }
 );
+
+}
+
+
+/* =====================================================
+MY PRODUCTS
+===================================================== */
+
+async function showMyProducts(){
+
+if(!currentUser){
+
+alert(
+"⚠️ Tafadhali ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+
+const box =
+document.getElementById("myProducts");
+
+
+box.innerHTML =
+"<p>⏳ Inapakia bidhaa zako...</p>";
+
+
+try{
+
+const result =
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("user_id",currentUser.id)
+.order(
+"created_at",
+{ascending:false}
+);
+
+
+if(result.error){
+
+throw result.error;
+
+}
+
+
+const products =
+result.data || [];
+
+
+if(products.length === 0){
+
+box.innerHTML =
+"<p>Huna bidhaa ulizoweka bado.</p>";
+
+return;
+
+}
+
+
+box.innerHTML =
+products.map(function(p){
+
+return `
+
+<div class="my-product">
+
+<div class="my-product-row">
+
+${
+p.image_url
+?
+`<img
+src="${escapeHtml(p.image_url)}"
+alt="${escapeHtml(p.name)}">`
+:
+`<div style="font-size:40px">
+📦
+</div>`
+}
+
+<div style="flex:1">
+
+<b>
+${escapeHtml(p.name)}
+</b>
+
+<br>
+
+TZS
+${Number(p.price || 0).toLocaleString()}
+
+<br>
+
+${escapeHtml(p.place || "")}
+
+</div>
+
+</div>
+
+<br>
+
+<button
+type="button"
+class="primary"
+onclick="editProduct('${p.id}')">
+
+✏️ Hariri
+
+</button>
+
+<br><br>
+
+<button
+type="button"
+class="danger"
+onclick="deleteProduct('${p.id}')">
+
+🗑️ Futa
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+
+}catch(error){
+
+console.error(
+"MY PRODUCTS ERROR:",
+error
+);
+
+box.innerHTML =
+`
+<p class="error">
+Imeshindikana kupakia bidhaa zako.
+<br><br>
+${escapeHtml(error.message)}
+</p>
+`;
+
+}
+
+}
+
+
+/* =====================================================
+EDIT PRODUCT
+===================================================== */
+
+function editProduct(id){
+
+const product =
+ps.find(function(p){
+
+return String(p.id) ===
+String(id);
+
+});
+
+
+if(!product){
+
+alert(
+"Bidhaa haijapatikana."
+);
+
+return;
+
+}
+
+
+editingProductId =
+product.id;
+
+
+document
+.getElementById("name")
+.value =
+product.name || "";
+
+
+document
+.getElementById("price")
+.value =
+product.price || "";
+
+
+document
+.getElementById("category")
+.value =
+product.category || "";
+
+
+document
+.getElementById("place")
+.value =
+product.place || "";
+
+
+document
+.getElementById("sellerPhone")
+.value =
+product.phone || "";
+
+
+document
+.getElementById("desc")
+.value =
+product.description || "";
+
+
+document
+.getElementById("formTitle")
+.innerText =
+"✏️ Hariri Bidhaa";
+
+
+document
+.getElementById("saveButton")
+.innerText =
+"💾 Hifadhi Mabadiliko";
+
+
+show("add");
+
+}
+
+
+/* =====================================================
+DELETE PRODUCT
+===================================================== */
+
+async function deleteProduct(id){
+
+if(!currentUser){
+
+alert(
+"Tafadhali ingia kwanza."
+);
+
+return;
+
+}
+
+
+if(
+!confirm(
+"Una uhakika unataka kufuta bidhaa hii?"
+)
+){
+
+return;
+
+}
+
+
+try{
+
+const result =
+await supabaseClient
+.from("Production")
+.delete()
+.eq("id",id)
+.eq("user_id",currentUser.id)
+.select();
+
+
+if(result.error){
+
+throw result.error;
+
+}
+
+
+if(
+!result.data ||
+result.data.length === 0
+){
+
+throw new Error(
+"Supabase haikufuta bidhaa. Hakikisha RLS policy ya DELETE inaruhusu user kufuta bidhaa yake."
+);
+
+}
+
+
+alert(
+"🗑️ Bidhaa imefutwa."
+);
+
+
+ps =
+ps.filter(function(p){
+
+return String(p.id) !==
+String(id);
+
+});
+
+
+render();
+
+showMyProducts();
+
+
+}catch(error){
+
+console.error(
+"DELETE ERROR:",
+error
+);
+
+alert(
+"❌ Bidhaa haijafutwa.\n\n" +
+error.message
+);
+
+}
+
+}
 
 
 /* =====================================================
@@ -1831,5 +2371,8 @@ loadProducts();
 
 checkUser();
 
-</script></body>
+</script>
+
+</body>
+
 </html>
