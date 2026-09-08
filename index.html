@@ -67,6 +67,83 @@ background:white;
 color:#0b7a3b;
 }
 
+/* =========================
+NOTIFICATION BUTTON
+========================= */
+
+.notification-wrap{
+position:relative;
+display:inline-block;
+}
+
+.notification-button{
+background:white;
+color:#0b7a3b;
+position:relative;
+}
+
+.notification-count{
+position:absolute;
+top:-8px;
+right:-8px;
+background:#d62828;
+color:white;
+font-size:11px;
+min-width:20px;
+height:20px;
+padding:2px 5px;
+border-radius:20px;
+display:none;
+align-items:center;
+justify-content:center;
+border:2px solid #0b7a3b;
+}
+
+.notification-panel{
+position:absolute;
+right:0;
+top:48px;
+width:320px;
+max-width:90vw;
+background:white;
+color:#222;
+border-radius:10px;
+box-shadow:0 4px 18px rgba(0,0,0,.2);
+padding:12px;
+display:none;
+z-index:5000;
+}
+
+.notification-panel.show{
+display:block;
+}
+
+.notification-panel h3{
+margin:5px 0 10px;
+color:#0b7a3b;
+}
+
+.notification-item{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+.notification-item:last-child{
+border-bottom:0;
+}
+
+.notification-item.unread{
+background:#eef8f1;
+border-radius:7px;
+}
+
+.notification-time{
+font-size:12px;
+color:#777;
+margin-top:5px;
+}
+
 .container{
 max-width:1100px;
 margin:auto;
@@ -441,6 +518,14 @@ width:100%;
 flex-direction:column;
 }
 
+.notification-panel{
+position:fixed;
+right:10px;
+top:70px;
+width:calc(100vw - 20px);
+max-width:none;
+}
+
 }
 
 </style>
@@ -471,6 +556,51 @@ Nyumbani
 👤 Akaunti
 </button>
 
+<div class="notification-wrap">
+
+<button
+type="button"
+class="notification-button"
+onclick="toggleNotifications()">
+
+🔔 Taarifa
+
+<span
+id="notificationCount"
+class="notification-count">
+0
+</span>
+
+</button>
+
+<div
+id="notificationPanel"
+class="notification-panel">
+
+<h3>🔔 Taarifa</h3>
+
+<div id="notificationList">
+
+<p>
+Hakuna taarifa mpya.
+</p>
+
+</div>
+
+<button
+type="button"
+class="secondary"
+onclick="clearNotifications()"
+style="width:100%;margin-top:8px;">
+
+✓ Soma zote
+
+</button>
+
+</div>
+
+</div>
+
 </nav>
 
 </div>
@@ -496,7 +626,7 @@ PLAM TANZANIA ni jukwaa la biashara mtandaoni kwa Tanzania.
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
-oninput="render()">
+oninput="render">
 
 </div>
 
@@ -948,6 +1078,562 @@ let selectedOrderProduct = null;
 
 
 /* ==============================
+NOTIFICATIONS
+============================== */
+
+let notifications = [];
+
+function notificationStorageKey(){
+
+if(!currentUser){
+
+return null;
+
+}
+
+return "plam_notifications_" +
+currentUser.id;
+
+}
+
+
+function loadSavedNotifications(){
+
+if(!currentUser){
+
+notifications = [];
+
+updateNotificationUI();
+
+return;
+
+}
+
+try{
+
+const key =
+notificationStorageKey();
+
+const saved =
+localStorage.getItem(key);
+
+notifications =
+saved
+?
+JSON.parse(saved)
+:
+[];
+
+if(!Array.isArray(notifications)){
+
+notifications = [];
+
+}
+
+}catch(error){
+
+console.error(
+"NOTIFICATION LOAD ERROR:",
+error
+);
+
+notifications = [];
+
+}
+
+updateNotificationUI();
+
+}
+
+
+function saveNotifications(){
+
+if(!currentUser){
+
+return;
+
+}
+
+try{
+
+localStorage.setItem(
+notificationStorageKey(),
+JSON.stringify(notifications)
+);
+
+}catch(error){
+
+console.error(
+"NOTIFICATION SAVE ERROR:",
+error
+);
+
+}
+
+}
+
+
+function addNotification(
+title,
+message
+){
+
+const notification = {
+
+id:
+Date.now().toString() +
+Math.random().toString(36),
+
+title:
+title,
+
+message:
+message,
+
+created_at:
+new Date().toISOString(),
+
+read:false
+
+};
+
+notifications.unshift(
+notification
+);
+
+if(notifications.length > 30){
+
+notifications =
+notifications.slice(0,30);
+
+}
+
+saveNotifications();
+
+updateNotificationUI();
+
+}
+
+
+function updateNotificationUI(){
+
+const count =
+document.getElementById(
+"notificationCount"
+);
+
+const list =
+document.getElementById(
+"notificationList"
+);
+
+if(!count || !list){
+
+return;
+
+}
+
+const unread =
+notifications.filter(function(n){
+
+return !n.read;
+
+}).length;
+
+
+if(unread > 0){
+
+count.style.display =
+"flex";
+
+count.innerText =
+unread > 99
+?
+"99+"
+:
+unread;
+
+}else{
+
+count.style.display =
+"none";
+
+}
+
+
+if(notifications.length === 0){
+
+list.innerHTML =
+`
+<p>
+Hakuna taarifa mpya.
+</p>
+`;
+
+return;
+
+}
+
+
+list.innerHTML =
+notifications.map(function(n){
+
+return `
+
+<div class="notification-item ${
+n.read ? "" : "unread"
+}">
+
+<b>
+${escapeHtml(n.title)}
+</b>
+
+<br>
+
+${escapeHtml(n.message)}
+
+<div class="notification-time">
+
+${
+n.created_at
+?
+new Date(
+n.created_at
+).toLocaleString("sw-TZ")
+:
+""
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function toggleNotifications(){
+
+const panel =
+document.getElementById(
+"notificationPanel"
+);
+
+if(!panel){
+
+return;
+
+}
+
+panel.classList.toggle("show");
+
+if(panel.classList.contains("show")){
+
+notifications =
+notifications.map(function(n){
+
+return {
+...n,
+read:true
+};
+
+});
+
+saveNotifications();
+
+updateNotificationUI();
+
+}
+
+}
+
+
+function clearNotifications(){
+
+notifications =
+notifications.map(function(n){
+
+return {
+...n,
+read:true
+};
+
+});
+
+saveNotifications();
+
+updateNotificationUI();
+
+}
+
+
+/* ==============================
+REALTIME ORDERS
+============================== */
+
+let orderRealtimeChannel = null;
+
+
+function startOrderRealtime(){
+
+if(orderRealtimeChannel){
+
+try{
+
+supabaseClient
+.removeChannel(
+orderRealtimeChannel
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+orderRealtimeChannel =
+null;
+
+}
+
+if(!currentUser){
+
+return;
+
+}
+
+
+orderRealtimeChannel =
+supabaseClient
+.channel(
+"plam-orders-" +
+currentUser.id
+)
+
+.on(
+"postgres_changes",
+{
+event:"INSERT",
+schema:"public",
+table:"orders"
+},
+function(payload){
+
+handleRealtimeOrderInsert(
+payload.new
+);
+
+}
+)
+
+.on(
+"postgres_changes",
+{
+event:"UPDATE",
+schema:"public",
+table:"orders"
+},
+function(payload){
+
+handleRealtimeOrderUpdate(
+payload.old,
+payload.new
+);
+
+}
+)
+
+.subscribe(function(status){
+
+console.log(
+"ORDER REALTIME:",
+status
+);
+
+});
+
+}
+
+
+function handleRealtimeOrderInsert(order){
+
+if(!currentUser || !order){
+
+return;
+
+}
+
+
+/*
+MUZUAJI:
+Oda mpya yenye seller_id yake.
+*/
+
+if(
+String(order.seller_id) ===
+String(currentUser.id)
+){
+
+addNotification(
+"🛒 Oda mpya",
+"Umepokea oda mpya kutoka kwa " +
+(order.buyer_name || "mteja") +
+"."
+);
+
+showSellerOrders();
+
+}
+
+
+/*
+MNUNUZI:
+Kama ni oda yake mwenyewe,
+tunamjulisha tu ikiwa inahitajika.
+*/
+
+if(
+String(order.buyer_id) ===
+String(currentUser.id)
+){
+
+addNotification(
+"📦 Oda imetumwa",
+"Oda yako imetumwa kwa muuzaji."
+);
+
+showMyOrders();
+
+}
+
+}
+
+
+function handleRealtimeOrderUpdate(
+oldOrder,
+newOrder
+){
+
+if(!currentUser || !newOrder){
+
+return;
+
+}
+
+const oldStatus =
+String(
+oldOrder?.status ||
+"pending"
+).toLowerCase();
+
+const newStatus =
+String(
+newOrder.status ||
+"pending"
+).toLowerCase();
+
+
+if(oldStatus === newStatus){
+
+return;
+
+}
+
+
+/*
+MNUNUZI ANAPATA TAARIFA
+*/
+
+if(
+String(newOrder.buyer_id) ===
+String(currentUser.id)
+){
+
+if(newStatus === "accepted"){
+
+addNotification(
+"🟢 Oda imekubaliwa",
+"Muuzaji amekubali oda yako."
+);
+
+}
+
+else if(newStatus === "rejected"){
+
+addNotification(
+"🔴 Oda imekataliwa",
+"Muuzaji amekataa oda yako."
+);
+
+}
+
+else if(newStatus === "pending"){
+
+addNotification(
+"🟡 Oda imerudishwa Pending",
+"Oda yako imerudishwa kwenye hali ya kusubiri."
+);
+
+}
+
+showMyOrders();
+
+}
+
+
+/*
+MUUZAJI ANAPATA TAARIFA
+*/
+
+if(
+String(newOrder.seller_id) ===
+String(currentUser.id)
+){
+
+if(newStatus === "accepted"){
+
+addNotification(
+"🟢 Oda imekubaliwa",
+"Umefanikiwa kukubali oda ya " +
+(newOrder.buyer_name || "mteja") +
+"."
+);
+
+}
+
+else if(newStatus === "rejected"){
+
+addNotification(
+"🔴 Oda imekataliwa",
+"Oda ya " +
+(newOrder.buyer_name || "mteja") +
+" imekataliwa."
+);
+
+}
+
+else if(newStatus === "pending"){
+
+addNotification(
+"🟡 Oda imerudishwa Pending",
+"Oda ya " +
+(newOrder.buyer_name || "mteja") +
+" imerudishwa Pending."
+);
+
+}
+
+showSellerOrders();
+
+}
+
+}
+
+
+/* ==============================
 SHOW
 ============================== */
 
@@ -955,7 +1641,8 @@ function show(id){
 
 ["home","add","account"].forEach(function(x){
 
-const el = document.getElementById(x);
+const el =
+document.getElementById(x);
 
 if(el){
 
@@ -1000,7 +1687,8 @@ throw result.error;
 
 }
 
-ps = result.data || [];
+ps =
+result.data || [];
 
 render();
 
@@ -1222,12 +1910,6 @@ rel="noopener noreferrer">
 }
 
 
-/*
-MUHIMU:
-Hapa hakuna tena onclick yenye template
-iliyokuwa inaweza kuvuruga script.
-*/
-
 return `
 
 <div class="card">
@@ -1276,11 +1958,6 @@ ${contactHTML}
 
 }).join("");
 
-
-/*
-Weka event kwa kila button ya Oda
-baada ya bidhaa kuchorwa.
-*/
 
 container
 .querySelectorAll("[data-order-id]")
@@ -2035,6 +2712,10 @@ result.data.session
 currentUser =
 result.data.user;
 
+loadSavedNotifications();
+
+startOrderRealtime();
+
 alert(
 "🎉 Akaunti imefunguliwa na umeingia."
 );
@@ -2127,6 +2808,10 @@ throw result.error;
 currentUser =
 result.data.user;
 
+loadSavedNotifications();
+
+startOrderRealtime();
+
 alert(
 "✅ Umeingia kwenye akaunti."
 );
@@ -2160,6 +2845,18 @@ async function logout(){
 
 try{
 
+if(orderRealtimeChannel){
+
+await supabaseClient
+.removeChannel(
+orderRealtimeChannel
+);
+
+orderRealtimeChannel =
+null;
+
+}
+
 await supabaseClient
 .auth
 .signOut();
@@ -2172,6 +2869,11 @@ console.error(error);
 
 currentUser =
 null;
+
+notifications =
+[];
+
+updateNotificationUI();
 
 updateAccountUI();
 
@@ -2206,6 +2908,14 @@ result.data.user || null;
 }
 
 updateAccountUI();
+
+if(currentUser){
+
+loadSavedNotifications();
+
+startOrderRealtime();
+
+}
 
 }catch(error){
 
@@ -2282,6 +2992,20 @@ currentUser =
 session?.user || null;
 
 updateAccountUI();
+
+if(currentUser){
+
+loadSavedNotifications();
+
+startOrderRealtime();
+
+}else{
+
+notifications = [];
+
+updateNotificationUI();
+
+}
 
 }
 );
@@ -3413,4 +4137,4 @@ checkUser();
 
 </body>
 
-</html>
+  </html>
