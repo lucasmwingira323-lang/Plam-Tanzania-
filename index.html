@@ -62,6 +62,11 @@ cursor:pointer;
 font-weight:bold;
 }
 
+button:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
+
 nav button{
 background:white;
 color:#0b7a3b;
@@ -97,6 +102,207 @@ display:none;
 align-items:center;
 justify-content:center;
 border:2px solid #0b7a3b;
+}
+
+.notification-panel{
+position:absolute;
+right:0;
+top:48px;
+width:320px;
+max-width:90vw;
+background:white;
+color:#222;
+border-radius:10px;
+box-shadow:0 4px 18px rgba(0,0,0,.2);
+padding:12px;
+display:none;
+z-index:5000;
+}
+
+.notification-panel.show{
+display:block;
+}
+
+.notification-panel h3{
+margin:5px 0 10px;
+color:#0b7a3b;
+}
+
+.notification-item{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+.notification-item:last-child{
+border-bottom:0;
+}
+
+.notification-item.unread{
+background:#eef8f1;
+border-radius:7px;
+}
+
+.notification-time{
+font-size:12px;
+color:#777;
+margin-top:5px;
+}
+
+/* =========================
+ADMIN
+========================= */
+
+.admin-button{
+background:#ffd166 !important;
+color:#222 !important;
+}
+
+.admin-header{
+background:linear-gradient(135deg,#0b7a3b,#075b2d);
+color:white;
+padding:22px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.admin-header h1{
+margin:0 0 8px;
+}
+
+.admin-header p{
+margin:0;
+opacity:.95;
+}
+
+.admin-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:20px;
+}
+
+.admin-stat{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px #ddd;
+text-align:center;
+}
+
+.admin-stat-number{
+font-size:32px;
+font-weight:bold;
+color:#0b7a3b;
+margin-top:8px;
+}
+
+.admin-section{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px #ddd;
+margin-bottom:20px;
+}
+
+.admin-section h2{
+margin-top:0;
+color:#0b7a3b;
+}
+
+.admin-table-wrap{
+overflow-x:auto;
+}
+
+.admin-table{
+width:100%;
+border-collapse:collapse;
+min-width:650px;
+}
+
+.admin-table th,
+.admin-table td{
+padding:11px;
+border-bottom:1px solid #eee;
+text-align:left;
+vertical-align:top;
+}
+
+.admin-table th{
+background:#eef8f1;
+color:#0b7a3b;
+}
+
+.admin-order{
+border:1px solid #ddd;
+border-left:5px solid #0b7a3b;
+padding:15px;
+border-radius:9px;
+margin-bottom:12px;
+background:#fafafa;
+}
+
+.admin-order h3{
+margin-top:0;
+color:#0b7a3b;
+}
+
+.admin-product{
+border:1px solid #ddd;
+border-radius:9px;
+padding:12px;
+margin-bottom:12px;
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.admin-product img{
+width:85px;
+height:85px;
+object-fit:cover;
+border-radius:8px;
+flex-shrink:0;
+}
+
+.admin-product-info{
+flex:1;
+}
+
+.admin-product-name{
+font-weight:bold;
+font-size:17px;
+color:#0b7a3b;
+}
+
+.admin-refresh{
+background:#0b7a3b;
+color:white;
+width:100%;
+margin-bottom:15px;
+}
+
+.admin-badge{
+display:inline-block;
+padding:6px 9px;
+border-radius:15px;
+font-size:12px;
+font-weight:bold;
+}
+
+.admin-badge-pending{
+background:#fff3cd;
+color:#856404;
+}
+
+.admin-badge-accepted{
+background:#d4edda;
+color:#155724;
+}
+
+.admin-badge-rejected{
+background:#f8d7da;
+color:#721c24;
 }
 
 .notification-panel{
@@ -526,6 +732,15 @@ width:calc(100vw - 20px);
 max-width:none;
 }
 
+.admin-product{
+align-items:flex-start;
+}
+
+.admin-product img{
+width:65px;
+height:65px;
+}
+
 }
 
 </style>
@@ -554,6 +769,17 @@ Nyumbani
 
 <button type="button" onclick="show('account')">
 👤 Akaunti
+</button>
+
+<!-- ADMIN BUTTON -->
+<button
+id="adminNavButton"
+type="button"
+class="admin-button hidden"
+onclick="showAdminDashboard()">
+
+🛠️ Admin
+
 </button>
 
 <div class="notification-wrap">
@@ -610,6 +836,10 @@ style="width:100%;margin-top:8px;">
 
 <main class="container">
 
+<!-- =========================
+HOME
+========================= -->
+
 <section id="home">
 
 <div class="hero">
@@ -626,7 +856,7 @@ PLAM TANZANIA ni jukwaa la biashara mtandaoni kwa Tanzania.
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa au huduma..."
-oninput="render">
+oninput="render()">
 
 </div>
 
@@ -674,6 +904,10 @@ Inapakia bidhaa...
 
 </section>
 
+
+<!-- =========================
+ADD PRODUCT
+========================= -->
 
 <section id="add" class="hidden">
 
@@ -790,6 +1024,10 @@ type="submit">
 
 </section>
 
+
+<!-- =========================
+ACCOUNT
+========================= -->
 
 <section id="account" class="hidden">
 
@@ -954,8 +1192,144 @@ Toka
 
 </section>
 
+
+<!-- =========================
+ADMIN DASHBOARD
+========================= -->
+
+<section id="admin" class="hidden">
+
+<div class="admin-header">
+
+<h1>
+🛠️ Admin Dashboard
+</h1>
+
+<p>
+Karibu kwenye usimamizi wa PLAM TANZANIA.
+</p>
+
+</div>
+
+
+<div class="admin-stats">
+
+<div class="admin-stat">
+
+<div>
+📦 Jumla ya Bidhaa
+</div>
+
+<div
+id="adminProductCount"
+class="admin-stat-number">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="admin-stat">
+
+<div>
+🛒 Jumla ya Oda
+</div>
+
+<div
+id="adminOrderCount"
+class="admin-stat-number">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="admin-stat">
+
+<div>
+👤 Admin
+</div>
+
+<div
+id="adminEmail"
+style="margin-top:10px;font-size:13px;word-break:break-word;">
+
+-
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>
+📊 Muhtasari wa Mfumo
+</h2>
+
+<p id="adminSummary">
+⏳ Inapakia taarifa...
+</p>
+
+<button
+type="button"
+class="admin-refresh"
+onclick="showAdminDashboard()">
+
+🔄 Refresh Dashboard
+
+</button>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>
+📦 Bidhaa Zote
+</h2>
+
+<div id="adminProducts">
+
+<p>
+⏳ Inapakia bidhaa...
+</p>
+
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>
+🛒 Oda Zote
+</h2>
+
+<div id="adminOrders">
+
+<p>
+⏳ Inapakia oda...
+</p>
+
+</div>
+
+</div>
+
+</section>
+
 </main>
 
+
+<!-- =========================
+ORDER MODAL
+========================= -->
 
 <div id="orderModal" class="modal hidden">
 
@@ -1075,6 +1449,8 @@ let editingProductId = null;
 let selectedCategory = "";
 
 let selectedOrderProduct = null;
+
+let isAdmin = false;
 
 
 /* ==============================
@@ -1468,7 +1844,7 @@ return;
 
 
 /*
-MUZUAJI:
+MUUZAJI:
 Oda mpya yenye seller_id yake.
 */
 
@@ -1492,7 +1868,7 @@ showSellerOrders();
 /*
 MNUNUZI:
 Kama ni oda yake mwenyewe,
-tunamjulisha tu ikiwa inahitajika.
+tunamjulisha.
 */
 
 if(
@@ -1506,6 +1882,18 @@ addNotification(
 );
 
 showMyOrders();
+
+}
+
+
+/*
+ADMIN:
+Refresh dashboard kama admin yupo.
+*/
+
+if(isAdmin){
+
+refreshAdminDashboard();
 
 }
 
@@ -1537,6 +1925,12 @@ newOrder.status ||
 
 
 if(oldStatus === newStatus){
+
+if(isAdmin){
+
+refreshAdminDashboard();
+
+}
 
 return;
 
@@ -1630,6 +2024,18 @@ showSellerOrders();
 
 }
 
+
+/*
+ADMIN:
+Refresh dashboard baada ya status kubadilika.
+*/
+
+if(isAdmin){
+
+refreshAdminDashboard();
+
+}
+
 }
 
 
@@ -1639,7 +2045,28 @@ SHOW
 
 function show(id){
 
-["home","add","account"].forEach(function(x){
+/*
+ADMIN section inaweza kuonekana
+tu kama mtumiaji ni admin.
+*/
+
+if(id === "admin" && !isAdmin){
+
+alert(
+"⚠️ Huna ruhusa ya kufungua Admin Dashboard."
+);
+
+return;
+
+}
+
+
+[
+"home",
+"add",
+"account",
+"admin"
+].forEach(function(x){
 
 const el =
 document.getElementById(x);
@@ -1655,9 +2082,16 @@ x !== id
 
 });
 
+
 if(id === "account"){
 
 updateAccountUI();
+
+}
+
+if(id === "admin"){
+
+showAdminDashboard();
 
 }
 
@@ -2611,6 +3045,12 @@ null;
 
 await loadProducts();
 
+if(isAdmin){
+
+await refreshAdminDashboard();
+
+}
+
 show("home");
 
 }catch(error){
@@ -2716,6 +3156,8 @@ loadSavedNotifications();
 
 startOrderRealtime();
 
+await checkAdmin();
+
 alert(
 "🎉 Akaunti imefunguliwa na umeingia."
 );
@@ -2812,6 +3254,8 @@ loadSavedNotifications();
 
 startOrderRealtime();
 
+await checkAdmin();
+
 alert(
 "✅ Umeingia kwenye akaunti."
 );
@@ -2870,6 +3314,11 @@ console.error(error);
 currentUser =
 null;
 
+isAdmin =
+false;
+
+updateAdminUI();
+
 notifications =
 [];
 
@@ -2909,6 +3358,8 @@ result.data.user || null;
 
 updateAccountUI();
 
+await checkAdmin();
+
 if(currentUser){
 
 loadSavedNotifications();
@@ -2927,7 +3378,113 @@ error
 currentUser =
 null;
 
+isAdmin =
+false;
+
+updateAdminUI();
+
 updateAccountUI();
+
+}
+
+}
+
+
+/* ==============================
+CHECK ADMIN
+============================== */
+
+async function checkAdmin(){
+
+isAdmin =
+false;
+
+updateAdminUI();
+
+if(!currentUser){
+
+return;
+
+}
+
+try{
+
+const result =
+await supabaseClient
+.from("admins")
+.select("id")
+.eq(
+"user_id",
+currentUser.id
+)
+.limit(1);
+
+if(result.error){
+
+console.error(
+"CHECK ADMIN ERROR:",
+result.error
+);
+
+isAdmin =
+false;
+
+}else{
+
+isAdmin =
+Array.isArray(result.data) &&
+result.data.length > 0;
+
+}
+
+}catch(error){
+
+console.error(
+"CHECK ADMIN ERROR:",
+error
+);
+
+isAdmin =
+false;
+
+}
+
+updateAdminUI();
+
+}
+
+
+/* ==============================
+UPDATE ADMIN UI
+============================== */
+
+function updateAdminUI(){
+
+const adminButton =
+document.getElementById(
+"adminNavButton"
+);
+
+if(!adminButton){
+
+return;
+
+}
+
+if(
+currentUser &&
+isAdmin
+){
+
+adminButton.classList.remove(
+"hidden"
+);
+
+}else{
+
+adminButton.classList.add(
+"hidden"
+);
 
 }
 
@@ -2986,12 +3543,10 @@ AUTH LISTENER
 supabaseClient
 .auth
 .onAuthStateChange(
-function(event,session){
+async function(event,session){
 
 currentUser =
 session?.user || null;
-
-updateAccountUI();
 
 if(currentUser){
 
@@ -2999,13 +3554,22 @@ loadSavedNotifications();
 
 startOrderRealtime();
 
+await checkAdmin();
+
 }else{
 
 notifications = [];
 
 updateNotificationUI();
 
+isAdmin =
+false;
+
+updateAdminUI();
+
 }
+
+updateAccountUI();
 
 }
 );
@@ -3298,6 +3862,12 @@ String(id);
 render();
 
 showMyProducts();
+
+if(isAdmin){
+
+await refreshAdminDashboard();
+
+}
 
 }catch(error){
 
@@ -4106,6 +4676,12 @@ alert(
 
 await showSellerOrders();
 
+if(isAdmin){
+
+await refreshAdminDashboard();
+
+}
+
 }catch(error){
 
 console.error(
@@ -4117,6 +4693,534 @@ alert(
 "❌ Imeshindikana kubadilisha oda.\n\n" +
 error.message
 );
+
+}
+
+}
+
+
+/* ==============================
+ADMIN DASHBOARD
+============================== */
+
+async function showAdminDashboard(){
+
+if(!currentUser){
+
+alert(
+"⚠️ Tafadhali ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+if(!isAdmin){
+
+alert(
+"⚠️ Huna ruhusa ya kufungua Admin Dashboard."
+);
+
+return;
+
+}
+
+show("admin");
+
+await refreshAdminDashboard();
+
+}
+
+
+/* ==============================
+REFRESH ADMIN DASHBOARD
+============================== */
+
+async function refreshAdminDashboard(){
+
+if(!currentUser || !isAdmin){
+
+return;
+
+}
+
+const productCount =
+document.getElementById(
+"adminProductCount"
+);
+
+const orderCount =
+document.getElementById(
+"adminOrderCount"
+);
+
+const adminEmail =
+document.getElementById(
+"adminEmail"
+);
+
+const summary =
+document.getElementById(
+"adminSummary"
+);
+
+const productsBox =
+document.getElementById(
+"adminProducts"
+);
+
+const ordersBox =
+document.getElementById(
+"adminOrders"
+);
+
+
+if(adminEmail){
+
+adminEmail.innerText =
+currentUser.email || "-";
+
+}
+
+if(productCount){
+
+productCount.innerText =
+"⏳";
+
+}
+
+if(orderCount){
+
+orderCount.innerText =
+"⏳";
+
+}
+
+if(summary){
+
+summary.innerText =
+"⏳ Inapakia taarifa za mfumo...";
+
+}
+
+
+/* =========================
+LOAD ALL PRODUCTS
+========================= */
+
+let allProducts = [];
+
+try{
+
+const productResult =
+await supabaseClient
+.from("Production")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(productResult.error){
+
+throw productResult.error;
+
+}
+
+allProducts =
+productResult.data || [];
+
+if(productCount){
+
+productCount.innerText =
+allProducts.length;
+
+}
+
+}catch(error){
+
+console.error(
+"ADMIN PRODUCTS ERROR:",
+error
+);
+
+if(productCount){
+
+productCount.innerText =
+"❌";
+
+}
+
+if(productsBox){
+
+productsBox.innerHTML =
+`
+<p class="error">
+Imeshindikana kupakia bidhaa za Admin.
+<br><br>
+${escapeHtml(error.message)}
+</p>
+`;
+
+}
+
+}
+
+
+/* =========================
+LOAD ALL ORDERS
+========================= */
+
+let allOrders = [];
+
+try{
+
+const orderResult =
+await supabaseClient
+.from("orders")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(orderResult.error){
+
+throw orderResult.error;
+
+}
+
+allOrders =
+orderResult.data || [];
+
+if(orderCount){
+
+orderCount.innerText =
+allOrders.length;
+
+}
+
+}catch(error){
+
+console.error(
+"ADMIN ORDERS ERROR:",
+error
+);
+
+if(orderCount){
+
+orderCount.innerText =
+"❌";
+
+}
+
+if(ordersBox){
+
+ordersBox.innerHTML =
+`
+<p class="error">
+Imeshindikana kupakia oda za Admin.
+<br><br>
+${escapeHtml(error.message)}
+</p>
+`;
+
+}
+
+}
+
+
+/* =========================
+SUMMARY
+========================= */
+
+if(summary){
+
+summary.innerHTML =
+`
+<b>📦 Bidhaa:</b>
+${allProducts.length}
+
+&nbsp;&nbsp; | &nbsp;&nbsp;
+
+<b>🛒 Oda:</b>
+${allOrders.length}
+
+<br><br>
+
+<b>🟡 Pending:</b>
+${
+allOrders.filter(function(o){
+return String(o.status || "pending").toLowerCase()
+=== "pending";
+}).length
+}
+
+&nbsp;&nbsp;
+
+<b>🟢 Accepted:</b>
+${
+allOrders.filter(function(o){
+return String(o.status || "").toLowerCase()
+=== "accepted";
+}).length
+}
+
+&nbsp;&nbsp;
+
+<b>🔴 Rejected:</b>
+${
+allOrders.filter(function(o){
+return String(o.status || "").toLowerCase()
+=== "rejected";
+}).length
+}
+`;
+
+}
+
+
+/* =========================
+RENDER ADMIN PRODUCTS
+========================= */
+
+if(productsBox){
+
+if(allProducts.length === 0){
+
+productsBox.innerHTML =
+`
+<p>
+Hakuna bidhaa kwenye PLAM bado.
+</p>
+`;
+
+}else{
+
+productsBox.innerHTML =
+allProducts.map(function(product){
+
+return `
+
+<div class="admin-product">
+
+${
+product.image_url
+?
+`
+<img
+src="${escapeHtml(product.image_url)}"
+alt="${escapeHtml(product.name || "Bidhaa")}">
+`
+:
+`
+<div
+style="
+width:85px;
+height:85px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+background:#eee;
+border-radius:8px;
+">
+
+📦
+
+</div>
+`
+}
+
+<div class="admin-product-info">
+
+<div class="admin-product-name">
+
+${escapeHtml(product.name || "Bila jina")}
+
+</div>
+
+<div>
+
+💰 TZS
+${Number(product.price || 0).toLocaleString()}
+
+</div>
+
+<div>
+
+📂
+${escapeHtml(product.category || "")}
+
+</div>
+
+<div>
+
+📍
+${escapeHtml(product.place || "")}
+
+</div>
+
+<div style="font-size:12px;color:#777;margin-top:5px;">
+
+🆔 Product ID:
+${escapeHtml(String(product.id))}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+}
+
+
+/* =========================
+RENDER ADMIN ORDERS
+========================= */
+
+if(ordersBox){
+
+if(allOrders.length === 0){
+
+ordersBox.innerHTML =
+`
+<p>
+Hakuna oda kwenye PLAM bado.
+</p>
+`;
+
+}else{
+
+ordersBox.innerHTML =
+allOrders.map(function(order){
+
+const product =
+allProducts.find(function(product){
+
+return String(product.id) ===
+String(order.product_id);
+
+});
+
+const productName =
+product
+?
+product.name
+:
+"Bidhaa #" + order.product_id;
+
+const status =
+String(
+order.status || "pending"
+).toLowerCase();
+
+let statusHTML = "";
+
+if(status === "accepted"){
+
+statusHTML =
+`
+<span class="admin-badge admin-badge-accepted">
+🟢 Imekubaliwa
+</span>
+`;
+
+}else if(status === "rejected"){
+
+statusHTML =
+`
+<span class="admin-badge admin-badge-rejected">
+🔴 Imekataliwa
+</span>
+`;
+
+}else{
+
+statusHTML =
+`
+<span class="admin-badge admin-badge-pending">
+🟡 Inasubiri
+</span>
+`;
+
+}
+
+return `
+
+<div class="admin-order">
+
+<h3>
+🛒 ${escapeHtml(productName)}
+</h3>
+
+<p>
+${statusHTML}
+</p>
+
+<p>
+<b>👤 Mnunuzi:</b>
+${escapeHtml(order.buyer_name || "")}
+</p>
+
+<p>
+<b>📞 Simu ya Mnunuzi:</b>
+${escapeHtml(order.buyer_phone || "")}
+</p>
+
+<p>
+<b>🔢 Idadi:</b>
+${Number(order.quantity || 1)}
+</p>
+
+<p>
+<b>💬 Ujumbe:</b>
+${escapeHtml(order.message || "Hakuna ujumbe")}
+</p>
+
+<p>
+<b>🆔 Order ID:</b>
+${escapeHtml(String(order.id))}
+</p>
+
+<p>
+<b>👤 Buyer ID:</b>
+${escapeHtml(String(order.buyer_id || ""))}
+</p>
+
+<p>
+<b>🏪 Seller ID:</b>
+${escapeHtml(String(order.seller_id || ""))}
+</p>
+
+<p>
+<b>📅 Tarehe:</b>
+${
+order.created_at
+?
+new Date(
+order.created_at
+).toLocaleString("sw-TZ")
+:
+""
+}
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
 
 }
 
