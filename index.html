@@ -204,6 +204,11 @@ background:#777;
 color:white
 }
 
+.purple{
+background:#6a1b9a;
+color:white
+}
+
 .hidden{
 display:none!important
 }
@@ -222,7 +227,10 @@ box-shadow:0 2px 8px rgba(0,0,0,.08)
 .form-box textarea,
 .form-box select,
 .account-box input,
-.modal-box input{
+.account-box textarea,
+.account-box select,
+.modal-box input,
+.modal-box textarea{
 width:100%;
 padding:12px;
 margin:7px 0 12px;
@@ -231,7 +239,8 @@ border-radius:8px;
 font-size:15px
 }
 
-.form-box textarea{
+.form-box textarea,
+.account-box textarea{
 min-height:100px;
 resize:vertical
 }
@@ -448,6 +457,44 @@ background:#f5f5f5;
 border-radius:10px
 }
 
+.profile-box{
+background:#f0f8f3;
+border:1px solid #d5eadc;
+border-radius:12px;
+padding:15px;
+margin:15px 0
+}
+
+.profile-logo{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+background:#eee;
+display:block;
+margin-bottom:10px
+}
+
+.profile-mini{
+background:#f7f9fa;
+border:1px solid #e0e0e0;
+padding:12px;
+border-radius:10px;
+margin-top:12px
+}
+
+.profile-mini strong{
+color:#0b7a3b
+}
+
+.location-box{
+background:#f0f8f3;
+border:1px solid #d5eadc;
+padding:12px;
+border-radius:10px;
+margin:10px 0 15px
+}
+
 .loading{
 text-align:center;
 padding:25px
@@ -470,14 +517,6 @@ color:#155724;
 background:#d4edda;
 padding:10px;
 border-radius:8px
-}
-
-.location-box{
-background:#f0f8f3;
-border:1px solid #d5eadc;
-padding:12px;
-border-radius:10px;
-margin:10px 0 15px
 }
 
 footer{
@@ -525,6 +564,11 @@ width:100%
 
 .preview-images{
 grid-template-columns:1fr
+}
+
+.profile-logo{
+margin-left:auto;
+margin-right:auto
 }
 
 }
@@ -607,7 +651,6 @@ Futa taarifa
 
 </header>
 
-
 <main class="container">
 
 <section id="home">
@@ -621,7 +664,6 @@ Jenga biashara yako. Fikia wateja zaidi.
 <p>
 Karibu PLAM TANZANIA — soko la biashara mtandaoni kwa Tanzania nzima.
 </p>
-
 
 <div id="homeAuthButtons" class="auth-buttons">
 
@@ -641,7 +683,6 @@ onclick="showLoginForm()">
 
 </div>
 
-
 <div
 id="homeRegisterForm"
 class="auth-form hidden">
@@ -655,9 +696,7 @@ id="registerMessage"
 class="auth-message">
 </div>
 
-<label>
-Email
-</label>
+<label>Email</label>
 
 <input
 id="homeRegisterEmail"
@@ -665,9 +704,7 @@ type="email"
 placeholder="Weka email yako"
 autocomplete="email">
 
-<label>
-Password
-</label>
+<label>Password</label>
 
 <input
 id="homeRegisterPassword"
@@ -695,7 +732,6 @@ Baada ya kufungua akaunti unaweza kuingia na kuanza kutumia PLAM.
 
 </div>
 
-
 <div
 id="homeLoginForm"
 class="auth-form hidden">
@@ -709,9 +745,7 @@ id="loginMessage"
 class="auth-message">
 </div>
 
-<label>
-Email
-</label>
+<label>Email</label>
 
 <input
 id="homeLoginEmail"
@@ -719,9 +753,7 @@ type="email"
 placeholder="Weka email yako"
 autocomplete="email">
 
-<label>
-Password
-</label>
+<label>Password</label>
 
 <input
 id="homeLoginPassword"
@@ -745,13 +777,11 @@ onclick="hideAuthForms()">
 
 </div>
 
-
 <input
 id="search"
 class="search"
 placeholder="🔍 Tafuta bidhaa, huduma, Mkoa au Wilaya..."
 oninput="render()">
-
 
 <div class="categories">
 
@@ -787,7 +817,6 @@ Zote
 
 </div>
 
-
 <div
 id="products"
 class="grid">
@@ -800,7 +829,6 @@ class="grid">
 
 </section>
 
-
 <section id="add" class="hidden">
 
 <div class="form-box">
@@ -809,13 +837,11 @@ class="grid">
 ➕ Weka Bidhaa
 </h2>
 
-
 <form id="productForm">
 
 <input
 type="hidden"
 id="editProductId">
-
 
 <label>
 Jina la bidhaa/huduma
@@ -826,7 +852,6 @@ id="productName"
 required
 placeholder="Mfano: Samsung A05">
 
-
 <label>
 Bei
 </label>
@@ -836,7 +861,6 @@ id="productPrice"
 type="number"
 required
 placeholder="Mfano: 250000">
-
 
 <label>
 Aina
@@ -850,32 +874,14 @@ required>
 Chagua category
 </option>
 
-<option>
-Simu
-</option>
-
-<option>
-Elektroniki
-</option>
-
-<option>
-Mavazi
-</option>
-
-<option>
-Chakula
-</option>
-
-<option>
-Huduma
-</option>
-
-<option>
-Nyingine
-</option>
+<option>Simu</option>
+<option>Elektroniki</option>
+<option>Mavazi</option>
+<option>Chakula</option>
+<option>Huduma</option>
+<option>Nyingine</option>
 
 </select>
-
 
 <div class="location-box">
 
@@ -887,10 +893,7 @@ Nyingine
 Chagua Mkoa na Wilaya ili wanunuzi waweze kukupata kwa urahisi.
 </p>
 
-
-<label>
-Mkoa
-</label>
+<label>Mkoa</label>
 
 <select
 id="productRegion"
@@ -903,10 +906,7 @@ Chagua Mkoa
 
 </select>
 
-
-<label>
-Wilaya
-</label>
+<label>Wilaya</label>
 
 <select
 id="productDistrict"
@@ -917,7 +917,6 @@ Chagua Wilaya
 </option>
 
 </select>
-
 
 <label>
 Eneo / Mahali
@@ -930,16 +929,13 @@ placeholder="Mfano: Mabatini, Mbeya Mjini">
 
 </div>
 
-
 <label>
 Maelezo
 </label>
 
 <textarea
 id="productDescription"
-placeholder="Andika maelezo ya bidhaa...">
-</textarea>
-
+placeholder="Andika maelezo ya bidhaa..."></textarea>
 
 <label>
 Picha ya kwanza
@@ -951,7 +947,6 @@ type="file"
 accept="image/*"
 onchange="previewImage(this,1)">
 
-
 <label>
 Picha ya pili — hiari
 </label>
@@ -962,14 +957,12 @@ type="file"
 accept="image/*"
 onchange="previewImage(this,2)">
 
-
 <div
 id="imagePreview"
 class="preview-images">
 </div>
 
 <br>
-
 
 <button
 id="saveProductButton"
@@ -991,11 +984,9 @@ onclick="resetProductForm()">
 
 </section>
 
-
 <section id="account" class="hidden">
 
 <div class="account-box">
-
 
 <div id="accountLoggedOut">
 
@@ -1020,7 +1011,6 @@ class="blue"
 onclick="showLoginFormAccount()">
 🔐 Ingia
 </button>
-
 
 <div
 id="accountRegisterForm"
@@ -1048,7 +1038,6 @@ onclick="register()">
 </button>
 
 </div>
-
 
 <div
 id="accountLoginForm"
@@ -1079,7 +1068,6 @@ onclick="login()">
 
 </div>
 
-
 <div id="accountLoggedIn" class="hidden">
 
 <h2>
@@ -1100,6 +1088,129 @@ onclick="logout()">
 
 <hr>
 
+<!-- SELLER PROFILE -->
+
+<h3>
+🏪 Wasifu wa Biashara
+</h3>
+
+<div id="sellerProfileDisplay">
+<p>⏳ Inapakia wasifu...</p>
+</div>
+
+<button
+type="button"
+class="green"
+onclick="showSellerProfileForm()">
+🏪 Tengeneza / Hariri Wasifu
+</button>
+
+<div
+id="sellerProfileForm"
+class="auth-form hidden">
+
+<h3>
+🏪 Taarifa za Biashara
+</h3>
+
+<div
+id="profileMessage"
+class="auth-message">
+</div>
+
+<label>
+Jina la biashara
+</label>
+
+<input
+id="profileBusinessName"
+type="text"
+placeholder="Mfano: Lucas Shop">
+
+<label>
+Jina la mwenye biashara
+</label>
+
+<input
+id="profileOwnerName"
+type="text"
+placeholder="Mfano: Lucas">
+
+<label>
+Namba ya simu
+</label>
+
+<input
+id="profilePhone"
+type="tel"
+placeholder="Mfano: 0712345678">
+
+<label>
+Mkoa
+</label>
+
+<select
+id="profileRegion"
+onchange="updateProfileDistricts()">
+
+<option value="">
+Chagua Mkoa
+</option>
+
+</select>
+
+<label>
+Wilaya
+</label>
+
+<select id="profileDistrict">
+
+<option value="">
+Chagua Wilaya
+</option>
+
+</select>
+
+<label>
+Maelezo ya biashara
+</label>
+
+<textarea
+id="profileDescription"
+placeholder="Eleza biashara yako kwa ufupi..."></textarea>
+
+<label>
+Logo / Picha ya biashara
+</label>
+
+<input
+id="profileLogo"
+type="file"
+accept="image/*"
+onchange="previewProfileLogo(this)">
+
+<div id="profileLogoPreview"></div>
+
+<br>
+
+<button
+type="button"
+id="saveProfileButton"
+class="green"
+onclick="saveSellerProfile()">
+💾 Hifadhi Wasifu
+</button>
+
+<button
+type="button"
+class="gray"
+onclick="hideSellerProfileForm()">
+✖ Funga
+</button>
+
+</div>
+
+<hr>
 
 <h3>
 📦 Bidhaa Zangu
@@ -1113,7 +1224,6 @@ onclick="logout()">
 
 <hr>
 
-
 <h3>
 🛍️ Oda Zangu
 </h3>
@@ -1125,7 +1235,6 @@ onclick="logout()">
 </div>
 
 <hr>
-
 
 <h3>
 🛍️ Oda za Wateja
@@ -1143,7 +1252,6 @@ onclick="logout()">
 
 </section>
 
-
 <section id="admin" class="hidden">
 
 <div class="admin-header">
@@ -1158,7 +1266,6 @@ Karibu kwenye usimamizi wa PLAM TANZANIA.
 
 </div>
 
-
 <div class="admin-stats">
 
 <div class="admin-stat">
@@ -1170,7 +1277,6 @@ class="admin-stat-number">
 </div>
 </div>
 
-
 <div class="admin-stat">
 <div>🛒 Jumla ya Oda</div>
 <div
@@ -1180,7 +1286,6 @@ class="admin-stat-number">
 </div>
 </div>
 
-
 <div class="admin-stat">
 <div>👥 Watumiaji</div>
 <div
@@ -1189,7 +1294,6 @@ class="admin-stat-number">
 0
 </div>
 </div>
-
 
 <div class="admin-stat">
 
@@ -1206,7 +1310,6 @@ style="margin-top:10px;font-size:13px;word-break:break-word;">
 </div>
 
 </div>
-
 
 <div class="admin-section">
 
@@ -1227,7 +1330,6 @@ onclick="showAdminDashboard()">
 
 </div>
 
-
 <div class="admin-section">
 
 <h2>
@@ -1242,6 +1344,19 @@ onclick="showAdminDashboard()">
 
 </div>
 
+<div class="admin-section">
+
+<h2>
+🏪 Wasifu wa Wauzaji
+</h2>
+
+<div id="adminProfiles">
+<p>
+⏳ Inapakia wasifu...
+</p>
+</div>
+
+</div>
 
 <div class="admin-section">
 
@@ -1256,7 +1371,6 @@ onclick="showAdminDashboard()">
 </div>
 
 </div>
-
 
 <div class="admin-section">
 
@@ -1275,7 +1389,6 @@ onclick="showAdminDashboard()">
 </section>
 
 </main>
-
 
 <div
 id="orderModal"
@@ -1313,7 +1426,6 @@ Jina lako
 id="buyerName"
 placeholder="Jina lako">
 
-
 <label>
 Namba ya simu
 </label>
@@ -1322,7 +1434,6 @@ Namba ya simu
 id="buyerPhone"
 type="tel"
 placeholder="Mfano: 0712345678">
-
 
 <label>
 Idadi
@@ -1334,14 +1445,12 @@ type="number"
 min="1"
 value="1">
 
-
 <label>
 Ujumbe
 </label>
 
 <textarea
 id="orderMessage"
-style="width:100%;min-height:90px;padding:12px;border:1px solid #ccc;border-radius:8px"
 placeholder="Ujumbe kwa muuzaji...">
 </textarea>
 
@@ -1365,7 +1474,6 @@ onclick="closeOrderModal()">
 
 </div>
 
-
 <footer>
 
 🇹🇿 PLAM TANZANIA
@@ -1377,11 +1485,13 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 </footer>
 
-
 <script>
 
 "use strict";
 
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -1389,26 +1499,20 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-
 const supabaseClient =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
 let ps=[];
-
 let currentUser=null;
-
 let isAdmin=false;
-
 let currentCategory="all";
-
 let selectedImage1=null;
-
 let selectedImage2=null;
-
+let selectedProfileLogo=null;
+let sellerProfile=null;
 
 /* =====================================================
    TANZANIA REGIONS
@@ -1417,292 +1521,164 @@ let selectedImage2=null;
 const TANZANIA_REGIONS = {
 
 "Dodoma":[
-"Bahi",
-"Chamwino",
-"Chemba",
-"Dodoma Mjini",
-"Kondoa",
-"Kongwa",
-"Mpwapwa"
+"Bahi","Chamwino","Chemba","Dodoma Mjini",
+"Kondoa","Kongwa","Mpwapwa"
 ],
 
 "Arusha":[
-"Arusha Mjini",
-"Arumeru",
-"Karatu",
-"Longido",
-"Meru",
-"Ngorongoro"
+"Arusha Mjini","Arumeru","Karatu","Longido",
+"Meru","Ngorongoro"
 ],
 
 "Kilimanjaro":[
-"Moshi Mjini",
-"Moshi Vijijini",
-"Rombo",
-"Same",
-"Siha",
-" Mwanga",
-" Hai"
+"Moshi Mjini","Moshi Vijijini","Rombo","Same",
+"Siha","Mwanga","Hai"
 ],
 
 "Tanga":[
-"Handeni",
-"Handeni Mjini",
-"Kilindi",
-"Korogwe",
-"Korogwe Mjini",
-"Lushoto",
-"Mkinga",
-"Muheza",
-"Pangani",
-"Tanga Mjini"
+"Handeni","Handeni Mjini","Kilindi","Korogwe",
+"Korogwe Mjini","Lushoto","Mkinga","Muheza",
+"Pangani","Tanga Mjini"
 ],
 
 "Morogoro":[
-"Kilombero",
-"Malinyi",
-"Morogoro Mjini",
-"Morogoro Vijijini",
-"Mvomero",
-"Ulanga",
-"Gairo",
-"Kilosa"
+"Kilombero","Malinyi","Morogoro Mjini",
+"Morogoro Vijijini","Mvomero","Ulanga",
+"Gairo","Kilosa"
 ],
 
 "Pwani":[
-"Bagamoyo",
-"Chalinze",
-"Fiji",
-"Kibaha Mjini",
-"Kibaha Vijijini",
-"Kibiti",
-"Kinondoni",
-"Rufiji",
-"Mkuranga",
-"Mafia"
+"Bagamoyo","Chalinze","Kibaha Mjini",
+"Kibaha Vijijini","Kibiti","Rufiji",
+"Mkuranga","Mafia"
 ],
 
 "Dar es Salaam":[
-"Ilala",
-"Kinondoni",
-"Temeke",
-"Ubungo",
-"Kawe"
+"Ilala","Kinondoni","Temeke","Ubungo","Kawe"
 ],
 
 "Lindi":[
-"Lindi Mjini",
-"Lindi Vijijini",
-"Kilwa",
-"Liwale",
-"Ruangwa",
-"Nachingwea"
+"Lindi Mjini","Lindi Vijijini","Kilwa",
+"Liwale","Ruangwa","Nachingwea"
 ],
 
 "Mtwara":[
-"Mtwara Mjini",
-"Mtwara Vijijini",
-"Masasi",
-"Masasi Mjini",
-"Nanyumbu",
-"Newala",
-"Tandahimba"
+"Mtwara Mjini","Mtwara Vijijini","Masasi",
+"Masasi Mjini","Nanyumbu","Newala","Tandahimba"
 ],
 
 "Ruvuma":[
-"Mbinga",
-"Mbinga Mjini",
-"Madaba",
-"Makete",
-"Nyasa",
-"Songea Mjini",
-"Songea Vijijini",
-"Tunduru"
+"Mbinga","Mbinga Mjini","Madaba","Nyasa",
+"Songea Mjini","Songea Vijijini","Tunduru"
 ],
 
 "Iringa":[
-"Iringa Mjini",
-"Iringa Vijijini",
-"Kilolo",
-"Mufindi"
+"Iringa Mjini","Iringa Vijijini","Kilolo","Mufindi"
 ],
 
 "Mbeya":[
-"Chunya",
-"Kyela",
-"Mbarali",
-"Mbeya Mjini",
-"Mbeya Vijijini",
-"Rungwe"
+"Chunya","Kyela","Mbarali","Mbeya Mjini",
+"Mbeya Vijijini","Rungwe"
 ],
 
 "Singida":[
-"Ikungi",
-"Iramba",
-"Manyoni",
-"Singida Mjini",
-"Singida Vijijini",
-"Singida"
+"Ikungi","Iramba","Manyoni","Singida Mjini",
+"Singida Vijijini","Singida"
 ],
 
 "Tabora":[
-"Nzega",
-"Nzega Mjini",
-"Sikonge",
-"Tabora Mjini",
-"Urambo",
-"Uyui",
-"Kaliua"
+"Nzega","Nzega Mjini","Sikonge","Tabora Mjini",
+"Urambo","Uyui","Kaliua"
 ],
 
 "Rukwa":[
-"Kalambo",
-"Mlele",
-"Nkasi",
-"Sumbawanga Mjini",
+"Kalambo","Nkasi","Sumbawanga Mjini",
 "Sumbawanga Vijijini"
 ],
 
 "Kigoma":[
-"Buhigwe",
-"Kakonko",
-"Kasulu",
-"Kasulu Mjini",
-"Kibondo",
-"Kigoma Mjini",
-"Kigoma Vijijini",
-"Uvinza"
+"Buhigwe","Kakonko","Kasulu","Kasulu Mjini",
+"Kibondo","Kigoma Mjini","Kigoma Vijijini","Uvinza"
 ],
 
 "Shinyanga":[
-"Kahama",
-"Kahama Mjini",
-" Kishapu",
-"Shinyanga Mjini",
-"Shinyanga Vijijini"
+"Kahama","Kahama Mjini","Kishapu",
+"Shinyanga Mjini","Shinyanga Vijijini"
 ],
 
 "Kagera":[
-"Biharamulo",
-"Bukoba Mjini",
-"Bukoba Vijijini",
-"Karagwe",
-"Kyerwa",
-"Missenyi",
-"Muleba",
-"Ngara"
+"Biharamulo","Bukoba Mjini","Bukoba Vijijini",
+"Karagwe","Kyerwa","Missenyi","Muleba","Ngara"
 ],
 
 "Mwanza":[
-"Ilemela",
-"Kwimba",
-"Magu",
-"Misungwi",
-"Mwanza Mjini",
-"Nyamagana",
-"Sengerema",
-"Ukerewe"
+"Ilemela","Kwimba","Magu","Misungwi",
+"Mwanza Mjini","Nyamagana","Sengerema","Ukerewe"
 ],
 
 "Mara":[
-"Bunda",
-"Musoma Mjini",
-"Musoma Vijijini",
-"Rorya",
-"Serengeti",
-"Tarime",
-"Tarime Mjini"
+"Bunda","Musoma Mjini","Musoma Vijijini",
+"Rorya","Serengeti","Tarime","Tarime Mjini"
 ],
 
 "Manyara":[
-"Babati",
-"Babati Mjini",
-"Hanang",
-"Kiteto",
-"Mbulu",
-"Simanjiro"
+"Babati","Babati Mjini","Hanang",
+"Kiteto","Mbulu","Simanjiro"
 ],
 
 "Njombe":[
-"Ludewa",
-"Makambako",
-"Makete",
-"Njombe Mjini",
-"Njombe Vijijini",
-"Wanging'ombe"
+"Ludewa","Makambako","Makete","Njombe Mjini",
+"Njombe Vijijini","Wanging'ombe"
 ],
 
 "Katavi":[
-"Mlele",
-"Mpanda Mjini",
-"Mpimbwe",
-"Nsimbo",
-"Tanganyika"
+"Mlele","Mpanda Mjini","Mpimbwe",
+"Nsimbo","Tanganyika"
 ],
 
 "Simiyu":[
-"Bariadi",
-"Bariadi Mjini",
-"Busega",
-"Maswa",
-"Meatu",
-"Itilima"
+"Bariadi","Bariadi Mjini","Busega",
+"Maswa","Meatu","Itilima"
 ],
 
 "Geita":[
-"Bukombe",
-"Chato",
-"Geita",
-"Geita Mjini",
-"Mbogwe",
-"Nyamaga"
+"Bukombe","Chato","Geita","Geita Mjini",
+"Mbogwe","Nyamaga"
 ],
 
 "Songwe":[
-"Ileje",
-"Mbozi",
-"Momba",
-"Tunduma",
-"Songwe"
+"Ileje","Mbozi","Momba","Tunduma","Songwe"
 ],
 
 "Kaskazini Unguja":[
-"Kaskazini A",
-"Kaskazini B"
+"Kaskazini A","Kaskazini B"
 ],
 
 "Kusini Unguja":[
-"Kati",
-"Kusini"
+"Kati","Kusini"
 ],
 
 "Mjini Magharibi":[
-"Magharibi A",
-"Magharibi B",
-"Mjini"
+"Magharibi A","Magharibi B","Mjini"
 ],
 
 "Kaskazini Pemba":[
-"Micheweni",
-"Wete"
+"Micheweni","Wete"
 ],
 
 "Kusini Pemba":[
-"Chake Chake",
-"Mkoani"
+"Chake Chake","Mkoani"
 ]
 
 };
 
-
 /* =====================================================
-   GENERAL FUNCTIONS
+   GENERAL
 ===================================================== */
 
 function $(id){
 return document.getElementById(id);
 }
-
 
 function escapeHtml(value){
 
@@ -1715,7 +1691,6 @@ return String(value??"")
 
 }
 
-
 function formatPrice(value){
 
 const n=Number(value||0);
@@ -1725,7 +1700,6 @@ return new Intl.NumberFormat("sw-TZ")
 
 }
 
-
 function cleanPhone(phone){
 
 return String(phone||"")
@@ -1733,18 +1707,15 @@ return String(phone||"")
 
 }
 
-
 /* =====================================================
    REGIONS
 ===================================================== */
 
-function loadRegions(){
+function fillRegionSelect(id,current=""){
 
-const select=$("productRegion");
+const select=$(id);
 
 if(!select)return;
-
-const current=select.value;
 
 select.innerHTML=
 '<option value="">Chagua Mkoa</option>';
@@ -1754,7 +1725,6 @@ Object.keys(TANZANIA_REGIONS).forEach(region=>{
 const option=document.createElement("option");
 
 option.value=region;
-
 option.textContent=region;
 
 select.appendChild(option);
@@ -1762,20 +1732,31 @@ select.appendChild(option);
 });
 
 if(current){
-
 select.value=current;
+}
 
 }
+
+function loadRegions(){
+
+fillRegionSelect(
+"productRegion",
+$("productRegion")?.value||""
+);
+
+fillRegionSelect(
+"profileRegion",
+$("profileRegion")?.value||""
+);
 
 updateDistricts();
+updateProfileDistricts();
 
 }
-
 
 function updateDistricts(){
 
 const region=$("productRegion");
-
 const district=$("productDistrict");
 
 if(!region||!district)return;
@@ -1787,15 +1768,12 @@ district.innerHTML=
 
 if(!selectedRegion)return;
 
-const districts=
-TANZANIA_REGIONS[selectedRegion]||[];
-
-districts.forEach(item=>{
+(TANZANIA_REGIONS[selectedRegion]||[])
+.forEach(item=>{
 
 const option=document.createElement("option");
 
 option.value=item.trim();
-
 option.textContent=item.trim();
 
 district.appendChild(option);
@@ -1804,9 +1782,42 @@ district.appendChild(option);
 
 }
 
+function updateProfileDistricts(){
+
+const region=$("profileRegion");
+const district=$("profileDistrict");
+
+if(!region||!district)return;
+
+const selectedRegion=region.value;
+
+const oldValue=district.value;
+
+district.innerHTML=
+'<option value="">Chagua Wilaya</option>';
+
+if(!selectedRegion)return;
+
+(TANZANIA_REGIONS[selectedRegion]||[])
+.forEach(item=>{
+
+const option=document.createElement("option");
+
+option.value=item.trim();
+option.textContent=item.trim();
+
+district.appendChild(option);
+
+});
+
+if(oldValue){
+district.value=oldValue;
+}
+
+}
 
 /* =====================================================
-   SHOW SECTIONS
+   SHOW
 ===================================================== */
 
 function show(id){
@@ -1833,30 +1844,24 @@ section!==id
 
 });
 
-
 if(id==="account"){
 
 updateAccountUI();
 
 if(currentUser){
 
+loadSellerProfile();
 showMyProducts();
-
 showMyOrders();
-
 showSellerOrders();
 
 }
 
 }
 
-
 if(id==="admin"){
-
 refreshAdminDashboard();
-
 }
-
 
 window.scrollTo({
 top:0,
@@ -1864,7 +1869,6 @@ behavior:"smooth"
 });
 
 }
-
 
 /* =====================================================
    AUTH FORMS
@@ -1880,7 +1884,6 @@ $("homeLoginForm")
 
 }
 
-
 function showLoginForm(){
 
 $("homeLoginForm")
@@ -1890,7 +1893,6 @@ $("homeRegisterForm")
 .classList.add("hidden");
 
 }
-
 
 function hideAuthForms(){
 
@@ -1902,7 +1904,6 @@ $("homeLoginForm")
 
 }
 
-
 function showRegisterFormAccount(){
 
 $("accountRegisterForm")
@@ -1912,7 +1913,6 @@ $("accountLoginForm")
 .classList.add("hidden");
 
 }
-
 
 function showLoginFormAccount(){
 
@@ -1924,12 +1924,7 @@ $("accountRegisterForm")
 
 }
 
-
-function setMessage(
-id,
-message,
-success=false
-){
+function setMessage(id,message,success=false){
 
 const el=$(id);
 
@@ -1944,7 +1939,6 @@ el.className=
 el.textContent=message;
 
 }
-
 
 /* =====================================================
    REGISTER
@@ -1969,19 +1963,15 @@ return;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient.auth.signUp({
+const {data,error}=
+await supabaseClient.auth.signUp({
 email,
 password
 });
 
 if(error)throw error;
-
 
 if(data.user){
 
@@ -2016,7 +2006,6 @@ setMessage(
 
 }
 
-
 async function register(){
 
 const email=
@@ -2033,19 +2022,15 @@ return;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient.auth.signUp({
+const {data,error}=
+await supabaseClient.auth.signUp({
 email,
 password
 });
 
 if(error)throw error;
-
 
 if(data.user){
 
@@ -2061,14 +2046,11 @@ $("registerPassword").value="";
 
 console.error(error);
 
-alert(
-"❌ "+error.message
-);
+alert("❌ "+error.message);
 
 }
 
 }
-
 
 /* =====================================================
    LOGIN
@@ -2093,13 +2075,10 @@ return;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient.auth.signInWithPassword({
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
 email,
 password
 });
@@ -2119,6 +2098,8 @@ $("homeLoginPassword").value="";
 hideAuthForms();
 
 await checkAdmin();
+
+await loadSellerProfile();
 
 updateAccountUI();
 
@@ -2140,7 +2121,6 @@ setMessage(
 
 }
 
-
 async function login(){
 
 const email=
@@ -2157,13 +2137,10 @@ return;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient.auth.signInWithPassword({
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
 email,
 password
 });
@@ -2175,6 +2152,7 @@ currentUser=data.user;
 $("loginPassword").value="";
 
 await checkAdmin();
+await loadSellerProfile();
 
 updateAccountUI();
 
@@ -2184,14 +2162,11 @@ show("account");
 
 console.error(error);
 
-alert(
-"❌ "+error.message
-);
+alert("❌ "+error.message);
 
 }
 
 }
-
 
 /* =====================================================
    LOGOUT
@@ -2204,11 +2179,10 @@ try{
 await supabaseClient.auth.signOut();
 
 currentUser=null;
-
 isAdmin=false;
+sellerProfile=null;
 
 updateAccountUI();
-
 updateAdminUI();
 
 show("home");
@@ -2229,24 +2203,20 @@ alert(
 
 }
 
-
 /* =====================================================
-   ACCOUNT UI
+   ACCOUNT
 ===================================================== */
 
 function updateAccountUI(){
 
 const loggedOut=$("accountLoggedOut");
-
 const loggedIn=$("accountLoggedIn");
 
 if(!loggedOut||!loggedIn)return;
 
-
 if(!currentUser){
 
 loggedOut.classList.remove("hidden");
-
 loggedIn.classList.add("hidden");
 
 $("currentEmail").textContent="";
@@ -2254,7 +2224,6 @@ $("currentEmail").textContent="";
 }else{
 
 loggedOut.classList.add("hidden");
-
 loggedIn.classList.remove("hidden");
 
 $("currentEmail").textContent=
@@ -2263,7 +2232,6 @@ currentUser.email||"";
 }
 
 }
-
 
 function updateAdminUI(){
 
@@ -2278,7 +2246,6 @@ nav.classList.toggle(
 
 }
 
-
 /* =====================================================
    CHECK USER
 ===================================================== */
@@ -2289,22 +2256,23 @@ try{
 
 const {
 data:{session}
-}=await supabaseClient.auth.getSession();
+}=
+await supabaseClient.auth.getSession();
 
 currentUser=
 session?.user||null;
 
 await checkAdmin();
 
-updateAccountUI();
-
-updateAdminUI();
-
 if(currentUser){
 
+await loadSellerProfile();
 renderNotifications();
 
 }
+
+updateAccountUI();
+updateAdminUI();
 
 }catch(error){
 
@@ -2316,7 +2284,6 @@ error
 }
 
 }
-
 
 /* =====================================================
    CHECK ADMIN
@@ -2334,25 +2301,18 @@ return false;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient
+const {data,error}=
+await supabaseClient
 .from("admins")
 .select("user_id")
 .eq("user_id",currentUser.id)
 .maybeSingle();
 
-
 if(error){
 
-console.error(
-"ADMIN CHECK:",
-error
-);
+console.error("ADMIN CHECK:",error);
 
 isAdmin=false;
 
@@ -2376,6 +2336,430 @@ return isAdmin;
 
 }
 
+/* =====================================================
+   SELLER PROFILE
+===================================================== */
+
+async function loadSellerProfile(){
+
+if(!currentUser)return null;
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.select("*")
+.eq("user_id",currentUser.id)
+.maybeSingle();
+
+if(error)throw error;
+
+sellerProfile=data||null;
+
+renderSellerProfile();
+
+return sellerProfile;
+
+}catch(error){
+
+console.error(
+"LOAD SELLER PROFILE:",
+error
+);
+
+sellerProfile=null;
+
+renderSellerProfile();
+
+return null;
+
+}
+
+}
+
+function renderSellerProfile(){
+
+const box=$("sellerProfileDisplay");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML=
+"<p>Ingia kwanza.</p>";
+
+return;
+
+}
+
+if(!sellerProfile){
+
+box.innerHTML=`
+
+<div class="profile-box">
+
+<h3>🏪 Wasifu wa Biashara</h3>
+
+<p>
+Bado hujatengeneza wasifu wa biashara.
+</p>
+
+<p class="small">
+Tengeneza wasifu ili wanunuzi wajue biashara yako na waweze kukuamini zaidi.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+let logo="";
+
+if(sellerProfile.logo_url){
+
+logo=`
+
+<img
+class="profile-logo"
+src="${escapeHtml(sellerProfile.logo_url)}"
+alt="Logo ya biashara">
+
+`;
+
+}
+
+box.innerHTML=`
+
+<div class="profile-box">
+
+${logo}
+
+<h3>
+🏪 ${escapeHtml(
+sellerProfile.business_name||"Biashara yangu"
+)}
+</h3>
+
+<p>
+<b>👤 Mwenye biashara:</b>
+${escapeHtml(sellerProfile.owner_name||"-")}
+</p>
+
+<p>
+<b>📞 Simu:</b>
+${escapeHtml(sellerProfile.phone||"-")}
+</p>
+
+<p>
+<b>📍 Mkoa:</b>
+${escapeHtml(sellerProfile.region||"-")}
+</p>
+
+<p>
+<b>🏘️ Wilaya:</b>
+${escapeHtml(sellerProfile.district||"-")}
+</p>
+
+<p>
+<b>📝 Kuhusu biashara:</b><br>
+${escapeHtml(
+sellerProfile.description||
+"Hakuna maelezo bado."
+)}
+
+</p>
+
+</div>
+
+`;
+
+}
+
+function showSellerProfileForm(){
+
+if(!currentUser){
+
+alert(
+"Ingia kwanza ili utengeneze wasifu wa biashara."
+);
+
+show("account");
+
+return;
+
+}
+
+$("sellerProfileForm")
+.classList.remove("hidden");
+
+if(sellerProfile){
+
+$("profileBusinessName").value=
+sellerProfile.business_name||"";
+
+$("profileOwnerName").value=
+sellerProfile.owner_name||"";
+
+$("profilePhone").value=
+sellerProfile.phone||"";
+
+$("profileRegion").value=
+sellerProfile.region||"";
+
+updateProfileDistricts();
+
+$("profileDistrict").value=
+sellerProfile.district||"";
+
+$("profileDescription").value=
+sellerProfile.description||"";
+
+$("profileLogoPreview").innerHTML=
+sellerProfile.logo_url
+?
+`
+<img
+class="profile-logo"
+src="${escapeHtml(sellerProfile.logo_url)}"
+alt="Logo ya sasa">
+<p class="small">Logo ya sasa</p>
+`
+:
+"";
+
+}else{
+
+$("profileBusinessName").value="";
+$("profileOwnerName").value="";
+$("profilePhone").value="";
+$("profileRegion").value="";
+$("profileDistrict").innerHTML=
+'<option value="">Chagua Wilaya</option>';
+$("profileDescription").value="";
+$("profileLogoPreview").innerHTML="";
+
+}
+
+}
+
+function hideSellerProfileForm(){
+
+$("sellerProfileForm")
+.classList.add("hidden");
+
+}
+
+function previewProfileLogo(input){
+
+const file=
+input?.files?.[0];
+
+if(!file)return;
+
+selectedProfileLogo=file;
+
+const url=
+URL.createObjectURL(file);
+
+$("profileLogoPreview").innerHTML=`
+
+<img
+class="profile-logo"
+src="${url}"
+alt="Logo mpya">
+
+<p class="small">
+Logo mpya
+</p>
+
+`;
+
+}
+
+async function saveSellerProfile(){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+
+return;
+
+}
+
+const businessName=
+$("profileBusinessName").value.trim();
+
+const ownerName=
+$("profileOwnerName").value.trim();
+
+const phone=
+$("profilePhone").value.trim();
+
+const region=
+$("profileRegion").value;
+
+const district=
+$("profileDistrict").value;
+
+const description=
+$("profileDescription").value.trim();
+
+if(
+!businessName||
+!ownerName||
+!phone||
+!region||
+!district
+){
+
+setMessage(
+"profileMessage",
+"Jaza taarifa zote muhimu za biashara."
+);
+
+return;
+
+}
+
+const button=$("saveProfileButton");
+
+button.disabled=true;
+button.textContent="⏳ Inahifadhi...";
+
+try{
+
+let logoUrl=
+sellerProfile?.logo_url||null;
+
+if(selectedProfileLogo){
+
+logoUrl=
+await uploadProfileLogo(
+selectedProfileLogo,
+currentUser.id
+);
+
+}
+
+const payload={
+
+user_id:currentUser.id,
+
+business_name:businessName,
+
+owner_name:ownerName,
+
+phone:phone,
+
+region:region,
+
+district:district,
+
+description:description,
+
+logo_url:logoUrl
+
+};
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.upsert(
+payload,
+{
+onConflict:"user_id"
+}
+)
+.select()
+.single();
+
+if(error)throw error;
+
+sellerProfile=data;
+
+setMessage(
+"profileMessage",
+"✅ Wasifu wa biashara umehifadhiwa!",
+true
+);
+
+selectedProfileLogo=null;
+
+renderSellerProfile();
+
+hideSellerProfileForm();
+
+}catch(error){
+
+console.error(
+"SAVE SELLER PROFILE:",
+error
+);
+
+setMessage(
+"profileMessage",
+"❌ Wasifu haujahifadhiwa: "+
+error.message
+);
+
+}finally{
+
+button.disabled=false;
+button.textContent="💾 Hifadhi Wasifu";
+
+}
+
+}
+
+async function uploadProfileLogo(
+file,
+userId
+){
+
+if(!file)return null;
+
+const blob=
+await compressImage(file);
+
+const filename=
+userId+
+"/profile_"+
+Date.now()+
+"_"+
+
+Math.random()
+.toString(36)
+.substring(2)+
+".jpg";
+
+const {error}=
+await supabaseClient
+.storage
+.from("product-images")
+.upload(
+filename,
+blob,
+{
+contentType:"image/jpeg",
+upsert:false
+}
+);
+
+if(error)throw error;
+
+const {data}=
+supabaseClient
+.storage
+.from("product-images")
+.getPublicUrl(filename);
+
+return data.publicUrl;
+
+}
 
 /* =====================================================
    LOAD PRODUCTS
@@ -2387,13 +2771,10 @@ const container=$("products");
 
 if(!container)return;
 
-
 try{
 
-const {
-data,
-error
-}=await supabaseClient
+const {data,error}=
+await supabaseClient
 .from("Production")
 .select("*")
 .order(
@@ -2425,7 +2806,6 @@ escapeHtml(error.message)+
 
 }
 
-
 /* =====================================================
    RENDER PRODUCTS
 ===================================================== */
@@ -2436,12 +2816,10 @@ const container=$("products");
 
 if(!container)return;
 
-
 const search=
 ($("search")?.value||"")
 .toLowerCase()
 .trim();
-
 
 const filtered=
 ps.filter(product=>{
@@ -2451,7 +2829,6 @@ currentCategory==="all"||
 String(product.category||"")
 .toLowerCase()===
 currentCategory.toLowerCase();
-
 
 const text=[
 product.name,
@@ -2464,16 +2841,13 @@ product.district
 .join(" ")
 .toLowerCase();
 
-
 const matchesSearch=
 !search||
 text.includes(search);
 
-
 return matchesCategory&&matchesSearch;
 
 });
-
 
 if(!filtered.length){
 
@@ -2484,22 +2858,18 @@ return;
 
 }
 
-
 container.innerHTML=
 filtered.map(product=>{
 
-const image1=
-product.image_url;
-
-const image2=
-product.image_url_2;
+const image1=product.image_url;
+const image2=product.image_url_2;
 
 let images="";
-
 
 if(image1){
 
 images+=`
+
 <div class="product-image-wrap">
 
 <img
@@ -2508,14 +2878,15 @@ alt="${escapeHtml(product.name)}"
 onclick="openImage(this.src)">
 
 </div>
+
 `;
 
 }
 
-
 if(image2){
 
 images+=`
+
 <div class="product-image-wrap">
 
 <img
@@ -2524,10 +2895,10 @@ alt="${escapeHtml(product.name)}"
 onclick="openImage(this.src)">
 
 </div>
+
 `;
 
 }
-
 
 if(!images){
 
@@ -2536,12 +2907,17 @@ images=
 
 }
 
-
 const isOwner=
 currentUser&&
 product.user_id===
 currentUser.id;
 
+const profile=
+product.user_id===currentUser?.id
+?
+sellerProfile
+:
+null;
 
 return `
 
@@ -2583,12 +2959,41 @@ ${escapeHtml(product.place)}
 ${escapeHtml(product.description||"")}
 </p>
 
+${
+profile
+?
+`
+<div class="profile-mini">
+
+<strong>🏪 ${escapeHtml(
+profile.business_name||"Biashara"
+)}</strong>
+
+<p>
+👤 ${escapeHtml(
+profile.owner_name||"-"
+)}
+</p>
+
+<p>
+📞 ${escapeHtml(
+profile.phone||product.phone||"-"
+)}
+</p>
+
+</div>
+`
+:
+""
+}
+
 <div class="card-actions">
 
 ${
 product.phone
 ?
 `
+
 <button
 type="button"
 class="green"
@@ -2602,28 +3007,34 @@ class="blue"
 onclick="whatsappSeller('${escapeHtml(product.phone)}','${escapeHtml(product.name)}')">
 💬 WhatsApp
 </button>
+
 `
-:""
+:
+""
 }
 
 ${
 currentUser&&!isOwner
 ?
 `
+
 <button
 type="button"
 class="orange"
 onclick="openOrderModal('${product.id}')">
 🛒 Agiza
 </button>
+
 `
-:""
+:
+""
 }
 
 ${
 isOwner
 ?
 `
+
 <button
 type="button"
 class="blue"
@@ -2637,8 +3048,10 @@ class="red"
 onclick="deleteProduct('${product.id}')">
 🗑️ Futa
 </button>
+
 `
-:""
+:
+""
 }
 
 </div>
@@ -2651,7 +3064,6 @@ onclick="deleteProduct('${product.id}')">
 
 }
 
-
 function filterCategory(category){
 
 currentCategory=category;
@@ -2659,7 +3071,6 @@ currentCategory=category;
 render();
 
 }
-
 
 /* =====================================================
    IMAGE
@@ -2675,6 +3086,7 @@ window.open("","_blank");
 if(win){
 
 win.document.write(`
+
 <!doctype html>
 
 <html>
@@ -2711,6 +3123,7 @@ object-fit:contain
 </body>
 
 </html>
+
 `);
 
 win.document.close();
@@ -2718,7 +3131,6 @@ win.document.close();
 }
 
 }
-
 
 function previewImage(input,number){
 
@@ -2741,7 +3153,6 @@ renderImagePreview();
 
 }
 
-
 function renderImagePreview(){
 
 const box=$("imagePreview");
@@ -2749,7 +3160,6 @@ const box=$("imagePreview");
 if(!box)return;
 
 box.innerHTML="";
-
 
 [selectedImage1,selectedImage2]
 .forEach((file,index)=>{
@@ -2779,7 +3189,6 @@ Picha ${index+1}
 
 }
 
-
 /* =====================================================
    COMPRESS IMAGE
 ===================================================== */
@@ -2797,10 +3206,8 @@ return;
 
 }
 
-
 const reader=
 new FileReader();
-
 
 reader.onload=
 event=>{
@@ -2808,15 +3215,12 @@ event=>{
 const img=
 new Image();
 
-
 img.onload=()=>{
 
 const maxWidth=1400;
 
 let width=img.width;
-
 let height=img.height;
-
 
 if(width>maxWidth){
 
@@ -2829,7 +3233,6 @@ width=maxWidth;
 
 }
 
-
 const canvas=
 document.createElement("canvas");
 
@@ -2839,10 +3242,8 @@ Math.round(width);
 canvas.height=
 Math.round(height);
 
-
 const ctx=
 canvas.getContext("2d");
-
 
 ctx.drawImage(
 img,
@@ -2851,7 +3252,6 @@ img,
 canvas.width,
 canvas.height
 );
-
 
 canvas.toBlob(
 blob=>{
@@ -2877,7 +3277,6 @@ resolve(blob);
 
 };
 
-
 img.onerror=()=>
 reject(
 new Error(
@@ -2889,7 +3288,6 @@ img.src=
 event.target.result;
 
 };
-
 
 reader.onerror=()=>
 reject(
@@ -2904,9 +3302,8 @@ reader.readAsDataURL(file);
 
 }
 
-
 /* =====================================================
-   UPLOAD IMAGE
+   UPLOAD PRODUCT IMAGE
 ===================================================== */
 
 async function uploadProductImage(
@@ -2916,10 +3313,8 @@ userId
 
 if(!file)return null;
 
-
 const blob=
 await compressImage(file);
-
 
 const filename=
 userId+
@@ -2932,10 +3327,7 @@ Math.random()
 .substring(2)+
 ".jpg";
 
-
-const {
-error
-}=
+const {error}=
 await supabaseClient
 .storage
 .from("product-images")
@@ -2948,25 +3340,17 @@ upsert:false
 }
 );
 
-
 if(error)throw error;
 
-
-const {
-data
-}=
+const {data}=
 supabaseClient
 .storage
 .from("product-images")
-.getPublicUrl(
-filename
-);
-
+.getPublicUrl(filename);
 
 return data.publicUrl;
 
 }
-
 
 /* =====================================================
    SAVE PRODUCT
@@ -2976,7 +3360,6 @@ async function saveProduct(event){
 
 if(event)
 event.preventDefault();
-
 
 if(!currentUser){
 
@@ -2989,7 +3372,6 @@ show("account");
 return;
 
 }
-
 
 const name=
 $("productName").value.trim();
@@ -3015,7 +3397,6 @@ $("productDescription").value.trim();
 const editId=
 $("editProductId").value;
 
-
 if(
 !name||
 !price||
@@ -3033,22 +3414,26 @@ return;
 
 }
 
-
-const button=
-$("saveProductButton");
+const button=$("saveProductButton");
 
 button.disabled=true;
-
-button.textContent=
-"⏳ Inahifadhi...";
-
+button.textContent="⏳ Inahifadhi...";
 
 try{
 
+/*
+   Kama muuzaji ana profile,
+   tumia namba yake ya biashara.
+*/
+
+if(!sellerProfile){
+
+await loadSellerProfile();
+
+}
+
 let imageUrl=null;
-
 let imageUrl2=null;
-
 
 if(selectedImage1){
 
@@ -3060,7 +3445,6 @@ currentUser.id
 
 }
 
-
 if(selectedImage2){
 
 imageUrl2=
@@ -3070,7 +3454,6 @@ currentUser.id
 );
 
 }
-
 
 const payload={
 
@@ -3088,34 +3471,30 @@ place:place,
 
 description:description,
 
-phone:currentUser.phone||null,
+phone:
+sellerProfile?.phone||
+currentUser.phone||
+null,
 
 user_id:currentUser.id
 
 };
 
-
 if(imageUrl){
 
-payload.image_url=
-imageUrl;
+payload.image_url=imageUrl;
 
 }
-
 
 if(imageUrl2){
 
-payload.image_url_2=
-imageUrl2;
+payload.image_url_2=imageUrl2;
 
 }
 
-
 if(editId){
 
-const {
-error
-}=
+const {error}=
 await supabaseClient
 .from("Production")
 .update(payload)
@@ -3130,9 +3509,7 @@ alert(
 
 }else{
 
-const {
-error
-}=
+const {error}=
 await supabaseClient
 .from("Production")
 .insert(payload);
@@ -3145,13 +3522,11 @@ alert(
 
 }
 
-
 resetProductForm();
 
 await loadProducts();
 
 show("home");
-
 
 }catch(error){
 
@@ -3165,18 +3540,14 @@ alert(
 error.message
 );
 
-
 }finally{
 
 button.disabled=false;
-
-button.textContent=
-"💾 Hifadhi Bidhaa";
+button.textContent="💾 Hifadhi Bidhaa";
 
 }
 
 }
-
 
 /* =====================================================
    RESET PRODUCT
@@ -3184,12 +3555,10 @@ button.textContent=
 
 function resetProductForm(){
 
-const form=
-$("productForm");
+const form=$("productForm");
 
 if(form)
 form.reset();
-
 
 $("editProductId").value="";
 
@@ -3199,9 +3568,7 @@ $("productFormTitle").textContent=
 $("saveProductButton").textContent=
 "💾 Hifadhi Bidhaa";
 
-
 selectedImage1=null;
-
 selectedImage2=null;
 
 $("imagePreview").innerHTML="";
@@ -3210,39 +3577,29 @@ updateDistricts();
 
 }
 
-
 /* =====================================================
    MY PRODUCTS
 ===================================================== */
 
 async function showMyProducts(){
 
-const box=
-$("myProducts");
+const box=$("myProducts");
 
 if(!box)return;
 
-
 if(!currentUser){
 
-box.innerHTML=
-"<p>Ingia kwanza.</p>";
+box.innerHTML="<p>Ingia kwanza.</p>";
 
 return;
 
 }
 
-
-box.innerHTML=
-"<p>⏳ Inapakia...</p>";
-
+box.innerHTML="<p>⏳ Inapakia...</p>";
 
 try{
 
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("Production")
 .select("*")
@@ -3252,9 +3609,7 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(error)throw error;
-
 
 if(!data?.length){
 
@@ -3264,7 +3619,6 @@ box.innerHTML=
 return;
 
 }
-
 
 box.innerHTML=
 data.map(product=>`
@@ -3318,7 +3672,6 @@ onclick="deleteProduct('${product.id}')">
 
 `).join("");
 
-
 }catch(error){
 
 console.error(error);
@@ -3329,7 +3682,6 @@ box.innerHTML=
 }
 
 }
-
 
 /* =====================================================
    EDIT PRODUCT
@@ -3345,12 +3697,10 @@ return;
 
 }
 
-
 const product=
 ps.find(
 p=>String(p.id)===String(id)
 );
-
 
 if(!product){
 
@@ -3361,7 +3711,6 @@ alert(
 return;
 
 }
-
 
 if(
 product.user_id!==
@@ -3376,7 +3725,6 @@ return;
 
 }
 
-
 $("editProductId").value=
 product.id;
 
@@ -3389,7 +3737,6 @@ product.price||"";
 $("productCategory").value=
 product.category||"";
 
-
 $("productRegion").value=
 product.region||"";
 
@@ -3398,20 +3745,16 @@ updateDistricts();
 $("productDistrict").value=
 product.district||"";
 
-
 $("productPlace").value=
 product.place||"";
 
 $("productDescription").value=
 product.description||"";
 
-
 selectedImage1=null;
-
 selectedImage2=null;
 
 $("imagePreview").innerHTML="";
-
 
 if(product.image_url){
 
@@ -3433,7 +3776,6 @@ Picha ya sasa
 
 }
 
-
 if(product.image_url_2){
 
 $("imagePreview").innerHTML+=`
@@ -3454,18 +3796,15 @@ Picha ya pili
 
 }
 
-
 $("productFormTitle").textContent=
 "✏️ Hariri Bidhaa";
-
 
 show("add");
 
 }
 
-
 /* =====================================================
-   DELETE PRODUCT
+   DELETE
 ===================================================== */
 
 async function deleteProduct(id){
@@ -3478,37 +3817,29 @@ return;
 
 }
 
-
 if(
 !confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
 )
 )return;
 
-
 try{
 
-const {
-error
-}=
+const {error}=
 await supabaseClient
 .from("Production")
 .delete()
 .eq("id",id)
 .eq("user_id",currentUser.id);
 
-
 if(error)throw error;
-
 
 alert(
 "✅ Bidhaa imefutwa."
 );
 
 await loadProducts();
-
 await showMyProducts();
-
 
 }catch(error){
 
@@ -3523,54 +3854,40 @@ error.message
 
 }
 
-
 /* =====================================================
    CALL / WHATSAPP
 ===================================================== */
 
 function callSeller(phone){
 
-const clean=
-cleanPhone(phone);
+const clean=cleanPhone(phone);
 
 if(!clean){
 
-alert(
-"Namba ya simu haipo."
-);
+alert("Namba ya simu haipo.");
 
 return;
 
 }
 
-window.location.href=
-"tel:"+clean;
+window.location.href="tel:"+clean;
 
 }
 
+function whatsappSeller(phone,name){
 
-function whatsappSeller(
-phone,
-name
-){
-
-const clean=
-cleanPhone(phone);
+const clean=cleanPhone(phone);
 
 if(!clean){
 
-alert(
-"Namba ya simu haipo."
-);
+alert("Namba ya simu haipo.");
 
 return;
 
 }
-
 
 let number=
 clean.replace(/\+/g,"");
-
 
 if(number.startsWith("0")){
 
@@ -3580,11 +3897,9 @@ number.substring(1);
 
 }
 
-
 const message=
 "Habari, nimeiona bidhaa yako kwenye PLAM TANZANIA: "+
 name;
-
 
 window.open(
 "https://wa.me/"+
@@ -3596,9 +3911,8 @@ encodeURIComponent(message),
 
 }
 
-
 /* =====================================================
-   ORDER MODAL
+   ORDER
 ===================================================== */
 
 function openOrderModal(productId){
@@ -3615,13 +3929,11 @@ return;
 
 }
 
-
 const product=
 ps.find(
 p=>String(p.id)===
 String(productId)
 );
-
 
 if(!product){
 
@@ -3632,7 +3944,6 @@ alert(
 return;
 
 }
-
 
 if(
 product.user_id===
@@ -3647,13 +3958,11 @@ return;
 
 }
 
-
 $("orderProductId").value=
 product.id;
 
 $("orderSellerId").value=
 product.user_id;
-
 
 $("orderProductInfo").innerHTML=`
 
@@ -3684,25 +3993,32 @@ ${escapeHtml(product.district||"-")}
 ${escapeHtml(product.place)}
 </p>
 
+${
+product.phone
+?
+`
+<p>
+📞 Muuzaji:
+${escapeHtml(product.phone)}
+</p>
+`
+:
+""
+}
+
 </div>
 
 `;
 
-
 $("buyerName").value="";
-
 $("buyerPhone").value="";
-
 $("orderQuantity").value="1";
-
 $("orderMessage").value="";
-
 
 $("orderModal")
 .classList.remove("hidden");
 
 }
-
 
 function closeOrderModal(){
 
@@ -3710,7 +4026,6 @@ $("orderModal")
 .classList.add("hidden");
 
 }
-
 
 /* =====================================================
    SUBMIT ORDER
@@ -3725,7 +4040,6 @@ alert("Ingia kwanza.");
 return;
 
 }
-
 
 const buyerName=
 $("buyerName").value.trim();
@@ -3747,11 +4061,7 @@ $("orderQuantity").value||1
 const message=
 $("orderMessage").value.trim();
 
-
-if(
-!buyerName||
-!buyerPhone
-){
+if(!buyerName||!buyerPhone){
 
 alert(
 "Jaza jina na namba ya simu."
@@ -3761,11 +4071,7 @@ return;
 
 }
 
-
-if(
-!productId||
-!sellerId
-){
+if(!productId||!sellerId){
 
 alert(
 "Bidhaa ya kuagiza haijapatikana."
@@ -3774,7 +4080,6 @@ alert(
 return;
 
 }
-
 
 if(quantity<1){
 
@@ -3786,37 +4091,25 @@ return;
 
 }
 
-
 try{
 
-const {
-error
-}=
+const {error}=
 await supabaseClient
 .from("orders")
 .insert({
 
 buyer_name:buyerName,
-
 buyer_phone:buyerPhone,
-
 product_id:Number(productId),
-
 seller_id:sellerId,
-
 buyer_id:currentUser.id,
-
 quantity:quantity,
-
 message:message,
-
 status:"pending"
 
 });
 
-
 if(error)throw error;
-
 
 closeOrderModal();
 
@@ -3825,7 +4118,6 @@ alert(
 );
 
 await showMyOrders();
-
 
 }catch(error){
 
@@ -3843,7 +4135,6 @@ error.message
 
 }
 
-
 /* =====================================================
    MY ORDERS
 ===================================================== */
@@ -3854,27 +4145,19 @@ const box=$("myOrders");
 
 if(!box)return;
 
-
 if(!currentUser){
 
-box.innerHTML=
-"<p>Ingia kwanza.</p>";
+box.innerHTML="<p>Ingia kwanza.</p>";
 
 return;
 
 }
 
-
-box.innerHTML=
-"<p>⏳ Inapakia...</p>";
-
+box.innerHTML="<p>⏳ Inapakia...</p>";
 
 try{
 
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("orders")
 .select("*")
@@ -3887,9 +4170,7 @@ currentUser.id
 {ascending:false}
 );
 
-
 if(error)throw error;
-
 
 if(!data?.length){
 
@@ -3900,46 +4181,30 @@ return;
 
 }
 
-
 box.innerHTML=
 '<div class="orders">'+
 
 data.map(order=>{
 
 const status=
-String(
-order.status||"pending"
-);
+String(order.status||"pending");
 
-
-let statusClass=
-"status-pending";
-
-let statusText=
-"🟡 Pending";
-
+let statusClass="status-pending";
+let statusText="🟡 Pending";
 
 if(status==="accepted"){
 
-statusClass=
-"status-accepted";
-
-statusText=
-"🟢 Imekubaliwa";
+statusClass="status-accepted";
+statusText="🟢 Imekubaliwa";
 
 }
-
 
 if(status==="rejected"){
 
-statusClass=
-"status-rejected";
-
-statusText=
-"🔴 Imekataliwa";
+statusClass="status-rejected";
+statusText="🔴 Imekataliwa";
 
 }
-
 
 return `
 
@@ -3986,7 +4251,6 @@ ${statusText}
 
 "</div>";
 
-
 }catch(error){
 
 console.error(error);
@@ -3998,7 +4262,6 @@ box.innerHTML=
 
 }
 
-
 /* =====================================================
    SELLER ORDERS
 ===================================================== */
@@ -4009,27 +4272,19 @@ const box=$("sellerOrders");
 
 if(!box)return;
 
-
 if(!currentUser){
 
-box.innerHTML=
-"<p>Ingia kwanza.</p>";
+box.innerHTML="<p>Ingia kwanza.</p>";
 
 return;
 
 }
 
-
-box.innerHTML=
-"<p>⏳ Inapakia...</p>";
-
+box.innerHTML="<p>⏳ Inapakia...</p>";
 
 try{
 
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("orders")
 .select("*")
@@ -4042,9 +4297,7 @@ currentUser.id
 {ascending:false}
 );
 
-
 if(error)throw error;
-
 
 if(!data?.length){
 
@@ -4055,49 +4308,32 @@ return;
 
 }
 
-
 box.innerHTML=
 '<div class="orders">'+
 
 data.map(order=>{
 
 const status=
-String(
-order.status||"pending"
-);
+String(order.status||"pending");
 
-
-let statusClass=
-"status-pending";
-
-let statusText=
-"🟡 Pending";
-
+let statusClass="status-pending";
+let statusText="🟡 Pending";
 
 if(status==="accepted"){
 
-statusClass=
-"status-accepted";
-
-statusText=
-"🟢 Imekubaliwa";
+statusClass="status-accepted";
+statusText="🟢 Imekubaliwa";
 
 }
-
 
 if(status==="rejected"){
 
-statusClass=
-"status-rejected";
-
-statusText=
-"🔴 Imekataliwa";
+statusClass="status-rejected";
+statusText="🔴 Imekataliwa";
 
 }
 
-
 let actions="";
-
 
 if(status==="pending"){
 
@@ -4133,7 +4369,6 @@ onclick="updateOrderStatus('${order.id}','pending')">
 `;
 
 }
-
 
 return `
 
@@ -4191,7 +4426,6 @@ ${actions}
 
 "</div>";
 
-
 }catch(error){
 
 console.error(error);
@@ -4202,7 +4436,6 @@ box.innerHTML=
 }
 
 }
-
 
 /* =====================================================
    UPDATE ORDER
@@ -4221,51 +4454,35 @@ return;
 
 }
 
-
 if(!orderId){
 
-alert(
-"Order ID haipo."
-);
+alert("Order ID haipo.");
 
 return;
 
 }
 
-
 try{
 
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("orders")
 .update({
 status:newStatus
 })
 .eq("id",orderId)
-.eq(
-"seller_id",
-currentUser.id
-)
+.eq("seller_id",currentUser.id)
 .select();
-
 
 if(error)throw error;
 
-
-if(
-!data||
-!data.length
-){
+if(!data||!data.length){
 
 throw new Error(
 "Oda haikupatikana au huna ruhusa ya kuibadilisha."
 );
 
 }
-
 
 if(newStatus==="accepted"){
 
@@ -4277,7 +4494,6 @@ addNotification(
 
 }
 
-
 if(newStatus==="rejected"){
 
 addNotification(
@@ -4287,7 +4503,6 @@ addNotification(
 );
 
 }
-
 
 if(newStatus==="pending"){
 
@@ -4299,14 +4514,12 @@ addNotification(
 
 }
 
-
 await showSellerOrders();
 
 alert(
 "✅ Oda imebadilishwa kuwa: "+
 newStatus
 );
-
 
 }catch(error){
 
@@ -4324,7 +4537,6 @@ error.message
 
 }
 
-
 /* =====================================================
    NOTIFICATIONS
 ===================================================== */
@@ -4338,14 +4550,11 @@ currentUser.id;
 
 }
 
-
 function getNotifications(){
 
-const key=
-notificationKey();
+const key=notificationKey();
 
 if(!key)return [];
-
 
 try{
 
@@ -4361,11 +4570,9 @@ return [];
 
 }
 
-
 function saveNotifications(list){
 
-const key=
-notificationKey();
+const key=notificationKey();
 
 if(!key)return;
 
@@ -4378,7 +4585,6 @@ list.slice(0,50)
 
 }
 
-
 function addNotification(
 title,
 message
@@ -4386,23 +4592,16 @@ message
 
 if(!currentUser)return;
 
-
-const list=
-getNotifications();
-
+const list=getNotifications();
 
 list.unshift({
 
 id:Date.now(),
-
 title:title,
-
 message:message,
-
 time:new Date().toISOString()
 
 });
-
 
 saveNotifications(list);
 
@@ -4410,21 +4609,14 @@ renderNotifications();
 
 }
 
-
 function renderNotifications(){
 
-const box=
-$("notifications");
-
-const badge=
-$("notificationBadge");
+const box=$("notifications");
+const badge=$("notificationBadge");
 
 if(!box||!badge)return;
 
-
-const list=
-getNotifications();
-
+const list=getNotifications();
 
 if(!list.length){
 
@@ -4432,19 +4624,15 @@ box.innerHTML=
 '<p class="small">Hakuna taarifa mpya.</p>';
 
 badge.classList.add("hidden");
-
 badge.textContent="0";
 
 return;
 
 }
 
-
-badge.textContent=
-String(list.length);
+badge.textContent=String(list.length);
 
 badge.classList.remove("hidden");
-
 
 box.innerHTML=
 list.map(item=>`
@@ -4474,22 +4662,17 @@ ${new Date(item.time)
 
 }
 
-
 function toggleNotifications(){
 
-const panel=
-$("notificationPanel");
+const panel=$("notificationPanel");
 
 if(!panel)return;
 
-panel.classList.toggle(
-"hidden"
-);
+panel.classList.toggle("hidden");
 
 renderNotifications();
 
 }
-
 
 function clearNotifications(){
 
@@ -4499,7 +4682,6 @@ saveNotifications([]);
 renderNotifications();
 
 }
-
 
 /* =====================================================
    REALTIME
@@ -4521,9 +4703,7 @@ table:"orders"
 },
 payload=>{
 
-const order=
-payload.new;
-
+const order=payload.new;
 
 if(
 currentUser&&
@@ -4553,9 +4733,7 @@ table:"orders"
 },
 payload=>{
 
-const order=
-payload.new;
-
+const order=payload.new;
 
 if(
 currentUser&&
@@ -4563,55 +4741,39 @@ order.buyer_id===
 currentUser.id
 ){
 
-if(
-order.status===
-"accepted"
-){
+if(order.status==="accepted"){
 
 addNotification(
 "🟢 Oda imekubaliwa",
-"Oda #"+
-order.id+
+"Oda #"+order.id+
 " imekubaliwa."
 );
 
 }
 
-
-if(
-order.status===
-"rejected"
-){
+if(order.status==="rejected"){
 
 addNotification(
 "🔴 Oda imekataliwa",
-"Oda #"+
-order.id+
+"Oda #"+order.id+
 " imekataliwa."
 );
 
 }
 
-
-if(
-order.status===
-"pending"
-){
+if(order.status==="pending"){
 
 addNotification(
 "🟡 Oda imerudishwa Pending",
-"Oda #"+
-order.id+
+"Oda #"+order.id+
 " imerudishwa Pending."
 );
 
 }
 
-
 showMyOrders();
 
 }
-
 
 if(
 currentUser&&
@@ -4628,7 +4790,6 @@ showSellerOrders();
 
 .subscribe();
 
-
 }catch(error){
 
 console.error(
@@ -4640,7 +4801,6 @@ error
 
 }
 
-
 /* =====================================================
    ADMIN
 ===================================================== */
@@ -4649,9 +4809,7 @@ async function showAdminDashboard(){
 
 if(!currentUser){
 
-alert(
-"Ingia kwanza."
-);
+alert("Ingia kwanza.");
 
 show("account");
 
@@ -4659,9 +4817,7 @@ return;
 
 }
 
-
 await checkAdmin();
-
 
 if(!isAdmin){
 
@@ -4675,27 +4831,19 @@ return;
 
 }
 
-
 show("admin");
 
 }
 
-
 async function refreshAdminDashboard(){
 
-if(
-!currentUser||
-!isAdmin
-)return;
-
+if(!currentUser||!isAdmin)return;
 
 $("adminEmail").textContent=
 currentUser.email||"-";
 
-
 $("adminSummary").textContent=
 "⏳ Inapakia taarifa...";
-
 
 try{
 
@@ -4707,7 +4855,6 @@ count:"exact",
 head:true
 });
 
-
 const ordersResult=
 await supabaseClient
 .from("orders")
@@ -4716,23 +4863,18 @@ count:"exact",
 head:true
 });
 
-
 const usersResult=
 await supabaseClient
 .rpc("get_admin_users");
 
-
 if(productsResult.error)
 throw productsResult.error;
-
 
 if(ordersResult.error)
 throw ordersResult.error;
 
-
 if(usersResult.error)
 throw usersResult.error;
-
 
 const productCount=
 productsResult.count||0;
@@ -4743,21 +4885,14 @@ ordersResult.count||0;
 const users=
 usersResult.data||[];
 
-
-$("adminProductCount")
-.textContent=
+$("adminProductCount").textContent=
 productCount;
 
-
-$("adminOrderCount")
-.textContent=
+$("adminOrderCount").textContent=
 orderCount;
 
-
-$("adminUserCount")
-.textContent=
+$("adminUserCount").textContent=
 users.length;
-
 
 $("adminSummary").innerHTML=
 `
@@ -4771,13 +4906,11 @@ na
 watumiaji.
 `;
 
-
 renderAdminUsers(users);
 
+await renderAdminProfiles();
 await renderAdminProducts();
-
 await renderAdminOrders();
-
 
 }catch(error){
 
@@ -4795,18 +4928,15 @@ escapeHtml(error.message)+
 
 }
 
-
 /* =====================================================
    ADMIN USERS
 ===================================================== */
 
 function renderAdminUsers(users){
 
-const box=
-$("adminUsers");
+const box=$("adminUsers");
 
 if(!box)return;
-
 
 if(!users.length){
 
@@ -4816,7 +4946,6 @@ box.innerHTML=
 return;
 
 }
-
 
 box.innerHTML=
 users.map(
@@ -4862,6 +4991,90 @@ user.created_at
 
 }
 
+/* =====================================================
+   ADMIN SELLER PROFILES
+===================================================== */
+
+async function renderAdminProfiles(){
+
+const box=$("adminProfiles");
+
+if(!box)return;
+
+box.innerHTML=
+"<p>⏳ Inapakia wasifu...</p>";
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML=
+"<p>Hakuna wasifu wa biashara bado.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+data.map(profile=>`
+
+<div class="admin-order">
+
+<h3>
+🏪 ${escapeHtml(
+profile.business_name||"-"
+)}
+</h3>
+
+<p>
+👤 ${escapeHtml(
+profile.owner_name||"-"
+)}
+</p>
+
+<p>
+📞 ${escapeHtml(
+profile.phone||"-"
+)}
+</p>
+
+<p>
+📍 ${escapeHtml(
+profile.region||"-"
+)}
+</p>
+
+<p>
+🏘️ ${escapeHtml(
+profile.district||"-"
+)}
+</p>
+
+<p>
+📝 ${escapeHtml(
+profile.description||"-"
+)}
+</p>
+
+<p class="small">
+User ID:
+${escapeHtml(profile.user_id||"-")}
+</p>
+
+</div>
+
+`).join("");
+
+}
 
 /* =====================================================
    ADMIN PRODUCTS
@@ -4869,20 +5082,14 @@ user.created_at
 
 async function renderAdminProducts(){
 
-const box=
-$("adminProducts");
+const box=$("adminProducts");
 
 if(!box)return;
-
 
 box.innerHTML=
 "<p>⏳ Inapakia bidhaa...</p>";
 
-
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("Production")
 .select("*")
@@ -4891,19 +5098,15 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(error)throw error;
-
 
 if(!data?.length){
 
-box.innerHTML=
-"<p>Hakuna bidhaa.</p>";
+box.innerHTML="<p>Hakuna bidhaa.</p>";
 
 return;
 
 }
-
 
 box.innerHTML=
 data.map(
@@ -4916,13 +5119,11 @@ ${escapeHtml(product.name)}
 </h3>
 
 <p>
-💰
-${formatPrice(product.price)}
+💰 ${formatPrice(product.price)}
 </p>
 
 <p>
-📂
-${escapeHtml(product.category)}
+📂 ${escapeHtml(product.category)}
 </p>
 
 <p>
@@ -4941,8 +5142,7 @@ ${escapeHtml(product.place)}
 </p>
 
 <p>
-📞
-${escapeHtml(product.phone||"-")}
+📞 ${escapeHtml(product.phone||"-")}
 </p>
 
 <p class="small">
@@ -4957,27 +5157,20 @@ ${escapeHtml(product.user_id||"-")}
 
 }
 
-
 /* =====================================================
    ADMIN ORDERS
 ===================================================== */
 
 async function renderAdminOrders(){
 
-const box=
-$("adminOrders");
+const box=$("adminOrders");
 
 if(!box)return;
-
 
 box.innerHTML=
 "<p>⏳ Inapakia oda...</p>";
 
-
-const {
-data,
-error
-}=
+const {data,error}=
 await supabaseClient
 .from("orders")
 .select("*")
@@ -4986,42 +5179,29 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(error)throw error;
-
 
 if(!data?.length){
 
-box.innerHTML=
-"<p>Hakuna oda.</p>";
+box.innerHTML="<p>Hakuna oda.</p>";
 
 return;
 
 }
 
-
 box.innerHTML=
 data.map(order=>{
 
 const status=
-String(
-order.status||"pending"
-);
+String(order.status||"pending");
 
-
-let statusClass=
-"status-pending";
-
+let statusClass="status-pending";
 
 if(status==="accepted")
-statusClass=
-"status-accepted";
-
+statusClass="status-accepted";
 
 if(status==="rejected")
-statusClass=
-"status-rejected";
-
+statusClass="status-rejected";
 
 return `
 
@@ -5075,7 +5255,6 @@ ${escapeHtml(order.message||"-")}
 
 }
 
-
 /* =====================================================
    AUTH STATE
 ===================================================== */
@@ -5089,31 +5268,30 @@ async()=>{
 currentUser=
 session?.user||null;
 
-await checkAdmin();
-
-updateAccountUI();
-
-updateAdminUI();
-
-
 if(currentUser){
 
+await checkAdmin();
+await loadSellerProfile();
 renderNotifications();
 
 }else{
 
-const badge=
-$("notificationBadge");
+isAdmin=false;
+sellerProfile=null;
+
+const badge=$("notificationBadge");
 
 if(badge){
 
 badge.classList.add("hidden");
-
 badge.textContent="0";
 
 }
 
 }
+
+updateAccountUI();
+updateAdminUI();
 
 },
 0
@@ -5121,9 +5299,8 @@ badge.textContent="0";
 
 });
 
-
 /* =====================================================
-   FORM SUBMIT
+   FORM
 ===================================================== */
 
 $("productForm")
@@ -5132,97 +5309,54 @@ $("productForm")
 saveProduct
 );
 
-
 /* =====================================================
    WINDOW FUNCTIONS
 ===================================================== */
 
 window.show=show;
+window.showRegisterForm=showRegisterForm;
+window.showLoginForm=showLoginForm;
+window.hideAuthForms=hideAuthForms;
+window.registerFromHome=registerFromHome;
+window.loginFromHome=loginFromHome;
+window.showRegisterFormAccount=showRegisterFormAccount;
+window.showLoginFormAccount=showLoginFormAccount;
+window.register=register;
+window.login=login;
+window.logout=logout;
+window.filterCategory=filterCategory;
+window.render=render;
+window.previewImage=previewImage;
+window.openImage=openImage;
+window.saveProduct=saveProduct;
+window.resetProductForm=resetProductForm;
+window.editProduct=editProduct;
+window.deleteProduct=deleteProduct;
+window.callSeller=callSeller;
+window.whatsappSeller=whatsappSeller;
+window.openOrderModal=openOrderModal;
+window.closeOrderModal=closeOrderModal;
+window.submitOrder=submitOrder;
+window.updateOrderStatus=updateOrderStatus;
+window.toggleNotifications=toggleNotifications;
+window.clearNotifications=clearNotifications;
+window.showAdminDashboard=showAdminDashboard;
+window.updateDistricts=updateDistricts;
 
-window.showRegisterForm=
-showRegisterForm;
+window.showSellerProfileForm=
+showSellerProfileForm;
 
-window.showLoginForm=
-showLoginForm;
+window.hideSellerProfileForm=
+hideSellerProfileForm;
 
-window.hideAuthForms=
-hideAuthForms;
+window.updateProfileDistricts=
+updateProfileDistricts;
 
-window.registerFromHome=
-registerFromHome;
+window.previewProfileLogo=
+previewProfileLogo;
 
-window.loginFromHome=
-loginFromHome;
-
-window.showRegisterFormAccount=
-showRegisterFormAccount;
-
-window.showLoginFormAccount=
-showLoginFormAccount;
-
-window.register=
-register;
-
-window.login=
-login;
-
-window.logout=
-logout;
-
-window.filterCategory=
-filterCategory;
-
-window.render=
-render;
-
-window.previewImage=
-previewImage;
-
-window.openImage=
-openImage;
-
-window.saveProduct=
-saveProduct;
-
-window.resetProductForm=
-resetProductForm;
-
-window.editProduct=
-editProduct;
-
-window.deleteProduct=
-deleteProduct;
-
-window.callSeller=
-callSeller;
-
-window.whatsappSeller=
-whatsappSeller;
-
-window.openOrderModal=
-openOrderModal;
-
-window.closeOrderModal=
-closeOrderModal;
-
-window.submitOrder=
-submitOrder;
-
-window.updateOrderStatus=
-updateOrderStatus;
-
-window.toggleNotifications=
-toggleNotifications;
-
-window.clearNotifications=
-clearNotifications;
-
-window.showAdminDashboard=
-showAdminDashboard;
-
-window.updateDistricts=
-updateDistricts;
-
+window.saveSellerProfile=
+saveSellerProfile;
 
 /* =====================================================
    START
@@ -5243,7 +5377,6 @@ error
 
 }
 
-
 try{
 
 await checkUser();
@@ -5257,7 +5390,6 @@ error
 
 }
 
-
 try{
 
 await loadProducts();
@@ -5270,7 +5402,6 @@ error
 );
 
 }
-
 
 try{
 
@@ -5290,4 +5421,4 @@ error
 </script>
 
 </body>
-  </html>
+   </html>
