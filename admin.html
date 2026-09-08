@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PLAM TANZANIA - Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#222;
+}
+
+header{
+  background:#0b7a3b;
+  color:white;
+  padding:18px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:25px;
+}
+
+header p{
+  margin:6px 0 0;
+}
+
+.container{
+  width:95%;
+  max-width:900px;
+  margin:20px auto;
+}
+
+.box{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+h2{
+  margin-top:0;
+  color:#0b7a3b;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  border:0;
+  padding:12px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.login-btn{
+  background:#0b7a3b;
+  color:white;
+  width:100%;
+  margin-top:8px;
+}
+
+.logout-btn{
+  background:#333;
+  color:white;
+}
+
+.delete-btn{
+  background:#d62828;
+  color:white;
+  margin-top:10px;
+  width:100%;
+}
+
+.product{
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:15px;
+  background:#fff;
+}
+
+.product h3{
+  margin:0 0 8px;
+  color:#0b7a3b;
+}
+
+.product p{
+  margin:5px 0;
+}
+
+.hidden{
+  display:none;
+}
+
+.message{
+  padding:10px;
+  border-radius:8px;
+  margin-top:10px;
+  background:#eee;
+}
+
+.warning{
+  background:#fff3cd;
+  color:#856404;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+.empty{
+  text-align:center;
+  padding:20px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🇹🇿 PLAM TANZANIA</h1>
+  <p>Admin Dashboard</p>
+</header>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="box">
+
+    <h2>🔐 Admin Login</h2>
+
+    <div class="warning">
+      Sehemu hii ni ya msimamizi wa PLAM TANZANIA pekee.
+    </div>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Email ya Admin"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button class="login-btn" onclick="login()">
+      Ingia kama Admin
+    </button>
+
+    <div id="loginMessage"></div>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+
+    <div class="box">
+
+      <h2>🛠️ Admin Dashboard</h2>
+
+      <p>
+        Hapa unaweza kuona bidhaa zilizowekwa kwenye PLAM
+        na kufuta bidhaa ambazo ni za kitapeli au zinakiuka
+        sheria za PLAM.
+      </p>
+
+      <button class="logout-btn" onclick="logout()">
+        Toka
+      </button>
+
+    </div>
+
+
+    <div class="box">
+
+      <h2>📦 Bidhaa Zilizowekwa</h2>
+
+      <input
+        type="text"
+        id="searchAdmin"
+        placeholder="🔍 Tafuta bidhaa..."
+        oninput="renderProducts()"
+      >
+
+      <div id="products">
+        <div class="empty">
+          Inapakia bidhaa...
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   SUPABASE SETTINGS
+   ===================================== */
+
+const SUPABASE_URL =
+"https://igcgcxkttzeaordqhqqy.supabase.co";
+
+/*
+WEKA PUBLISHABLE KEY YAKO HAPA
+*/
+
+const SUPABASE_KEY =
+"WEKA_PUBLISHABLE_KEY_YAKO_HAPA";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================
+   VARIABLES
+   ===================================== */
+
+let allProducts = [];
+
+
+/* =====================================
+   LOGIN
+   ===================================== */
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  if(!email || !password){
+
+    message.innerHTML =
+      '<div class="message">⚠️ Jaza email na password.</div>';
+
+    return;
+  }
+
+  message.innerHTML =
+    '<div class="message">Inaingia...</div>';
+
+  try{
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if(error){
+
+      message.innerHTML =
+        '<div class="message">❌ ' +
+        error.message +
+        '</div>';
+
+      return;
+    }
+
+    if(!data.user){
+
+      message.innerHTML =
+        '<div class="message">❌ Imeshindikana kuingia.</div>';
+
+      return;
+    }
+
+    document
+      .getElementById("loginBox")
+      .classList.add("hidden");
+
+    document
+      .getElementById("dashboard")
+      .classList.remove("hidden");
+
+    loadProducts();
+
+  }catch(error){
+
+    message.innerHTML =
+      '<div class="message">❌ Kuna tatizo la mfumo.</div>';
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================
+   CHECK USER
+   ===================================== */
+
+async function checkUser(){
+
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if(user){
+
+    document
+      .getElementById("loginBox")
+      .classList.add("hidden");
+
+    document
+      .getElementById("dashboard")
+      .classList.remove("hidden");
+
+    loadProducts();
+
+  }
+
+}
+
+
+/* =====================================
+   LOGOUT
+   ===================================== */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+}
+
+
+/* =====================================
+   LOAD PRODUCTS
+   ===================================== */
+
+async function loadProducts(){
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML =
+    '<div class="empty">Inapakia bidhaa...</div>';
+
+  try{
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("Products")
+      .select("*")
+      .order("created_at", {
+        ascending:false
+      });
+
+    if(error){
+
+      console.error(error);
+
+      container.innerHTML =
+        '<div class="message">❌ Bidhaa hazijaweza kupakiwa.</div>';
+
+      return;
+    }
+
+    allProducts = data || [];
+
+    renderProducts();
+
+  }catch(error){
+
+    console.error(error);
+
+    container.innerHTML =
+      '<div class="message">❌ Kuna tatizo wakati wa kupakia bidhaa.</div>';
+
+  }
+
+}
+
+
+/* =====================================
+   SHOW PRODUCTS
+   ===================================== */
+
+function renderProducts(){
+
+  const container =
+    document.getElementById("products");
+
+  const search =
+    document
+      .getElementById("searchAdmin")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const filtered =
+    allProducts.filter(product => {
+
+      const name =
+        String(product.name || "")
+        .toLowerCase();
+
+      const category =
+        String(product.category || "")
+        .toLowerCase();
+
+      const place =
+        String(product.place || "")
+        .toLowerCase();
+
+      return (
+        name.includes(search) ||
+        category.includes(search) ||
+        place.includes(search)
+      );
+
+    });
+
+
+  if(filtered.length === 0){
+
+    container.innerHTML =
+      '<div class="empty">Hakuna bidhaa iliyopatikana.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    filtered.map(product => {
+
+      const id =
+        product.id;
+
+      return `
+
+        <div class="product">
+
+          <h3>
+            ${escapeHTML(product.name || "Bidhaa bila jina")}
+          </h3>
+
+          <p>
+            💰 <strong>Bei:</strong>
+            ${escapeHTML(product.price || "Haijawekwa")}
+          </p>
+
+          <p>
+            📂 <strong>Kategoria:</strong>
+            ${escapeHTML(product.category || "Haijawekwa")}
+          </p>
+
+          <p>
+            📍 <strong>Eneo:</strong>
+            ${escapeHTML(product.place || "Haijawekwa")}
+          </p>
+
+          <p>
+            📝 <strong>Maelezo:</strong>
+            ${escapeHTML(product.description || "Hakuna maelezo")}
+          </p>
+
+          <p>
+            🆔 <strong>ID:</strong>
+            ${escapeHTML(String(id))}
+          </p>
+
+          <button
+            class="delete-btn"
+            onclick="deleteProduct('${String(id).replace(/'/g, "\\'")}')"
+          >
+            🗑️ Futa Bidhaa Hii
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================
+   DELETE PRODUCT
+   ===================================== */
+
+async function deleteProduct(id){
+
+  const confirmDelete =
+    confirm(
+      "⚠️ Una uhakika unataka kufuta bidhaa hii?\n\n" +
+      "Kitendo hiki hakiwezi kurudishwa."
+    );
+
+  if(!confirmDelete){
+
+    return;
+
+  }
+
+
+  try{
+
+    const {
+      error
+    } = await supabaseClient
+      .from("Products")
+      .delete()
+      .eq("id", id);
+
+
+    if(error){
+
+      console.error(error);
+
+      alert(
+        "❌ Bidhaa haijafutwa.\n\n" +
+        "Huenda RLS policy ya DELETE haijawekwa Supabase."
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      "✅ Bidhaa imefutwa kwenye PLAM."
+    );
+
+
+    loadProducts();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Kuna tatizo wakati wa kufuta bidhaa."
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   SECURITY - ESCAPE HTML
+   ===================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================
+   START
+   ===================================== */
+
+checkUser();
+
+</script>
+
+</body>
+</html>
