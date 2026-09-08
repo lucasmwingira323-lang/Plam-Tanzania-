@@ -359,19 +359,16 @@ padding:8px 4px
 padding:16px
 }
 
-/* Picha mbili */
 .gallery img{
 height:300px;
 object-fit:cover
 }
 
-/* Picha moja */
 .single-image{
 height:340px;
 object-fit:cover
 }
 
-/* Preview ya picha wakati wa kuweka bidhaa */
 .image-preview-box{
 grid-template-columns:1fr 1fr
 }
@@ -1310,8 +1307,6 @@ let imageUrl=null;
 let imageUrl2=null;
 
 
-/* UPLOAD FIRST IMAGE */
-
 if(image1){
 
 imageUrl=
@@ -1319,8 +1314,6 @@ await uploadImage(image1);
 
 }
 
-
-/* UPLOAD SECOND IMAGE */
 
 if(image2){
 
@@ -2087,7 +2080,7 @@ show("add");
 
 
 /* =========================
-DELETE
+DELETE PRODUCT - IMEREKEBISHWA
 ========================= */
 
 async function deleteProduct(id){
@@ -2105,22 +2098,37 @@ return;
 
 if(!confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
-))return;
+)){
+
+return;
+
+}
 
 
 try{
+
+/*
+  Tunafuta kwa kutumia:
+  1. ID ya bidhaa
+  2. USER ID ya mwenye bidhaa
+*/
 
 const response=
 await fetch(
 SUPABASE_URL+
 "/rest/v1/Production?id=eq."+
-encodeURIComponent(id),
+encodeURIComponent(id)+
+"&user_id=eq."+
+encodeURIComponent(currentUser.id),
 {
 method:"DELETE",
+
 headers:{
 "apikey":SUPABASE_KEY,
 "Authorization":
-"Bearer "+SUPABASE_KEY
+"Bearer "+SUPABASE_KEY,
+"Prefer":
+"return=representation"
 }
 }
 );
@@ -2135,20 +2143,61 @@ await response.text()
 }
 
 
-alert(
-"Bidhaa imefutwa. 🗑️"
+/*
+  Supabase itatupa bidhaa zilizofutwa.
+  Kama hakuna bidhaa iliyorudi,
+  maana yake haikufutwa.
+*/
+
+const deleted=
+await response.json();
+
+
+if(!deleted || deleted.length===0){
+
+throw new Error(
+"Supabase haikufuta bidhaa. Hakikisha Delete RLS Policy imeruhusu mtumiaji kufuta bidhaa yake."
 );
 
-await loadProducts();
+}
+
+
+/*
+  Ondoa bidhaa kwenye list ya
+  PLAM bila kusubiri refresh.
+*/
+
+ps=
+ps.filter(function(p){
+
+return String(p.id)!==
+String(id);
+
+});
+
+
+render();
+
+
+/*
+  Refresh BIDHAA ZANGU
+*/
 
 await showMyProducts();
 
 
+alert(
+"Bidhaa imefutwa kabisa. 🗑️"
+);
+
+
 }catch(error){
 
+console.error(error);
+
 alert(
-"Imeshindikana kufuta bidhaa:\n"+
-error.message
+"Imeshindikana kufuta bidhaa:\n\n"+
+(error.message||error)
 );
 
 }
@@ -2200,5 +2249,5 @@ checkUser();
 
 </script>
 
-</body>
-  </html>
+</body> 
+</html>
