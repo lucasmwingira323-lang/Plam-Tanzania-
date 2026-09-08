@@ -459,18 +459,15 @@ flex-direction:column;
 
 <nav>
 
-<button type="button"
-onclick="show('home')">
+<button type="button" onclick="show('home')">
 Nyumbani
 </button>
 
-<button type="button"
-onclick="show('add')">
+<button type="button" onclick="show('add')">
 ➕ Weka Bidhaa
 </button>
 
-<button type="button"
-onclick="show('account')">
+<button type="button" onclick="show('account')">
 👤 Akaunti
 </button>
 
@@ -482,9 +479,6 @@ onclick="show('account')">
 
 
 <main class="container">
-
-
-<!-- HOME -->
 
 <section id="home">
 
@@ -509,33 +503,27 @@ oninput="render()">
 
 <div class="categories">
 
-<div class="category"
-onclick="filterCategory('Simu')">
+<div class="category" onclick="filterCategory('Simu')">
 📱 Simu
 </div>
 
-<div class="category"
-onclick="filterCategory('Nguo')">
+<div class="category" onclick="filterCategory('Nguo')">
 👕 Nguo
 </div>
 
-<div class="category"
-onclick="filterCategory('Viatu')">
+<div class="category" onclick="filterCategory('Viatu')">
 👟 Viatu
 </div>
 
-<div class="category"
-onclick="filterCategory('Samani')">
+<div class="category" onclick="filterCategory('Samani')">
 🛋️ Samani
 </div>
 
-<div class="category"
-onclick="filterCategory('Chakula')">
+<div class="category" onclick="filterCategory('Chakula')">
 🍲 Chakula
 </div>
 
-<div class="category"
-onclick="filterCategory('Huduma')">
+<div class="category" onclick="filterCategory('Huduma')">
 🛠️ Huduma
 </div>
 
@@ -546,8 +534,7 @@ onclick="filterCategory('Huduma')">
 Bidhaa na Huduma
 </h2>
 
-<div id="products"
-class="products">
+<div id="products" class="products">
 
 <p>
 Inapakia bidhaa...
@@ -558,11 +545,7 @@ Inapakia bidhaa...
 </section>
 
 
-
-<!-- ADD PRODUCT -->
-
-<section id="add"
-class="hidden">
+<section id="add" class="hidden">
 
 <div class="form-box">
 
@@ -576,9 +559,7 @@ Ili kuweka bidhaa, lazima uwe umeingia kwenye akaunti.
 
 <form onsubmit="addProduct(event)">
 
-<label>
-Jina la bidhaa/huduma
-</label>
+<label>Jina la bidhaa/huduma</label>
 
 <input
 id="name"
@@ -586,9 +567,7 @@ required
 placeholder="Mfano: Samsung A05">
 
 
-<label>
-Bei
-</label>
+<label>Bei</label>
 
 <input
 id="price"
@@ -597,12 +576,9 @@ required
 placeholder="Mfano: 250000">
 
 
-<label>
-Kategoria
-</label>
+<label>Kategoria</label>
 
-<select id="category"
-required>
+<select id="category" required>
 
 <option value="">
 Chagua kategoria
@@ -623,9 +599,7 @@ Chagua kategoria
 </select>
 
 
-<label>
-Eneo/Mkoa
-</label>
+<label>Eneo/Mkoa</label>
 
 <input
 id="place"
@@ -633,9 +607,7 @@ required
 placeholder="Mfano: Mbeya">
 
 
-<label>
-Namba ya simu ya muuzaji
-</label>
+<label>Namba ya simu ya muuzaji</label>
 
 <input
 id="sellerPhone"
@@ -644,18 +616,14 @@ required
 placeholder="Mfano: 07XXXXXXXX">
 
 
-<label>
-Maelezo
-</label>
+<label>Maelezo</label>
 
 <textarea
 id="desc"
 placeholder="Andika maelezo ya bidhaa..."></textarea>
 
 
-<label>
-Picha ya kwanza
-</label>
+<label>Picha ya kwanza</label>
 
 <input
 id="productImage1"
@@ -663,14 +631,10 @@ type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus1')">
 
-<div id="imageStatus1"
-class="image-status">
-</div>
+<div id="imageStatus1" class="image-status"></div>
 
 
-<label>
-Picha ya pili (hiari)
-</label>
+<label>Picha ya pili (hiari)</label>
 
 <input
 id="productImage2"
@@ -678,9 +642,7 @@ type="file"
 accept="image/*"
 onchange="handleImageSelect(this,'imageStatus2')">
 
-<div id="imageStatus2"
-class="image-status">
-</div>
+<div id="imageStatus2" class="image-status"></div>
 
 
 <button
@@ -699,20 +661,13 @@ type="submit">
 </section>
 
 
-
-<!-- ACCOUNT -->
-
-<section id="account"
-class="hidden">
+<section id="account" class="hidden">
 
 <div class="account-box">
 
-
 <div id="loggedOut">
 
-<h2>
-👤 Akaunti ya PLAM
-</h2>
+<h2>👤 Akaunti ya PLAM</h2>
 
 <p>
 Fungua akaunti au ingia ili uweze kuweka na kusimamia bidhaa zako.
@@ -721,9 +676,7 @@ Fungua akaunti au ingia ili uweze kuweka na kusimamia bidhaa zako.
 
 <div class="account-section">
 
-<h3>
-📝 Fungua Akaunti Mpya
-</h3>
+<h3>📝 Fungua Akaunti Mpya</h3>
 
 <label>Email</label>
 
@@ -760,9 +713,7 @@ Fungua Akaunti
 
 <div class="account-section">
 
-<h3>
-🔐 Ingia Kwenye Akaunti
-</h3>
+<h3>🔐 Ingia Kwenye Akaunti</h3>
 
 <label>Email</label>
 
@@ -796,13 +747,9 @@ Ingia
 </div>
 
 
+<div id="loggedIn" class="hidden">
 
-<div id="loggedIn"
-class="hidden">
-
-<h2>
-👤 Akaunti Yangu
-</h2>
+<h2>👤 Akaunti Yangu</h2>
 
 <p id="userEmail"></p>
 
@@ -880,11 +827,7 @@ Toka
 </main>
 
 
-
-<!-- ORDER MODAL -->
-
-<div id="orderModal"
-class="modal hidden">
+<div id="orderModal" class="modal hidden">
 
 <div class="modal-box">
 
@@ -892,15 +835,11 @@ class="modal hidden">
 🛒 Weka Oda
 </h2>
 
-<div id="orderProductInfo"
-class="info">
-</div>
+<div id="orderProductInfo" class="info"></div>
 
 <form onsubmit="submitOrder(event)">
 
-<label>
-Jina lako
-</label>
+<label>Jina lako</label>
 
 <input
 id="buyerName"
@@ -908,9 +847,7 @@ required
 placeholder="Andika jina lako">
 
 
-<label>
-Namba yako ya simu
-</label>
+<label>Namba yako ya simu</label>
 
 <input
 id="buyerPhone"
@@ -919,9 +856,7 @@ required
 placeholder="07XXXXXXXX">
 
 
-<label>
-Idadi
-</label>
+<label>Idadi</label>
 
 <input
 id="orderQuantity"
@@ -931,9 +866,7 @@ value="1"
 required>
 
 
-<label>
-Ujumbe kwa muuzaji
-</label>
+<label>Ujumbe kwa muuzaji</label>
 
 <textarea
 id="orderMessage"
@@ -969,7 +902,6 @@ Funga
 </div>
 
 
-
 <footer>
 
 🇹🇿 PLAM TANZANIA
@@ -981,13 +913,11 @@ Jenga biashara yako. Fikia wateja zaidi.
 </footer>
 
 
-
 <script>
 
-
-/* =====================================================
+/* ==============================
 SUPABASE
-===================================================== */
+============================== */
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -1002,9 +932,9 @@ SUPABASE_KEY
 );
 
 
-/* =====================================================
+/* ==============================
 VARIABLES
-===================================================== */
+============================== */
 
 let ps = [];
 
@@ -1017,17 +947,15 @@ let selectedCategory = "";
 let selectedOrderProduct = null;
 
 
-
-/* =====================================================
+/* ==============================
 SHOW
-===================================================== */
+============================== */
 
 function show(id){
 
 ["home","add","account"].forEach(function(x){
 
-const el =
-document.getElementById(x);
+const el = document.getElementById(x);
 
 if(el){
 
@@ -1049,10 +977,9 @@ updateAccountUI();
 }
 
 
-
-/* =====================================================
+/* ==============================
 LOAD PRODUCTS
-===================================================== */
+============================== */
 
 async function loadProducts(){
 
@@ -1073,8 +1000,7 @@ throw result.error;
 
 }
 
-ps =
-result.data || [];
+ps = result.data || [];
 
 render();
 
@@ -1093,10 +1019,9 @@ document.getElementById("products").innerHTML =
 }
 
 
-
-/* =====================================================
-WHATSAPP NUMBER
-===================================================== */
+/* ==============================
+WHATSAPP
+============================== */
 
 function getWhatsAppNumber(phone){
 
@@ -1107,14 +1032,12 @@ String(phone || "")
 .replace(/\(/g,"")
 .replace(/\)/g,"");
 
-
 if(number.startsWith("+")){
 
 number =
 number.substring(1);
 
 }
-
 
 if(number.startsWith("0")){
 
@@ -1123,16 +1046,10 @@ number =
 
 }
 
-
 return number;
 
 }
 
-
-
-/* =====================================================
-WHATSAPP LINK
-===================================================== */
 
 function getWhatsAppLink(phone,productName){
 
@@ -1154,10 +1071,9 @@ encodeURIComponent(message)
 }
 
 
-
-/* =====================================================
+/* ==============================
 RENDER PRODUCTS
-===================================================== */
+============================== */
 
 function render(){
 
@@ -1169,7 +1085,6 @@ if(!container){
 return;
 
 }
-
 
 const search =
 (
@@ -1193,7 +1108,6 @@ const text = (
 (p.description || "")
 
 ).toLowerCase();
-
 
 return (
 
@@ -1279,7 +1193,6 @@ p.phone,
 p.name
 );
 
-
 contactHTML = `
 
 <div class="contact-buttons">
@@ -1291,7 +1204,6 @@ href="tel:${escapeHtml(p.phone)}">
 📞 Piga Simu
 
 </a>
-
 
 <a
 class="whatsapp"
@@ -1310,6 +1222,12 @@ rel="noopener noreferrer">
 }
 
 
+/*
+MUHIMU:
+Hapa hakuna tena onclick yenye template
+iliyokuwa inaweza kuvuruga script.
+*/
+
 return `
 
 <div class="card">
@@ -1322,37 +1240,31 @@ ${imageHTML}
 ${escapeHtml(p.name || "")}
 </h3>
 
-
 <div class="price">
 TZS ${Number(p.price || 0).toLocaleString()}
 </div>
-
 
 <p>
 <b>Kategoria:</b>
 ${escapeHtml(p.category || "")}
 </p>
 
-
 <p>
 📍 ${escapeHtml(p.place || "")}
 </p>
-
 
 <p>
 ${escapeHtml(p.description || "")}
 </p>
 
-
 <button
 type="button"
 class="order-button"
-onclick="openOrderModal('${escapeHtml(String(p.id))}')">
+data-order-id="${escapeHtml(String(p.id))}">
 
 🛒 Weka Oda
 
 </button>
-
 
 ${contactHTML}
 
@@ -1364,13 +1276,34 @@ ${contactHTML}
 
 }).join("");
 
+
+/*
+Weka event kwa kila button ya Oda
+baada ya bidhaa kuchorwa.
+*/
+
+container
+.querySelectorAll("[data-order-id]")
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(){
+
+openOrderModal(
+button.getAttribute("data-order-id")
+);
+
+});
+
+});
+
 }
 
 
-
-/* =====================================================
+/* ==============================
 CATEGORY
-===================================================== */
+============================== */
 
 function filterCategory(category){
 
@@ -1384,10 +1317,9 @@ render();
 }
 
 
-
-/* =====================================================
+/* ==============================
 ESCAPE HTML
-===================================================== */
+============================== */
 
 function escapeHtml(value){
 
@@ -1401,10 +1333,9 @@ return String(value ?? "")
 }
 
 
-
-/* =====================================================
+/* ==============================
 IMAGE SELECT
-===================================================== */
+============================== */
 
 function handleImageSelect(
 input,
@@ -1425,10 +1356,8 @@ return;
 
 }
 
-
 const file =
 input.files[0];
-
 
 if(
 !file.type ||
@@ -1447,7 +1376,6 @@ return;
 
 }
 
-
 status.className =
 "image-status success";
 
@@ -1458,10 +1386,9 @@ file.name;
 }
 
 
-
-/* =====================================================
+/* ==============================
 COMPRESS IMAGE
-===================================================== */
+============================== */
 
 function compressImage(file){
 
@@ -1470,12 +1397,10 @@ return new Promise(function(resolve,reject){
 const reader =
 new FileReader();
 
-
 reader.onload = function(e){
 
 const img =
 new Image();
-
 
 img.onload = function(){
 
@@ -1484,7 +1409,6 @@ img.naturalWidth;
 
 let height =
 img.naturalHeight;
-
 
 if(!width || !height){
 
@@ -1498,10 +1422,8 @@ return;
 
 }
 
-
 const maxSize =
 1600;
-
 
 if(width > maxSize ||
 height > maxSize){
@@ -1530,7 +1452,6 @@ maxSize;
 
 }
 
-
 const canvas =
 document.createElement("canvas");
 
@@ -1540,10 +1461,8 @@ width;
 canvas.height =
 height;
 
-
 const context =
 canvas.getContext("2d");
-
 
 if(!context){
 
@@ -1557,7 +1476,6 @@ return;
 
 }
 
-
 context.drawImage(
 img,
 0,
@@ -1565,7 +1483,6 @@ img,
 width,
 height
 );
-
 
 canvas.toBlob(
 function(blob){
@@ -1582,7 +1499,6 @@ return;
 
 }
 
-
 const newFile =
 new File(
 [blob],
@@ -1595,7 +1511,6 @@ lastModified:Date.now()
 }
 );
 
-
 resolve(newFile);
 
 },
@@ -1604,7 +1519,6 @@ resolve(newFile);
 );
 
 };
-
 
 img.onerror = function(){
 
@@ -1616,12 +1530,10 @@ new Error(
 
 };
 
-
 img.src =
 e.target.result;
 
 };
-
 
 reader.onerror = function(){
 
@@ -1633,7 +1545,6 @@ new Error(
 
 };
 
-
 reader.readAsDataURL(file);
 
 });
@@ -1641,10 +1552,9 @@ reader.readAsDataURL(file);
 }
 
 
-
-/* =====================================================
+/* ==============================
 UPLOAD IMAGE
-===================================================== */
+============================== */
 
 async function uploadImage(file){
 
@@ -1654,10 +1564,8 @@ return null;
 
 }
 
-
 const compressedFile =
 await compressImage(file);
-
 
 const fileName =
 "product-" +
@@ -1667,7 +1575,6 @@ Math.random()
 .toString(36)
 .substring(2,10) +
 ".jpg";
-
 
 try{
 
@@ -1685,13 +1592,11 @@ upsert:false
 }
 );
 
-
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 !result.data ||
@@ -1704,7 +1609,6 @@ throw new Error(
 
 }
 
-
 const publicResult =
 supabaseClient
 .storage
@@ -1712,7 +1616,6 @@ supabaseClient
 .getPublicUrl(
 result.data.path
 );
-
 
 if(
 !publicResult ||
@@ -1726,9 +1629,7 @@ throw new Error(
 
 }
 
-
 return publicResult.data.publicUrl;
-
 
 }catch(error){
 
@@ -1747,15 +1648,13 @@ throw new Error(
 }
 
 
-
-/* =====================================================
+/* ==============================
 ADD / UPDATE PRODUCT
-===================================================== */
+============================== */
 
 async function addProduct(event){
 
 event.preventDefault();
-
 
 if(!currentUser){
 
@@ -1769,10 +1668,8 @@ return;
 
 }
 
-
 const saveButton =
 document.getElementById("saveButton");
-
 
 try{
 
@@ -1782,18 +1679,15 @@ document
 .value
 .trim();
 
-
 const price =
 document
 .getElementById("price")
 .value;
 
-
 const category =
 document
 .getElementById("category")
 .value;
-
 
 const place =
 document
@@ -1801,20 +1695,17 @@ document
 .value
 .trim();
 
-
 const phone =
 document
 .getElementById("sellerPhone")
 .value
 .trim();
 
-
 const description =
 document
 .getElementById("desc")
 .value
 .trim();
-
 
 if(
 !name ||
@@ -1832,13 +1723,11 @@ return;
 
 }
 
-
 const image1 =
 document
 .getElementById("productImage1")
 .files[0]
 || null;
-
 
 const image2 =
 document
@@ -1846,17 +1735,14 @@ document
 .files[0]
 || null;
 
-
 saveButton.disabled =
 true;
-
 
 let imageUrl =
 null;
 
 let imageUrl2 =
 null;
-
 
 if(image1){
 
@@ -1870,10 +1756,8 @@ document
 .innerText =
 "⏳ Inasoma na kupakia picha...";
 
-
 imageUrl =
 await uploadImage(image1);
-
 
 document
 .getElementById("imageStatus1")
@@ -1881,7 +1765,6 @@ document
 "✅ Picha ya kwanza imepakiwa.";
 
 }
-
 
 if(image2){
 
@@ -1895,10 +1778,8 @@ document
 .innerText =
 "⏳ Inasoma na kupakia picha ya pili...";
 
-
 imageUrl2 =
 await uploadImage(image2);
-
 
 document
 .getElementById("imageStatus2")
@@ -1908,7 +1789,6 @@ document
 }
 
 
-
 /* UPDATE */
 
 if(editingProductId){
@@ -1916,23 +1796,16 @@ if(editingProductId){
 saveButton.innerText =
 "Inahifadhi mabadiliko...";
 
-
 const updateData = {
 
 name:name,
-
 price:Number(price),
-
 category:category,
-
 place:place,
-
 description:description,
-
 phone:phone
 
 };
-
 
 if(imageUrl){
 
@@ -1941,14 +1814,12 @@ imageUrl;
 
 }
 
-
 if(imageUrl2){
 
 updateData.image_url_2 =
 imageUrl2;
 
 }
-
 
 const result =
 await supabaseClient
@@ -1958,13 +1829,11 @@ await supabaseClient
 .eq("user_id",currentUser.id)
 .select();
 
-
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 !result.data ||
@@ -1977,15 +1846,12 @@ throw new Error(
 
 }
 
-
 alert(
 "✅ Bidhaa imehaririwa kikamilifu!"
 );
 
-
 editingProductId =
 null;
-
 
 }else{
 
@@ -1995,29 +1861,19 @@ null;
 saveButton.innerText =
 "Inahifadhi bidhaa...";
 
-
 const insertData = {
 
 name:name,
-
 price:Number(price),
-
 category:category,
-
 place:place,
-
 description:description,
-
 phone:phone,
-
 image_url:imageUrl,
-
 image_url_2:imageUrl2,
-
 user_id:currentUser.id
 
 };
-
 
 const result =
 await supabaseClient
@@ -2025,13 +1881,11 @@ await supabaseClient
 .insert([insertData])
 .select();
 
-
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 !result.data ||
@@ -2044,13 +1898,11 @@ throw new Error(
 
 }
 
-
 alert(
 "🎉 Bidhaa imehifadhiwa kwenye PLAM!"
 );
 
 }
-
 
 
 /* RESET */
@@ -2059,37 +1911,30 @@ document
 .querySelector("#add form")
 .reset();
 
-
 document
 .getElementById("imageStatus1")
 .innerHTML =
 "";
-
 
 document
 .getElementById("imageStatus2")
 .innerHTML =
 "";
 
-
 document
 .getElementById("formTitle")
 .innerText =
 "➕ Weka Bidhaa";
 
-
 saveButton.innerText =
 "💾 Hifadhi Bidhaa";
-
 
 editingProductId =
 null;
 
-
 await loadProducts();
 
 show("home");
-
 
 }catch(error){
 
@@ -2117,10 +1962,9 @@ saveButton.innerText =
 }
 
 
-
-/* =====================================================
+/* ==============================
 REGISTER
-===================================================== */
+============================== */
 
 async function register(){
 
@@ -2130,12 +1974,10 @@ document
 .value
 .trim();
 
-
 const password =
 document
 .getElementById("registerPassword")
 .value;
-
 
 if(!email){
 
@@ -2147,7 +1989,6 @@ return;
 
 }
 
-
 if(!password){
 
 alert(
@@ -2157,7 +1998,6 @@ alert(
 return;
 
 }
-
 
 if(password.length < 6){
 
@@ -2169,7 +2009,6 @@ return;
 
 }
 
-
 try{
 
 const result =
@@ -2178,18 +2017,15 @@ await supabaseClient
 .signUp({
 
 email:email,
-
 password:password
 
 });
-
 
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 result.data &&
@@ -2199,16 +2035,13 @@ result.data.session
 currentUser =
 result.data.user;
 
-
 alert(
 "🎉 Akaunti imefunguliwa na umeingia."
 );
 
-
 updateAccountUI();
 
 show("home");
-
 
 }else{
 
@@ -2236,10 +2069,9 @@ error.message
 }
 
 
-
-/* =====================================================
+/* ==============================
 LOGIN
-===================================================== */
+============================== */
 
 async function login(){
 
@@ -2249,12 +2081,10 @@ document
 .value
 .trim();
 
-
 const password =
 document
 .getElementById("loginPassword")
 .value;
-
 
 if(!email){
 
@@ -2266,7 +2096,6 @@ return;
 
 }
 
-
 if(!password){
 
 alert(
@@ -2277,7 +2106,6 @@ return;
 
 }
 
-
 try{
 
 const result =
@@ -2286,11 +2114,9 @@ await supabaseClient
 .signInWithPassword({
 
 email:email,
-
 password:password
 
 });
-
 
 if(result.error){
 
@@ -2298,20 +2124,16 @@ throw result.error;
 
 }
 
-
 currentUser =
 result.data.user;
-
 
 alert(
 "✅ Umeingia kwenye akaunti."
 );
 
-
 updateAccountUI();
 
 show("home");
-
 
 }catch(error){
 
@@ -2330,10 +2152,9 @@ error.message
 }
 
 
-
-/* =====================================================
+/* ==============================
 LOGOUT
-===================================================== */
+============================== */
 
 async function logout(){
 
@@ -2359,10 +2180,9 @@ show("account");
 }
 
 
-
-/* =====================================================
+/* ==============================
 CHECK USER
-===================================================== */
+============================== */
 
 async function checkUser(){
 
@@ -2372,7 +2192,6 @@ const result =
 await supabaseClient
 .auth
 .getUser();
-
 
 if(result.error){
 
@@ -2386,9 +2205,7 @@ result.data.user || null;
 
 }
 
-
 updateAccountUI();
-
 
 }catch(error){
 
@@ -2407,24 +2224,20 @@ updateAccountUI();
 }
 
 
-
-/* =====================================================
+/* ==============================
 ACCOUNT UI
-===================================================== */
+============================== */
 
 function updateAccountUI(){
 
 const loggedOut =
 document.getElementById("loggedOut");
 
-
 const loggedIn =
 document.getElementById("loggedIn");
 
-
 const userEmail =
 document.getElementById("userEmail");
-
 
 if(!loggedOut || !loggedIn){
 
@@ -2432,13 +2245,11 @@ return;
 
 }
 
-
 if(currentUser){
 
 loggedOut.classList.add("hidden");
 
 loggedIn.classList.remove("hidden");
-
 
 if(userEmail){
 
@@ -2458,10 +2269,9 @@ loggedIn.classList.add("hidden");
 }
 
 
-
-/* =====================================================
+/* ==============================
 AUTH LISTENER
-===================================================== */
+============================== */
 
 supabaseClient
 .auth
@@ -2477,10 +2287,9 @@ updateAccountUI();
 );
 
 
-
-/* =====================================================
+/* ==============================
 MY PRODUCTS
-===================================================== */
+============================== */
 
 async function showMyProducts(){
 
@@ -2496,17 +2305,13 @@ return;
 
 }
 
-
 show("account");
-
 
 const box =
 document.getElementById("myProducts");
 
-
 box.innerHTML =
 "<h3>📦 Bidhaa Zangu</h3><p>⏳ Inapakia bidhaa zako...</p>";
-
 
 try{
 
@@ -2520,17 +2325,14 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(result.error){
 
 throw result.error;
 
 }
 
-
 const products =
 result.data || [];
-
 
 if(products.length === 0){
 
@@ -2540,7 +2342,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 "<h3>📦 Bidhaa Zangu</h3>" +
@@ -2586,11 +2387,10 @@ ${escapeHtml(p.place || "")}
 
 <br>
 
-
 <button
 type="button"
 class="primary"
-onclick="editProduct('${p.id}')">
+onclick="editProduct('${String(p.id)}')">
 
 ✏️ Hariri
 
@@ -2598,11 +2398,10 @@ onclick="editProduct('${p.id}')">
 
 <br><br>
 
-
 <button
 type="button"
 class="danger"
-onclick="deleteProduct('${p.id}')">
+onclick="deleteProduct('${String(p.id)}')">
 
 🗑️ Futa
 
@@ -2613,7 +2412,6 @@ onclick="deleteProduct('${p.id}')">
 `;
 
 }).join("");
-
 
 }catch(error){
 
@@ -2636,10 +2434,9 @@ ${escapeHtml(error.message)}
 }
 
 
-
-/* =====================================================
+/* ==============================
 EDIT PRODUCT
-===================================================== */
+============================== */
 
 function editProduct(id){
 
@@ -2651,7 +2448,6 @@ String(id);
 
 });
 
-
 if(!product){
 
 alert(
@@ -2662,68 +2458,57 @@ return;
 
 }
 
-
 editingProductId =
 product.id;
-
 
 document
 .getElementById("name")
 .value =
 product.name || "";
 
-
 document
 .getElementById("price")
 .value =
 product.price || "";
-
 
 document
 .getElementById("category")
 .value =
 product.category || "";
 
-
 document
 .getElementById("place")
 .value =
 product.place || "";
-
 
 document
 .getElementById("sellerPhone")
 .value =
 product.phone || "";
 
-
 document
 .getElementById("desc")
 .value =
 product.description || "";
-
 
 document
 .getElementById("formTitle")
 .innerText =
 "✏️ Hariri Bidhaa";
 
-
 document
 .getElementById("saveButton")
 .innerText =
 "💾 Hifadhi Mabadiliko";
-
 
 show("add");
 
 }
 
 
-
-/* =====================================================
+/* ==============================
 DELETE PRODUCT
-===================================================== */
+============================== */
 
 async function deleteProduct(id){
 
@@ -2737,7 +2522,6 @@ return;
 
 }
 
-
 if(
 !confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
@@ -2747,7 +2531,6 @@ if(
 return;
 
 }
-
 
 try{
 
@@ -2759,13 +2542,11 @@ await supabaseClient
 .eq("user_id",currentUser.id)
 .select();
 
-
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 !result.data ||
@@ -2778,11 +2559,9 @@ throw new Error(
 
 }
 
-
 alert(
 "🗑️ Bidhaa imefutwa."
 );
-
 
 ps =
 ps.filter(function(p){
@@ -2792,11 +2571,9 @@ String(id);
 
 });
 
-
 render();
 
 showMyProducts();
-
 
 }catch(error){
 
@@ -2815,10 +2592,9 @@ error.message
 }
 
 
-
-/* =====================================================
+/* ==============================
 OPEN ORDER MODAL
-===================================================== */
+============================== */
 
 function openOrderModal(productId){
 
@@ -2834,7 +2610,6 @@ return;
 
 }
 
-
 const product =
 ps.find(function(p){
 
@@ -2842,7 +2617,6 @@ return String(p.id) ===
 String(productId);
 
 });
-
 
 if(!product){
 
@@ -2853,7 +2627,6 @@ alert(
 return;
 
 }
-
 
 if(
 String(product.user_id) ===
@@ -2868,12 +2641,12 @@ return;
 
 }
 
-
 selectedOrderProduct =
 product;
 
-
-document.getElementById("orderProductInfo").innerHTML =
+document
+.getElementById("orderProductInfo")
+.innerHTML =
 
 `
 <b>Bidhaa:</b>
@@ -2890,15 +2663,21 @@ TZS ${Number(product.price || 0).toLocaleString()}
 ${escapeHtml(product.place || "")}
 `;
 
+document
+.getElementById("buyerName")
+.value = "";
 
-document.getElementById("buyerName").value = "";
+document
+.getElementById("buyerPhone")
+.value = "";
 
-document.getElementById("buyerPhone").value = "";
+document
+.getElementById("orderQuantity")
+.value = "1";
 
-document.getElementById("orderQuantity").value = "1";
-
-document.getElementById("orderMessage").value = "";
-
+document
+.getElementById("orderMessage")
+.value = "";
 
 document
 .getElementById("orderModal")
@@ -2907,10 +2686,9 @@ document
 }
 
 
-
-/* =====================================================
+/* ==============================
 CLOSE ORDER MODAL
-===================================================== */
+============================== */
 
 function closeOrderModal(){
 
@@ -2924,15 +2702,13 @@ document
 }
 
 
-
-/* =====================================================
+/* ==============================
 SUBMIT ORDER
-===================================================== */
+============================== */
 
 async function submitOrder(event){
 
 event.preventDefault();
-
 
 if(!currentUser){
 
@@ -2948,7 +2724,6 @@ return;
 
 }
 
-
 if(!selectedOrderProduct){
 
 alert(
@@ -2959,20 +2734,17 @@ return;
 
 }
 
-
 const buyerName =
 document
 .getElementById("buyerName")
 .value
 .trim();
 
-
 const buyerPhone =
 document
 .getElementById("buyerPhone")
 .value
 .trim();
-
 
 const quantity =
 Number(
@@ -2981,13 +2753,11 @@ document
 .value
 );
 
-
 const message =
 document
 .getElementById("orderMessage")
 .value
 .trim();
-
 
 if(
 !buyerName ||
@@ -3004,7 +2774,6 @@ return;
 
 }
 
-
 if(
 String(selectedOrderProduct.user_id) ===
 String(currentUser.id)
@@ -3020,19 +2789,16 @@ return;
 
 }
 
-
 const button =
 document.getElementById(
 "orderSubmitButton"
 );
-
 
 button.disabled =
 true;
 
 button.innerText =
 "⏳ Inatuma oda...";
-
 
 try{
 
@@ -3064,17 +2830,10 @@ status:
 
 };
 
-
-/*
-Muhimu:
-Tunatumia insert bila .select()
-*/
-
 const result =
 await supabaseClient
 .from("orders")
 .insert(orderData);
-
 
 if(result.error){
 
@@ -3082,14 +2841,11 @@ throw result.error;
 
 }
 
-
 alert(
 "🎉 Oda yako imetumwa kwa muuzaji!"
 );
 
-
 closeOrderModal();
-
 
 }catch(error){
 
@@ -3117,17 +2873,15 @@ button.innerText =
 }
 
 
-
-/* =====================================================
+/* ==============================
 ORDER STATUS
-===================================================== */
+============================== */
 
 function getOrderStatusHTML(status){
 
 const value =
 String(status || "pending")
 .toLowerCase();
-
 
 if(value === "accepted"){
 
@@ -3139,7 +2893,6 @@ return `
 
 }
 
-
 if(value === "rejected"){
 
 return `
@@ -3150,7 +2903,6 @@ return `
 
 }
 
-
 return `
 <span class="order-status status-pending">
 🟡 Inasubiri
@@ -3160,10 +2912,9 @@ return `
 }
 
 
-
-/* =====================================================
-MY ORDERS - BUYER
-===================================================== */
+/* ==============================
+MY ORDERS
+============================== */
 
 async function showMyOrders(){
 
@@ -3179,17 +2930,13 @@ return;
 
 }
 
-
 show("account");
-
 
 const box =
 document.getElementById("myOrders");
 
-
 box.innerHTML =
 "<h3>🛒 Oda Zangu</h3><p>⏳ Inapakia oda...</p>";
-
 
 try{
 
@@ -3203,24 +2950,20 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(result.error){
 
 throw result.error;
 
 }
 
-
 const orders =
 result.data || [];
-
 
 if(orders.length === 0){
 
 box.innerHTML =
 `
 <h3>🛒 Oda Zangu</h3>
-
 <p>
 Hujaweka oda yoyote bado.
 </p>
@@ -3230,11 +2973,9 @@ return;
 
 }
 
-
 box.innerHTML =
 `
 <h3>🛒 Oda Zangu</h3>
-
 ` +
 
 orders.map(function(order){
@@ -3247,14 +2988,12 @@ String(order.product_id);
 
 });
 
-
 const productName =
 product
 ?
 product.name
 :
 "Bidhaa #" + order.product_id;
-
 
 return `
 
@@ -3283,11 +3022,13 @@ ${escapeHtml(order.message || "Hakuna ujumbe")}
 
 <p>
 <b>Tarehe:</b>
-${order.created_at
+${
+order.created_at
 ?
 new Date(order.created_at).toLocaleString("sw-TZ")
 :
-""}
+""
+}
 </p>
 
 </div>
@@ -3295,7 +3036,6 @@ new Date(order.created_at).toLocaleString("sw-TZ")
 `;
 
 }).join("");
-
 
 }catch(error){
 
@@ -3324,10 +3064,9 @@ ${escapeHtml(error.message)}
 }
 
 
-
-/* =====================================================
+/* ==============================
 SELLER ORDERS
-===================================================== */
+============================== */
 
 async function showSellerOrders(){
 
@@ -3343,13 +3082,10 @@ return;
 
 }
 
-
 show("account");
-
 
 const box =
 document.getElementById("sellerOrders");
-
 
 box.innerHTML =
 `
@@ -3359,7 +3095,6 @@ box.innerHTML =
 ⏳ Inapakia oda za bidhaa zako...
 </p>
 `;
-
 
 try{
 
@@ -3373,17 +3108,14 @@ await supabaseClient
 {ascending:false}
 );
 
-
 if(result.error){
 
 throw result.error;
 
 }
 
-
 const orders =
 result.data || [];
-
 
 if(orders.length === 0){
 
@@ -3400,11 +3132,9 @@ return;
 
 }
 
-
 box.innerHTML =
 `
 <h3>🛍️ Oda za Wateja</h3>
-
 ` +
 
 orders.map(function(order){
@@ -3417,7 +3147,6 @@ String(order.product_id);
 
 });
 
-
 const productName =
 product
 ?
@@ -3425,13 +3154,10 @@ product.name
 :
 "Bidhaa #" + order.product_id;
 
-
 const currentStatus =
 String(order.status || "pending");
 
-
 let actionHTML = "";
-
 
 if(currentStatus === "pending"){
 
@@ -3442,7 +3168,7 @@ actionHTML = `
 <button
 type="button"
 class="primary"
-onclick="updateOrderStatus('${order.id}','accepted')">
+onclick="updateOrderStatus('${String(order.id)}','accepted')">
 
 🟢 Kubali Oda
 
@@ -3451,7 +3177,7 @@ onclick="updateOrderStatus('${order.id}','accepted')">
 <button
 type="button"
 class="danger"
-onclick="updateOrderStatus('${order.id}','rejected')">
+onclick="updateOrderStatus('${String(order.id)}','rejected')">
 
 🔴 Kataa Oda
 
@@ -3468,7 +3194,7 @@ actionHTML = `
 <button
 type="button"
 class="secondary"
-onclick="updateOrderStatus('${order.id}','pending')">
+onclick="updateOrderStatus('${String(order.id)}','pending')">
 
 ↩️ Rudisha Pending
 
@@ -3477,7 +3203,6 @@ onclick="updateOrderStatus('${order.id}','pending')">
 `;
 
 }
-
 
 return `
 
@@ -3528,7 +3253,6 @@ ${actionHTML}
 
 }).join("");
 
-
 }catch(error){
 
 console.error(
@@ -3556,10 +3280,9 @@ ${escapeHtml(error.message)}
 }
 
 
-
-/* =====================================================
+/* ==============================
 UPDATE ORDER STATUS
-===================================================== */
+============================== */
 
 async function updateOrderStatus(
 orderId,
@@ -3576,7 +3299,6 @@ return;
 
 }
 
-
 if(
 newStatus !== "pending" &&
 newStatus !== "accepted" &&
@@ -3591,10 +3313,7 @@ return;
 
 }
 
-
-let message =
-"";
-
+let message = "";
 
 if(newStatus === "accepted"){
 
@@ -3603,14 +3322,12 @@ message =
 
 }
 
-
 if(newStatus === "rejected"){
 
 message =
 "Unataka kukataa oda hii?";
 
 }
-
 
 if(newStatus === "pending"){
 
@@ -3619,7 +3336,6 @@ message =
 
 }
 
-
 if(
 !confirm(message)
 ){
@@ -3627,7 +3343,6 @@ if(
 return;
 
 }
-
 
 try{
 
@@ -3644,13 +3359,11 @@ newStatus
 .eq("seller_id",currentUser.id)
 .select();
 
-
 if(result.error){
 
 throw result.error;
 
 }
-
 
 if(
 !result.data ||
@@ -3663,14 +3376,11 @@ throw new Error(
 
 }
 
-
 alert(
 "✅ Status ya oda imebadilishwa."
 );
 
-
 await showSellerOrders();
-
 
 }catch(error){
 
@@ -3689,10 +3399,9 @@ error.message
 }
 
 
-
-/* =====================================================
+/* ==============================
 START
-===================================================== */
+============================== */
 
 show("home");
 
