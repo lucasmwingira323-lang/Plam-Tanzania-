@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="sw">
-
 <head>
 
 <meta charset="utf-8">
@@ -110,23 +109,30 @@ font-weight:bold;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
 }
 
 .card{
 background:white;
-border-radius:12px;
+border-radius:14px;
 padding:14px;
 box-shadow:0 2px 8px rgba(0,0,0,.08);
+overflow:hidden;
 }
+
+/* ==============================
+PICHA KUBWA NA NZURI
+============================== */
 
 .card img{
 width:100%;
-height:190px;
-object-fit:cover;
-border-radius:9px;
+height:300px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:12px;
 margin-bottom:10px;
+display:block;
 }
 
 .card h3{
@@ -403,6 +409,20 @@ float:right;
 background:#ddd;
 }
 
+.preview-images{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.preview-images img{
+width:100%;
+height:180px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:10px;
+}
+
 footer{
 text-align:center;
 padding:25px;
@@ -420,18 +440,10 @@ font-size:13px;
 color:#666;
 }
 
-.preview-images{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
 
-.preview-images img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:8px;
-}
+/* ==============================
+SIMU
+============================== */
 
 @media(max-width:600px){
 
@@ -444,8 +456,18 @@ padding:8px 9px;
 font-size:12px;
 }
 
+.grid{
+grid-template-columns:1fr;
+}
+
+/* Picha kubwa kwenye simu */
 .card img{
-height:170px;
+width:100%;
+height:280px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:12px;
+display:block;
 }
 
 .notification-panel{
@@ -538,7 +560,9 @@ Futa taarifa
 
 <div class="hero">
 
-<h1>Jenga biashara yako. Fikia wateja zaidi.</h1>
+<h1>
+Jenga biashara yako. Fikia wateja zaidi.
+</h1>
 
 <p>
 Karibu PLAM TANZANIA — soko la biashara mtandaoni kwa Tanzania nzima.
@@ -584,8 +608,7 @@ Zote
 
 </div>
 
-<div id="products"
-class="grid">
+<div id="products" class="grid">
 
 <div class="loading">
 ⏳ Inapakia bidhaa...
@@ -642,15 +665,10 @@ Chagua category
 </option>
 
 <option>Simu</option>
-
 <option>Elektroniki</option>
-
 <option>Mavazi</option>
-
 <option>Chakula</option>
-
 <option>Huduma</option>
-
 <option>Nyingine</option>
 
 </select>
@@ -848,7 +866,6 @@ Karibu kwenye usimamizi wa PLAM TANZANIA.
 
 
 <div class="admin-stats">
-
 
 <div class="admin-stat">
 
@@ -1088,7 +1105,6 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
 let ps=[];
 
 let currentUser=null;
@@ -1282,6 +1298,7 @@ function setupRealtime(){
 
 supabaseClient
 .channel("plam-orders-channel")
+
 .on(
 "postgres_changes",
 {
@@ -1308,6 +1325,7 @@ showSellerOrders();
 
 }
 )
+
 .on(
 "postgres_changes",
 {
@@ -1365,6 +1383,7 @@ showSellerOrders();
 
 }
 )
+
 .subscribe();
 
 }
@@ -1546,7 +1565,7 @@ data.map(function(p){
 
 const image1=
 p.image_url||
-"https://via.placeholder.com/500x350?text=PLAM+TANZANIA";
+"https://via.placeholder.com/700x500?text=PLAM+TANZANIA";
 
 let imageHtml=`
 
@@ -1800,7 +1819,7 @@ new Image();
 
 img.onload=function(){
 
-const max=1200;
+const max=1600;
 
 let width=img.width;
 
@@ -1850,7 +1869,7 @@ resolve(blob);
 
 },
 "image/jpeg",
-0.82
+0.88
 );
 
 };
@@ -1866,6 +1885,7 @@ reader.onerror=reject;
 reader.readAsDataURL(file);
 
 });
+
 
 }
 
@@ -1984,11 +2004,6 @@ await uploadImage(selectedImage2);
 
 
 if(id){
-
-const existing=
-ps.find(
-p=>String(p.id)===String(id)
-);
 
 const updateData={
 
@@ -3309,6 +3324,7 @@ orderCount.innerText="⏳";
 if(userCount)
 userCount.innerText="⏳";
 
+
 if(productsBox){
 
 productsBox.innerHTML=
@@ -3442,7 +3458,7 @@ ${escapeHtml(error.message)}
 
 
 /* ==============================
-PRODUCTS
+ADMIN PRODUCTS
 ============================== */
 
 try{
@@ -3549,7 +3565,7 @@ ${escapeHtml(error.message)}
 
 
 /* ==============================
-ORDERS
+ADMIN ORDERS
 ============================== */
 
 try{
@@ -3717,7 +3733,7 @@ ${escapeHtml(error.message)}
 
 
 /* ==============================
-SUMMARY
+ADMIN SUMMARY
 ============================== */
 
 try{
@@ -3845,5 +3861,4 @@ setupRealtime();
 </script>
 
 </body>
-
   </html>
