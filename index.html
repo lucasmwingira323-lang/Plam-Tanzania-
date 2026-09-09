@@ -6538,41 +6538,7 @@ alert(
 "❌ Tangazo halijafutwa."
 );
 
-}
-
-}
-// ==========================================
-// AUTO LOAD ADMIN ADS
-// ==========================================
-
-setInterval(() => {
-
-    const box = $("adminAds");
-    const admin = $("admin");
-
-    if (!box || !admin) return;
-
-    if (
-        !admin.classList.contains("hidden") &&
-        isAdmin &&
-        box.dataset.loaded !== "yes"
-    ) {
-
-        box.dataset.loaded = "yes";
-
-        loadAdminAds();
-
-    }
-
-    if (
-        admin.classList.contains("hidden")
-    ) {
-
-        box.dataset.loaded = "";
-
-    }
-
-}, 1000);
+):
   
 </script>
   
