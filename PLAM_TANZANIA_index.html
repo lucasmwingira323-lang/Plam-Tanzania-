@@ -1,0 +1,6372 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f4f6f8;
+color:#222
+}
+
+header{
+background:#0b7a3b;
+color:white;
+padding:15px;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 2px 8px rgba(0,0,0,.15)
+}
+
+.header-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap
+}
+
+.logo{
+font-size:22px;
+font-weight:bold
+}
+
+nav{
+display:flex;
+gap:7px;
+flex-wrap:wrap
+}
+
+nav button{
+background:#e8f5e9;
+color:#0b7a3b;
+font-weight:bold
+}
+
+button{
+border:0;
+border-radius:8px;
+padding:10px 14px;
+cursor:pointer;
+font-size:14px
+}
+
+button:disabled{
+opacity:.6;
+cursor:not-allowed
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:18px
+}
+
+.hero{
+background:#e8f5e9;
+padding:25px;
+border-radius:14px;
+margin-bottom:18px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.06)
+}
+
+.hero h1{
+color:#0b7a3b;
+margin-top:0
+}
+
+.search{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:16px;
+margin:15px 0
+}
+
+.auth-buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin:18px 0
+}
+
+.auth-buttons button{
+font-size:15px;
+font-weight:bold;
+padding:12px 18px
+}
+
+.categories{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:8px;
+margin-bottom:18px
+}
+
+.categories button{
+background:#e9f5ee;
+color:#0b7a3b;
+font-weight:bold
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+gap:18px
+}
+
+.card{
+background:#e8f5e9;
+border-radius:14px;
+padding:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+overflow:hidden
+}
+
+.product-gallery{
+width:100%;
+display:flex;
+flex-direction:column;
+gap:10px
+}
+
+.product-image-wrap{
+width:100%;
+background:#f5f5f5;
+border-radius:12px;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.product-image-wrap img{
+width:100%;
+height:auto;
+max-width:100%;
+display:block;
+object-fit:contain;
+object-position:center;
+cursor:pointer
+}
+
+.card h3{
+margin:8px 0 5px
+}
+
+.price{
+color:#0b7a3b;
+font-size:18px;
+font-weight:bold
+}
+
+.card-actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin-top:10px
+}
+
+.green{background:#0b7a3b;color:white}
+.red{background:#d62828;color:white}
+.orange{background:#f4a261;color:white}
+.blue{background:#1976d2;color:white}
+.gray{background:#777;color:white}
+.purple{background:#6a1b9a;color:white}
+
+.favorite{
+background:#ffe4e6;
+color:#b00020;
+font-weight:bold
+}
+
+.favorite.active{
+background:#d62828;
+color:white
+}
+
+.favorite-box{
+background:#fff5f6;
+border:1px solid #ffd4d9;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px
+}
+
+.favorite-card{
+background:#e8f5e9;
+border:1px solid #eee;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px;
+box-shadow:0 2px 6px rgba(0,0,0,.05)
+}
+
+.favorite-image{
+width:100%;
+max-height:230px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:10px;
+cursor:pointer
+}
+
+.favorite-count{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#d62828;
+color:white;
+min-width:24px;
+height:24px;
+padding:0 7px;
+border-radius:20px;
+font-size:12px;
+margin-left:5px
+}
+
+.hidden{
+display:none!important
+}
+
+.form-box,
+.account-box{
+background:#e8f5e9;
+padding:20px;
+border-radius:12px;
+max-width:650px;
+margin:20px auto;
+box-shadow:0 2px 8px rgba(0,0,0,.08)
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select,
+.account-box input,
+.account-box textarea,
+.account-box select,
+.modal-box input,
+.modal-box textarea{
+width:100%;
+padding:12px;
+margin:7px 0 12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px
+}
+
+.form-box textarea,
+.account-box textarea{
+min-height:100px;
+resize:vertical
+}
+
+.auth-form{
+background:#f8faf9;
+border:1px solid #e1e8e3;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+text-align:left
+}
+
+.auth-form h3{
+color:#0b7a3b;
+margin-top:0
+}
+
+.auth-form label{
+font-weight:bold;
+display:block;
+margin-top:8px
+}
+
+.auth-message{
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+display:none
+}
+
+.orders{
+display:grid;
+gap:12px
+}
+
+.order{
+background:#e8f5e9;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,.06)
+}
+
+.status{
+font-weight:bold;
+padding:6px 10px;
+border-radius:7px;
+display:inline-block
+}
+
+.status-pending{
+background:#fff3cd;
+color:#856404
+}
+
+.status-accepted{
+background:#d4edda;
+color:#155724
+}
+
+.status-rejected{
+background:#f8d7da;
+color:#721c24
+}
+
+.notification-wrap{
+position:relative;
+display:inline-block
+}
+
+.notification-button{
+background:#e8f5e9;
+color:#0b7a3b;
+font-weight:bold
+}
+
+.badge{
+position:absolute;
+top:-7px;
+right:-5px;
+background:red;
+color:white;
+font-size:11px;
+min-width:19px;
+height:19px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.notification-panel{
+position:absolute;
+right:0;
+top:45px;
+width:310px;
+max-width:90vw;
+background:#e8f5e9;
+color:#222;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+padding:10px;
+max-height:400px;
+overflow:auto;
+z-index:2000
+}
+
+.notification-item{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:13px
+}
+
+.notification-item:last-child{
+border-bottom:0
+}
+
+.admin-header{
+background:#0b7a3b;
+color:white;
+padding:22px;
+border-radius:12px;
+margin-bottom:15px
+}
+
+.admin-header h1{
+margin:0 0 8px
+}
+
+.admin-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-bottom:15px
+}
+
+.admin-stat{
+background:#e8f5e9;
+padding:18px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.07)
+}
+
+.admin-stat-number{
+font-size:28px;
+font-weight:bold;
+color:#0b7a3b;
+margin-top:8px
+}
+
+.admin-section{
+background:#e8f5e9;
+padding:18px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.06)
+}
+
+.admin-section h2{
+color:#0b7a3b;
+margin-top:0
+}
+
+.admin-order{
+background:#f7f9fa;
+border:1px solid #e0e0e0;
+padding:13px;
+border-radius:10px;
+margin-bottom:10px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:15px;
+z-index:3000
+}
+
+.modal-box{
+background:#e8f5e9;
+width:100%;
+max-width:550px;
+max-height:90vh;
+overflow:auto;
+border-radius:12px;
+padding:20px
+}
+
+.modal-box h2{
+margin-top:0;
+color:#0b7a3b
+}
+
+.close{
+float:right;
+background:#ddd
+}
+
+.preview-images{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.preview-images img{
+width:100%;
+height:180px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:10px
+}
+
+.profile-box{
+background:#f0f8f3;
+border:1px solid #d5eadc;
+border-radius:12px;
+padding:15px;
+margin:15px 0
+}
+
+.profile-logo{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+background:#eee;
+display:block;
+margin-bottom:10px
+}
+
+.profile-mini{
+background:#f7f9fa;
+border:1px solid #e0e0e0;
+padding:12px;
+border-radius:10px;
+margin-top:12px
+}
+
+.profile-mini strong{
+color:#0b7a3b
+}
+
+.location-box{
+background:#f0f8f3;
+border:1px solid #d5eadc;
+padding:12px;
+border-radius:10px;
+margin:10px 0 15px
+}
+
+.loading{
+text-align:center;
+padding:25px
+}
+
+.small{
+font-size:13px;
+color:#666
+}
+
+.error{
+color:#b00020;
+background:#ffe9ec;
+padding:10px;
+border-radius:8px
+}
+
+.success{
+color:#155724;
+background:#d4edda;
+padding:10px;
+border-radius:8px
+}
+
+/* =========================
+REVIEWS & RATINGS
+========================= */
+
+.rating-summary{
+margin:10px 0;
+padding:9px 11px;
+background:#fff8e1;
+border:1px solid #ffe082;
+border-radius:9px;
+display:inline-block;
+font-weight:bold;
+color:#8a5a00
+}
+
+.stars{
+font-size:25px;
+letter-spacing:3px;
+margin:10px 0
+}
+
+.star-button{
+background:transparent;
+padding:4px;
+font-size:30px;
+color:#bbb;
+border:0
+}
+
+.star-button.selected{
+color:#f5a623
+}
+
+.review-item{
+background:#f8faf9;
+border:1px solid #e0e7e2;
+border-radius:10px;
+padding:12px;
+margin:10px 0
+}
+
+.review-meta{
+font-size:12px;
+color:#666;
+margin-bottom:7px
+}
+
+.review-comment{
+white-space:pre-wrap;
+word-break:break-word;
+margin-top:7px
+}
+
+.review-stars{
+color:#f5a623;
+font-size:19px;
+letter-spacing:2px
+}
+
+.review-empty{
+padding:15px;
+background:#f7f7f7;
+border-radius:10px;
+text-align:center
+}
+
+.rating-box{
+background:#fff8e1;
+border-radius:10px;
+padding:12px;
+margin:10px 0
+}
+
+footer{
+text-align:center;
+padding:30px 15px
+}
+
+@media(max-width:600px){
+
+.logo{
+font-size:18px
+}
+
+nav button{
+padding:8px 9px;
+font-size:12px
+}
+
+.grid{
+grid-template-columns:1fr
+}
+
+.card{
+padding:8px
+}
+
+.product-image-wrap img{
+width:100%;
+height:auto;
+max-width:100%;
+object-fit:contain
+}
+
+.notification-panel{
+right:-100px
+}
+
+.auth-buttons{
+flex-direction:column
+}
+
+.auth-buttons button{
+width:100%
+}
+
+.preview-images{
+grid-template-columns:1fr
+}
+
+.profile-logo{
+margin-left:auto;
+margin-right:auto
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-top">
+
+<div class="logo">🇹🇿 PLAM TANZANIA</div>
+
+<nav>
+
+<button type="button" onclick="show('home')">🏠 Nyumbani</button>
+
+<button type="button" onclick="show('add')">➕ Weka Bidhaa</button>
+
+<button type="button" onclick="show('account')">👤 Akaunti</button>
+
+<button type="button" id="adminNav" class="hidden" onclick="showAdminDashboard()">🛠️ Admin</button>
+
+<div class="notification-wrap">
+
+<button type="button" class="notification-button" onclick="toggleNotifications()">
+🔔 Taarifa
+<span id="notificationBadge" class="badge hidden">0</span>
+</button>
+
+<div id="notificationPanel" class="notification-panel hidden">
+
+<div id="notifications">
+<p class="small">Hakuna taarifa mpya.</p>
+</div>
+
+<button type="button" class="gray" onclick="clearNotifications()">Futa taarifa</button>
+
+</div>
+</div>
+
+</nav>
+</div>
+</header>
+
+
+<main class="container">
+
+<section id="home">
+
+<div class="hero">
+
+<h1>Jenga biashara yako. Fikia wateja zaidi.</h1>
+
+<p>
+Karibu PLAM TANZANIA — soko la biashara mtandaoni kwa Tanzania nzima.
+</p>
+
+<div id="homeAuthButtons" class="auth-buttons">
+
+<button type="button" class="green" onclick="showRegisterForm()">
+👤 Fungua Akaunti
+</button>
+
+<button type="button" class="blue" onclick="showLoginForm()">
+🔐 Ingia
+</button>
+
+</div>
+
+
+<div id="homeRegisterForm" class="auth-form hidden">
+
+<h3>📝 Fungua Akaunti</h3>
+
+<div id="registerMessage" class="auth-message"></div>
+
+<label>Email</label>
+
+<input id="homeRegisterEmail" type="email"
+placeholder="Weka email yako" autocomplete="email">
+
+<label>Password</label>
+
+<input id="homeRegisterPassword" type="password"
+placeholder="Weka password yako" autocomplete="new-password">
+
+<button type="button" class="green" onclick="registerFromHome()">
+✅ Jisajili
+</button>
+
+<button type="button" class="gray" onclick="hideAuthForms()">
+✖ Funga
+</button>
+
+<p class="small">
+Baada ya kufungua akaunti unaweza kuingia na kuanza kutumia PLAM.
+</p>
+
+</div>
+
+
+<div id="homeLoginForm" class="auth-form hidden">
+
+<h3>🔐 Ingia kwenye Akaunti</h3>
+
+<div id="loginMessage" class="auth-message"></div>
+
+<label>Email</label>
+
+<input id="homeLoginEmail" type="email"
+placeholder="Weka email yako" autocomplete="email">
+
+<label>Password</label>
+
+<input id="homeLoginPassword" type="password"
+placeholder="Weka password yako" autocomplete="current-password">
+
+<button type="button" class="blue" onclick="loginFromHome()">
+🔐 Ingia
+</button>
+
+<button type="button" class="gray" onclick="hideAuthForms()">
+✖ Funga
+</button>
+
+</div>
+
+
+<input
+id="search"
+class="search"
+placeholder="🔍 Tafuta bidhaa, huduma, Mkoa au Wilaya..."
+oninput="render()">
+
+
+<div class="categories">
+
+<button type="button" onclick="filterCategory('all')">Zote</button>
+<button type="button" onclick="filterCategory('Simu')">📱 Simu</button>
+<button type="button" onclick="filterCategory('Elektroniki')">💻 Elektroniki</button>
+<button type="button" onclick="filterCategory('Mavazi')">👕 Mavazi</button>
+<button type="button" onclick="filterCategory('Chakula')">🍔 Chakula</button>
+<button type="button" onclick="filterCategory('Huduma')">🛠️ Huduma</button>
+<button type="button" onclick="filterCategory('Nyingine')">📦 Nyingine</button>
+
+</div>
+
+</div>
+
+
+<div id="products" class="grid">
+
+<div class="loading">
+⏳ Inapakia bidhaa...
+</div>
+
+</div>
+
+</section>
+
+
+<section id="add" class="hidden">
+
+<div class="form-box">
+
+<h2 id="productFormTitle">➕ Weka Bidhaa</h2>
+
+<form id="productForm">
+
+<input type="hidden" id="editProductId">
+
+<label>Jina la bidhaa/huduma</label>
+
+<input id="productName" required placeholder="Mfano: Samsung A05">
+
+<label>Bei</label>
+
+<input id="productPrice" type="number" required placeholder="Mfano: 250000">
+
+<label>Aina</label>
+
+<select id="productCategory" required>
+
+<option value="">Chagua category</option>
+<option>Simu</option>
+<option>Elektroniki</option>
+<option>Mavazi</option>
+<option>Chakula</option>
+<option>Huduma</option>
+<option>Nyingine</option>
+
+</select>
+
+
+<div class="location-box">
+
+<strong>📍 Mahali bidhaa ilipo</strong>
+
+<p class="small">
+Chagua Mkoa na Wilaya ili wanunuzi waweze kukupata kwa urahisi.
+</p>
+
+<label>Mkoa</label>
+
+<select id="productRegion" required onchange="updateDistricts()">
+<option value="">Chagua Mkoa</option>
+</select>
+
+<label>Wilaya</label>
+
+<select id="productDistrict" required>
+<option value="">Chagua Wilaya</option>
+</select>
+
+<label>Eneo / Mahali</label>
+
+<input id="productPlace" required placeholder="Mfano: Mabatini, Mbeya Mjini">
+
+</div>
+
+
+<label>Maelezo</label>
+
+<textarea id="productDescription"
+placeholder="Andika maelezo ya bidhaa..."></textarea>
+
+
+<label>📞 Namba ya mawasiliano ya muuzaji</label>
+
+<input id="productPhone" type="tel"
+placeholder="Mfano: 0712 345 678"
+inputmode="tel" required>
+
+<small class="small">Namba hii itaonekana kwa mnunuzi kwa ajili ya kupiga simu au WhatsApp.</small>
+
+
+<label>Picha ya kwanza</label>
+
+<input id="productImage" type="file" accept="image/*"
+onchange="previewImage(this,1)">
+
+
+<label>Picha ya pili — hiari</label>
+
+<input id="productImage2" type="file" accept="image/*"
+onchange="previewImage(this,2)">
+
+
+<div id="imagePreview" class="preview-images"></div>
+
+<br>
+
+<button id="saveProductButton" class="green" type="submit">
+💾 Hifadhi Bidhaa
+</button>
+
+<button type="button" class="gray" onclick="resetProductForm()">
+↩️ Futa
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<section id="account" class="hidden">
+
+<div class="account-box">
+
+<div id="accountLoggedOut">
+
+<h2>👤 Akaunti</h2>
+
+<p>Fungua akaunti au ingia kwenye PLAM TANZANIA.</p>
+
+<button type="button" class="green" onclick="showRegisterFormAccount()">
+👤 Fungua Akaunti
+</button>
+
+<button type="button" class="blue" onclick="showLoginFormAccount()">
+🔐 Ingia
+</button>
+
+
+<div id="accountRegisterForm" class="auth-form hidden">
+
+<h3>📝 Fungua Akaunti</h3>
+
+<input id="registerEmail" type="email" placeholder="Email">
+
+<input id="registerPassword" type="password" placeholder="Password">
+
+<button type="button" class="green" onclick="register()">
+✅ Fungua Akaunti
+</button>
+
+</div>
+
+
+<div id="accountLoginForm" class="auth-form hidden">
+
+<h3>🔐 Ingia</h3>
+
+<input id="loginEmail" type="email" placeholder="Email">
+
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button type="button" class="blue" onclick="login()">
+🔐 Ingia
+</button>
+
+</div>
+
+</div>
+
+
+<div id="accountLoggedIn" class="hidden">
+
+<h2>👤 Akaunti Yangu</h2>
+
+<p>
+<b>Email:</b>
+<span id="currentEmail"></span>
+</p>
+
+<button type="button" class="red" onclick="logout()">
+🚪 Toka
+</button>
+
+<hr>
+
+
+<h3>🏪 Wasifu wa Biashara</h3>
+
+<div id="sellerProfileDisplay">
+<p>⏳ Inapakia wasifu...</p>
+</div>
+
+<button type="button" class="green" onclick="showSellerProfileForm()">
+🏪 Tengeneza / Hariri Wasifu
+</button>
+
+
+<div id="sellerProfileForm" class="auth-form hidden">
+
+<h3>🏪 Taarifa za Biashara</h3>
+
+<div id="profileMessage" class="auth-message"></div>
+
+<label>Jina la biashara</label>
+
+<input id="profileBusinessName" type="text"
+placeholder="Mfano: Lucas Shop">
+
+<label>Jina la mwenye biashara</label>
+
+<input id="profileOwnerName" type="text"
+placeholder="Mfano: Lucas">
+
+<label>Namba ya simu</label>
+
+<input id="profilePhone" type="tel"
+placeholder="Mfano: 0712345678">
+
+<label>Mkoa</label>
+
+<select id="profileRegion" onchange="updateProfileDistricts()">
+<option value="">Chagua Mkoa</option>
+</select>
+
+<label>Wilaya</label>
+
+<select id="profileDistrict">
+<option value="">Chagua Wilaya</option>
+</select>
+
+<label>Maelezo ya biashara</label>
+
+<textarea id="profileDescription"
+placeholder="Eleza biashara yako kwa ufupi..."></textarea>
+
+<label>Logo / Picha ya biashara</label>
+
+<input id="profileLogo" type="file"
+accept="image/*" onchange="previewProfileLogo(this)">
+
+<div id="profileLogoPreview"></div>
+
+<br>
+
+<button type="button" id="saveProfileButton"
+class="green" onclick="saveSellerProfile()">
+💾 Hifadhi Wasifu
+</button>
+
+<button type="button" class="gray" onclick="hideSellerProfileForm()">
+✖ Funga
+</button>
+
+</div>
+
+
+<hr>
+
+
+<div class="favorite-box">
+
+<h3>
+❤️ Bidhaa Nilizohifadhi
+<span id="favoriteCount" class="favorite-count">0</span>
+</h3>
+
+<p class="small">
+Bidhaa unazozipenda unaweza kuzihifadhi hapa.
+</p>
+
+<div id="myFavorites">
+<p>⏳ Inapakia...</p>
+</div>
+
+</div>
+
+
+<hr>
+
+
+<h3>📦 Bidhaa Zangu</h3>
+
+<div id="myProducts">
+<p>⏳ Inapakia...</p>
+</div>
+
+
+<hr>
+
+
+<h3>🛍️ Oda Zangu</h3>
+
+<div id="myOrders">
+<p>⏳ Inapakia...</p>
+</div>
+
+
+<hr>
+
+
+<h3>🛍️ Oda za Wateja</h3>
+
+<div id="sellerOrders">
+<p>⏳ Inapakia...</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="admin" class="hidden">
+
+<div class="admin-header">
+
+<h1>🛠️ Admin Dashboard</h1>
+
+<p>
+Karibu kwenye usimamizi wa PLAM TANZANIA.
+</p>
+
+</div>
+
+
+<div class="admin-stats">
+
+<div class="admin-stat">
+<div>📦 Jumla ya Bidhaa</div>
+<div id="adminProductCount" class="admin-stat-number">0</div>
+</div>
+
+<div class="admin-stat">
+<div>🛒 Jumla ya Oda</div>
+<div id="adminOrderCount" class="admin-stat-number">0</div>
+</div>
+
+<div class="admin-stat">
+<div>👥 Watumiaji</div>
+<div id="adminUserCount" class="admin-stat-number">0</div>
+</div>
+
+<div class="admin-stat">
+
+<div>👤 Admin</div>
+
+<div id="adminEmail"
+style="margin-top:10px;font-size:13px;word-break:break-word;">
+-
+</div>
+
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>📊 Muhtasari wa Mfumo</h2>
+
+<p id="adminSummary">
+⏳ Inapakia taarifa...
+</p>
+
+<button type="button" class="blue" onclick="showAdminDashboard()">
+🔄 Refresh Dashboard
+</button>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>👥 Watumiaji wa PLAM</h2>
+
+<div id="adminUsers">
+<p>⏳ Inapakia watumiaji...</p>
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>🏪 Wasifu wa Wauzaji</h2>
+
+<div id="adminProfiles">
+<p>⏳ Inapakia wasifu...</p>
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h2>📦 Bidhaa Zote</h2>
+
+<div id="adminProducts">
+<p>⏳ Inapakia bidhaa...</p>
+</div>
+
+</div>
+
+
+  <div class="admin-section">
+
+<h2>📢 Matangazo</h2>
+
+<p>
+Hapa ndipo Admin ataweza kusimamia matangazo ya PLAM TANZANIA.
+</p>
+
+<div id="adminAds">
+<p>⏳ Inapakia matangazo...</p>
+</div>
+
+  </div>
+
+<div class="admin-section">
+
+<h2>🛒 Oda Zote</h2>
+
+<div id="adminOrders">
+<p>⏳ Inapakia oda...</p>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ORDER MODAL -->
+
+<div id="orderModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button type="button" class="close" onclick="closeOrderModal()">✖</button>
+
+<h2>🛒 Agiza Bidhaa</h2>
+
+<div id="orderProductInfo"></div>
+
+<input type="hidden" id="orderProductId">
+<input type="hidden" id="orderSellerId">
+
+<label>Jina lako</label>
+
+<input id="buyerName" placeholder="Jina lako">
+
+<label>Namba ya simu</label>
+
+<input id="buyerPhone" type="tel"
+placeholder="Mfano: 0712345678">
+
+<label>Idadi</label>
+
+<input id="orderQuantity" type="number" min="1" value="1">
+
+<label>Ujumbe</label>
+
+<textarea id="orderMessage"
+placeholder="Ujumbe kwa muuzaji..."></textarea>
+
+<br><br>
+
+<button type="button" class="green" onclick="submitOrder()">
+🛒 Tuma Oda
+</button>
+
+<button type="button" class="gray" onclick="closeOrderModal()">
+✖ Funga
+</button>
+
+</div>
+</div>
+
+
+<!-- REVIEW MODAL -->
+
+<div id="reviewModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button type="button" class="close" onclick="closeReviewModal()">
+✖
+</button>
+
+<h2>⭐ Tathmini Bidhaa</h2>
+
+<div id="reviewProductInfo"></div>
+
+<div id="reviewFormArea"></div>
+
+<hr>
+
+<h3>💬 Maoni ya Wateja</h3>
+
+<div id="productReviewsList">
+<p>⏳ Inapakia maoni...</p>
+</div>
+
+</div>
+</div>
+
+
+<footer>
+
+🇹🇿 PLAM TANZANIA
+
+<br>
+
+<span class="small">
+Jenga biashara yako. Fikia wateja zaidi.
+</span>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+"https://igcgcxkttzeaordqhqqy.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+let ps=[];
+let currentUser=null;
+let isAdmin=false;
+let currentCategory="all";
+
+let selectedImage1=null;
+let selectedImage2=null;
+
+let selectedProfileLogo=null;
+let sellerProfile=null;
+
+let favoriteProductIds=new Set();
+
+
+/* =====================================================
+REVIEWS
+===================================================== */
+
+let allReviews=[];
+let reviewStats=new Map();
+let currentReviewProductId=null;
+let currentReviewRating=5;
+
+
+/* =====================================================
+TANZANIA REGIONS
+===================================================== */
+
+const TANZANIA_REGIONS={
+
+"Dodoma":[
+"Bahi","Chamwino","Chemba","Dodoma Mjini",
+"Kondoa","Kongwa","Mpwapwa"
+],
+
+"Arusha":[
+"Arusha Mjini","Arumeru","Karatu","Longido",
+"Meru","Ngorongoro"
+],
+
+"Kilimanjaro":[
+"Moshi Mjini","Moshi Vijijini","Rombo","Same",
+"Siha","Mwanga","Hai"
+],
+
+"Tanga":[
+"Handeni","Handeni Mjini","Kilindi","Korogwe",
+"Korogwe Mjini","Lushoto","Mkinga","Muheza",
+"Pangani","Tanga Mjini"
+],
+
+"Morogoro":[
+"Kilombero","Malinyi","Morogoro Mjini",
+"Morogoro Vijijini","Mvomero","Ulanga",
+"Gairo","Kilosa"
+],
+
+"Pwani":[
+"Bagamoyo","Chalinze","Kibaha Mjini",
+"Kibaha Vijijini","Kibiti","Rufiji",
+"Mkuranga","Mafia"
+],
+
+"Dar es Salaam":[
+"Ilala","Kinondoni","Temeke","Ubungo","Kawe"
+],
+
+"Lindi":[
+"Lindi Mjini","Lindi Vijijini","Kilwa",
+"Liwale","Ruangwa","Nachingwea"
+],
+
+"Mtwara":[
+"Mtwara Mjini","Mtwara Vijijini","Masasi",
+"Masasi Mjini","Nanyumbu","Newala","Tandahimba"
+],
+
+"Ruvuma":[
+"Mbinga","Mbinga Mjini","Madaba","Nyasa",
+"Songea Mjini","Songea Vijijini","Tunduru"
+],
+
+"Iringa":[
+"Iringa Mjini","Iringa Vijijini","Kilolo","Mufindi"
+],
+
+"Mbeya":[
+"Chunya","Kyela","Mbarali","Mbeya Mjini",
+"Mbeya Vijijini","Rungwe"
+],
+
+"Singida":[
+"Ikungi","Iramba","Manyoni","Singida Mjini",
+"Singida Vijijini","Singida"
+],
+
+"Tabora":[
+"Nzega","Nzega Mjini","Sikonge","Tabora Mjini",
+"Urambo","Uyui","Kaliua"
+],
+
+"Rukwa":[
+"Kalambo","Nkasi","Sumbawanga Mjini",
+"Sumbawanga Vijijini"
+],
+
+"Kigoma":[
+"Buhigwe","Kakonko","Kasulu","Kasulu Mjini",
+"Kibondo","Kigoma Mjini","Kigoma Vijijini","Uvinza"
+],
+
+"Shinyanga":[
+"Kahama","Kahama Mjini","Kishapu",
+"Shinyanga Mjini","Shinyanga Vijijini"
+],
+
+"Kagera":[
+"Biharamulo","Bukoba Mjini","Bukoba Vijijini",
+"Karagwe","Kyerwa","Missenyi","Muleba","Ngara"
+],
+
+"Mwanza":[
+"Ilemela","Kwimba","Magu","Misungwi",
+"Mwanza Mjini","Nyamagana","Sengerema","Ukerewe"
+],
+
+"Mara":[
+"Bunda","Musoma Mjini","Musoma Vijijini",
+"Rorya","Serengeti","Tarime","Tarime Mjini"
+],
+
+"Manyara":[
+"Babati","Babati Mjini","Hanang",
+"Kiteto","Mbulu","Simanjiro"
+],
+
+"Njombe":[
+"Ludewa","Makambako","Makete","Njombe Mjini",
+"Njombe Vijijini","Wanging'ombe"
+],
+
+"Katavi":[
+"Mlele","Mpanda Mjini","Mpimbwe",
+"Nsimbo","Tanganyika"
+],
+
+"Simiyu":[
+"Bariadi","Bariadi Mjini","Busega",
+"Maswa","Meatu","Itilima"
+],
+
+"Geita":[
+"Bukombe","Chato","Geita","Geita Mjini",
+"Mbogwe","Nyamaga"
+],
+
+"Songwe":[
+"Ileje","Mbozi","Momba","Tunduma","Songwe"
+],
+
+"Kaskazini Unguja":[
+"Kaskazini A","Kaskazini B"
+],
+
+"Kusini Unguja":[
+"Kati","Kusini"
+],
+
+"Mjini Magharibi":[
+"Magharibi A","Magharibi B","Mjini"
+],
+
+"Kaskazini Pemba":[
+"Micheweni","Wete"
+],
+
+"Kusini Pemba":[
+"Chake Chake","Mkoani"
+]
+
+};
+
+
+/* =====================================================
+GENERAL
+===================================================== */
+
+function $(id){
+return document.getElementById(id);
+}
+
+
+function escapeHtml(value){
+
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function formatPrice(value){
+
+const n=Number(value||0);
+
+return new Intl.NumberFormat("sw-TZ")
+.format(n)+" TZS";
+
+}
+
+
+function cleanPhone(phone){
+
+return String(phone||"")
+.replace(/[^\d+]/g,"");
+
+}
+
+
+/* =====================================================
+REGIONS
+===================================================== */
+
+function fillRegionSelect(id,current=""){
+
+const select=$(id);
+
+if(!select)return;
+
+select.innerHTML=
+'<option value="">Chagua Mkoa</option>';
+
+Object.keys(TANZANIA_REGIONS).forEach(region=>{
+
+const option=document.createElement("option");
+
+option.value=region;
+option.textContent=region;
+
+select.appendChild(option);
+
+});
+
+if(current){
+select.value=current;
+}
+
+}
+
+
+function loadRegions(){
+
+fillRegionSelect(
+"productRegion",
+$("productRegion")?.value||""
+);
+
+fillRegionSelect(
+"profileRegion",
+$("profileRegion")?.value||""
+);
+
+updateDistricts();
+updateProfileDistricts();
+
+}
+
+
+function updateDistricts(){
+
+const region=$("productRegion");
+const district=$("productDistrict");
+
+if(!region||!district)return;
+
+const selectedRegion=region.value;
+
+district.innerHTML=
+'<option value="">Chagua Wilaya</option>';
+
+if(!selectedRegion)return;
+
+(TANZANIA_REGIONS[selectedRegion]||[])
+.forEach(item=>{
+
+const option=document.createElement("option");
+
+option.value=item.trim();
+option.textContent=item.trim();
+
+district.appendChild(option);
+
+});
+
+}
+
+
+function updateProfileDistricts(){
+
+const region=$("profileRegion");
+const district=$("profileDistrict");
+
+if(!region||!district)return;
+
+const selectedRegion=region.value;
+const oldValue=district.value;
+
+district.innerHTML=
+'<option value="">Chagua Wilaya</option>';
+
+if(!selectedRegion)return;
+
+(TANZANIA_REGIONS[selectedRegion]||[])
+.forEach(item=>{
+
+const option=document.createElement("option");
+
+option.value=item.trim();
+option.textContent=item.trim();
+
+district.appendChild(option);
+
+});
+
+if(oldValue){
+district.value=oldValue;
+}
+
+}
+
+
+/* =====================================================
+SHOW
+===================================================== */
+
+function show(id){
+
+const sections=[
+"home",
+"add",
+"account",
+"admin"
+];
+
+sections.forEach(section=>{
+
+const el=$(section);
+
+if(el){
+
+el.classList.toggle(
+"hidden",
+section!==id
+);
+
+}
+
+});
+
+
+if(id==="account"){
+
+updateAccountUI();
+
+if(currentUser){
+
+loadSellerProfile();
+showMyProducts();
+showMyFavorites();
+showMyOrders();
+showSellerOrders();
+
+}
+
+}
+
+
+if(id==="admin"){
+refreshAdminDashboard();
+}
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+AUTH FORMS
+===================================================== */
+
+function showRegisterForm(){
+
+$("homeRegisterForm").classList.remove("hidden");
+$("homeLoginForm").classList.add("hidden");
+
+}
+
+
+function showLoginForm(){
+
+$("homeLoginForm").classList.remove("hidden");
+$("homeRegisterForm").classList.add("hidden");
+
+}
+
+
+function hideAuthForms(){
+
+$("homeRegisterForm").classList.add("hidden");
+$("homeLoginForm").classList.add("hidden");
+
+}
+
+
+function showRegisterFormAccount(){
+
+$("accountRegisterForm").classList.remove("hidden");
+$("accountLoginForm").classList.add("hidden");
+
+}
+
+
+function showLoginFormAccount(){
+
+$("accountLoginForm").classList.remove("hidden");
+$("accountRegisterForm").classList.add("hidden");
+
+}
+
+
+function setMessage(id,message,success=false){
+
+const el=$(id);
+
+if(!el)return;
+
+el.style.display="block";
+
+el.className=
+"auth-message "+
+(success?"success":"error");
+
+el.textContent=message;
+
+}
+
+
+/* =====================================================
+REGISTER
+===================================================== */
+
+async function registerFromHome(){
+
+const email=$("homeRegisterEmail").value.trim();
+const password=$("homeRegisterPassword").value;
+
+if(!email||!password){
+
+setMessage(
+"registerMessage",
+"Jaza email na password."
+);
+
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+email,
+password
+});
+
+if(error)throw error;
+
+if(data.user){
+
+setMessage(
+"registerMessage",
+"✅ Akaunti imefunguliwa. Sasa unaweza kuingia.",
+true
+);
+
+$("homeRegisterPassword").value="";
+
+}else{
+
+setMessage(
+"registerMessage",
+"Angalia email yako kwa uthibitisho wa akaunti.",
+true
+);
+
+}
+
+}catch(error){
+
+console.error(error);
+
+setMessage(
+"registerMessage",
+"❌ "+error.message
+);
+
+}
+
+}
+
+
+async function register(){
+
+const email=$("registerEmail").value.trim();
+const password=$("registerPassword").value;
+
+if(!email||!password){
+
+alert("Jaza email na password.");
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+email,
+password
+});
+
+if(error)throw error;
+
+if(data.user){
+
+alert(
+"✅ Akaunti imefunguliwa. Sasa unaweza kuingia."
+);
+
+$("registerPassword").value="";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+alert("❌ "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+async function loginFromHome(){
+
+const email=$("homeLoginEmail").value.trim();
+const password=$("homeLoginPassword").value;
+
+if(!email||!password){
+
+setMessage(
+"loginMessage",
+"Jaza email na password."
+);
+
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
+email,
+password
+});
+
+if(error)throw error;
+
+currentUser=data.user;
+
+setMessage(
+"loginMessage",
+"✅ Umeingia kwenye PLAM.",
+true
+);
+
+$("homeLoginPassword").value="";
+
+hideAuthForms();
+
+await checkAdmin();
+await loadSellerProfile();
+await loadFavorites();
+
+updateAccountUI();
+
+setTimeout(
+()=>show("account"),
+300
+);
+
+}catch(error){
+
+console.error(error);
+
+setMessage(
+"loginMessage",
+"❌ "+error.message
+);
+
+}
+
+}
+
+
+async function login(){
+
+const email=$("loginEmail").value.trim();
+const password=$("loginPassword").value;
+
+if(!email||!password){
+
+alert("Jaza email na password.");
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
+email,
+password
+});
+
+if(error)throw error;
+
+currentUser=data.user;
+
+$("loginPassword").value="";
+
+await checkAdmin();
+await loadSellerProfile();
+await loadFavorites();
+
+updateAccountUI();
+
+show("account");
+
+}catch(error){
+
+console.error(error);
+
+alert("❌ "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+async function logout(){
+
+try{
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+sellerProfile=null;
+favoriteProductIds=new Set();
+
+updateAccountUI();
+updateAdminUI();
+render();
+
+show("home");
+
+alert("Umetoka kwenye akaunti.");
+
+}catch(error){
+
+console.error(error);
+
+alert("Imeshindikana kutoka.");
+
+}
+
+}
+
+
+/* =====================================================
+ACCOUNT
+===================================================== */
+
+function updateAccountUI(){
+
+const loggedOut=$("accountLoggedOut");
+const loggedIn=$("accountLoggedIn");
+
+if(!loggedOut||!loggedIn)return;
+
+if(!currentUser){
+
+loggedOut.classList.remove("hidden");
+loggedIn.classList.add("hidden");
+$("currentEmail").textContent="";
+
+}else{
+
+loggedOut.classList.add("hidden");
+loggedIn.classList.remove("hidden");
+$("currentEmail").textContent=currentUser.email||"";
+
+}
+
+}
+
+
+function updateAdminUI(){
+
+const nav=$("adminNav");
+
+if(!nav)return;
+
+nav.classList.toggle(
+"hidden",
+!isAdmin
+);
+
+}
+
+
+/* =====================================================
+CHECK USER
+===================================================== */
+
+async function checkUser(){
+
+try{
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+currentUser=session?.user||null;
+
+await checkAdmin();
+
+if(currentUser){
+
+await loadSellerProfile();
+await loadFavorites();
+renderNotifications();
+
+}else{
+
+favoriteProductIds=new Set();
+
+}
+
+updateAccountUI();
+updateAdminUI();
+
+}catch(error){
+
+console.error(
+"CHECK USER ERROR:",
+error
+);
+
+}
+
+}
+
+
+/* =====================================================
+CHECK ADMIN
+===================================================== */
+
+async function checkAdmin(){
+
+isAdmin=false;
+
+if(!currentUser){
+
+updateAdminUI();
+return false;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("admins")
+.select("user_id")
+.eq("user_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+
+console.error("ADMIN CHECK:",error);
+isAdmin=false;
+
+}else{
+
+isAdmin=!!data;
+
+}
+
+}catch(error){
+
+console.error(error);
+isAdmin=false;
+
+}
+
+updateAdminUI();
+
+return isAdmin;
+
+}
+
+
+/* =====================================================
+SELLER PROFILE
+===================================================== */
+
+async function loadSellerProfile(){
+
+if(!currentUser)return null;
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.select("*")
+.eq("user_id",currentUser.id)
+.maybeSingle();
+
+if(error)throw error;
+
+sellerProfile=data||null;
+
+renderSellerProfile();
+
+return sellerProfile;
+
+}catch(error){
+
+console.error(
+"LOAD SELLER PROFILE:",
+error
+);
+
+sellerProfile=null;
+
+renderSellerProfile();
+
+return null;
+
+}
+
+}
+
+
+function renderSellerProfile(){
+
+const box=$("sellerProfileDisplay");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML="<p>Ingia kwanza.</p>";
+return;
+
+}
+
+if(!sellerProfile){
+
+box.innerHTML=`
+
+<div class="profile-box">
+
+<h3>🏪 Wasifu wa Biashara</h3>
+
+<p>Bado hujatengeneza wasifu wa biashara.</p>
+
+<p class="small">
+Tengeneza wasifu ili wanunuzi wajue biashara yako.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+let logo="";
+
+if(sellerProfile.logo_url){
+
+logo=`
+
+<img
+class="profile-logo"
+src="${escapeHtml(sellerProfile.logo_url)}"
+alt="Logo ya biashara">
+
+`;
+
+}
+
+box.innerHTML=`
+
+<div class="profile-box">
+
+${logo}
+
+<h3>
+🏪 ${escapeHtml(
+sellerProfile.business_name||"Biashara yangu"
+)}
+</h3>
+
+<p>
+<b>👤 Mwenye biashara:</b>
+${escapeHtml(sellerProfile.owner_name||"-")}
+</p>
+
+<p>
+<b>📞 Simu:</b>
+${escapeHtml(sellerProfile.phone||"-")}
+</p>
+
+<p>
+<b>📍 Mkoa:</b>
+${escapeHtml(sellerProfile.region||"-")}
+</p>
+
+<p>
+<b>🏘️ Wilaya:</b>
+${escapeHtml(sellerProfile.district||"-")}
+</p>
+
+<p>
+<b>📝 Kuhusu biashara:</b><br>
+${escapeHtml(
+sellerProfile.description||
+"Hakuna maelezo bado."
+)}
+</p>
+
+</div>
+
+`;
+
+}
+
+
+function showSellerProfileForm(){
+
+if(!currentUser){
+
+alert(
+"Ingia kwanza ili utengeneze wasifu wa biashara."
+);
+
+show("account");
+return;
+
+}
+
+$("sellerProfileForm").classList.remove("hidden");
+
+if(sellerProfile){
+
+$("profileBusinessName").value=
+sellerProfile.business_name||"";
+
+$("profileOwnerName").value=
+sellerProfile.owner_name||"";
+
+$("profilePhone").value=
+sellerProfile.phone||"";
+
+$("profileRegion").value=
+sellerProfile.region||"";
+
+updateProfileDistricts();
+
+$("profileDistrict").value=
+sellerProfile.district||"";
+
+$("profileDescription").value=
+sellerProfile.description||"";
+
+$("profileLogoPreview").innerHTML=
+sellerProfile.logo_url
+?
+`
+<img
+class="profile-logo"
+src="${escapeHtml(sellerProfile.logo_url)}"
+alt="Logo ya sasa">
+
+<p class="small">Logo ya sasa</p>
+`
+:
+"";
+
+}else{
+
+$("profileBusinessName").value="";
+$("profileOwnerName").value="";
+$("profilePhone").value="";
+$("profileRegion").value="";
+
+$("profileDistrict").innerHTML=
+'<option value="">Chagua Wilaya</option>';
+
+$("profileDescription").value="";
+$("profileLogoPreview").innerHTML="";
+
+}
+
+}
+
+
+function hideSellerProfileForm(){
+
+$("sellerProfileForm").classList.add("hidden");
+
+}
+
+
+function previewProfileLogo(input){
+
+const file=input?.files?.[0];
+
+if(!file)return;
+
+selectedProfileLogo=file;
+
+const url=URL.createObjectURL(file);
+
+$("profileLogoPreview").innerHTML=`
+
+<img
+class="profile-logo"
+src="${url}"
+alt="Logo mpya">
+
+<p class="small">Logo mpya</p>
+
+`;
+
+}
+
+
+async function saveSellerProfile(){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+return;
+
+}
+
+const businessName=$("profileBusinessName").value.trim();
+const ownerName=$("profileOwnerName").value.trim();
+const phone=$("profilePhone").value.trim();
+const region=$("profileRegion").value;
+const district=$("profileDistrict").value;
+const description=$("profileDescription").value.trim();
+
+if(!businessName||!ownerName||!phone||!region||!district){
+
+setMessage(
+"profileMessage",
+"Jaza taarifa zote muhimu za biashara."
+);
+
+return;
+
+}
+
+const button=$("saveProfileButton");
+
+button.disabled=true;
+button.textContent="⏳ Inahifadhi...";
+
+try{
+
+let logoUrl=sellerProfile?.logo_url||null;
+
+if(selectedProfileLogo){
+
+logoUrl=
+await uploadProfileLogo(
+selectedProfileLogo,
+currentUser.id
+);
+
+}
+
+const payload={
+
+user_id:currentUser.id,
+business_name:businessName,
+owner_name:ownerName,
+phone:phone,
+region:region,
+district:district,
+description:description,
+logo_url:logoUrl
+
+};
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.upsert(
+payload,
+{onConflict:"user_id"}
+)
+.select()
+.single();
+
+if(error)throw error;
+
+sellerProfile=data;
+
+setMessage(
+"profileMessage",
+"✅ Wasifu wa biashara umehifadhiwa!",
+true
+);
+
+selectedProfileLogo=null;
+
+renderSellerProfile();
+hideSellerProfileForm();
+
+}catch(error){
+
+console.error(
+"SAVE SELLER PROFILE:",
+error
+);
+
+setMessage(
+"profileMessage",
+"❌ Wasifu haujahifadhiwa: "+
+error.message
+);
+
+}finally{
+
+button.disabled=false;
+button.textContent="💾 Hifadhi Wasifu";
+
+}
+
+}
+
+
+async function uploadProfileLogo(file,userId){
+
+if(!file)return null;
+
+const blob=await compressImage(file);
+
+const filename=
+userId+
+"/profile_"+
+Date.now()+
+"_"+Math.random()
+.toString(36)
+.substring(2)+
+".jpg";
+
+const {error}=
+await supabaseClient
+.storage
+.from("product-images")
+.upload(
+filename,
+blob,
+{
+contentType:"image/jpeg",
+upsert:false
+}
+);
+
+if(error)throw error;
+
+const {data}=
+supabaseClient
+.storage
+.from("product-images")
+.getPublicUrl(filename);
+
+return data.publicUrl;
+
+}
+
+
+/* =====================================================
+FAVORITES
+===================================================== */
+
+async function loadFavorites(){
+
+if(!currentUser){
+
+favoriteProductIds=new Set();
+updateFavoriteCount();
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("favorites")
+.select("product_id")
+.eq("user_id",currentUser.id);
+
+if(error)throw error;
+
+favoriteProductIds=
+new Set(
+(data||[]).map(item=>String(item.product_id))
+);
+
+updateFavoriteCount();
+render();
+
+if($("myFavorites")){
+showMyFavorites();
+}
+
+}catch(error){
+
+console.error(
+"LOAD FAVORITES:",
+error
+);
+
+favoriteProductIds=new Set();
+updateFavoriteCount();
+
+}
+
+}
+
+
+function updateFavoriteCount(){
+
+const count=$("favoriteCount");
+
+if(!count)return;
+
+count.textContent=
+String(favoriteProductIds.size);
+
+}
+
+
+async function toggleFavorite(productId){
+
+if(!currentUser){
+
+alert(
+"⚠️ Ingia kwenye akaunti kwanza ili kuhifadhi bidhaa."
+);
+
+show("account");
+return;
+
+}
+
+const id=String(productId);
+const numericId=Number(productId);
+
+if(!Number.isFinite(numericId)){
+
+alert("❌ Bidhaa hii haijatambulika.");
+return;
+
+}
+
+try{
+
+if(favoriteProductIds.has(id)){
+
+const {error}=
+await supabaseClient
+.from("favorites")
+.delete()
+.eq("user_id",currentUser.id)
+.eq("product_id",numericId);
+
+if(error)throw error;
+
+favoriteProductIds.delete(id);
+
+}else{
+
+const {error}=
+await supabaseClient
+.from("favorites")
+.insert({
+user_id:currentUser.id,
+product_id:numericId
+});
+
+if(error)throw error;
+
+favoriteProductIds.add(id);
+
+}
+
+updateFavoriteCount();
+render();
+await showMyFavorites();
+
+}catch(error){
+
+console.error(
+"TOGGLE FAVORITE:",
+error
+);
+
+alert(
+"❌ Imeshindikana kubadilisha Favorites.\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+async function showMyFavorites(){
+
+const box=$("myFavorites");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML="<p>Ingia kwanza.</p>";
+updateFavoriteCount();
+return;
+
+}
+
+box.innerHTML="<p>⏳ Inapakia Favorites...</p>";
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("favorites")
+.select("product_id,created_at")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+const favorites=data||[];
+
+favoriteProductIds=
+new Set(
+favorites.map(item=>String(item.product_id))
+);
+
+updateFavoriteCount();
+
+if(!favorites.length){
+
+box.innerHTML=`
+
+<div class="favorite-card">
+
+<p>❤️ Bado hujahifadhi bidhaa yoyote.</p>
+
+<button
+type="button"
+class="green"
+onclick="show('home')">
+🏠 Tafuta Bidhaa
+</button>
+
+</div>
+
+`;
+
+return;
+
+}
+
+const favoriteProducts=[];
+
+favorites.forEach(item=>{
+
+const product=
+ps.find(
+p=>String(p.id)===
+String(item.product_id)
+);
+
+if(product)favoriteProducts.push(product);
+
+});
+
+
+if(!favoriteProducts.length){
+
+box.innerHTML=`
+
+<div class="favorite-card">
+
+<p>
+📦 Bidhaa ulizohifadhi hazipatikani tena.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML=
+favoriteProducts.map(product=>{
+
+const isOwner=
+currentUser&&
+product.user_id===
+currentUser.id;
+
+let image="";
+
+if(product.image_url){
+
+image=`
+
+<img
+class="favorite-image"
+src="${escapeHtml(product.image_url)}"
+alt="${escapeHtml(product.name)}"
+onclick="openImage(this.src)">
+
+`;
+
+}else{
+
+image=`
+
+<div style="
+padding:40px;
+text-align:center;
+background:#f5f5f5;
+border-radius:10px">
+📦 Hakuna picha
+</div>
+
+`;
+
+}
+
+return `
+
+<div class="favorite-card">
+
+${image}
+
+<h3>${escapeHtml(product.name)}</h3>
+
+<div class="price">
+${formatPrice(product.price)}
+</div>
+
+${renderRatingSummary(product.id)}
+
+<p>
+<b>📂 Aina:</b>
+${escapeHtml(product.category||"-")}
+</p>
+
+<p>
+<b>📍 Mkoa:</b>
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+<b>🏘️ Wilaya:</b>
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+<b>📌 Eneo:</b>
+${escapeHtml(product.place||"-")}
+</p>
+
+<div class="card-actions">
+
+<button
+type="button"
+class="favorite active"
+onclick="toggleFavorite('${product.id}')">
+💔 Ondoa
+</button>
+
+<button
+type="button"
+class="blue"
+onclick="openReviewModal('${product.id}')">
+💬 Maoni
+</button>
+
+${
+!isOwner
+?
+`
+<button
+type="button"
+class="orange"
+onclick="openOrderModal('${product.id}')">
+🛒 Agiza
+</button>
+`
+:
+""
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}catch(error){
+
+console.error(
+"SHOW MY FAVORITES:",
+error
+);
+
+box.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia Favorites.</div>';
+
+}
+
+}
+
+
+/* =====================================================
+LOAD PRODUCTS
+===================================================== */
+
+async function loadProducts(){
+
+const container=$("products");
+
+if(!container)return;
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+ps=data||[];
+
+render();
+
+}catch(error){
+
+console.error(
+"LOAD PRODUCTS:",
+error
+);
+
+ps=[];
+
+container.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia bidhaa.<br>'+
+escapeHtml(error.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =====================================================
+REVIEWS - LOAD
+===================================================== */
+
+async function loadReviews(){
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("reviews")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+allReviews=data||[];
+
+reviewStats=new Map();
+
+allReviews.forEach(review=>{
+
+const id=String(review.product_id);
+
+if(!reviewStats.has(id)){
+
+reviewStats.set(id,{
+count:0,
+sum:0,
+average:0
+});
+
+}
+
+const stats=reviewStats.get(id);
+
+stats.count++;
+stats.sum+=Number(review.rating||0);
+stats.average=
+stats.sum/stats.count;
+
+});
+
+render();
+
+if(
+currentReviewProductId &&
+!$("reviewModal").classList.contains("hidden")
+){
+
+renderReviewModal();
+
+}
+
+}catch(error){
+
+console.error(
+"LOAD REVIEWS:",
+error
+);
+
+allReviews=[];
+reviewStats=new Map();
+
+}
+
+}
+
+
+/* =====================================================
+REVIEW SUMMARY
+===================================================== */
+
+function getReviewSummary(productId){
+
+const stats=
+reviewStats.get(
+String(productId)
+);
+
+if(!stats){
+
+return{
+count:0,
+average:0
+};
+
+}
+
+return{
+count:stats.count,
+average:stats.average
+};
+
+}
+
+
+function renderRatingSummary(productId){
+
+const summary=
+getReviewSummary(productId);
+
+if(!summary.count){
+
+return `
+<div class="rating-summary">
+⭐ Hakuna tathmini bado
+</div>
+`;
+
+}
+
+return `
+<div class="rating-summary">
+⭐ ${summary.average.toFixed(1)}/5
+(${summary.count})
+</div>
+`;
+
+}
+
+
+/* =====================================================
+RENDER PRODUCTS
+===================================================== */
+
+function render(){
+
+const container=$("products");
+
+if(!container)return;
+
+const search=
+($("search")?.value||"")
+.toLowerCase()
+.trim();
+
+const filtered=
+ps.filter(product=>{
+
+const matchesCategory=
+currentCategory==="all"||
+String(product.category||"")
+.toLowerCase()===
+currentCategory.toLowerCase();
+
+const text=[
+product.name,
+product.category,
+product.description,
+product.place,
+product.region,
+product.district
+]
+.join(" ")
+.toLowerCase();
+
+const matchesSearch=
+!search||
+text.includes(search);
+
+return matchesCategory&&matchesSearch;
+
+});
+
+
+if(!filtered.length){
+
+container.innerHTML=
+'<div class="card"><p>Hakuna bidhaa iliyopatikana.</p></div>';
+
+return;
+
+}
+
+
+container.innerHTML=
+filtered.map(product=>{
+
+const image1=product.image_url;
+const image2=product.image_url_2;
+
+let images="";
+
+if(image1){
+
+images+=`
+
+<div class="product-image-wrap">
+
+<img
+src="${escapeHtml(image1)}"
+alt="${escapeHtml(product.name)}"
+onclick="openImage(this.src)">
+
+<button type="button" class="blue"
+style="margin-top:8px;width:100%"
+onclick="downloadImage('${escapeHtml(image1)}','${escapeHtml(product.name)}-picha-1.jpg')">
+⬇️ Pakua Picha 1
+</button>
+
+</div>
+
+`;
+
+}
+
+if(image2){
+
+images+=`
+
+<div class="product-image-wrap">
+
+<img
+src="${escapeHtml(image2)}"
+alt="${escapeHtml(product.name)}"
+onclick="openImage(this.src)">
+
+<button type="button" class="blue"
+style="margin-top:8px;width:100%"
+onclick="downloadImage('${escapeHtml(image2)}','${escapeHtml(product.name)}-picha-2.jpg')">
+⬇️ Pakua Picha 2
+</button>
+
+</div>
+
+`;
+
+}
+
+if(!images){
+
+images=
+'<div style="padding:40px;text-align:center;background:#f5f5f5;border-radius:12px">📦 Hakuna picha</div>';
+
+}
+
+
+const isOwner=
+currentUser&&
+product.user_id===
+currentUser.id;
+
+const profile=
+product.user_id===
+currentUser?.id
+?
+sellerProfile
+:
+null;
+
+const isFavorite=
+favoriteProductIds.has(
+String(product.id)
+);
+
+
+let favoriteButton="";
+
+if(!isOwner){
+
+favoriteButton=`
+
+<button
+type="button"
+class="favorite ${isFavorite?"active":""}"
+onclick="toggleFavorite('${product.id}')">
+
+${isFavorite?"💔 Ondoa":"❤️ Hifadhi"}
+
+</button>
+
+`;
+
+}
+
+
+return `
+
+<div class="card">
+
+<div class="product-gallery">
+${images}
+</div>
+
+<h3>${escapeHtml(product.name)}</h3>
+
+<div class="price">
+${formatPrice(product.price)}
+</div>
+
+${renderRatingSummary(product.id)}
+
+<div class="card-actions">
+
+<button
+type="button"
+class="blue"
+onclick="openReviewModal('${product.id}')">
+💬 Maoni (${getReviewSummary(product.id).count})
+</button>
+
+${
+!isOwner
+?
+`
+<button
+type="button"
+class="orange"
+onclick="openReviewModal('${product.id}')">
+⭐ Tathmini
+</button>
+`
+:
+""
+}
+
+</div>
+
+<p>
+<b>📂 Aina:</b>
+${escapeHtml(product.category||"-")}
+</p>
+
+<p>
+<b>📍 Mkoa:</b>
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+<b>🏘️ Wilaya:</b>
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+<b>📌 Eneo:</b>
+${escapeHtml(product.place||"-")}
+</p>
+
+<p>
+${escapeHtml(product.description||"")}
+</p>
+
+
+${
+profile
+?
+`
+
+<div class="profile-mini">
+
+<strong>
+🏪 ${escapeHtml(
+profile.business_name||
+"Biashara"
+)}
+</strong>
+
+<p>
+👤 ${escapeHtml(
+profile.owner_name||"-"
+)}
+</p>
+
+<p>
+📞 ${escapeHtml(
+profile.phone||
+product.phone||
+"-"
+)}
+</p>
+
+</div>
+
+`
+:
+""
+}
+
+
+<div class="card-actions">
+
+${favoriteButton}
+
+${
+product.phone
+?
+`
+
+<button
+type="button"
+class="green"
+onclick="callSeller('${escapeHtml(product.phone)}')">
+📞 Piga
+</button>
+
+<button
+type="button"
+class="blue"
+onclick="whatsappSeller('${escapeHtml(product.phone)}','${escapeHtml(product.name)}')">
+💬 WhatsApp
+</button>
+
+`
+:
+""
+}
+
+
+${
+currentUser&&!isOwner
+?
+`
+
+<button
+type="button"
+class="orange"
+onclick="openOrderModal('${product.id}')">
+🛒 Agiza
+</button>
+
+`
+:
+""
+}
+
+
+${
+isOwner
+?
+`
+
+<button
+type="button"
+class="blue"
+onclick="editProduct('${product.id}')">
+✏️ Hariri
+</button>
+
+<button
+type="button"
+class="red"
+onclick="deleteProduct('${product.id}')">
+🗑️ Futa
+</button>
+
+`
+:
+""
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function filterCategory(category){
+
+currentCategory=category;
+render();
+
+}
+
+
+/* =====================================================
+REVIEW MODAL
+===================================================== */
+
+function openReviewModal(productId){
+
+const product=
+ps.find(
+p=>String(p.id)===
+String(productId)
+);
+
+if(!product){
+
+alert("Bidhaa haijapatikana.");
+return;
+
+}
+
+currentReviewProductId=
+String(product.id);
+
+currentReviewRating=5;
+
+renderReviewModal();
+
+$("reviewModal")
+.classList.remove("hidden");
+
+}
+
+
+function closeReviewModal(){
+
+$("reviewModal")
+.classList.add("hidden");
+
+currentReviewProductId=null;
+
+}
+
+
+function renderStarsSelector(){
+
+let html="";
+
+for(let i=1;i<=5;i++){
+
+html+=`
+
+<button
+type="button"
+class="star-button ${
+i<=currentReviewRating?"selected":""
+}"
+onclick="selectReviewRating(${i})">
+★
+</button>
+
+`;
+
+}
+
+return html;
+
+}
+
+
+function selectReviewRating(rating){
+
+currentReviewRating=
+Number(rating);
+
+const stars=$("reviewStars");
+
+if(stars){
+
+stars.innerHTML=
+renderStarsSelector();
+
+}
+
+}
+
+
+function getStars(rating){
+
+const n=
+Math.max(
+1,
+Math.min(
+5,
+Number(rating||0)
+)
+);
+
+return "★".repeat(n)+
+"☆".repeat(5-n);
+
+}
+
+
+function renderReviewModal(){
+
+const product=
+ps.find(
+p=>String(p.id)===
+String(currentReviewProductId)
+);
+
+if(!product)return;
+
+const summary=
+getReviewSummary(product.id);
+
+$("reviewProductInfo").innerHTML=`
+
+<div class="rating-box">
+
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<p class="price">
+${formatPrice(product.price)}
+</p>
+
+<p>
+⭐ ${
+summary.count
+?
+summary.average.toFixed(1)+
+"/5 ("+summary.count+" tathmini)"
+:
+"Hakuna tathmini bado"
+}
+</p>
+
+</div>
+
+`;
+
+
+const reviews=
+allReviews.filter(
+review=>
+String(review.product_id)===
+String(product.id)
+);
+
+
+let ownReview=null;
+
+if(currentUser){
+
+ownReview=
+reviews.find(
+review=>
+review.user_id===
+currentUser.id
+)||null;
+
+}
+
+
+if(ownReview){
+
+currentReviewRating=
+Number(ownReview.rating||5);
+
+}
+
+
+let formHtml="";
+
+
+if(!currentUser){
+
+formHtml=`
+
+<div class="auth-form">
+
+<p>
+🔐 <b>Ingia ili utoe tathmini na kuandika maoni.</b>
+</p>
+
+<button
+type="button"
+class="blue"
+onclick="closeReviewModal();show('account');showLoginFormAccount();">
+🔐 Ingia
+</button>
+
+</div>
+
+`;
+
+}else if(
+product.user_id===
+currentUser.id
+){
+
+formHtml=`
+
+<div class="auth-form">
+
+<p>
+🏪 Huwezi kutoa tathmini kwenye bidhaa yako mwenyewe.
+</p>
+
+</div>
+
+`;
+
+}else{
+
+formHtml=`
+
+<div class="auth-form">
+
+<h3>
+${ownReview?"✏️ Hariri Tathmini Yako":"⭐ Toa Tathmini"}
+</h3>
+
+<div id="reviewSaveMessage" class="auth-message"></div>
+
+<label>Chagua nyota</label>
+
+<div
+id="reviewStars"
+class="stars">
+${renderStarsSelector()}
+</div>
+
+<label>Maoni</label>
+
+<textarea
+id="reviewComment"
+placeholder="Andika maoni yako kuhusu bidhaa hii...">${
+escapeHtml(ownReview?.comment||"")
+}</textarea>
+
+<button
+type="button"
+id="saveReviewButton"
+class="green"
+onclick="saveReview()">
+💾 ${ownReview?"Sasisha Tathmini":"Hifadhi Tathmini"}
+</button>
+
+${
+ownReview
+?
+`
+<button
+type="button"
+class="red"
+onclick="deleteReview('${ownReview.id}')">
+🗑️ Futa Tathmini
+</button>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+}
+
+
+$("reviewFormArea").innerHTML=formHtml;
+
+
+if(!reviews.length){
+
+$("productReviewsList").innerHTML=`
+
+<div class="review-empty">
+
+<p>⭐ Hakuna maoni bado.</p>
+
+<p class="small">
+Kuwa wa kwanza kutoa tathmini ya bidhaa hii.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+$("productReviewsList").innerHTML=
+reviews.map(review=>{
+
+const own=
+currentUser&&
+review.user_id===
+currentUser.id;
+
+return `
+
+<div class="review-item">
+
+<div class="review-meta">
+
+<b>
+👤 ${own?"Wewe":"Mteja"}
+</b>
+
+&nbsp; • &nbsp;
+
+${review.created_at
+?
+new Date(review.created_at)
+.toLocaleString("sw-TZ")
+:
+""}
+
+</div>
+
+<div class="review-stars">
+${getStars(review.rating)}
+</div>
+
+${
+review.comment
+?
+`
+<div class="review-comment">
+${escapeHtml(review.comment)}
+</div>
+`
+:
+`
+<div class="small">
+Hakuna maoni yaliyoandikwa.
+</div>
+`
+}
+
+${
+own
+?
+`
+<div class="card-actions">
+
+<button
+type="button"
+class="blue"
+onclick="startEditReview('${review.id}')">
+✏️ Hariri
+</button>
+
+<button
+type="button"
+class="red"
+onclick="deleteReview('${review.id}')">
+🗑️ Futa
+</button>
+
+</div>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function startEditReview(reviewId){
+
+const review=
+allReviews.find(
+item=>String(item.id)===
+String(reviewId)
+);
+
+if(!review)return;
+
+currentReviewRating=
+Number(review.rating||5);
+
+renderReviewModal();
+
+const textarea=$("reviewComment");
+
+if(textarea){
+
+textarea.focus();
+
+textarea.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+
+/* =====================================================
+SAVE REVIEW
+===================================================== */
+
+async function saveReview(){
+
+if(!currentUser){
+
+alert("🔐 Ingia kwanza ili utoe tathmini.");
+return;
+
+}
+
+if(!currentReviewProductId){
+
+alert("Bidhaa haijapatikana.");
+return;
+
+}
+
+const product=
+ps.find(
+p=>String(p.id)===
+String(currentReviewProductId)
+);
+
+if(
+product &&
+product.user_id===
+currentUser.id
+){
+
+alert(
+"Huwezi kutoa tathmini kwenye bidhaa yako mwenyewe."
+);
+
+return;
+
+}
+
+const comment=
+$("reviewComment")?.value.trim()||"";
+
+const button=$("saveReviewButton");
+
+if(button){
+
+button.disabled=true;
+button.textContent="⏳ Inahifadhi...";
+
+}
+
+try{
+
+const {error}=
+await supabaseClient
+.from("reviews")
+.upsert({
+
+product_id:
+Number(currentReviewProductId),
+
+user_id:
+currentUser.id,
+
+rating:
+currentReviewRating,
+
+comment:
+comment||null
+
+},{
+onConflict:"user_id,product_id"
+});
+
+if(error)throw error;
+
+await loadReviews();
+
+alert(
+"✅ Tathmini yako imehifadhiwa!"
+);
+
+}catch(error){
+
+console.error(
+"SAVE REVIEW:",
+error
+);
+
+const msg=$("reviewSaveMessage");
+
+if(msg){
+
+setMessage(
+"reviewSaveMessage",
+"❌ Tathmini haijahifadhiwa: "+
+error.message
+);
+
+}else{
+
+alert(
+"❌ Tathmini haijahifadhiwa.\n\n"+
+error.message
+);
+
+}
+
+}finally{
+
+if(button){
+
+button.disabled=false;
+
+button.textContent=
+"💾 Hifadhi Tathmini";
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+DELETE REVIEW
+===================================================== */
+
+async function deleteReview(reviewId){
+
+if(!currentUser){
+
+alert("🔐 Ingia kwanza.");
+return;
+
+}
+
+if(!confirm(
+"Una uhakika unataka kufuta tathmini hii?"
+))return;
+
+try{
+
+const {error}=
+await supabaseClient
+.from("reviews")
+.delete()
+.eq("id",reviewId)
+.eq("user_id",currentUser.id);
+
+if(error)throw error;
+
+await loadReviews();
+
+alert(
+"✅ Tathmini imefutwa."
+);
+
+}catch(error){
+
+console.error(
+"DELETE REVIEW:",
+error
+);
+
+alert(
+"❌ Imeshindikana kufuta tathmini.\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+IMAGE
+===================================================== */
+
+function openImage(src){
+
+if(!src)return;
+
+const win=window.open("","_blank");
+
+if(win){
+
+win.document.write(`
+
+<!doctype html>
+
+<html>
+
+<head>
+
+<title>PLAM Tanzania</title>
+
+<style>
+
+body{
+margin:0;
+background:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh
+}
+
+img{
+max-width:100%;
+max-height:100vh;
+object-fit:contain
+}
+
+</style>
+
+</head>
+
+<body>
+
+<img src="${escapeHtml(src)}">
+
+</body>
+
+</html>
+
+`);
+
+win.document.close();
+
+}
+
+}
+
+
+async function downloadImage(src,name){
+
+if(!src)return;
+
+try{
+
+const response=await fetch(src);
+
+if(!response.ok)throw new Error("Picha haijapatikana.");
+
+const blob=await response.blob();
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+a.href=url;
+a.download=name||"plam-picha.jpg";
+document.body.appendChild(a);
+a.click();
+a.remove();
+
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+}catch(error){
+
+console.error("DOWNLOAD IMAGE:",error);
+window.open(src,"_blank");
+
+}
+
+}
+
+
+function previewImage(input,number){
+
+const file=input?.files?.[0];
+
+if(!file)return;
+
+if(number===1){
+
+selectedImage1=file;
+
+}else{
+
+selectedImage2=file;
+
+}
+
+renderImagePreview();
+
+}
+
+
+function renderImagePreview(){
+
+const box=$("imagePreview");
+
+if(!box)return;
+
+box.innerHTML="";
+
+[selectedImage1,selectedImage2]
+.forEach((file,index)=>{
+
+if(!file)return;
+
+const url=URL.createObjectURL(file);
+
+box.innerHTML+=`
+
+<div>
+
+<img
+src="${url}"
+alt="Picha ${index+1}">
+
+<p class="small">
+Picha ${index+1}
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =====================================================
+COMPRESS IMAGE
+===================================================== */
+
+async function compressImage(file){
+
+return new Promise(
+(resolve,reject)=>{
+
+if(!file){
+
+resolve(null);
+return;
+
+}
+
+const reader=new FileReader();
+
+reader.onload=event=>{
+
+const img=new Image();
+
+img.onload=()=>{
+
+const maxWidth=1400;
+
+let width=img.width;
+let height=img.height;
+
+if(width>maxWidth){
+
+height=
+height*
+maxWidth/
+width;
+
+width=maxWidth;
+
+}
+
+const canvas=document.createElement("canvas");
+
+canvas.width=Math.round(width);
+canvas.height=Math.round(height);
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+canvas.toBlob(
+blob=>{
+
+if(!blob){
+
+reject(
+new Error("Picha haijakubali.")
+);
+
+return;
+
+}
+
+resolve(blob);
+
+},
+"image/jpeg",
+0.82
+);
+
+};
+
+img.onerror=()=>
+reject(
+new Error("Imeshindikana kusoma picha.")
+);
+
+img.src=event.target.result;
+
+};
+
+reader.onerror=()=>
+reject(
+new Error("Imeshindikana kusoma faili.")
+);
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =====================================================
+UPLOAD PRODUCT IMAGE
+===================================================== */
+
+async function uploadProductImage(file,userId){
+
+if(!file)return null;
+
+const blob=await compressImage(file);
+
+const filename=
+userId+
+"/"+
+Date.now()+
+"_"+Math.random()
+.toString(36)
+.substring(2)+
+".jpg";
+
+const {error}=
+await supabaseClient
+.storage
+.from("product-images")
+.upload(
+filename,
+blob,
+{
+contentType:"image/jpeg",
+upsert:false
+}
+);
+
+if(error)throw error;
+
+const {data}=
+supabaseClient
+.storage
+.from("product-images")
+.getPublicUrl(filename);
+
+return data.publicUrl;
+
+}
+
+
+/* =====================================================
+SAVE PRODUCT
+===================================================== */
+
+async function saveProduct(event){
+
+if(event)event.preventDefault();
+
+if(!currentUser){
+
+alert(
+"Tafadhali ingia kwenye akaunti kwanza."
+);
+
+show("account");
+return;
+
+}
+
+const name=$("productName").value.trim();
+const price=$("productPrice").value;
+const category=$("productCategory").value;
+const region=$("productRegion").value;
+const district=$("productDistrict").value;
+const place=$("productPlace").value.trim();
+const description=$("productDescription").value.trim();
+const productPhone=$("productPhone").value.trim();
+const editId=$("editProductId").value;
+
+if(!name||!price||!category||!region||!district||!place||!productPhone){
+
+alert("Jaza taarifa zote muhimu, pamoja na namba ya mawasiliano ya muuzaji.");
+return;
+
+}
+
+const button=$("saveProductButton");
+
+button.disabled=true;
+button.textContent="⏳ Inahifadhi...";
+
+try{
+
+if(!sellerProfile){
+await loadSellerProfile();
+}
+
+let imageUrl=null;
+let imageUrl2=null;
+
+if(selectedImage1){
+
+imageUrl=
+await uploadProductImage(
+selectedImage1,
+currentUser.id
+);
+
+}
+
+if(selectedImage2){
+
+imageUrl2=
+await uploadProductImage(
+selectedImage2,
+currentUser.id
+);
+
+}
+
+const payload={
+
+name:name,
+price:Number(price),
+category:category,
+region:region,
+district:district,
+place:place,
+description:description,
+phone:
+productPhone||
+sellerProfile?.phone||
+currentUser.phone||
+null,
+user_id:currentUser.id
+
+};
+
+if(imageUrl)payload.image_url=imageUrl;
+if(imageUrl2)payload.image_url_2=imageUrl2;
+
+
+if(editId){
+
+const {error}=
+await supabaseClient
+.from("Production")
+.update(payload)
+.eq("id",editId)
+.eq("user_id",currentUser.id);
+
+if(error)throw error;
+
+alert("✅ Bidhaa imebadilishwa.");
+
+}else{
+
+const {error}=
+await supabaseClient
+.from("Production")
+.insert(payload);
+
+if(error)throw error;
+
+alert(
+"🎉 Bidhaa imehifadhiwa kwenye PLAM!"
+);
+
+}
+
+resetProductForm();
+
+await loadProducts();
+
+show("home");
+
+}catch(error){
+
+console.error(
+"SAVE PRODUCT:",
+error
+);
+
+alert(
+"❌ Bidhaa haijahifadhiwa.\n\n"+
+error.message
+);
+
+}finally{
+
+button.disabled=false;
+button.textContent="💾 Hifadhi Bidhaa";
+
+}
+
+}
+
+
+/* =====================================================
+RESET PRODUCT
+===================================================== */
+
+function resetProductForm(){
+
+const form=$("productForm");
+
+if(form)form.reset();
+
+$("editProductId").value="";
+
+$("productFormTitle").textContent=
+"➕ Weka Bidhaa";
+
+$("saveProductButton").textContent=
+"💾 Hifadhi Bidhaa";
+
+selectedImage1=null;
+selectedImage2=null;
+
+$("imagePreview").innerHTML="";
+
+updateDistricts();
+
+}
+
+
+/* =====================================================
+MY PRODUCTS
+===================================================== */
+
+async function showMyProducts(){
+
+const box=$("myProducts");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML="<p>Ingia kwanza.</p>";
+return;
+
+}
+
+box.innerHTML="<p>⏳ Inapakia...</p>";
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML=
+"<p>Huna bidhaa ulizoweka bado.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+data.map(product=>`
+
+<div class="card" style="margin-bottom:10px">
+
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<p class="price">
+${formatPrice(product.price)}
+</p>
+
+${renderRatingSummary(product.id)}
+
+<p>
+📍 Mkoa:
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+🏘️ Wilaya:
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+📌 Eneo:
+${escapeHtml(product.place||"-")}
+</p>
+
+<div class="card-actions">
+
+<button
+type="button"
+class="blue"
+onclick="editProduct('${product.id}')">
+✏️ Hariri
+</button>
+
+<button
+type="button"
+class="red"
+onclick="deleteProduct('${product.id}')">
+🗑️ Futa
+</button>
+
+<button
+type="button"
+class="purple"
+onclick="openReviewModal('${product.id}')">
+💬 Maoni
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia bidhaa zako.</div>';
+
+}
+
+}
+
+
+/* =====================================================
+EDIT PRODUCT
+===================================================== */
+
+async function editProduct(id){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+return;
+
+}
+
+const product=
+ps.find(
+p=>String(p.id)===String(id)
+);
+
+if(!product){
+
+alert("Bidhaa haijapatikana.");
+return;
+
+}
+
+if(product.user_id!==currentUser.id){
+
+alert(
+"Huna ruhusa ya kuhariri bidhaa hii."
+);
+
+return;
+
+}
+
+$("editProductId").value=product.id;
+
+$("productName").value=product.name||"";
+$("productPrice").value=product.price||"";
+$("productCategory").value=product.category||"";
+$("productRegion").value=product.region||"";
+
+updateDistricts();
+
+$("productDistrict").value=product.district||"";
+$("productPlace").value=product.place||"";
+$("productDescription").value=product.description||"";
+$("productPhone").value=product.phone||sellerProfile?.phone||currentUser.phone||"";
+
+selectedImage1=null;
+selectedImage2=null;
+
+$("imagePreview").innerHTML="";
+
+if(product.image_url){
+
+$("imagePreview").innerHTML+=`
+
+<div>
+
+<img
+src="${escapeHtml(product.image_url)}"
+alt="Picha ya bidhaa">
+
+<p class="small">
+Picha ya sasa
+</p>
+
+</div>
+
+`;
+
+}
+
+if(product.image_url_2){
+
+$("imagePreview").innerHTML+=`
+
+<div>
+
+<img
+src="${escapeHtml(product.image_url_2)}"
+alt="Picha ya pili">
+
+<p class="small">
+Picha ya pili
+</p>
+
+</div>
+
+`;
+
+}
+
+$("productFormTitle").textContent=
+"✏️ Hariri Bidhaa";
+
+show("add");
+
+}
+
+
+/* =====================================================
+DELETE
+===================================================== */
+
+async function deleteProduct(id){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+return;
+
+}
+
+if(!confirm(
+"Una uhakika unataka kufuta bidhaa hii?"
+))return;
+
+try{
+
+const {error}=
+await supabaseClient
+.from("Production")
+.delete()
+.eq("id",id)
+.eq("user_id",currentUser.id);
+
+if(error)throw error;
+
+alert("✅ Bidhaa imefutwa.");
+
+await loadProducts();
+await showMyProducts();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Imeshindikana kufuta bidhaa.\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+CALL / WHATSAPP
+===================================================== */
+
+function callSeller(phone){
+
+const clean=cleanPhone(phone);
+
+if(!clean){
+
+alert("Namba ya simu haipo.");
+return;
+
+}
+
+window.location.href="tel:"+clean;
+
+}
+
+
+function whatsappSeller(phone,name){
+
+const clean=cleanPhone(phone);
+
+if(!clean){
+
+alert("Namba ya simu haipo.");
+return;
+
+}
+
+let number=clean.replace(/\+/g,"");
+
+if(number.startsWith("0")){
+
+number=
+"255"+
+number.substring(1);
+
+}
+
+const message=
+"Habari, nimeiona bidhaa yako kwenye PLAM TANZANIA: "+
+name;
+
+window.open(
+"https://wa.me/"+
+number+
+"?text="+
+encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+
+/* =====================================================
+ORDER
+===================================================== */
+
+function openOrderModal(productId){
+
+if(!currentUser){
+
+alert(
+"⚠️ Ingia kwenye akaunti kwanza ili kuagiza."
+);
+
+show("account");
+return;
+
+}
+
+const product=
+ps.find(
+p=>String(p.id)===String(productId)
+);
+
+if(!product){
+
+alert("Bidhaa haijapatikana.");
+return;
+
+}
+
+if(product.user_id===currentUser.id){
+
+alert(
+"Huwezi kuagiza bidhaa yako mwenyewe."
+);
+
+return;
+
+}
+
+$("orderProductId").value=product.id;
+$("orderSellerId").value=product.user_id;
+
+$("orderProductInfo").innerHTML=`
+
+<div class="card" style="margin-bottom:15px">
+
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<p class="price">
+${formatPrice(product.price)}
+</p>
+
+<p>
+📍 Mkoa:
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+🏘️ Wilaya:
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+📌 Eneo:
+${escapeHtml(product.place||"-")}
+</p>
+
+${
+product.phone
+?
+`
+<p>
+📞 Muuzaji:
+${escapeHtml(product.phone)}
+</p>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+$("buyerName").value="";
+$("buyerPhone").value="";
+$("orderQuantity").value="1";
+$("orderMessage").value="";
+
+$("orderModal").classList.remove("hidden");
+
+}
+
+
+function closeOrderModal(){
+
+$("orderModal").classList.add("hidden");
+
+}
+
+
+/* =====================================================
+SUBMIT ORDER
+===================================================== */
+
+async function submitOrder(){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+return;
+
+}
+
+const buyerName=$("buyerName").value.trim();
+const buyerPhone=$("buyerPhone").value.trim();
+const productId=$("orderProductId").value;
+const sellerId=$("orderSellerId").value;
+const quantity=Number($("orderQuantity").value||1);
+const message=$("orderMessage").value.trim();
+
+if(!buyerName||!buyerPhone){
+
+alert("Jaza jina na namba ya simu.");
+return;
+
+}
+
+if(!productId||!sellerId){
+
+alert("Bidhaa ya kuagiza haijapatikana.");
+return;
+
+}
+
+if(quantity<1){
+
+alert("Idadi lazima iwe angalau 1.");
+return;
+
+}
+
+try{
+
+const {error}=
+await supabaseClient
+.from("orders")
+.insert({
+
+buyer_name:buyerName,
+buyer_phone:buyerPhone,
+product_id:Number(productId),
+seller_id:sellerId,
+buyer_id:currentUser.id,
+quantity:quantity,
+message:message,
+status:"pending"
+
+});
+
+if(error)throw error;
+
+closeOrderModal();
+
+alert(
+"🎉 Oda imetumwa kwa muuzaji!"
+);
+
+await showMyOrders();
+
+}catch(error){
+
+console.error(
+"SUBMIT ORDER:",
+error
+);
+
+alert(
+"❌ Oda haijatumwa.\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+MY ORDERS
+===================================================== */
+
+async function showMyOrders(){
+
+const box=$("myOrders");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML="<p>Ingia kwanza.</p>";
+return;
+
+}
+
+box.innerHTML="<p>⏳ Inapakia...</p>";
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("buyer_id",currentUser.id)
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML=
+"<p>Hujaagiza bidhaa bado.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+'<div class="orders">'+
+
+data.map(order=>{
+
+const status=
+String(order.status||"pending");
+
+let statusClass="status-pending";
+let statusText="🟡 Pending";
+
+if(status==="accepted"){
+
+statusClass="status-accepted";
+statusText="🟢 Imekubaliwa";
+
+}
+
+if(status==="rejected"){
+
+statusClass="status-rejected";
+statusText="🔴 Imekataliwa";
+
+}
+
+return `
+
+<div class="order">
+
+<h3>
+🛒 Oda #${escapeHtml(order.id)}
+</h3>
+
+<p>
+<b>Bidhaa ID:</b>
+${escapeHtml(order.product_id)}
+</p>
+
+<p>
+<b>Idadi:</b>
+${escapeHtml(order.quantity)}
+</p>
+
+<p>
+<b>Jina:</b>
+${escapeHtml(order.buyer_name)}
+</p>
+
+<p>
+<b>Simu:</b>
+${escapeHtml(order.buyer_phone)}
+</p>
+
+<p>
+${escapeHtml(order.message||"")}
+</p>
+
+<span class="status ${statusClass}">
+${statusText}
+</span>
+
+</div>
+
+`;
+
+}).join("")+
+
+"</div>";
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia oda zako.</div>';
+
+}
+
+}
+
+
+/* =====================================================
+SELLER ORDERS
+===================================================== */
+
+async function showSellerOrders(){
+
+const box=$("sellerOrders");
+
+if(!box)return;
+
+if(!currentUser){
+
+box.innerHTML="<p>Ingia kwanza.</p>";
+return;
+
+}
+
+box.innerHTML="<p>⏳ Inapakia...</p>";
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("seller_id",currentUser.id)
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML=
+"<p>Hakuna oda za wateja bado.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+'<div class="orders">'+
+
+data.map(order=>{
+
+const status=
+String(order.status||"pending");
+
+let statusClass="status-pending";
+let statusText="🟡 Pending";
+
+if(status==="accepted"){
+
+statusClass="status-accepted";
+statusText="🟢 Imekubaliwa";
+
+}
+
+if(status==="rejected"){
+
+statusClass="status-rejected";
+statusText="🔴 Imekataliwa";
+
+}
+
+let actions="";
+
+if(status==="pending"){
+
+actions=`
+
+<button
+type="button"
+class="green"
+onclick="updateOrderStatus('${order.id}','accepted')">
+🟢 Kubali Oda
+</button>
+
+<button
+type="button"
+class="red"
+onclick="updateOrderStatus('${order.id}','rejected')">
+🔴 Kataa Oda
+</button>
+
+`;
+
+}else{
+
+actions=`
+
+<button
+type="button"
+class="orange"
+onclick="updateOrderStatus('${order.id}','pending')">
+↩️ Rudisha Pending
+</button>
+
+`;
+
+}
+
+return `
+
+<div class="order">
+
+<h3>
+🛒 Oda #${escapeHtml(order.id)}
+</h3>
+
+<p>
+<b>Jina la mteja:</b>
+${escapeHtml(order.buyer_name)}
+</p>
+
+<p>
+<b>Simu:</b>
+${escapeHtml(order.buyer_phone)}
+</p>
+
+<p>
+<b>Bidhaa ID:</b>
+${escapeHtml(order.product_id)}
+</p>
+
+<p>
+<b>Idadi:</b>
+${escapeHtml(order.quantity)}
+</p>
+
+<p>
+<b>Ujumbe:</b>
+${escapeHtml(order.message||"-")}
+</p>
+
+<p>
+<span class="status ${statusClass}">
+${statusText}
+</span>
+</p>
+
+<div class="card-actions">
+${actions}
+</div>
+
+</div>
+
+`;
+
+}).join("")+
+
+"</div>";
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML=
+'<div class="error">❌ Imeshindikana kupakia oda za wateja.</div>';
+
+}
+
+}
+
+
+/* =====================================================
+UPDATE ORDER
+===================================================== */
+
+async function updateOrderStatus(orderId,newStatus){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+return;
+
+}
+
+if(!orderId){
+
+alert("Order ID haipo.");
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.update({status:newStatus})
+.eq("id",orderId)
+.eq("seller_id",currentUser.id)
+.select();
+
+if(error)throw error;
+
+if(!data||!data.length){
+
+throw new Error(
+"Oda haikupatikana au huna ruhusa ya kuibadilisha."
+);
+
+}
+
+if(newStatus==="accepted"){
+
+addNotification(
+"🟢 Oda imekubaliwa",
+"Oda #"+orderId+
+" imekubaliwa na muuzaji."
+);
+
+}
+
+if(newStatus==="rejected"){
+
+addNotification(
+"🔴 Oda imekataliwa",
+"Oda #"+orderId+
+" imekataliwa na muuzaji."
+);
+
+}
+
+if(newStatus==="pending"){
+
+addNotification(
+"🟡 Oda imerudishwa Pending",
+"Oda #"+orderId+
+" imerudishwa kwenye Pending."
+);
+
+}
+
+await showSellerOrders();
+
+alert(
+"✅ Oda imebadilishwa kuwa: "+
+newStatus
+);
+
+}catch(error){
+
+console.error(
+"UPDATE ORDER:",
+error
+);
+
+alert(
+"❌ Imekataa kubadilisha oda.\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+NOTIFICATIONS
+===================================================== */
+
+function notificationKey(){
+
+if(!currentUser)return null;
+
+return "plam_notifications_"+
+currentUser.id;
+
+}
+
+
+function getNotifications(){
+
+const key=notificationKey();
+
+if(!key)return [];
+
+try{
+
+return JSON.parse(
+localStorage.getItem(key)||"[]"
+);
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+function saveNotifications(list){
+
+const key=notificationKey();
+
+if(!key)return;
+
+localStorage.setItem(
+key,
+JSON.stringify(
+list.slice(0,50)
+)
+);
+
+}
+
+
+function addNotification(title,message){
+
+if(!currentUser)return;
+
+const list=getNotifications();
+
+list.unshift({
+
+id:Date.now(),
+title:title,
+message:message,
+time:new Date().toISOString()
+
+});
+
+saveNotifications(list);
+renderNotifications();
+
+}
+
+
+function renderNotifications(){
+
+const box=$("notifications");
+const badge=$("notificationBadge");
+
+if(!box||!badge)return;
+
+const list=getNotifications();
+
+if(!list.length){
+
+box.innerHTML=
+'<p class="small">Hakuna taarifa mpya.</p>';
+
+badge.classList.add("hidden");
+badge.textContent="0";
+
+return;
+
+}
+
+badge.textContent=String(list.length);
+badge.classList.remove("hidden");
+
+box.innerHTML=
+list.map(item=>`
+
+<div class="notification-item">
+
+<b>${escapeHtml(item.title)}</b>
+
+<br>
+
+${escapeHtml(item.message)}
+
+<br>
+
+<span class="small">
+${new Date(item.time)
+.toLocaleString("sw-TZ")}
+</span>
+
+</div>
+
+`).join("");
+
+}
+
+
+function toggleNotifications(){
+
+const panel=$("notificationPanel");
+
+if(!panel)return;
+
+panel.classList.toggle("hidden");
+
+renderNotifications();
+
+}
+
+
+function clearNotifications(){
+
+if(currentUser)
+saveNotifications([]);
+
+renderNotifications();
+
+}
+
+
+/* =====================================================
+REALTIME
+===================================================== */
+
+function setupRealtime(){
+
+try{
+
+supabaseClient
+.channel("plam-orders-realtime")
+
+.on(
+"postgres_changes",
+{
+event:"INSERT",
+schema:"public",
+table:"orders"
+},
+payload=>{
+
+const order=payload.new;
+
+if(
+currentUser&&
+order.seller_id===
+currentUser.id
+){
+
+addNotification(
+"🛒 Oda mpya",
+"Mteja ametuma oda mpya #"+
+order.id
+);
+
+showSellerOrders();
+
+}
+
+}
+)
+
+.on(
+"postgres_changes",
+{
+event:"UPDATE",
+schema:"public",
+table:"orders"
+},
+payload=>{
+
+const order=payload.new;
+
+if(
+currentUser&&
+order.buyer_id===
+currentUser.id
+){
+
+if(order.status==="accepted"){
+
+addNotification(
+"🟢 Oda imekubaliwa",
+"Oda #"+order.id+
+" imekubaliwa."
+);
+
+}
+
+if(order.status==="rejected"){
+
+addNotification(
+"🔴 Oda imekataliwa",
+"Oda #"+order.id+
+" imekataliwa."
+);
+
+}
+
+if(order.status==="pending"){
+
+addNotification(
+"🟡 Oda imerudishwa Pending",
+"Oda #"+order.id+
+" imerudishwa Pending."
+);
+
+}
+
+showMyOrders();
+
+}
+
+if(
+currentUser&&
+order.seller_id===
+currentUser.id
+){
+
+showSellerOrders();
+
+}
+
+}
+)
+
+.subscribe();
+
+}catch(error){
+
+console.error(
+"REALTIME ERROR:",
+error
+);
+
+}
+
+}
+
+
+/* =====================================================
+ADMIN
+===================================================== */
+
+async function showAdminDashboard(){
+
+if(!currentUser){
+
+alert("Ingia kwanza.");
+show("account");
+return;
+
+}
+
+await checkAdmin();
+
+if(!isAdmin){
+
+alert("❌ Huna ruhusa ya Admin.");
+show("home");
+return;
+
+}
+
+show("admin");
+
+}
+
+
+async function refreshAdminDashboard(){
+
+if(!currentUser||!isAdmin)return;
+
+$("adminEmail").textContent=
+currentUser.email||"-";
+
+$("adminSummary").textContent=
+"⏳ Inapakia taarifa...";
+
+try{
+
+const productsResult=
+await supabaseClient
+.from("Production")
+.select("*",{count:"exact",head:true});
+
+const ordersResult=
+await supabaseClient
+.from("orders")
+.select("*",{count:"exact",head:true});
+
+const usersResult=
+await supabaseClient
+.rpc("get_admin_users");
+
+if(productsResult.error)
+throw productsResult.error;
+
+if(ordersResult.error)
+throw ordersResult.error;
+
+if(usersResult.error)
+throw usersResult.error;
+
+const productCount=
+productsResult.count||0;
+
+const orderCount=
+ordersResult.count||0;
+
+const users=
+usersResult.data||[];
+
+$("adminProductCount").textContent=
+productCount;
+
+$("adminOrderCount").textContent=
+orderCount;
+
+$("adminUserCount").textContent=
+users.length;
+
+$("adminSummary").innerHTML=
+`Mfumo una <b>${productCount}</b> bidhaa,
+<b>${orderCount}</b> oda,
+na <b>${users.length}</b> watumiaji.`;
+
+renderAdminUsers(users);
+
+await renderAdminProfiles();
+await renderAdminProducts();
+await renderAdminOrders();
+
+}catch(error){
+
+console.error(
+"ADMIN DASHBOARD:",
+error
+);
+
+$("adminSummary").innerHTML=
+'<div class="error">❌ Imeshindikana kupakia Admin Dashboard.<br>'+
+escapeHtml(error.message)+
+'</div>';
+
+}
+
+}
+
+
+function renderAdminUsers(users){
+
+const box=$("adminUsers");
+
+if(!box)return;
+
+if(!users.length){
+
+box.innerHTML="<p>Hakuna watumiaji.</p>";
+return;
+
+}
+
+box.innerHTML=
+users.map(
+(user,index)=>`
+
+<div class="admin-order">
+
+<h3>
+👤 Mtumiaji ${index+1}
+</h3>
+
+<p>
+<b>Email:</b>
+${escapeHtml(user.email)}
+</p>
+
+<p>
+<b>ID:</b>
+<span class="small">
+${escapeHtml(user.id)}
+</span>
+</p>
+
+<p class="small">
+Aliunda akaunti:
+${
+user.created_at
+?
+new Date(user.created_at)
+.toLocaleString("sw-TZ")
+:
+"-"
+}
+</p>
+
+</div>
+
+`
+).join("");
+
+}
+
+
+async function renderAdminProfiles(){
+
+const box=$("adminProfiles");
+
+if(!box)return;
+
+box.innerHTML=
+"<p>⏳ Inapakia wasifu...</p>";
+
+const {data,error}=
+await supabaseClient
+.from("seller_profiles")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML=
+"<p>Hakuna wasifu wa biashara bado.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+data.map(profile=>`
+
+<div class="admin-order">
+
+<h3>
+🏪 ${escapeHtml(
+profile.business_name||"-"
+)}
+</h3>
+
+<p>
+👤 ${escapeHtml(profile.owner_name||"-")}
+</p>
+
+<p>
+📞 ${escapeHtml(profile.phone||"-")}
+</p>
+
+<p>
+📍 ${escapeHtml(profile.region||"-")}
+</p>
+
+<p>
+🏘️ ${escapeHtml(profile.district||"-")}
+</p>
+
+<p>
+📝 ${escapeHtml(profile.description||"-")}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+async function renderAdminProducts(){
+
+const box=$("adminProducts");
+
+if(!box)return;
+
+box.innerHTML=
+"<p>⏳ Inapakia bidhaa...</p>";
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+box.innerHTML="<p>❌ Imeshindikana kupakia bidhaa.</p>";
+console.error(error);
+return;
+}
+
+if(!data?.length){
+
+box.innerHTML="<p>Hakuna bidhaa.</p>";
+return;
+
+}
+
+box.innerHTML=
+data.map(product=>`
+
+<div class="admin-order">
+
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<p>
+💰 ${formatPrice(product.price)}
+</p>
+
+<p>
+📂 ${escapeHtml(product.category||"-")}
+</p>
+
+<p>
+📍 Mkoa:
+${escapeHtml(product.region||"-")}
+</p>
+
+<p>
+🏘️ Wilaya:
+${escapeHtml(product.district||"-")}
+</p>
+
+<p>
+📌 Eneo:
+${escapeHtml(product.place||"-")}
+</p>
+
+<p>
+📞 ${escapeHtml(product.phone||"-")}
+</p>
+
+<button
+type="button"
+class="red"
+onclick="deleteAdminProduct('${product.id}')">
+🗑️ Futa Bidhaa
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =====================================================
+DELETE ADMIN PRODUCT
+===================================================== */
+
+async function deleteAdminProduct(productId){
+
+if(!isAdmin){
+
+alert("⛔ Huna ruhusa ya kufuta bidhaa.");
+
+return;
+
+}
+
+const confirmDelete=
+confirm(
+"⚠️ Una uhakika unataka kufuta bidhaa hii?\n\n" +
+"Kitendo hiki hakiwezi kurudishwa."
+);
+
+if(!confirmDelete)return;
+
+try{
+
+const {error}=
+await supabaseClient
+.from("Production")
+.delete()
+.eq("id",productId);
+
+if(error)throw error;
+
+alert("✅ Bidhaa imefutwa kikamilifu.");
+
+await renderAdminProducts();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Bidhaa haijafutwa.\n\n" +
+"Hakikisha Admin ana ruhusa ya DELETE kwenye Supabase."
+);
+
+}
+
+}
+
+
+async function renderAdminOrders(){
+
+const box=$("adminOrders");
+
+if(!box)return;
+
+box.innerHTML=
+"<p>⏳ Inapakia oda...</p>";
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+if(!data?.length){
+
+box.innerHTML="<p>Hakuna oda.</p>";
+return;
+
+}
+
+box.innerHTML=
+data.map(order=>{
+
+const status=
+String(order.status||"pending");
+
+let statusClass="status-pending";
+
+if(status==="accepted")
+statusClass="status-accepted";
+
+if(status==="rejected")
+statusClass="status-rejected";
+
+return `
+
+<div class="admin-order">
+
+<h3>
+🛒 Oda #${escapeHtml(order.id)}
+</h3>
+
+<p>
+<b>Mteja:</b>
+${escapeHtml(order.buyer_name)}
+</p>
+
+<p>
+<b>Simu:</b>
+${escapeHtml(order.buyer_phone)}
+</p>
+
+<p>
+<b>Bidhaa ID:</b>
+${escapeHtml(order.product_id)}
+</p>
+
+<p>
+<b>Idadi:</b>
+${escapeHtml(order.quantity)}
+</p>
+
+<p>
+
+<b>Status:</b>
+
+<span class="status ${statusClass}">
+${escapeHtml(status)}
+</span>
+
+</p>
+
+<p>
+<b>Ujumbe:</b>
+${escapeHtml(order.message||"-")}
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =====================================================
+AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+setTimeout(
+async()=>{
+
+currentUser=
+session?.user||null;
+
+if(currentUser){
+
+await checkAdmin();
+await loadSellerProfile();
+await loadFavorites();
+renderNotifications();
+
+}else{
+
+isAdmin=false;
+sellerProfile=null;
+favoriteProductIds=new Set();
+
+const badge=$("notificationBadge");
+
+if(badge){
+
+badge.classList.add("hidden");
+badge.textContent="0";
+
+}
+
+updateFavoriteCount();
+render();
+
+}
+
+updateAccountUI();
+updateAdminUI();
+
+},
+0
+);
+
+});
+
+
+/* =====================================================
+FORM
+===================================================== */
+
+$("productForm").addEventListener(
+"submit",
+saveProduct
+);
+
+
+/* =====================================================
+WINDOW FUNCTIONS
+===================================================== */
+
+window.show=show;
+
+window.showRegisterForm=showRegisterForm;
+window.showLoginForm=showLoginForm;
+window.hideAuthForms=hideAuthForms;
+
+window.registerFromHome=registerFromHome;
+window.loginFromHome=loginFromHome;
+
+window.showRegisterFormAccount=
+showRegisterFormAccount;
+
+window.showLoginFormAccount=
+showLoginFormAccount;
+
+window.register=register;
+window.login=login;
+window.logout=logout;
+
+window.filterCategory=filterCategory;
+window.render=render;
+
+window.previewImage=previewImage;
+window.openImage=openImage;
+
+window.saveProduct=saveProduct;
+window.resetProductForm=resetProductForm;
+
+window.editProduct=editProduct;
+window.deleteProduct=deleteProduct;
+
+window.callSeller=callSeller;
+window.whatsappSeller=whatsappSeller;
+
+window.openOrderModal=openOrderModal;
+window.closeOrderModal=closeOrderModal;
+window.submitOrder=submitOrder;
+
+window.updateOrderStatus=updateOrderStatus;
+
+window.toggleNotifications=
+toggleNotifications;
+
+window.clearNotifications=
+clearNotifications;
+
+window.showAdminDashboard=
+showAdminDashboard;
+
+window.updateDistricts=
+updateDistricts;
+
+window.showSellerProfileForm=
+showSellerProfileForm;
+
+window.hideSellerProfileForm=
+hideSellerProfileForm;
+
+window.updateProfileDistricts=
+updateProfileDistricts;
+
+window.previewProfileLogo=
+previewProfileLogo;
+
+window.saveSellerProfile=
+saveSellerProfile;
+
+
+/* FAVORITES */
+
+window.toggleFavorite=
+toggleFavorite;
+
+window.showMyFavorites=
+showMyFavorites;
+
+
+/* REVIEWS */
+
+window.openReviewModal=
+openReviewModal;
+
+window.closeReviewModal=
+closeReviewModal;
+
+window.selectReviewRating=
+selectReviewRating;
+
+window.saveReview=
+saveReview;
+
+window.deleteReview=
+deleteReview;
+
+window.startEditReview=
+startEditReview;
+
+
+/* =====================================================
+START
+===================================================== */
+
+(async function(){
+
+try{
+
+loadRegions();
+
+}catch(error){
+
+console.error(
+"START REGIONS:",
+error
+);
+
+}
+
+
+try{
+
+await checkUser();
+
+}catch(error){
+
+console.error(
+"START CHECK USER:",
+error
+);
+
+}
+
+
+try{
+
+await loadProducts();
+
+}catch(error){
+
+console.error(
+"START LOAD PRODUCTS:",
+error
+);
+
+}
+
+
+try{
+
+await loadReviews();
+
+}catch(error){
+
+console.error(
+"START LOAD REVIEWS:",
+error
+);
+}
+
+
+try{
+
+setupRealtime();
+
+}catch(error){
+
+console.error(
+"START REALTIME:",
+error
+);
+
+}
+
+})();
+</script>
+  <!-- ADMIN CONTACT -->
+<div class="admin-contact" style="text-align:center; padding:25px 15px; margin:20px auto; max-width:600px;">
+  <h3>📞 Wasiliana na Admin wa PLAM</h3>
+
+  <p>Kwa msaada au mawasiliano kuhusu PLAM:</p>
+
+  <p>
+    📱
+    <a href="tel:0625053021">
+      0625053021
+    </a>
+  </p>
+
+  <p>
+    💬
+    <a href="https://wa.me/255625053021" target="_blank">
+      WhatsApp Admin
+    </a>
+  </p>
+</div>
+</body>
+  </html>
