@@ -1,10 +1,19 @@
 <!doctype html>
-
 <html lang="sw">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PLAM TANZANIA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
 *{
 box-sizing:border-box;
 }
@@ -12,25 +21,37 @@ box-sizing:border-box;
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:#f4f7f5;
+background:#f2f5f3;
 color:#222;
 }
 
+/* =========================
+HEADER
+========================= */
+
 header{
-background:#008000;
+background:linear-gradient(135deg,#087a38,#00a651);
 color:white;
 text-align:center;
-padding:22px 10px;
+padding:25px 12px;
+box-shadow:0 3px 10px #0003;
 }
 
 header h1{
 margin:0;
-font-size:28px;
+font-size:30px;
+font-weight:800;
+letter-spacing:.5px;
 }
 
 header p{
-margin:8px 0 0;
+margin:9px 0 0;
+font-size:15px;
 }
+
+/* =========================
+NAVIGATION
+========================= */
 
 nav{
 display:flex;
@@ -39,6 +60,7 @@ border-bottom:1px solid #ddd;
 position:sticky;
 top:0;
 z-index:20;
+box-shadow:0 2px 7px #0001;
 }
 
 nav button{
@@ -52,9 +74,17 @@ font-size:12px;
 cursor:pointer;
 }
 
-nav button:active{
+nav button:hover{
 background:#eef8f0;
 }
+
+nav button:active{
+background:#dff5e5;
+}
+
+/* =========================
+SECTIONS
+========================= */
 
 section{
 max-width:900px;
@@ -66,45 +96,72 @@ padding:15px;
 display:none !important;
 }
 
+/* =========================
+CARDS
+========================= */
+
 .card{
 background:white;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-box-shadow:0 2px 8px #0002;
+padding:17px;
+border-radius:15px;
+margin-bottom:17px;
+box-shadow:0 3px 12px #0002;
 }
 
 h2{
 color:#087a38;
+margin-top:5px;
 }
+
+/* =========================
+INPUTS
+========================= */
 
 input,
 select,
 textarea{
 width:100%;
-padding:13px;
-margin:6px 0 12px;
+padding:14px;
+margin:6px 0 13px;
 border:1px solid #bbb;
-border-radius:8px;
+border-radius:10px;
 font-size:16px;
 background:white;
+outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#087a38;
+box-shadow:0 0 0 2px #087a3820;
 }
 
 textarea{
-min-height:100px;
+min-height:110px;
+resize:vertical;
 }
+
+/* =========================
+MAIN BUTTON
+========================= */
 
 .main{
 width:100%;
 padding:14px;
 border:0;
-border-radius:8px;
-background:#008000;
+border-radius:10px;
+background:#087a38;
 color:white;
-font-size:16px;
+font-size:17px;
 font-weight:bold;
-margin:5px 0;
+margin:6px 0;
 cursor:pointer;
+box-shadow:0 3px 8px #0002;
+}
+
+.main:hover{
+opacity:.92;
 }
 
 .red{
@@ -123,75 +180,146 @@ background:#555;
 background:#1769aa;
 }
 
+/* =========================
+PRODUCT
+========================= */
+
+#products{
+margin-top:10px;
+}
+
 .product{
 background:white;
-border-radius:14px;
+border-radius:17px;
 overflow:hidden;
-margin-bottom:18px;
-box-shadow:0 2px 10px #0002;
+margin-bottom:20px;
+box-shadow:0 4px 14px #0002;
+border:1px solid #e4e4e4;
+}
+
+/* image wrapper */
+
+.product-image-box{
+background:#f0f2f1;
+width:100%;
+padding:10px;
+text-align:center;
 }
 
 .product img.main-image{
 width:100%;
-height:auto;
-max-height:600px;
+height:300px;
 object-fit:contain;
 display:block;
-background:#eee;
+border-radius:11px;
+background:#f0f2f1;
 }
 
+/* product body */
+
 .product-body{
-padding:14px;
+padding:17px;
 }
 
 .product-body h3{
 margin:0 0 8px;
+font-size:22px;
+color:#222;
+line-height:1.3;
+}
+
+.price-box{
+background:#eef8f0;
+border-radius:11px;
+padding:11px 13px;
+margin:10px 0;
+}
+
+.price-label{
+font-size:13px;
+color:#666;
 }
 
 .price{
-color:#008000;
-font-size:22px;
-font-weight:bold;
+color:#087a38;
+font-size:23px;
+font-weight:800;
+margin-top:2px;
 }
 
+/* location */
+
 .location{
-background:#eef8f0;
-padding:10px;
-border-radius:8px;
-margin:10px 0;
-line-height:1.7;
+background:#f4f8f5;
+padding:12px;
+border-radius:11px;
+margin:12px 0;
+line-height:1.8;
+border-left:4px solid #087a38;
+}
+
+.location b{
+color:#333;
+}
+
+/* description */
+
+.description{
+font-size:15px;
+line-height:1.6;
+margin:12px 0;
+color:#444;
+}
+
+/* second image */
+
+.second-image-box{
+margin-top:13px;
+}
+
+.second-image-title{
+font-weight:bold;
+color:#087a38;
+margin-bottom:7px;
 }
 
 .second-image{
 width:100%;
-height:auto;
-max-height:600px;
+height:260px;
 object-fit:contain;
-background:#eee;
-border-radius:10px;
-margin-top:10px;
+background:#f0f2f1;
+border-radius:11px;
+border:1px solid #ddd;
 }
 
+/* =========================
+PRODUCT BUTTONS
+========================= */
+
 .actions{
-display:flex;
-gap:8px;
-margin-top:12px;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:15px;
 }
 
 .actions a,
 .actions button{
-flex:1;
-min-width:120px;
-padding:12px 5px;
+width:100%;
+min-height:48px;
+padding:12px 6px;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
 text-decoration:none;
 color:white;
 border:0;
-border-radius:8px;
+border-radius:10px;
 font-weight:bold;
-font-size:14px;
+font-size:15px;
 cursor:pointer;
+box-shadow:0 3px 7px #0002;
 }
 
 .call{
@@ -199,7 +327,7 @@ background:#087a38;
 }
 
 .whatsapp{
-background:#25d366;
+background:#20bd5a;
 }
 
 .order{
@@ -210,13 +338,26 @@ background:#1769aa;
 background:#555;
 }
 
+.actions a:hover,
+.actions button:hover{
+opacity:.9;
+}
+
+/* =========================
+MESSAGE
+========================= */
+
 .message{
-padding:12px;
+padding:13px;
 margin-top:10px;
-border-radius:8px;
+border-radius:10px;
 background:#eef8f0;
 line-height:1.6;
 }
+
+/* =========================
+ORDERS
+========================= */
 
 .stats{
 display:grid;
@@ -253,8 +394,9 @@ color:#d00000;
 border-left:5px solid #087a38;
 background:#f8faf8;
 padding:13px;
-border-radius:8px;
+border-radius:9px;
 margin:10px 0;
+line-height:1.6;
 }
 
 .status{
@@ -280,238 +422,533 @@ background:#ffe1e1;
 color:#c00000;
 }
 
+/* =========================
+PLAM CONTACT
+========================= */
+
+.contact-card{
+background:linear-gradient(135deg,#ffffff,#eef8f0);
+border:2px solid #d7efdd;
+text-align:center;
+}
+
+.contact-title{
+color:#087a38;
+font-size:24px;
+font-weight:800;
+margin:4px 0 8px;
+}
+
+.contact-number{
+font-size:25px;
+font-weight:800;
+color:#087a38;
+margin:17px 0;
+letter-spacing:1px;
+}
+
+.contact-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:12px;
+}
+
+.contact-actions a{
+min-height:52px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+color:white;
+border-radius:12px;
+font-size:17px;
+font-weight:800;
+box-shadow:0 4px 10px #0002;
+}
+
+.contact-call{
+background:#087a38;
+}
+
+.contact-whatsapp{
+background:#25d366;
+}
+
+/* =========================
+ADMIN
+========================= */
+
+.admin-product-image{
+width:100%;
+height:250px;
+object-fit:contain;
+background:#eee;
+border-radius:10px;
+}
+
+/* =========================
+FOOTER
+========================= */
+
 footer{
 background:#075c2b;
 color:white;
 text-align:center;
-padding:25px 10px;
+padding:28px 10px;
 margin-top:20px;
+line-height:1.5;
 }
+
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:500px){
 
-.product img.main-image{
-max-height:none;
-height:auto;
+header h1{
+font-size:25px;
 }
 
-.second-image{
-max-height:none;
-height:auto;
+header p{
+font-size:14px;
 }
 
 nav button{
-font-size:11px;
+font-size:10px;
 padding:12px 2px;
 }
 
+section{
+padding:11px;
 }
-</style></head><body><header>
+
+.product-body{
+padding:14px;
+}
+
+.product img.main-image{
+height:250px;
+}
+
+.second-image{
+height:220px;
+}
+
+.product-body h3{
+font-size:20px;
+}
+
+.price{
+font-size:22px;
+}
+
+.actions{
+grid-template-columns:1fr 1fr;
+}
+
+.actions a,
+.actions button{
+font-size:14px;
+min-height:47px;
+}
+
+.contact-actions{
+grid-template-columns:1fr;
+}
+
+.contact-number{
+font-size:23px;
+}
+
+}
+
+/* very small phones */
+
+@media(max-width:350px){
+
+nav button{
+font-size:9px;
+}
+
+.actions{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header>
+
 <h1>🇹🇿 PLAM TANZANIA</h1>
-<p>Jenga biashara yako. Fikia wateja zaidi.</p>
-</header><nav><button type="button" onclick="show('home')">
+
+<p>
+Jenga biashara yako. Fikia wateja zaidi.
+</p>
+
+</header>
+
+
+<!-- =========================
+NAV
+========================= -->
+
+<nav>
+
+<button type="button" onclick="show('home')">
 🏠 Home
-</button><button type="button" onclick="show('search')">
+</button>
+
+<button type="button" onclick="show('search')">
 🔎 Tafuta
-</button><button type="button" onclick="show('add')">
+</button>
+
+<button type="button" onclick="show('add')">
 ➕ Weka
-</button><button type="button" onclick="show('account')">
+</button>
+
+<button type="button" onclick="show('account')">
 👤 Akaunti
-</button><button type="button" onclick="show('admin')">
+</button>
+
+<button type="button" onclick="show('admin')">
 🔐 Admin
-</button></nav><!-- HOME --><section id="home"><div class="card"><h2>Karibu PLAM TANZANIA</h2><p>
+</button>
+
+</nav>
+
+
+<!-- =========================
+HOME
+========================= -->
+
+<section id="home">
+
+<div class="card">
+
+<h2>
+Karibu PLAM TANZANIA
+</h2>
+
+<p>
 Tafuta bidhaa na huduma kutoka kwa wauzaji mbalimbali Tanzania.
-</p><input
+</p>
+
+<input
 id="homeSearch"
 placeholder="🔎 Tafuta bidhaa..."
 oninput="searchProducts(this.value)"
-
-«»
+>
 
 <button
 type="button"
 class="main"
 onclick="show('add')"
-
-«»
-
+>
 ➕ Weka Bidhaa Yako
 </button>
 
-</div><h2>🛍️ Bidhaa Zote</h2><div id="products">
+</div>
+
+
+<h2>
+🛍️ Bidhaa Zote
+</h2>
+
+<div id="products">
 ⏳ Inapakia bidhaa...
-</div></section><!-- SEARCH --><section id="search" class="hidden"><div class="card"><h2>🔎 Tafuta Bidhaa</h2><input
+</div>
+
+</section>
+
+
+<!-- =========================
+SEARCH
+========================= -->
+
+<section id="search" class="hidden">
+
+<div class="card">
+
+<h2>
+🔎 Tafuta Bidhaa
+</h2>
+
+<input
 id="searchInput"
 placeholder="Andika jina la bidhaa..."
 oninput="searchProducts(this.value)"
-
-«»
+>
 
 <select
 id="searchRegion"
 onchange="loadSearchDistricts()"
+>
 
-«»
+<option value="">
+Mikoa yote
+</option>
 
-<option value="">Mikoa yote</option>
-</select><select
+</select>
+
+<select
 id="searchDistrict"
 onchange="searchProducts()"
+>
 
-«»
+<option value="">
+Wilaya zote
+</option>
 
-<option value="">Wilaya zote</option>
-</select></div><div id="searchResults"></div></section><!-- ADD PRODUCT --><section id="add" class="hidden"><div class="card"><h2>➕ Weka Bidhaa</h2><label>Jina la bidhaa</label>
+</select>
+
+</div>
+
+<div id="searchResults"></div>
+
+</section>
+
+
+<!-- =========================
+ADD PRODUCT
+========================= -->
+
+<section id="add" class="hidden">
+
+<div class="card">
+
+<h2>
+➕ Weka Bidhaa
+</h2>
+
+<label>
+<b>Jina la bidhaa</b>
+</label>
 
 <input
 id="name"
 placeholder="Mfano: Samsung A05"
+>
 
-«»
-
-<label>Bei (TSh)</label>
+<label>
+<b>Bei (TSh)</b>
+</label>
 
 <input
 id="price"
 type="number"
 placeholder="Mfano: 250000"
+>
 
-«»
+<label>
+<b>Kundi</b>
+</label>
 
-<label>Kundi</label>
+<select id="category">
 
-<select id="category"><option value="">
+<option value="">
 Chagua kundi
-</option><option>Mavazi</option>
+</option>
+
+<option>Mavazi</option>
 <option>Electronics</option>
 <option>Nyumba</option>
 <option>Magari</option>
 <option>Kilimo</option>
 <option>Urembo</option>
 <option>Elimu</option>
-<option>Huduma</option></select><h3>📍 Eneo la Muuzaji</h3><label>Mkoa</label>
+<option>Huduma</option>
+
+</select>
+
+
+<h3>
+📍 Eneo la Muuzaji
+</h3>
+
+<label>
+<b>Mkoa</b>
+</label>
 
 <select
 id="region"
 onchange="loadDistricts()"
-
-«»
+>
 
 <option value="">
 ⏳ Inapakia mikoa...
-</option></select><label>Wilaya</label>
+</option>
+
+</select>
+
+
+<label>
+<b>Wilaya</b>
+</label>
 
 <select
 id="district"
 onchange="loadLocalities()"
-
-«»
+>
 
 <option value="">
 Chagua Wilaya
-</option></select><label>Mtaa / Kijiji</label>
+</option>
 
-<select id="locality"><option value="">
+</select>
+
+
+<label>
+<b>Mtaa / Kijiji</b>
+</label>
+
+<select id="locality">
+
+<option value="">
 Chagua Mtaa au Kijiji
-</option></select><label>
-📞 Namba ya simu ya muuzaji
-</label><input
+</option>
+
+</select>
+
+
+<label>
+<b>📞 Namba ya simu ya muuzaji</b>
+</label>
+
+<input
 id="phone"
 type="tel"
 placeholder="Mfano: 0625053021"
+>
 
-«»
 
-<label>Maelezo ya bidhaa</label>
+<label>
+<b>Maelezo ya bidhaa</b>
+</label>
 
 <textarea
 id="description"
 placeholder="Eleza bidhaa yako..."
-></textarea><label>🖼️ Picha ya kwanza</label>
+></textarea>
+
+
+<label>
+<b>🖼️ Picha ya kwanza</b>
+</label>
 
 <input
 id="image1"
 type="file"
 accept="image/*"
+>
 
-«»
 
-<label>🖼️ Picha ya pili</label>
+<label>
+<b>🖼️ Picha ya pili</b>
+</label>
 
 <input
 id="image2"
 type="file"
 accept="image/*"
+>
 
-«»
 
 <button
 type="button"
 class="main"
 onclick="addProduct()"
-
-«»
-
+>
 🚀 Weka Bidhaa PLAM
 </button>
 
-<div id="addMessage"></div></div></section><!-- ACCOUNT --><section id="account" class="hidden"><div class="card"><h2>👤 Fungua Akaunti</h2><input
+<div id="addMessage"></div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ACCOUNT
+========================= -->
+
+<section id="account" class="hidden">
+
+
+<div class="card">
+
+<h2>
+👤 Fungua Akaunti
+</h2>
+
+<input
 id="regName"
 placeholder="Jina kamili"
-
-«»
+>
 
 <input
 id="regPhone"
 placeholder="Namba ya simu"
-
-«»
+>
 
 <input
 id="regEmail"
 type="email"
 placeholder="Barua pepe"
-
-«»
+>
 
 <input
 id="regPassword"
 type="password"
 placeholder="Password"
-
-«»
+>
 
 <button
 type="button"
 class="main"
 onclick="registerUser()"
-
-«»
-
+>
 Fungua Akaunti
 </button>
 
-<div id="registerMessage"></div></div><div class="card"><h2>🔑 Ingia</h2><input
+<div id="registerMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🔑 Ingia
+</h2>
+
+<input
 id="loginEmail"
 type="email"
 placeholder="Barua pepe"
-
-«»
+>
 
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
-
-«»
+>
 
 <button
 type="button"
 class="main"
 onclick="loginUser()"
-
-«»
-
+>
 Ingia
 </button>
 
@@ -519,129 +956,265 @@ Ingia
 type="button"
 class="main gray"
 onclick="logoutUser()"
-
-«»
-
+>
 Toka
 </button>
 
-<div id="loginMessage"></div></div><div class="card"><h2>🛒 Maagizo Yangu</h2><p>
+<div id="loginMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🛒 Maagizo Yangu
+</h2>
+
+<p>
 Hapa utaona hali ya bidhaa ulizoagiza.
-</p><button
+</p>
+
+<button
 type="button"
 class="main blue"
 onclick="loadMyOrders()"
-
-«»
-
+>
 🔄 Angalia Maagizo
 </button>
 
 <div id="myOrders">
 Ingia kwenye akaunti kuona maagizo yako.
-</div></div><div class="card"><h2>🏪 Maagizo ya Wateja Wangu</h2><p>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🏪 Maagizo ya Wateja Wangu
+</h2>
+
+<p>
 Kama wewe ni muuzaji, hapa utaona maagizo ya bidhaa zako.
-</p><button
+</p>
+
+<button
 type="button"
 class="main"
 onclick="loadSellerOrders()"
-
-«»
-
+>
 🔄 Angalia Maagizo ya Wateja
 </button>
 
 <div id="sellerOrders">
 Ingia kwenye akaunti na hakikisha namba yako ya simu iko kwenye akaunti.
-</div></div></section><!-- ADMIN --><section id="admin" class="hidden"><div id="adminLogin" class="card"><h2>🔐 Admin</h2><input
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ADMIN
+========================= -->
+
+<section id="admin" class="hidden">
+
+
+<div id="adminLogin" class="card">
+
+<h2>
+🔐 Admin
+</h2>
+
+<input
 id="adminEmail"
 type="email"
 placeholder="Email ya Admin"
-
-«»
+>
 
 <input
 id="adminPassword"
 type="password"
 placeholder="Password"
-
-«»
+>
 
 <button
 type="button"
 class="main"
 onclick="adminLogin()"
-
-«»
-
+>
 Ingia Admin
 </button>
 
-<div id="adminMessage"></div></div><div id="dashboard" class="hidden"><div class="card"><h2>📊 Admin Dashboard</h2><p id="adminWelcome"></p></div><div class="card"><h2>📦 Bidhaa Zote</h2><p>
+<div id="adminMessage"></div>
+
+</div>
+
+
+<div id="dashboard" class="hidden">
+
+
+<div class="card">
+
+<h2>
+📊 Admin Dashboard
+</h2>
+
+<p id="adminWelcome"></p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+📦 Bidhaa Zote
+</h2>
+
+<p>
 Admin anaona bidhaa zote na anaweza
 <b>kufuta bidhaa yenye utapeli au tatizo.</b>
-</p><div id="adminProducts">
+</p>
+
+<div id="adminProducts">
 Inapakia...
-</div></div><div class="card"><h2>🛒 Maagizo</h2><p>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🛒 Maagizo
+</h2>
+
+<p>
 Admin anaona hali ya maagizo tu.
 <br>
 <b>
 Uamuzi wa Accepted/Rejected unafanywa na muuzaji.
 </b>
-</p><div id="adminOrders">
+</p>
+
+<div id="adminOrders">
 Inapakia...
-</div></div><div class="card"><h2>👥 Watumiaji Wenye Akaunti</h2><button
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+👥 Watumiaji Wenye Akaunti
+</h2>
+
+<button
 type="button"
 class="main"
 onclick="loadUsers()"
-
-«»
-
+>
 🔄 Onyesha Watumiaji
 </button>
 
-<div id="users"></div></div><button
+<div id="users"></div>
+
+</div>
+
+
+<button
 type="button"
 class="main gray"
 onclick="adminLogout()"
-
-«»
-
+>
 Toka Admin
 </button>
 
-</div></section><!-- PLAM CONTACT --><section><div class="card"><h2>📞 Mawasiliano ya PLAM</h2><p>
-Kwa msaada au mawasiliano na PLAM:
-</p><div class="actions"><a
-class="call"
+</div>
+
+</section>
+
+
+<!-- =========================
+PLAM CONTACT
+========================= -->
+
+<section>
+
+<div class="card contact-card">
+
+<div class="contact-title">
+📞 Mawasiliano ya PLAM
+</div>
+
+<p>
+Kwa msaada au mawasiliano na
+<b>msimamizi wa PLAM TANZANIA</b>:
+</p>
+
+<div class="contact-number">
+📱 0625 053 021
+</div>
+
+<div class="contact-actions">
+
+<a
+class="contact-call"
 href="tel:+255625053021"
-
-«»
-
+>
 📞 Piga Simu
 </a>
 
 <a
-class="whatsapp"
+class="contact-whatsapp"
 href="https://wa.me/255625053021"
 target="_blank"
-
-«»
-
+>
 💬 WhatsApp
 </a>
 
-</div></div></section><footer><strong>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+<strong>
 🇹🇿 PLAM TANZANIA
-</strong><br><br>
+</strong>
+
+<br><br>
 
 Jenga biashara yako. Fikia wateja zaidi.
 
 <br><br>
 
+📞 0625 053 021
+
+<br><br>
+
 © 2026 PLAM TANZANIA
 
-</footer><script>
+</footer>
+
+
+<script>
+
+/* =========================
+SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -660,7 +1233,7 @@ const ADMIN_EMAIL =
 
 
 /* =========================
-   MAENEO
+MAENEO
 ========================= */
 
 const LOCATIONS = {
@@ -859,12 +1432,13 @@ const LOCATIONS = {
 
 
 /* =========================
-   SHOW
+SHOW
 ========================= */
 
 function show(id){
 
-document.querySelectorAll("section")
+document
+.querySelectorAll("section")
 .forEach(function(section){
 
 section.classList.add("hidden");
@@ -874,11 +1448,7 @@ section.classList.add("hidden");
 const target =
 document.getElementById(id);
 
-if(target){
-
-target.classList.remove("hidden");
-
-}else{
+if(!target){
 
 console.error(
 "Section haipo:",
@@ -889,6 +1459,8 @@ return;
 
 }
 
+target.classList.remove("hidden");
+
 window.scrollTo({
 top:0,
 behavior:"smooth"
@@ -896,38 +1468,27 @@ behavior:"smooth"
 
 
 if(id==="home"){
-
 loadProducts();
-
 }
-
 
 if(id==="search"){
-
 searchProducts();
-
 }
-
 
 if(id==="admin"){
-
 checkAdmin();
-
 }
 
-
 if(id==="account"){
-
 loadMyOrders();
 loadSellerOrders();
-
 }
 
 }
 
 
 /* =========================
-   LOAD REGIONS
+LOAD REGIONS
 ========================= */
 
 function loadRegions(){
@@ -940,6 +1501,7 @@ document.getElementById("region");
 
 const searchRegion =
 document.getElementById("searchRegion");
+
 
 if(region){
 
@@ -959,6 +1521,7 @@ region.appendChild(option);
 });
 
 }
+
 
 if(searchRegion){
 
@@ -983,7 +1546,7 @@ searchRegion.appendChild(option);
 
 
 /* =========================
-   LOAD DISTRICTS
+LOAD DISTRICTS
 ========================= */
 
 function loadDistricts(){
@@ -1034,7 +1597,7 @@ district.appendChild(option);
 
 
 /* =========================
-   LOAD LOCALITIES
+LOAD LOCALITIES
 ========================= */
 
 function loadLocalities(){
@@ -1078,7 +1641,7 @@ locality.appendChild(option);
 
 
 /* =========================
-   SEARCH DISTRICTS
+SEARCH DISTRICTS
 ========================= */
 
 function loadSearchDistricts(){
@@ -1130,7 +1693,7 @@ searchProducts();
 
 
 /* =========================
-   PHONE
+PHONE
 ========================= */
 
 function formatPhone(phone){
@@ -1140,15 +1703,11 @@ String(phone||"")
 .replace(/\D/g,"");
 
 if(p.startsWith("255")){
-
 return "+"+p;
-
 }
 
 if(p.startsWith("0")){
-
 return "+255"+p.substring(1);
-
 }
 
 return p;
@@ -1157,7 +1716,7 @@ return p;
 
 
 /* =========================
-   IMAGE
+IMAGE
 ========================= */
 
 function compressImage(file){
@@ -1254,7 +1813,7 @@ reader.readAsDataURL(file);
 
 
 /* =========================
-   ADD PRODUCT
+ADD PRODUCT
 ========================= */
 
 async function addProduct(){
@@ -1348,18 +1907,13 @@ let image2="";
 
 
 if(file1){
-
 image1 =
 await compressImage(file1);
-
 }
 
-
 if(file2){
-
 image2 =
 await compressImage(file2);
-
 }
 
 
@@ -1384,14 +1938,12 @@ status:"accepted"
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
 msg.innerHTML =
-'<div class="message">✅ Bidhaa imewekwa PLAM na sasa inaonekana kwa wanunuzi.<br><br>📢 Admin anaweza kuifuta ikiwa itabainika kuwa ni bidhaa ya utapeli au isiyofaa.</div>';
+'<div class="message">✅ Bidhaa imewekwa PLAM na sasa inaonekana kwa wanunuzi.</div>';
 
 
 document.getElementById("name").value="";
@@ -1428,7 +1980,7 @@ error.message||String(error)
 
 
 /* =========================
-   LOAD PRODUCTS
+LOAD PRODUCTS
 ========================= */
 
 async function loadProducts(){
@@ -1456,9 +2008,7 @@ ascending:false
 });
 
 if(result.error){
-
 throw result.error;
-
 }
 
 renderProducts(
@@ -1481,7 +2031,7 @@ error.message||String(error)
 
 
 /* =========================
-   RENDER PRODUCTS
+RENDER PRODUCTS
 ========================= */
 
 function renderProducts(data,box){
@@ -1494,6 +2044,7 @@ box.innerHTML =
 return;
 
 }
+
 
 box.innerHTML =
 data.map(function(p){
@@ -1508,9 +2059,12 @@ formatPhone(p.phone);
 const wa =
 phone.replace(/\D/g,"");
 
+
 return `
 
 <div class="product">
+
+<div class="product-image-box">
 
 <img
 class="main-image"
@@ -1519,17 +2073,30 @@ alt="${escapeHTML(p.name)}"
 onerror="this.src='https://via.placeholder.com/900x600?text=PLAM+TANZANIA'"
 >
 
+</div>
+
+
 <div class="product-body">
 
 <h3>
 ${escapeHTML(p.name)}
 </h3>
 
+
+<div class="price-box">
+
+<div class="price-label">
+Bei ya bidhaa
+</div>
+
 <div class="price">
 TSh ${Number(
 p.price||0
 ).toLocaleString()}
 </div>
+
+</div>
+
 
 <div class="location">
 
@@ -1548,25 +2115,46 @@ ${escapeHTML(p.place||"-")}
 
 </div>
 
-<p>
-${escapeHTML(p.description||"")}
-</p>
 
 ${
-p.image_url_2
+p.description
 ?
 `
-<img
-class="second-image"
-src="${p.image_url_2}"
-alt="Picha ya pili"
->
+<div class="description">
+<b>📝 Maelezo:</b><br>
+${escapeHTML(p.description)}
+</div>
 `
 :
 ""
 }
 
+
+${
+p.image_url_2
+?
+`
+<div class="second-image-box">
+
+<div class="second-image-title">
+🖼️ Picha ya pili
+</div>
+
+<img
+class="second-image"
+src="${p.image_url_2}"
+alt="Picha ya pili ya ${escapeHTML(p.name)}"
+>
+
+</div>
+`
+:
+""
+}
+
+
 <div class="actions">
+
 
 <button
 type="button"
@@ -1576,13 +2164,15 @@ onclick="placeOrder(${Number(p.id)})"
 🛒 Agiza Bidhaa
 </button>
 
+
 <a
 class="download"
 href="${image}"
 download="PLAM-${encodeURIComponent(p.name||"bidhaa")}.jpg"
 >
-⬇️ Pakua Picha
+📥 Pakua Picha
 </a>
+
 
 <a
 class="call"
@@ -1591,6 +2181,7 @@ href="tel:${phone}"
 📞 Piga Simu
 </a>
 
+
 <a
 class="whatsapp"
 href="https://wa.me/${wa}"
@@ -1598,6 +2189,7 @@ target="_blank"
 >
 💬 WhatsApp
 </a>
+
 
 </div>
 
@@ -1613,7 +2205,7 @@ target="_blank"
 
 
 /* =========================
-   ESCAPE
+ESCAPE
 ========================= */
 
 function escapeHTML(value){
@@ -1629,7 +2221,7 @@ return String(value||"")
 
 
 /* =========================
-   SEARCH
+SEARCH
 ========================= */
 
 async function searchProducts(text){
@@ -1646,6 +2238,7 @@ if(!box){
 return;
 }
 
+
 let query =
 supabaseClient
 .from("Production")
@@ -1653,6 +2246,7 @@ supabaseClient
 .order("created_at",{
 ascending:false
 });
+
 
 const region =
 document.getElementById(
@@ -1693,13 +2287,12 @@ const result =
 await query;
 
 if(result.error){
-
 throw result.error;
-
 }
 
 let products =
 result.data||[];
+
 
 const word =
 String(
@@ -1751,6 +2344,7 @@ products,
 box
 );
 
+
 }catch(error){
 
 box.innerHTML =
@@ -1766,7 +2360,7 @@ error.message||String(error)
 
 
 /* =========================
-   PLACE ORDER
+PLACE ORDER
 ========================= */
 
 async function placeOrder(productId){
@@ -1803,19 +2397,19 @@ await supabaseClient
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
 const product =
 result.data;
 
+
 const buyerName =
 user.user_metadata?.full_name||
 user.email||
 "Mnunuzi";
+
 
 const buyerPhone =
 user.user_metadata?.phone||
@@ -1839,9 +2433,7 @@ status:"pending"
 
 
 if(orderResult.error){
-
 throw orderResult.error;
-
 }
 
 
@@ -1865,7 +2457,7 @@ alert(
 
 
 /* =========================
-   STATUS
+STATUS
 ========================= */
 
 function statusHTML(status){
@@ -1900,7 +2492,7 @@ return `
 
 
 /* =========================
-   BUYER ORDERS
+BUYER ORDERS
 ========================= */
 
 async function loadMyOrders(){
@@ -1931,8 +2523,10 @@ return;
 
 }
 
+
 box.innerHTML =
 "⏳ Inapakia maagizo...";
+
 
 try{
 
@@ -1945,11 +2539,11 @@ await supabaseClient
 ascending:false
 });
 
+
 if(orders.error){
-
 throw orders.error;
-
 }
+
 
 if(!orders.data?.length){
 
@@ -1959,6 +2553,7 @@ box.innerHTML =
 return;
 
 }
+
 
 box.innerHTML =
 orders.data.map(function(o){
@@ -1995,6 +2590,7 @@ o.created_at
 
 }).join("");
 
+
 }catch(error){
 
 box.innerHTML =
@@ -2010,7 +2606,7 @@ error.message||String(error)
 
 
 /* =========================
-   SELLER ORDERS
+SELLER ORDERS
 ========================= */
 
 async function loadSellerOrders(){
@@ -2041,6 +2637,7 @@ return;
 
 }
 
+
 const sellerPhone =
 formatPhone(
 user.user_metadata?.phone||""
@@ -2056,8 +2653,10 @@ return;
 
 }
 
+
 box.innerHTML =
 "⏳ Inapakia maagizo...";
+
 
 try{
 
@@ -2070,11 +2669,11 @@ await supabaseClient
 ascending:false
 });
 
+
 if(result.error){
-
 throw result.error;
-
 }
+
 
 if(!result.data?.length){
 
@@ -2128,6 +2727,7 @@ o.created_at
 ).toLocaleString("sw-TZ")
 }
 
+
 ${
 o.status==="pending"
 ?
@@ -2164,6 +2764,7 @@ onclick="sellerOrderStatus(${Number(o.id)},'rejected')"
 
 }).join("");
 
+
 }catch(error){
 
 box.innerHTML =
@@ -2179,7 +2780,7 @@ error.message||String(error)
 
 
 /* =========================
-   SELLER ACCEPT / REJECT
+SELLER STATUS
 ========================= */
 
 async function sellerOrderStatus(id,status){
@@ -2201,6 +2802,7 @@ alert(
 return;
 
 }
+
 
 const sellerPhone =
 formatPhone(
@@ -2235,9 +2837,7 @@ sellerPhone
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2266,7 +2866,7 @@ error.message||error
 
 
 /* =========================
-   REGISTER
+REGISTER
 ========================= */
 
 async function registerUser(){
@@ -2341,9 +2941,7 @@ phone:formatPhone(phone)
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2393,7 +2991,7 @@ error.message||String(error)
 
 
 /* =========================
-   LOGIN
+LOGIN
 ========================= */
 
 async function loginUser(){
@@ -2441,9 +3039,7 @@ password:password
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2498,7 +3094,7 @@ error.message||String(error)
 
 
 /* =========================
-   LOGOUT
+LOGOUT
 ========================= */
 
 async function logoutUser(){
@@ -2524,7 +3120,7 @@ document.getElementById(
 
 
 /* =========================
-   ADMIN CHECK
+ADMIN CHECK
 ========================= */
 
 async function checkAdmin(){
@@ -2577,7 +3173,7 @@ document.getElementById(
 
 
 /* =========================
-   ADMIN LOGIN
+ADMIN LOGIN
 ========================= */
 
 async function adminLogin(){
@@ -2628,9 +3224,7 @@ password:password
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2667,7 +3261,7 @@ error.message||String(error)
 
 
 /* =========================
-   ADMIN PRODUCTS
+ADMIN PRODUCTS
 ========================= */
 
 async function loadAdminProducts(){
@@ -2693,9 +3287,7 @@ ascending:false
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2726,14 +3318,7 @@ p.image_url
 `
 <img
 src="${p.image_url}"
-style="
-width:100%;
-height:auto;
-max-height:500px;
-object-fit:contain;
-background:#eee;
-border-radius:8px;
-"
+class="admin-product-image"
 >
 `
 :
@@ -2758,10 +3343,6 @@ p.price||0
 
 <p>
 📞 ${escapeHTML(p.phone||"-")}
-</p>
-
-<p>
-<b>Bidhaa ipo kwenye PLAM.</b>
 </p>
 
 <button
@@ -2794,7 +3375,7 @@ error.message||String(error)
 
 
 /* =========================
-   DELETE PRODUCT
+DELETE PRODUCT
 ========================= */
 
 async function deleteProduct(id){
@@ -2818,9 +3399,7 @@ await supabaseClient
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2846,7 +3425,7 @@ error.message||error
 
 
 /* =========================
-   ADMIN ORDERS
+ADMIN ORDERS
 ========================= */
 
 async function loadAdminOrders(){
@@ -2876,9 +3455,7 @@ ascending:false
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -2961,7 +3538,7 @@ error.message||String(error)
 
 
 /* =========================
-   ADMIN USERS
+ADMIN USERS
 ========================= */
 
 async function loadUsers(){
@@ -2993,9 +3570,7 @@ ascending:false
 
 
 if(result.error){
-
 throw result.error;
-
 }
 
 
@@ -3068,7 +3643,7 @@ error.message||String(error)
 
 
 /* =========================
-   ADMIN LOGOUT
+ADMIN LOGOUT
 ========================= */
 
 async function adminLogout(){
@@ -3087,7 +3662,7 @@ document.getElementById(
 
 
 /* =========================
-   START PLAM
+START PLAM
 ========================= */
 
 async function startPLAM(){
@@ -3104,7 +3679,7 @@ loadProducts();
 
 
 /* =========================
-   START
+START
 ========================= */
 
 if(
@@ -3124,7 +3699,7 @@ startPLAM();
 
 
 /* =========================
-   AUTH STATE
+AUTH STATE
 ========================= */
 
 supabaseClient.auth.onAuthStateChange(
@@ -3144,5 +3719,8 @@ loadSellerOrders();
 
 });
 
-</script></body>
+</script>
+
+</body>
+
    </html>
