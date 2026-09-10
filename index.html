@@ -2,21 +2,14 @@
 <html lang="sw">
 
 <head>
-
 <meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PLAM TANZANIA</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -24,10 +17,6 @@ font-family:Arial,sans-serif;
 background:#f2f5f3;
 color:#222;
 }
-
-/* =========================
-HEADER
-========================= */
 
 header{
 background:linear-gradient(135deg,#087a38,#00a651);
@@ -41,17 +30,12 @@ header h1{
 margin:0;
 font-size:30px;
 font-weight:800;
-letter-spacing:.5px;
 }
 
 header p{
 margin:9px 0 0;
 font-size:15px;
 }
-
-/* =========================
-NAVIGATION
-========================= */
 
 nav{
 display:flex;
@@ -78,14 +62,6 @@ nav button:hover{
 background:#eef8f0;
 }
 
-nav button:active{
-background:#dff5e5;
-}
-
-/* =========================
-SECTIONS
-========================= */
-
 section{
 max-width:900px;
 margin:auto;
@@ -95,10 +71,6 @@ padding:15px;
 .hidden{
 display:none !important;
 }
-
-/* =========================
-CARDS
-========================= */
 
 .card{
 background:white;
@@ -112,10 +84,6 @@ h2{
 color:#087a38;
 margin-top:5px;
 }
-
-/* =========================
-INPUTS
-========================= */
 
 input,
 select,
@@ -142,10 +110,6 @@ min-height:110px;
 resize:vertical;
 }
 
-/* =========================
-MAIN BUTTON
-========================= */
-
 .main{
 width:100%;
 padding:14px;
@@ -160,29 +124,10 @@ cursor:pointer;
 box-shadow:0 3px 8px #0002;
 }
 
-.main:hover{
-opacity:.92;
-}
-
-.red{
-background:#d00000;
-}
-
-.orange{
-background:#e68a00;
-}
-
-.gray{
-background:#555;
-}
-
-.blue{
-background:#1769aa;
-}
-
-/* =========================
-PRODUCT
-========================= */
+.red{background:#d00000}
+.orange{background:#e68a00}
+.gray{background:#555}
+.blue{background:#1769aa}
 
 #products{
 margin-top:10px;
@@ -196,10 +141,6 @@ margin-bottom:20px;
 box-shadow:0 4px 14px #0002;
 border:1px solid #e4e4e4;
 }
-
-/* =========================
-PRODUCT IMAGE
-========================= */
 
 .product-image-box{
 background:#f0f2f1;
@@ -217,10 +158,6 @@ display:block;
 border-radius:11px;
 background:#f0f2f1;
 }
-
-/* =========================
-PRODUCT BODY
-========================= */
 
 .product-body{
 padding:17px;
@@ -252,10 +189,6 @@ font-weight:800;
 margin-top:2px;
 }
 
-/* =========================
-LOCATION
-========================= */
-
 .location{
 background:#f4f8f5;
 padding:12px;
@@ -265,24 +198,12 @@ line-height:1.8;
 border-left:4px solid #087a38;
 }
 
-.location b{
-color:#333;
-}
-
-/* =========================
-DESCRIPTION
-========================= */
-
 .description{
 font-size:15px;
 line-height:1.6;
 margin:12px 0;
 color:#444;
 }
-
-/* =========================
-SECOND IMAGE
-========================= */
 
 .second-image-box{
 margin-top:13px;
@@ -304,10 +225,6 @@ background:#f0f2f1;
 border-radius:11px;
 border:1px solid #ddd;
 }
-
-/* =========================
-PRODUCT BUTTONS
-========================= */
 
 .actions{
 display:grid;
@@ -335,30 +252,10 @@ cursor:pointer;
 box-shadow:0 3px 7px #0002;
 }
 
-.call{
-background:#087a38;
-}
-
-.whatsapp{
-background:#20bd5a;
-}
-
-.order{
-background:#1769aa;
-}
-
-.download{
-background:#555;
-}
-
-.actions a:hover,
-.actions button:hover{
-opacity:.9;
-}
-
-/* =========================
-MESSAGE
-========================= */
+.call{background:#087a38}
+.whatsapp{background:#20bd5a}
+.order{background:#1769aa}
+.download{background:#555}
 
 .message{
 padding:13px;
@@ -367,10 +264,6 @@ border-radius:10px;
 background:#eef8f0;
 line-height:1.6;
 }
-
-/* =========================
-ORDERS
-========================= */
 
 .stats{
 display:grid;
@@ -391,17 +284,9 @@ display:block;
 font-size:25px;
 }
 
-.pending{
-color:#e68a00;
-}
-
-.accepted{
-color:#008000;
-}
-
-.rejected{
-color:#d00000;
-}
+.pending{color:#e68a00}
+.accepted{color:#008000}
+.rejected{color:#d00000}
 
 .order-box{
 border-left:5px solid #087a38;
@@ -435,10 +320,6 @@ background:#ffe1e1;
 color:#c00000;
 }
 
-/* =========================
-PLAM CONTACT
-========================= */
-
 .contact-card{
 background:linear-gradient(135deg,#ffffff,#eef8f0);
 border:2px solid #d7efdd;
@@ -457,7 +338,6 @@ font-size:25px;
 font-weight:800;
 color:#087a38;
 margin:17px 0;
-letter-spacing:1px;
 }
 
 .contact-actions{
@@ -480,17 +360,8 @@ font-weight:800;
 box-shadow:0 4px 10px #0002;
 }
 
-.contact-call{
-background:#087a38;
-}
-
-.contact-whatsapp{
-background:#25d366;
-}
-
-/* =========================
-ADMIN
-========================= */
+.contact-call{background:#087a38}
+.contact-whatsapp{background:#25d366}
 
 .admin-product-image{
 width:100%;
@@ -502,10 +373,6 @@ border-radius:10px;
 display:block;
 }
 
-/* =========================
-FOOTER
-========================= */
-
 footer{
 background:#075c2b;
 color:white;
@@ -515,40 +382,21 @@ margin-top:20px;
 line-height:1.5;
 }
 
-/* =========================
-MOBILE
-========================= */
-
 @media(max-width:500px){
 
-header h1{
-font-size:25px;
-}
-
-header p{
-font-size:14px;
-}
+header h1{font-size:25px}
+header p{font-size:14px}
 
 nav button{
 font-size:10px;
 padding:12px 2px;
 }
 
-section{
-padding:11px;
-}
+section{padding:11px}
 
-.product-body{
-padding:14px;
-}
+.product-body{padding:14px}
 
-.product img.main-image{
-width:100%;
-height:auto;
-max-height:none;
-object-fit:contain;
-}
-
+.product img.main-image,
 .second-image{
 width:100%;
 height:auto;
@@ -556,13 +404,8 @@ max-height:none;
 object-fit:contain;
 }
 
-.product-body h3{
-font-size:20px;
-}
-
-.price{
-font-size:22px;
-}
+.product-body h3{font-size:20px}
+.price{font-size:22px}
 
 .actions{
 grid-template-columns:1fr 1fr;
@@ -581,72 +424,39 @@ grid-template-columns:1fr;
 .contact-number{
 font-size:23px;
 }
-
 }
-
-/* =========================
-VERY SMALL PHONES
-========================= */
 
 @media(max-width:350px){
 
-nav button{
-font-size:9px;
-}
+nav button{font-size:9px}
 
 .actions{
 grid-template-columns:1fr;
 }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
 <h1>🇹🇿 PLAM TANZANIA</h1>
-
-<p>
-Jenga biashara yako. Fikia wateja zaidi.
-</p>
-
+<p>Jenga biashara yako. Fikia wateja zaidi.</p>
 </header>
 
 <nav>
-
-<button type="button" onclick="show('home')">
-🏠 Home
-</button>
-
-<button type="button" onclick="show('search')">
-🔎 Tafuta
-</button>
-
-<button type="button" onclick="show('add')">
-➕ Weka
-</button>
-
-<button type="button" onclick="show('account')">
-👤 Akaunti
-</button>
-
-<button type="button" onclick="show('admin')">
-🔐 Admin
-</button>
-
+<button type="button" onclick="show('home')">🏠 Home</button>
+<button type="button" onclick="show('search')">🔎 Tafuta</button>
+<button type="button" onclick="show('add')">➕ Weka</button>
+<button type="button" onclick="show('account')">👤 Akaunti</button>
+<button type="button" onclick="show('admin')">🔐 Admin</button>
 </nav>
 
 <section id="home">
 
 <div class="card">
 
-<h2>
-Karibu PLAM TANZANIA
-</h2>
+<h2>Karibu PLAM TANZANIA</h2>
 
 <p>
 Tafuta bidhaa na huduma kutoka kwa wauzaji mbalimbali Tanzania.
@@ -668,9 +478,7 @@ onclick="show('add')"
 
 </div>
 
-<h2>
-🛍️ Bidhaa Zote
-</h2>
+<h2>🛍️ Bidhaa Zote</h2>
 
 <div id="products">
 ⏳ Inapakia bidhaa...
@@ -682,9 +490,7 @@ onclick="show('add')"
 
 <div class="card">
 
-<h2>
-🔎 Tafuta Bidhaa
-</h2>
+<h2>🔎 Tafuta Bidhaa</h2>
 
 <input
 id="searchInput"
@@ -696,22 +502,14 @@ oninput="searchProducts(this.value)"
 id="searchRegion"
 onchange="loadSearchDistricts()"
 >
-
-<option value="">
-Mikoa yote
-</option>
-
+<option value="">Mikoa yote</option>
 </select>
 
 <select
 id="searchDistrict"
 onchange="searchProducts()"
 >
-
-<option value="">
-Wilaya zote
-</option>
-
+<option value="">Wilaya zote</option>
 </select>
 
 </div>
@@ -724,39 +522,18 @@ Wilaya zote
 
 <div class="card">
 
-<h2>
-➕ Weka Bidhaa
-</h2>
+<h2>➕ Weka Bidhaa</h2>
 
-<label>
-<b>Jina la bidhaa</b>
-</label>
+<label><b>Jina la bidhaa</b></label>
+<input id="name" placeholder="Mfano: Samsung A05">
 
-<input
-id="name"
-placeholder="Mfano: Samsung A05"
->
+<label><b>Bei (TSh)</b></label>
+<input id="price" type="number" placeholder="Mfano: 250000">
 
-<label>
-<b>Bei (TSh)</b>
-</label>
-
-<input
-id="price"
-type="number"
-placeholder="Mfano: 250000"
->
-
-<label>
-<b>Kundi</b>
-</label>
+<label><b>Kundi</b></label>
 
 <select id="category">
-
-<option value="">
-Chagua kundi
-</option>
-
+<option value="">Chagua kundi</option>
 <option>Mavazi</option>
 <option>Electronics</option>
 <option>Nyumba</option>
@@ -765,58 +542,29 @@ Chagua kundi
 <option>Urembo</option>
 <option>Elimu</option>
 <option>Huduma</option>
-
 </select>
 
-<h3>
-📍 Eneo la Muuzaji
-</h3>
+<h3>📍 Eneo la Muuzaji</h3>
 
-<label>
-<b>Mkoa</b>
-</label>
+<label><b>Mkoa</b></label>
 
-<select
-id="region"
-onchange="loadDistricts()"
->
-
-<option value="">
-⏳ Inapakia mikoa...
-</option>
-
+<select id="region" onchange="loadDistricts()">
+<option value="">⏳ Inapakia mikoa...</option>
 </select>
 
-<label>
-<b>Wilaya</b>
-</label>
+<label><b>Wilaya</b></label>
 
-<select
-id="district"
-onchange="loadLocalities()"
->
-
-<option value="">
-Chagua Wilaya
-</option>
-
+<select id="district" onchange="loadLocalities()">
+<option value="">Chagua Wilaya</option>
 </select>
 
-<label>
-<b>Mtaa / Kijiji</b>
-</label>
+<label><b>Mtaa / Kijiji</b></label>
 
 <select id="locality">
-
-<option value="">
-Chagua Mtaa au Kijiji
-</option>
-
+<option value="">Chagua Mtaa au Kijiji</option>
 </select>
 
-<label>
-<b>📞 Namba ya simu ya muuzaji</b>
-</label>
+<label><b>📞 Namba ya simu ya muuzaji</b></label>
 
 <input
 id="phone"
@@ -824,18 +572,14 @@ type="tel"
 placeholder="Mfano: 0625053021"
 >
 
-<label>
-<b>Maelezo ya bidhaa</b>
-</label>
+<label><b>Maelezo ya bidhaa</b></label>
 
 <textarea
 id="description"
 placeholder="Eleza bidhaa yako..."
 ></textarea>
 
-<label>
-<b>🖼️ Picha ya kwanza</b>
-</label>
+<label><b>🖼️ Picha ya kwanza</b></label>
 
 <input
 id="image1"
@@ -843,9 +587,7 @@ type="file"
 accept="image/*"
 >
 
-<label>
-<b>🖼️ Picha ya pili</b>
-</label>
+<label><b>🖼️ Picha ya pili</b></label>
 
 <input
 id="image2"
@@ -871,31 +613,15 @@ onclick="addProduct()"
 
 <div class="card">
 
-<h2>
-👤 Fungua Akaunti
-</h2>
+<h2>👤 Fungua Akaunti</h2>
 
-<input
-id="regName"
-placeholder="Jina kamili"
->
+<input id="regName" placeholder="Jina kamili">
 
-<input
-id="regPhone"
-placeholder="Namba ya simu"
->
+<input id="regPhone" placeholder="Namba ya simu">
 
-<input
-id="regEmail"
-type="email"
-placeholder="Barua pepe"
->
+<input id="regEmail" type="email" placeholder="Barua pepe">
 
-<input
-id="regPassword"
-type="password"
-placeholder="Password"
->
+<input id="regPassword" type="password" placeholder="Password">
 
 <button
 type="button"
@@ -911,21 +637,11 @@ Fungua Akaunti
 
 <div class="card">
 
-<h2>
-🔑 Ingia
-</h2>
+<h2>🔑 Ingia</h2>
 
-<input
-id="loginEmail"
-type="email"
-placeholder="Barua pepe"
->
+<input id="loginEmail" type="email" placeholder="Barua pepe">
 
-<input
-id="loginPassword"
-type="password"
-placeholder="Password"
->
+<input id="loginPassword" type="password" placeholder="Password">
 
 <button
 type="button"
@@ -949,9 +665,7 @@ Toka
 
 <div class="card">
 
-<h2>
-🛒 Maagizo Yangu
-</h2>
+<h2>🛒 Maagizo Yangu</h2>
 
 <p>
 Hapa utaona hali ya bidhaa ulizoagiza.
@@ -973,9 +687,7 @@ Ingia kwenye akaunti kuona maagizo yako.
 
 <div class="card">
 
-<h2>
-🏪 Maagizo ya Wateja Wangu
-</h2>
+<h2>🏪 Maagizo ya Wateja Wangu</h2>
 
 <p>
 Kama wewe ni muuzaji, hapa utaona maagizo ya bidhaa zako.
@@ -1001,21 +713,11 @@ Ingia kwenye akaunti na hakikisha namba yako ya simu iko kwenye akaunti.
 
 <div id="adminLogin" class="card">
 
-<h2>
-🔐 Admin
-</h2>
+<h2>🔐 Admin</h2>
 
-<input
-id="adminEmail"
-type="email"
-placeholder="Email ya Admin"
->
+<input id="adminEmail" type="email" placeholder="Email ya Admin">
 
-<input
-id="adminPassword"
-type="password"
-placeholder="Password"
->
+<input id="adminPassword" type="password" placeholder="Password">
 
 <button
 type="button"
@@ -1033,9 +735,7 @@ Ingia Admin
 
 <div class="card">
 
-<h2>
-📊 Admin Dashboard
-</h2>
+<h2>📊 Admin Dashboard</h2>
 
 <p id="adminWelcome"></p>
 
@@ -1043,14 +743,7 @@ Ingia Admin
 
 <div class="card">
 
-<h2>
-📦 Bidhaa Zote
-</h2>
-
-<p>
-Admin anaona bidhaa zote na anaweza
-<b>kufuta bidhaa yenye utapeli au tatizo.</b>
-</p>
+<h2>📦 Bidhaa Zote</h2>
 
 <div id="adminProducts">
 Inapakia...
@@ -1060,17 +753,7 @@ Inapakia...
 
 <div class="card">
 
-<h2>
-🛒 Maagizo
-</h2>
-
-<p>
-Admin anaona hali ya maagizo tu.
-<br>
-<b>
-Uamuzi wa Accepted/Rejected unafanywa na muuzaji.
-</b>
-</p>
+<h2>🛒 Maagizo</h2>
 
 <div id="adminOrders">
 Inapakia...
@@ -1080,9 +763,7 @@ Inapakia...
 
 <div class="card">
 
-<h2>
-👥 Watumiaji Wenye Akaunti
-</h2>
+<h2>👥 Watumiaji Wenye Akaunti</h2>
 
 <button
 type="button"
@@ -1150,9 +831,7 @@ target="_blank"
 
 <footer>
 
-<strong>
-🇹🇿 PLAM TANZANIA
-</strong>
+<strong>🇹🇿 PLAM TANZANIA</strong>
 
 <br><br>
 
@@ -1170,10 +849,6 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 <script>
 
-/* =========================
-SUPABASE
-========================= */
-
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
 
@@ -1189,10 +864,6 @@ SUPABASE_KEY
 const ADMIN_EMAIL =
 "lucasmwingira323@gmail.com";
 
-/* =========================
-MAENEO
-========================= */
-
 const LOCATIONS = {
 
 "Mbeya":{
@@ -1200,15 +871,9 @@ const LOCATIONS = {
 "Soweto","Forest","Sisimba","Nonde",
 "Mabatini","Maendeleo","Ruanda","Iyunga"
 ],
-"Rungwe":[
-"Tukuyu","Kiwira","Kisiba","Bulyaga"
-],
-"Kyela":[
-"Kyela Mjini","Ipinda","Matema","Busale"
-],
-"Chunya":[
-"Chunya Mjini","Makongolosi"
-]
+"Rungwe":["Tukuyu","Kiwira","Kisiba","Bulyaga"],
+"Kyela":["Kyela Mjini","Ipinda","Matema","Busale"],
+"Chunya":["Chunya Mjini","Makongolosi"]
 },
 
 "Ruvuma":{
@@ -1216,191 +881,101 @@ const LOCATIONS = {
 "Matarawe","Mashangano","Msamala",
 "Mjimwema","Ruhuwiko"
 ],
-"Songea DC":[
-"Peramiho","Mpitimbi","Matimira"
-],
-"Mbinga":[
-"Mbinga Mjini","Kigonsera","Mikalanga"
-],
-"Tunduru":[
-"Tunduru Mjini","Namikango","Namasakata"
-]
+"Songea DC":["Peramiho","Mpitimbi","Matimira"],
+"Mbinga":["Mbinga Mjini","Kigonsera","Mikalanga"],
+"Tunduru":["Tunduru Mjini","Namikango","Namasakata"]
 },
 
 "Dar es Salaam":{
-"Ilala":[
-"Kariakoo","Upanga","Tabata",
-"Buguruni","Vingunguti"
-],
-"Kinondoni":[
-"Sinza","Manzese","Mwananyamala",
-"Mikocheni","Kijitonyama"
-],
-"Temeke":[
-"Mbagala","Kurasini","Chang'ombe",
-"Yombo","Temeke"
-],
-"Ubungo":[
-"Ubungo","Kimara","Kibamba","Sinza"
-],
-"Kigamboni":[
-"Kigamboni","Mjimwema","Somangila"
-]
+"Ilala":["Kariakoo","Upanga","Tabata","Buguruni","Vingunguti"],
+"Kinondoni":["Sinza","Manzese","Mwananyamala","Mikocheni","Kijitonyama"],
+"Temeke":["Mbagala","Kurasini","Chang'ombe","Yombo","Temeke"],
+"Ubungo":["Ubungo","Kimara","Kibamba","Sinza"],
+"Kigamboni":["Kigamboni","Mjimwema","Somangila"]
 },
 
 "Arusha":{
-"Arusha Mjini":[
-"Kaloleni","Sekei","Sakina",
-"Sanawari","Ngarenaro"
-],
-"Arusha DC":[
-"Usa River","Kikatiti",
-"Ngaramtoni","Kisongo"
-]
+"Arusha Mjini":["Kaloleni","Sekei","Sakina","Sanawari","Ngarenaro"],
+"Arusha DC":["Usa River","Kikatiti","Ngaramtoni","Kisongo"]
 },
 
 "Mwanza":{
-"Nyamagana":[
-"Pamba","Isamilo","Mabatini","Kirumba"
-],
-"Ilemela":[
-"Pasiansi","Nyakato","Buzuruga","Mkolani"
-]
+"Nyamagana":["Pamba","Isamilo","Mabatini","Kirumba"],
+"Ilemela":["Pasiansi","Nyakato","Buzuruga","Mkolani"]
 },
 
 "Dodoma":{
-"Dodoma Mjini":[
-"Kikuyu","Majengo","Kisasa",
-"Area C","Miyuji"
-],
-"Bahi":[
-"Bahi Mjini","Chipanga","Mpalanga"
-],
-"Chamwino":[
-"Chamwino","Fufu","Buigiri"
-]
+"Dodoma Mjini":["Kikuyu","Majengo","Kisasa","Area C","Miyuji"],
+"Bahi":["Bahi Mjini","Chipanga","Mpalanga"],
+"Chamwino":["Chamwino","Fufu","Buigiri"]
 },
 
 "Morogoro":{
-"Morogoro Mjini":[
-"Kihonda","Mazimbu","Mji Mpya",
-"Sabasaba","Kingo"
-],
-"Morogoro DC":[
-"Mgeta","Mikese","Matombo"
-]
+"Morogoro Mjini":["Kihonda","Mazimbu","Mji Mpya","Sabasaba","Kingo"],
+"Morogoro DC":["Mgeta","Mikese","Matombo"]
 },
 
 "Shinyanga":{
-"Shinyanga Mjini":[
-"Kambarage","Ibadakuli","Kizumbi","Chibe"
-],
-"Kahama":[
-"Kahama Mjini","Isaka","Bugarama"
-]
+"Shinyanga Mjini":["Kambarage","Ibadakuli","Kizumbi","Chibe"],
+"Kahama":["Kahama Mjini","Isaka","Bugarama"]
 },
 
 "Tabora":{
-"Tabora Mjini":[
-"Chemchem","Ipuli","Isevya","Kanyenye"
-],
-"Nzega":[
-"Nzega Mjini","Mbutu","Nata"
-]
+"Tabora Mjini":["Chemchem","Ipuli","Isevya","Kanyenye"],
+"Nzega":["Nzega Mjini","Mbutu","Nata"]
 },
 
 "Tanga":{
-"Tanga Mjini":[
-"Ngamiani","Mzingani","Chumbageni","Mabawa"
-],
-"Muheza":[
-"Muheza Mjini","Amani","Magila"
-],
-"Korogwe":[
-"Korogwe Mjini","Mombo","Mkomazi"
-]
+"Tanga Mjini":["Ngamiani","Mzingani","Chumbageni","Mabawa"],
+"Muheza":["Muheza Mjini","Amani","Magila"],
+"Korogwe":["Korogwe Mjini","Mombo","Mkomazi"]
 },
 
 "Kilimanjaro":{
-"Moshi Mjini":[
-"Bondeni","Rau","Majengo","Kiboriloni"
-],
-"Moshi DC":[
-"Himo","Marangu","Uru","Machame"
-]
+"Moshi Mjini":["Bondeni","Rau","Majengo","Kiboriloni"],
+"Moshi DC":["Himo","Marangu","Uru","Machame"]
 },
 
 "Manyara":{
-"Babati":[
-"Babati Mjini","Gallapo","Dareda"
-],
-"Hanang":[
-"Katesh","Endasak"
-]
+"Babati":["Babati Mjini","Gallapo","Dareda"],
+"Hanang":["Katesh","Endasak"]
 },
 
 "Singida":{
-"Singida Mjini":[
-"Unyianga","Misuna","Ipembe","Kindai"
-],
-"Manyoni":[
-"Manyoni Mjini","Itigi","Sanjaranda"
-]
+"Singida Mjini":["Unyianga","Misuna","Ipembe","Kindai"],
+"Manyoni":["Manyoni Mjini","Itigi","Sanjaranda"]
 },
 
 "Iringa":{
-"Iringa Mjini":[
-"Gangilonga","Mkwawa","Kitanzini","Mshindo"
-],
-"Iringa DC":[
-"Kalenga","Izazi","Ilula"
-]
+"Iringa Mjini":["Gangilonga","Mkwawa","Kitanzini","Mshindo"],
+"Iringa DC":["Kalenga","Izazi","Ilula"]
 },
 
 "Njombe":{
-"Njombe Mjini":[
-"Ramadhani","Mji Mpya","Luponde","Matola"
-],
-"Makete":[
-"Makete Mjini","Ipelele","Tandala"
-]
+"Njombe Mjini":["Ramadhani","Mji Mpya","Luponde","Matola"],
+"Makete":["Makete Mjini","Ipelele","Tandala"]
 },
 
 "Pwani":{
-"Kibaha":[
-"Tumbi","Mailimoja","Mkuza","Visiga"
-],
-"Bagamoyo":[
-"Bagamoyo Mjini","Dunda","Zinga"
-]
+"Kibaha":["Tumbi","Mailimoja","Mkuza","Visiga"],
+"Bagamoyo":["Bagamoyo Mjini","Dunda","Zinga"]
 },
 
 "Zanzibar":{
-"Mjini Magharibi":[
-"Stone Town","Mwanakwerekwe",
-"Mombasa","Kisauni"
-],
-"Kaskazini Unguja":[
-"Kijini","Nungwi","Kendwa"
-]
+"Mjini Magharibi":["Stone Town","Mwanakwerekwe","Mombasa","Kisauni"],
+"Kaskazini Unguja":["Kijini","Nungwi","Kendwa"]
 }
 
 };
 
-/* =========================
-SHOW
-========================= */
-
 function show(id){
 
-document
-.querySelectorAll("section")
+document.querySelectorAll("section")
 .forEach(function(section){
 section.classList.add("hidden");
 });
 
-const target =
-document.getElementById(id);
+const target=document.getElementById(id);
 
 if(!target){
 console.error("Section haipo:",id);
@@ -1414,17 +989,9 @@ top:0,
 behavior:"smooth"
 });
 
-if(id==="home"){
-loadProducts();
-}
-
-if(id==="search"){
-searchProducts();
-}
-
-if(id==="admin"){
-checkAdmin();
-}
+if(id==="home") loadProducts();
+if(id==="search") searchProducts();
+if(id==="admin") checkAdmin();
 
 if(id==="account"){
 loadMyOrders();
@@ -1433,30 +1000,20 @@ loadSellerOrders();
 
 }
 
-/* =========================
-LOAD REGIONS
-========================= */
-
 function loadRegions(){
 
-const regions =
-Object.keys(LOCATIONS).sort();
+const regions=Object.keys(LOCATIONS).sort();
 
-const region =
-document.getElementById("region");
-
-const searchRegion =
-document.getElementById("searchRegion");
+const region=document.getElementById("region");
+const searchRegion=document.getElementById("searchRegion");
 
 if(region){
 
-region.innerHTML =
-'<option value="">Chagua Mkoa</option>';
+region.innerHTML='<option value="">Chagua Mkoa</option>';
 
 regions.forEach(function(name){
 
-const option =
-document.createElement("option");
+const option=document.createElement("option");
 
 option.value=name;
 option.textContent=name;
@@ -1469,13 +1026,11 @@ region.appendChild(option);
 
 if(searchRegion){
 
-searchRegion.innerHTML =
-'<option value="">Mikoa yote</option>';
+searchRegion.innerHTML='<option value="">Mikoa yote</option>';
 
 regions.forEach(function(name){
 
-const option =
-document.createElement("option");
+const option=document.createElement("option");
 
 option.value=name;
 option.textContent=name;
@@ -1488,46 +1043,26 @@ searchRegion.appendChild(option);
 
 }
 
-/* =========================
-LOAD DISTRICTS
-========================= */
-
 function loadDistricts(){
 
-const region =
-document.getElementById("region");
+const region=document.getElementById("region");
+const district=document.getElementById("district");
+const locality=document.getElementById("locality");
 
-const district =
-document.getElementById("district");
+if(!region||!district||!locality) return;
 
-const locality =
-document.getElementById("locality");
+const selectedRegion=region.value;
 
-if(!region||!district||!locality){
-return;
-}
+district.innerHTML='<option value="">Chagua Wilaya</option>';
+locality.innerHTML='<option value="">Chagua Mtaa au Kijiji</option>';
 
-const selectedRegion =
-region.value;
+if(!selectedRegion) return;
 
-district.innerHTML =
-'<option value="">Chagua Wilaya</option>';
+const districts=LOCATIONS[selectedRegion]||{};
 
-locality.innerHTML =
-'<option value="">Chagua Mtaa au Kijiji</option>';
+Object.keys(districts).forEach(function(name){
 
-if(!selectedRegion){
-return;
-}
-
-const districts =
-LOCATIONS[selectedRegion] || {};
-
-Object.keys(districts)
-.forEach(function(name){
-
-const option =
-document.createElement("option");
+const option=document.createElement("option");
 
 option.value=name;
 option.textContent=name;
@@ -1538,39 +1073,23 @@ district.appendChild(option);
 
 }
 
-/* =========================
-LOAD LOCALITIES
-========================= */
-
 function loadLocalities(){
 
-const region =
-document.getElementById("region").value;
+const region=document.getElementById("region").value;
+const district=document.getElementById("district").value;
+const locality=document.getElementById("locality");
 
-const district =
-document.getElementById("district").value;
+if(!locality) return;
 
-const locality =
-document.getElementById("locality");
+locality.innerHTML='<option value="">Chagua Mtaa au Kijiji</option>';
 
-if(!locality){
-return;
-}
+if(!region||!district) return;
 
-locality.innerHTML =
-'<option value="">Chagua Mtaa au Kijiji</option>';
-
-if(!region||!district){
-return;
-}
-
-const places =
-LOCATIONS[region]?.[district] || [];
+const places=LOCATIONS[region]?.[district]||[];
 
 places.forEach(function(place){
 
-const option =
-document.createElement("option");
+const option=document.createElement("option");
 
 option.value=place;
 option.textContent=place;
@@ -1581,38 +1100,25 @@ locality.appendChild(option);
 
 }
 
-/* =========================
-SEARCH DISTRICTS
-========================= */
-
 function loadSearchDistricts(){
 
-const region =
-document.getElementById("searchRegion").value;
+const region=document.getElementById("searchRegion").value;
+const district=document.getElementById("searchDistrict");
 
-const district =
-document.getElementById("searchDistrict");
+if(!district) return;
 
-if(!district){
-return;
-}
-
-district.innerHTML =
-'<option value="">Wilaya zote</option>';
+district.innerHTML='<option value="">Wilaya zote</option>';
 
 if(!region){
 searchProducts();
 return;
 }
 
-const districts =
-LOCATIONS[region] || {};
+const districts=LOCATIONS[region]||{};
 
-Object.keys(districts)
-.forEach(function(name){
+Object.keys(districts).forEach(function(name){
 
-const option =
-document.createElement("option");
+const option=document.createElement("option");
 
 option.value=name;
 option.textContent=name;
@@ -1625,31 +1131,17 @@ searchProducts();
 
 }
 
-/* =========================
-PHONE
-========================= */
-
 function formatPhone(phone){
 
-let p =
-String(phone||"")
-.replace(/\D/g,"");
+let p=String(phone||"").replace(/\D/g,"");
 
-if(p.startsWith("255")){
-return "+"+p;
-}
+if(p.startsWith("255")) return "+"+p;
 
-if(p.startsWith("0")){
-return "+255"+p.substring(1);
-}
+if(p.startsWith("0")) return "+255"+p.substring(1);
 
 return p;
 
 }
-
-/* =========================
-IMAGE
-========================= */
 
 function compressImage(file){
 
@@ -1660,20 +1152,15 @@ resolve("");
 return;
 }
 
-const reader =
-new FileReader();
+const reader=new FileReader();
 
-reader.onload =
-function(event){
+reader.onload=function(event){
 
-const img =
-new Image();
+const img=new Image();
 
-img.onload =
-function(){
+img.onload=function(){
 
-const canvas =
-document.createElement("canvas");
+const canvas=document.createElement("canvas");
 
 const max=1600;
 
@@ -1682,22 +1169,14 @@ let height=img.height;
 
 if(width>max){
 
-height =
-Math.round(
-height*max/width
-);
-
+height=Math.round(height*max/width);
 width=max;
 
 }
 
 if(height>max){
 
-width =
-Math.round(
-width*max/height
-);
-
+width=Math.round(width*max/height);
 height=max;
 
 }
@@ -1705,28 +1184,17 @@ height=max;
 canvas.width=width;
 canvas.height=height;
 
-const ctx =
-canvas.getContext("2d");
+const ctx=canvas.getContext("2d");
 
-ctx.drawImage(
-img,
-0,
-0,
-width,
-height
-);
+ctx.drawImage(img,0,0,width,height);
 
 resolve(
-canvas.toDataURL(
-"image/jpeg",
-0.80
-)
+canvas.toDataURL("image/jpeg",0.80)
 );
 
 };
 
 img.onerror=reject;
-
 img.src=event.target.result;
 
 };
@@ -1739,51 +1207,30 @@ reader.readAsDataURL(file);
 
 }
 
-/* =========================
-ADD PRODUCT
-========================= */
-
 async function addProduct(){
 
-const msg =
-document.getElementById("addMessage");
+const msg=document.getElementById("addMessage");
 
-msg.innerHTML =
+msg.innerHTML=
 '<div class="message">⏳ Inahifadhi bidhaa...</div>';
 
 try{
 
-const name =
-document.getElementById("name").value.trim();
+const name=document.getElementById("name").value.trim();
+const price=document.getElementById("price").value;
+const category=document.getElementById("category").value;
+const region=document.getElementById("region").value;
+const district=document.getElementById("district").value;
+const locality=document.getElementById("locality").value;
 
-const price =
-document.getElementById("price").value;
-
-const category =
-document.getElementById("category").value;
-
-const region =
-document.getElementById("region").value;
-
-const district =
-document.getElementById("district").value;
-
-const locality =
-document.getElementById("locality").value;
-
-const phone =
-formatPhone(
+const phone=formatPhone(
 document.getElementById("phone").value
 );
 
-const description =
-document.getElementById("description").value.trim();
+const description=document.getElementById("description").value.trim();
 
-const file1 =
-document.getElementById("image1").files[0];
-
-const file2 =
-document.getElementById("image2").files[0];
+const file1=document.getElementById("image1").files[0];
+const file2=document.getElementById("image2").files[0];
 
 if(
 !name||
@@ -1795,36 +1242,27 @@ if(
 !phone
 ){
 
-msg.innerHTML =
+msg.innerHTML=
 '<div class="message">⚠️ Tafadhali jaza taarifa zote muhimu.</div>';
 
 return;
-
 }
 
 if(!/^\+255\d{9}$/.test(phone)){
 
-msg.innerHTML =
+msg.innerHTML=
 '<div class="message">⚠️ Weka namba sahihi ya Tanzania.<br><br>Mfano: 0625053021</div>';
 
 return;
-
 }
 
 let image1="";
 let image2="";
 
-if(file1){
-image1 =
-await compressImage(file1);
-}
+if(file1) image1=await compressImage(file1);
+if(file2) image2=await compressImage(file2);
 
-if(file2){
-image2 =
-await compressImage(file2);
-}
-
-const result =
+const result=
 await supabaseClient
 .from("Production")
 .insert([{
@@ -1843,11 +1281,9 @@ status:"accepted"
 
 }]);
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-msg.innerHTML =
+msg.innerHTML=
 '<div class="message">✅ Bidhaa imewekwa PLAM na sasa inaonekana kwa wanunuzi.</div>';
 
 document.getElementById("name").value="";
@@ -1865,97 +1301,66 @@ await loadProducts();
 
 }catch(error){
 
-console.error(
-"ADD PRODUCT ERROR:",
-error
-);
+console.error("ADD PRODUCT ERROR:",error);
 
-msg.innerHTML =
+msg.innerHTML=
 '<div class="message">❌ Imeshindikana kuhifadhi bidhaa.<br><br><b>'+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</b></div>';
 
 }
 
 }
 
-/* =========================
-LOAD PRODUCTS
-========================= */
-
 async function loadProducts(){
 
-const box =
-document.getElementById("products");
+const box=document.getElementById("products");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-box.innerHTML =
-"⏳ Inapakia bidhaa...";
+box.innerHTML="⏳ Inapakia bidhaa...";
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("Production")
 .select("*")
-.order("created_at",{
-ascending:false
-});
+.order("created_at",{ascending:false});
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-renderProducts(
-result.data||[],
-box
-);
+renderProducts(result.data||[],box);
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
 
 }
 
-/* =========================
-RENDER PRODUCTS
-========================= */
-
 function renderProducts(data,box){
 
 if(!data.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="card">Hakuna bidhaa zilizowekwa bado.</div>';
 
 return;
-
 }
 
-box.innerHTML =
-data.map(function(p){
+box.innerHTML=data.map(function(p){
 
-const image =
-p.image_url ||
+const image=
+p.image_url||
 "https://via.placeholder.com/900x600?text=PLAM+TANZANIA";
 
-const phone =
-formatPhone(p.phone);
-
-const wa =
-phone.replace(/\D/g,"");
+const phone=formatPhone(p.phone);
+const wa=phone.replace(/\D/g,"");
 
 return `
 
@@ -1974,9 +1379,7 @@ onerror="this.src='https://via.placeholder.com/900x600?text=PLAM+TANZANIA'"
 
 <div class="product-body">
 
-<h3>
-${escapeHTML(p.name)}
-</h3>
+<h3>${escapeHTML(p.name)}</h3>
 
 <div class="price-box">
 
@@ -1985,9 +1388,7 @@ Bei ya bidhaa
 </div>
 
 <div class="price">
-TSh ${Number(
-p.price||0
-).toLocaleString()}
+TSh ${Number(p.price||0).toLocaleString()}
 </div>
 
 </div>
@@ -2089,10 +1490,6 @@ target="_blank"
 
 }
 
-/* =========================
-ESCAPE
-========================= */
-
 function escapeHTML(value){
 
 return String(value||"")
@@ -2104,132 +1501,86 @@ return String(value||"")
 
 }
 
-/* =========================
-SEARCH
-========================= */
-
 async function searchProducts(text){
 
-const box =
-document.getElementById("searchResults") ||
+const box=
+document.getElementById("searchResults")||
 document.getElementById("products");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-let query =
+let query=
 supabaseClient
 .from("Production")
 .select("*")
-.order("created_at",{
-ascending:false
-});
+.order("created_at",{ascending:false});
 
-const region =
+const region=
 document.getElementById("searchRegion")?.value||"";
 
-const district =
+const district=
 document.getElementById("searchDistrict")?.value||"";
 
-if(region){
-query =
-query.eq(
-"region",
-region
-);
-}
-
-if(district){
-query =
-query.eq(
-"district",
-district
-);
-}
+if(region) query=query.eq("region",region);
+if(district) query=query.eq("district",district);
 
 try{
 
-const result =
-await query;
+const result=await query;
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-let products =
-result.data||[];
+let products=result.data||[];
 
-const word =
-String(
+const word=String(
 text||
 document.getElementById("searchInput")?.value||
 document.getElementById("homeSearch")?.value||
 ""
-)
-.toLowerCase()
-.trim();
+).toLowerCase().trim();
 
 if(word){
 
-products =
-products.filter(function(p){
+products=products.filter(function(p){
 
-return (
-
-String(p.name||"")
-.toLowerCase()
-.includes(word)
-
-||
-
-String(p.description||"")
-.toLowerCase()
-.includes(word)
-
-||
-
-String(p.category||"")
-.toLowerCase()
-.includes(word)
-
+return(
+String(p.name||"").toLowerCase().includes(word)||
+String(p.description||"").toLowerCase().includes(word)||
+String(p.category||"").toLowerCase().includes(word)
 );
 
 });
 
 }
 
-renderProducts(
-products,
-box
-);
+renderProducts(products,box);
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
 
 }
 
-/* =========================
-PLACE ORDER
-========================= */
+/* =====================================================
+   PLACE ORDER - IMEREKEBISHWA
+   buyer_id = UUID ya akaunti ya mteja
+   buyer_email = email ya mteja
+   seller_phone = simu ya muuzaji
+===================================================== */
 
 async function placeOrder(productId){
 
 try{
 
-const userResult =
+const userResult=
 await supabaseClient.auth.getUser();
 
-const user =
-userResult.data?.user;
+const user=userResult.data?.user;
 
 if(!user){
 
@@ -2240,71 +1591,114 @@ alert(
 show("account");
 
 return;
-
 }
 
-const result =
+const result=
 await supabaseClient
 .from("Production")
 .select("*")
 .eq("id",productId)
 .single();
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-const product =
-result.data;
+const product=result.data;
 
-const buyerName =
+const buyerName=
 user.user_metadata?.full_name||
 user.email||
 "Mnunuzi";
 
-const buyerPhone =
+const buyerPhone=
+formatPhone(
 user.user_metadata?.phone||
-"";
+""
+);
 
-const orderResult =
-await supabaseClient
-.from("orders")
-.insert([{
+const sellerPhone=
+formatPhone(product.phone||"");
+
+if(!sellerPhone){
+
+alert(
+"⚠️ Bidhaa hii haina namba ya muuzaji."
+);
+
+return;
+}
+
+/*
+   MUHIMU:
+   buyer_id inatumia UUID ya Supabase Auth.
+   product_id ni bigint kutoka Production.
+*/
+
+const orderData={
 
 product_id:product.id,
+
 product_name:product.name,
+
+buyer_id:user.id,
+
 buyer_name:buyerName,
+
 buyer_phone:buyerPhone,
+
 buyer_email:user.email,
-seller_phone:formatPhone(product.phone),
+
+seller_phone:sellerPhone,
+
+quantity:1,
+
+message:"",
+
 status:"pending"
 
-}]);
+};
+
+console.log(
+"ORDER DATA:",
+orderData
+);
+
+const orderResult=
+await supabaseClient
+.from("orders")
+.insert([orderData]);
 
 if(orderResult.error){
+
+console.error(
+"ORDER INSERT ERROR:",
+orderResult.error
+);
+
 throw orderResult.error;
 }
 
 alert(
-"✅ Agizo limetumwa kwa muuzaji.\n\nHali ya sasa: 🟡 Bado hajafanya uamuzi."
+"✅ Agizo limetumwa kwa muuzaji.\n\n"+
+"Hali ya sasa: 🟡 Bado hajafanya uamuzi."
 );
 
-loadMyOrders();
+await loadMyOrders();
 
 }catch(error){
 
+console.error(
+"PLACE ORDER ERROR:",
+error
+);
+
 alert(
 "❌ Imeshindikana kutuma agizo.\n\n"+
-(error.message||error)
+(error.message||String(error))
 );
 
 }
 
 }
-
-/* =========================
-STATUS
-========================= */
 
 function statusHTML(status){
 
@@ -2336,62 +1730,58 @@ return `
 
 }
 
-/* =========================
-BUYER ORDERS
-========================= */
+/* =====================================================
+   BUYER ORDERS - IMEREKEBISHWA
+   Inatafuta kwa buyer_id kwanza.
+===================================================== */
 
 async function loadMyOrders(){
 
-const box =
-document.getElementById("myOrders");
+const box=document.getElementById("myOrders");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-const result =
+const result=
 await supabaseClient.auth.getUser();
 
-const user =
-result.data?.user;
+const user=result.data?.user;
 
 if(!user){
 
-box.innerHTML =
+box.innerHTML=
 "Ingia kwenye akaunti kuona maagizo yako.";
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 "⏳ Inapakia maagizo...";
 
 try{
 
-const orders =
+/*
+   buyer_id ni UUID.
+   Tunatumia user.id ya Supabase Auth.
+*/
+
+const orders=
 await supabaseClient
 .from("orders")
 .select("*")
-.eq("buyer_email",user.email)
-.order("created_at",{
-ascending:false
-});
+.eq("buyer_id",user.id)
+.order("created_at",{ascending:false});
 
-if(orders.error){
-throw orders.error;
-}
+if(orders.error) throw orders.error;
 
 if(!orders.data?.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">Hujawa na agizo lolote bado.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 orders.data.map(function(o){
 
 return `
@@ -2403,6 +1793,11 @@ return `
 o.product_name||"Bidhaa"
 )}
 </b>
+
+<br>
+
+💰 <b>Idadi:</b>
+${Number(o.quantity||1)}
 
 <br><br>
 
@@ -2420,6 +1815,18 @@ o.created_at
 ).toLocaleString("sw-TZ")
 }
 
+${
+o.message
+?
+`
+<br><br>
+💬 <b>Ujumbe:</b>
+${escapeHTML(o.message)}
+`
+:
+""
+}
+
 </div>
 
 `;
@@ -2428,87 +1835,81 @@ o.created_at
 
 }catch(error){
 
-box.innerHTML =
+console.error(
+"LOAD MY ORDERS ERROR:",
+error
+);
+
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
 
 }
 
-/* =========================
-SELLER ORDERS
-========================= */
+/* =====================================================
+   SELLER ORDERS
+   Inatumia seller_phone kwa sababu bidhaa zako tayari
+   zina namba ya muuzaji kwenye Production.phone.
+===================================================== */
 
 async function loadSellerOrders(){
 
-const box =
-document.getElementById("sellerOrders");
+const box=document.getElementById("sellerOrders");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-const result =
+const result=
 await supabaseClient.auth.getUser();
 
-const user =
-result.data?.user;
+const user=result.data?.user;
 
 if(!user){
 
-box.innerHTML =
+box.innerHTML=
 "Ingia kwenye akaunti kuona maagizo ya wateja.";
 
 return;
-
 }
 
-const sellerPhone =
+const sellerPhone=
 formatPhone(
 user.user_metadata?.phone||""
 );
 
 if(!sellerPhone){
 
-box.innerHTML =
-'<div class="message">⚠️ Akaunti yako haina namba ya simu. Namba ya simu lazima iwe sawa na iliyowekwa kwenye bidhaa zako.</div>';
+box.innerHTML=
+'<div class="message">⚠️ Akaunti yako haina namba ya simu. Toka kisha ingia tena ukiwa na namba ya simu iliyosajiliwa.</div>';
 
 return;
-
 }
 
-box.innerHTML =
-"⏳ Inapakia maagizo...";
+box.innerHTML=
+"⏳ Inapakia maagizo ya wateja...";
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("orders")
 .select("*")
 .eq("seller_phone",sellerPhone)
-.order("created_at",{
-ascending:false
-});
+.order("created_at",{ascending:false});
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
 if(!result.data?.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">Hakuna maagizo ya wateja kwa bidhaa zako bado.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 result.data.map(function(o){
 
 return `
@@ -2536,6 +1937,11 @@ ${escapeHTML(o.buyer_phone||"-")}
 📧 <b>Email:</b>
 ${escapeHTML(o.buyer_email||"-")}
 
+<br>
+
+📦 <b>Idadi:</b>
+${Number(o.quantity||1)}
+
 <br><br>
 
 <b>Hali:</b>
@@ -2548,6 +1954,18 @@ ${statusHTML(o.status)}
 new Date(
 o.created_at
 ).toLocaleString("sw-TZ")
+}
+
+${
+o.message
+?
+`
+<br><br>
+💬 <b>Ujumbe wa mnunuzi:</b><br>
+${escapeHTML(o.message)}
+`
+:
+""
 }
 
 ${
@@ -2588,11 +2006,14 @@ onclick="sellerOrderStatus(${Number(o.id)},'rejected')"
 
 }catch(error){
 
-box.innerHTML =
+console.error(
+"LOAD SELLER ORDERS ERROR:",
+error
+);
+
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -2605,23 +2026,19 @@ SELLER STATUS
 
 async function sellerOrderStatus(id,status){
 
-const result =
+const result=
 await supabaseClient.auth.getUser();
 
-const user =
-result.data?.user;
+const user=result.data?.user;
 
 if(!user){
 
-alert(
-"Tafadhali ingia kwanza."
-);
+alert("Tafadhali ingia kwanza.");
 
 return;
-
 }
 
-const sellerPhone =
+const sellerPhone=
 formatPhone(
 user.user_metadata?.phone||""
 );
@@ -2633,26 +2050,20 @@ alert(
 );
 
 return;
-
 }
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("orders")
 .update({
 status:status
 })
 .eq("id",id)
-.eq(
-"seller_phone",
-sellerPhone
-);
+.eq("seller_phone",sellerPhone);
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
 alert(
 status==="accepted"
@@ -2662,14 +2073,18 @@ status==="accepted"
 "❌ Agizo limekataliwa."
 );
 
-loadSellerOrders();
+await loadSellerOrders();
 
 }catch(error){
 
+console.error(
+"SELLER STATUS ERROR:",
+error
+);
+
 alert(
-"❌ "+(
-error.message||error
-)
+"❌ "+
+(error.message||String(error))
 );
 
 }
@@ -2682,57 +2097,46 @@ REGISTER
 
 async function registerUser(){
 
-const box =
-document.getElementById(
-"registerMessage"
-);
+const box=
+document.getElementById("registerMessage");
 
-const name =
-document.getElementById(
-"regName"
-).value.trim();
+const name=
+document.getElementById("regName").value.trim();
 
-const phone =
-document.getElementById(
-"regPhone"
-).value.trim();
+const phone=
+document.getElementById("regPhone").value.trim();
 
-const email =
-document.getElementById(
-"regEmail"
-).value.trim();
+const email=
+document.getElementById("regEmail").value.trim();
 
-const password =
-document.getElementById(
-"regPassword"
-).value;
+const password=
+document.getElementById("regPassword").value;
 
 if(!name||!phone||!email||!password){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">⚠️ Jaza taarifa zote.</div>';
 
 return;
-
 }
 
 if(password.length<6){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">⚠️ Password iwe na angalau herufi 6.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 "⏳ Inafungua akaunti...";
 
 try{
 
-const result =
-await supabaseClient.auth
-.signUp({
+const formattedPhone=formatPhone(phone);
+
+const result=
+await supabaseClient.auth.signUp({
 
 email:email,
 password:password,
@@ -2740,15 +2144,13 @@ password:password,
 options:{
 data:{
 full_name:name,
-phone:formatPhone(phone)
+phone:formattedPhone
 }
 }
 
 });
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
 if(
 result.data?.session&&
@@ -2761,14 +2163,14 @@ await supabaseClient
 
 id:result.data.user.id,
 full_name:name,
-phone:formatPhone(phone),
+phone:formattedPhone,
 email:email
 
 });
 
 }
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">✅ Akaunti imeundwa.<br><br>'+
 (
 result.data?.session
@@ -2781,11 +2183,9 @@ result.data?.session
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -2798,36 +2198,29 @@ LOGIN
 
 async function loginUser(){
 
-const box =
-document.getElementById(
-"loginMessage"
-);
+const box=
+document.getElementById("loginMessage");
 
-const email =
-document.getElementById(
-"loginEmail"
-).value.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-const password =
-document.getElementById(
-"loginPassword"
-).value;
+const password=
+document.getElementById("loginPassword").value;
 
 if(!email||!password){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">⚠️ Weka email na password.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 "⏳ Inaingia...";
 
 try{
 
-const result =
+const result=
 await supabaseClient.auth
 .signInWithPassword({
 
@@ -2836,12 +2229,9 @@ password:password
 
 });
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-const user =
-result.data.user;
+const user=result.data.user;
 
 await supabaseClient
 .from("profiles")
@@ -2861,7 +2251,7 @@ email:user.email
 
 });
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">✅ Umeingia.<br><br>Karibu '+
 escapeHTML(
 user.user_metadata?.full_name||
@@ -2869,16 +2259,14 @@ user.email
 )+
 '.</div>';
 
-loadMyOrders();
-loadSellerOrders();
+await loadMyOrders();
+await loadSellerOrders();
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -2893,19 +2281,13 @@ async function logoutUser(){
 
 await supabaseClient.auth.signOut();
 
-document.getElementById(
-"loginMessage"
-).innerHTML =
+document.getElementById("loginMessage").innerHTML=
 '<div class="message">Umetoka kwenye akaunti.</div>';
 
-document.getElementById(
-"myOrders"
-).innerHTML =
+document.getElementById("myOrders").innerHTML=
 "Ingia kwenye akaunti kuona maagizo yako.";
 
-document.getElementById(
-"sellerOrders"
-).innerHTML =
+document.getElementById("sellerOrders").innerHTML=
 "Ingia kwenye akaunti kuona maagizo ya wateja.";
 
 }
@@ -2916,11 +2298,10 @@ ADMIN CHECK
 
 async function checkAdmin(){
 
-const result =
+const result=
 await supabaseClient.auth.getUser();
 
-const user =
-result.data?.user;
+const user=result.data?.user;
 
 if(
 user &&
@@ -2928,18 +2309,14 @@ user.email?.toLowerCase()===
 ADMIN_EMAIL.toLowerCase()
 ){
 
-document.getElementById(
-"adminLogin"
-).classList.add("hidden");
+document.getElementById("adminLogin")
+.classList.add("hidden");
 
-document.getElementById(
-"dashboard"
-).classList.remove("hidden");
+document.getElementById("dashboard")
+.classList.remove("hidden");
 
-document.getElementById(
-"adminWelcome"
-).textContent =
-"Admin: "+user.email;
+document.getElementById("adminWelcome")
+.textContent="Admin: "+user.email;
 
 loadAdminProducts();
 loadAdminOrders();
@@ -2947,13 +2324,11 @@ loadUsers();
 
 }else{
 
-document.getElementById(
-"adminLogin"
-).classList.remove("hidden");
+document.getElementById("adminLogin")
+.classList.remove("hidden");
 
-document.getElementById(
-"dashboard"
-).classList.add("hidden");
+document.getElementById("dashboard")
+.classList.add("hidden");
 
 }
 
@@ -2965,39 +2340,32 @@ ADMIN LOGIN
 
 async function adminLogin(){
 
-const email =
-document.getElementById(
-"adminEmail"
-).value.trim();
+const email=
+document.getElementById("adminEmail").value.trim();
 
-const password =
-document.getElementById(
-"adminPassword"
-).value;
+const password=
+document.getElementById("adminPassword").value;
 
-const box =
-document.getElementById(
-"adminMessage"
-);
+const box=
+document.getElementById("adminMessage");
 
 if(
 email.toLowerCase()!==
 ADMIN_EMAIL.toLowerCase()
 ){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ Hii si email ya Admin.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 "⏳ Inaingia...";
 
 try{
 
-const result =
+const result=
 await supabaseClient.auth
 .signInWithPassword({
 
@@ -3006,21 +2374,16 @@ password:password
 
 });
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-document.getElementById(
-"adminLogin"
-).classList.add("hidden");
+document.getElementById("adminLogin")
+.classList.add("hidden");
 
-document.getElementById(
-"dashboard"
-).classList.remove("hidden");
+document.getElementById("dashboard")
+.classList.remove("hidden");
 
-document.getElementById(
-"adminWelcome"
-).textContent =
+document.getElementById("adminWelcome")
+.textContent=
 "Admin: "+result.data.user.email;
 
 loadAdminProducts();
@@ -3029,11 +2392,9 @@ loadUsers();
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -3046,41 +2407,31 @@ ADMIN PRODUCTS
 
 async function loadAdminProducts(){
 
-const box =
-document.getElementById(
-"adminProducts"
-);
+const box=
+document.getElementById("adminProducts");
 
-box.innerHTML =
-"⏳ Inapakia...";
+box.innerHTML="⏳ Inapakia...";
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("Production")
 .select("*")
-.order("created_at",{
-ascending:false
-});
+.order("created_at",{ascending:false});
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-const products =
-result.data||[];
+const products=result.data||[];
 
 if(!products.length){
 
-box.innerHTML =
-"Hakuna bidhaa.";
+box.innerHTML="Hakuna bidhaa.";
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 products.map(function(p){
 
 return `
@@ -3105,9 +2456,7 @@ ${escapeHTML(p.name)}
 </h3>
 
 <p>
-💰 TSh ${Number(
-p.price||0
-).toLocaleString()}
+💰 TSh ${Number(p.price||0).toLocaleString()}
 </p>
 
 <p>
@@ -3136,11 +2485,9 @@ onclick="deleteProduct(${Number(p.id)})"
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -3155,27 +2502,19 @@ async function deleteProduct(id){
 
 if(!confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
-)){
-
-return;
-
-}
+)) return;
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("Production")
 .delete()
 .eq("id",id);
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
-alert(
-"🗑️ Bidhaa imefutwa."
-);
+alert("🗑️ Bidhaa imefutwa.");
 
 loadAdminProducts();
 loadProducts();
@@ -3183,9 +2522,8 @@ loadProducts();
 }catch(error){
 
 alert(
-"❌ "+(
-error.message||error
-)
+"❌ "+
+(error.message||String(error))
 );
 
 }
@@ -3198,42 +2536,32 @@ ADMIN ORDERS
 
 async function loadAdminOrders(){
 
-const box =
-document.getElementById(
-"adminOrders"
-);
+const box=
+document.getElementById("adminOrders");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-box.innerHTML =
-"⏳ Inapakia...";
+box.innerHTML="⏳ Inapakia...";
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("orders")
 .select("*")
-.order("created_at",{
-ascending:false
-});
+.order("created_at",{ascending:false});
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
 if(!result.data?.length){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">Hakuna maagizo bado.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 result.data.map(function(o){
 
 return `
@@ -3264,13 +2592,16 @@ o.buyer_phone||"-"
 o.buyer_email||"-"
 )}
 
+<br>
+
+📦 Idadi:
+${Number(o.quantity||1)}
+
 <br><br>
 
 <b>Hali:</b>
 
-${statusHTML(
-o.status||"pending"
-)}
+${statusHTML(o.status||"pending")}
 
 <br>
 
@@ -3288,11 +2619,9 @@ o.created_at
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -3305,44 +2634,32 @@ ADMIN USERS
 
 async function loadUsers(){
 
-const box =
-document.getElementById(
-"users"
-);
+const box=document.getElementById("users");
 
-if(!box){
-return;
-}
+if(!box) return;
 
-box.innerHTML =
+box.innerHTML=
 "⏳ Inapakia watumiaji...";
 
 try{
 
-const result =
+const result=
 await supabaseClient
 .from("profiles")
-.select(
-"full_name,phone,email,created_at"
-)
-.order("created_at",{
-ascending:false
-});
+.select("full_name,phone,email,created_at")
+.order("created_at",{ascending:false});
 
-if(result.error){
-throw result.error;
-}
+if(result.error) throw result.error;
 
 if(!result.data?.length){
 
-box.innerHTML =
-'<div class="message">Hakuna watumiaji kwenye profiles bado.<br><br>Watumiaji wapya wataonekana baada ya kuingia kwenye akaunti.</div>';
+box.innerHTML=
+'<div class="message">Hakuna watumiaji kwenye profiles bado.</div>';
 
 return;
-
 }
 
-box.innerHTML =
+box.innerHTML=
 result.data.map(function(u){
 
 return `
@@ -3387,11 +2704,9 @@ u.created_at
 
 }catch(error){
 
-box.innerHTML =
+box.innerHTML=
 '<div class="message">❌ '+
-escapeHTML(
-error.message||String(error)
-)+
+escapeHTML(error.message||String(error))+
 '</div>';
 
 }
@@ -3406,13 +2721,11 @@ async function adminLogout(){
 
 await supabaseClient.auth.signOut();
 
-document.getElementById(
-"dashboard"
-).classList.add("hidden");
+document.getElementById("dashboard")
+.classList.add("hidden");
 
-document.getElementById(
-"adminLogin"
-).classList.remove("hidden");
+document.getElementById("adminLogin")
+.classList.remove("hidden");
 
 }
 
@@ -3427,7 +2740,6 @@ console.log(
 );
 
 loadRegions();
-
 loadProducts();
 
 }
@@ -3436,9 +2748,7 @@ loadProducts();
 START
 ========================= */
 
-if(
-document.readyState==="loading"
-){
+if(document.readyState==="loading"){
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -3458,15 +2768,16 @@ AUTH STATE
 supabaseClient.auth.onAuthStateChange(
 function(event,session){
 
-console.log(
-"Auth:",
-event
-);
+console.log("Auth:",event);
 
 if(session?.user){
 
+setTimeout(function(){
+
 loadMyOrders();
 loadSellerOrders();
+
+},300);
 
 }
 
@@ -3475,5 +2786,4 @@ loadSellerOrders();
 </script>
 
 </body>
-
-</html>
+  </html>
