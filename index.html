@@ -197,7 +197,9 @@ box-shadow:0 4px 14px #0002;
 border:1px solid #e4e4e4;
 }
 
-/* image wrapper */
+/* =========================
+PRODUCT IMAGE
+========================= */
 
 .product-image-box{
 background:#f0f2f1;
@@ -208,14 +210,17 @@ text-align:center;
 
 .product img.main-image{
 width:100%;
-height:300px;
+height:auto;
+max-height:none;
 object-fit:contain;
 display:block;
 border-radius:11px;
 background:#f0f2f1;
 }
 
-/* product body */
+/* =========================
+PRODUCT BODY
+========================= */
 
 .product-body{
 padding:17px;
@@ -247,7 +252,9 @@ font-weight:800;
 margin-top:2px;
 }
 
-/* location */
+/* =========================
+LOCATION
+========================= */
 
 .location{
 background:#f4f8f5;
@@ -262,7 +269,9 @@ border-left:4px solid #087a38;
 color:#333;
 }
 
-/* description */
+/* =========================
+DESCRIPTION
+========================= */
 
 .description{
 font-size:15px;
@@ -271,7 +280,9 @@ margin:12px 0;
 color:#444;
 }
 
-/* second image */
+/* =========================
+SECOND IMAGE
+========================= */
 
 .second-image-box{
 margin-top:13px;
@@ -285,8 +296,10 @@ margin-bottom:7px;
 
 .second-image{
 width:100%;
-height:260px;
+height:auto;
+max-height:none;
 object-fit:contain;
+display:block;
 background:#f0f2f1;
 border-radius:11px;
 border:1px solid #ddd;
@@ -481,10 +494,12 @@ ADMIN
 
 .admin-product-image{
 width:100%;
-height:250px;
+height:auto;
+max-height:none;
 object-fit:contain;
 background:#eee;
 border-radius:10px;
+display:block;
 }
 
 /* =========================
@@ -528,11 +543,17 @@ padding:14px;
 }
 
 .product img.main-image{
-height:250px;
+width:100%;
+height:auto;
+max-height:none;
+object-fit:contain;
 }
 
 .second-image{
-height:220px;
+width:100%;
+height:auto;
+max-height:none;
+object-fit:contain;
 }
 
 .product-body h3{
@@ -563,7 +584,9 @@ font-size:23px;
 
 }
 
-/* very small phones */
+/* =========================
+VERY SMALL PHONES
+========================= */
 
 @media(max-width:350px){
 
@@ -583,10 +606,6 @@ grid-template-columns:1fr;
 
 <body>
 
-<!-- =========================
-HEADER
-========================= -->
-
 <header>
 
 <h1>🇹🇿 PLAM TANZANIA</h1>
@@ -596,11 +615,6 @@ Jenga biashara yako. Fikia wateja zaidi.
 </p>
 
 </header>
-
-
-<!-- =========================
-NAV
-========================= -->
 
 <nav>
 
@@ -625,11 +639,6 @@ NAV
 </button>
 
 </nav>
-
-
-<!-- =========================
-HOME
-========================= -->
 
 <section id="home">
 
@@ -659,7 +668,6 @@ onclick="show('add')"
 
 </div>
 
-
 <h2>
 🛍️ Bidhaa Zote
 </h2>
@@ -669,11 +677,6 @@ onclick="show('add')"
 </div>
 
 </section>
-
-
-<!-- =========================
-SEARCH
-========================= -->
 
 <section id="search" class="hidden">
 
@@ -716,11 +719,6 @@ Wilaya zote
 <div id="searchResults"></div>
 
 </section>
-
-
-<!-- =========================
-ADD PRODUCT
-========================= -->
 
 <section id="add" class="hidden">
 
@@ -770,7 +768,6 @@ Chagua kundi
 
 </select>
 
-
 <h3>
 📍 Eneo la Muuzaji
 </h3>
@@ -790,7 +787,6 @@ onchange="loadDistricts()"
 
 </select>
 
-
 <label>
 <b>Wilaya</b>
 </label>
@@ -806,7 +802,6 @@ Chagua Wilaya
 
 </select>
 
-
 <label>
 <b>Mtaa / Kijiji</b>
 </label>
@@ -819,7 +814,6 @@ Chagua Mtaa au Kijiji
 
 </select>
 
-
 <label>
 <b>📞 Namba ya simu ya muuzaji</b>
 </label>
@@ -830,7 +824,6 @@ type="tel"
 placeholder="Mfano: 0625053021"
 >
 
-
 <label>
 <b>Maelezo ya bidhaa</b>
 </label>
@@ -839,7 +832,6 @@ placeholder="Mfano: 0625053021"
 id="description"
 placeholder="Eleza bidhaa yako..."
 ></textarea>
-
 
 <label>
 <b>🖼️ Picha ya kwanza</b>
@@ -851,7 +843,6 @@ type="file"
 accept="image/*"
 >
 
-
 <label>
 <b>🖼️ Picha ya pili</b>
 </label>
@@ -861,7 +852,6 @@ id="image2"
 type="file"
 accept="image/*"
 >
-
 
 <button
 type="button"
@@ -877,13 +867,7 @@ onclick="addProduct()"
 
 </section>
 
-
-<!-- =========================
-ACCOUNT
-========================= -->
-
 <section id="account" class="hidden">
-
 
 <div class="card">
 
@@ -925,7 +909,6 @@ Fungua Akaunti
 
 </div>
 
-
 <div class="card">
 
 <h2>
@@ -964,7 +947,6 @@ Toka
 
 </div>
 
-
 <div class="card">
 
 <h2>
@@ -988,7 +970,6 @@ Ingia kwenye akaunti kuona maagizo yako.
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -1016,13 +997,7 @@ Ingia kwenye akaunti na hakikisha namba yako ya simu iko kwenye akaunti.
 
 </section>
 
-
-<!-- =========================
-ADMIN
-========================= -->
-
 <section id="admin" class="hidden">
-
 
 <div id="adminLogin" class="card">
 
@@ -1054,9 +1029,7 @@ Ingia Admin
 
 </div>
 
-
 <div id="dashboard" class="hidden">
-
 
 <div class="card">
 
@@ -1067,7 +1040,6 @@ Ingia Admin
 <p id="adminWelcome"></p>
 
 </div>
-
 
 <div class="card">
 
@@ -1085,7 +1057,6 @@ Inapakia...
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -1107,7 +1078,6 @@ Inapakia...
 
 </div>
 
-
 <div class="card">
 
 <h2>
@@ -1126,7 +1096,6 @@ onclick="loadUsers()"
 
 </div>
 
-
 <button
 type="button"
 class="main gray"
@@ -1138,11 +1107,6 @@ Toka Admin
 </div>
 
 </section>
-
-
-<!-- =========================
-PLAM CONTACT
-========================= -->
 
 <section>
 
@@ -1184,11 +1148,6 @@ target="_blank"
 
 </section>
 
-
-<!-- =========================
-FOOTER
-========================= -->
-
 <footer>
 
 <strong>
@@ -1208,7 +1167,6 @@ Jenga biashara yako. Fikia wateja zaidi.
 © 2026 PLAM TANZANIA
 
 </footer>
-
 
 <script>
 
@@ -1230,7 +1188,6 @@ SUPABASE_KEY
 
 const ADMIN_EMAIL =
 "lucasmwingira323@gmail.com";
-
 
 /* =========================
 MAENEO
@@ -1430,7 +1387,6 @@ const LOCATIONS = {
 
 };
 
-
 /* =========================
 SHOW
 ========================= */
@@ -1440,23 +1396,15 @@ function show(id){
 document
 .querySelectorAll("section")
 .forEach(function(section){
-
 section.classList.add("hidden");
-
 });
 
 const target =
 document.getElementById(id);
 
 if(!target){
-
-console.error(
-"Section haipo:",
-id
-);
-
+console.error("Section haipo:",id);
 return;
-
 }
 
 target.classList.remove("hidden");
@@ -1465,7 +1413,6 @@ window.scrollTo({
 top:0,
 behavior:"smooth"
 });
-
 
 if(id==="home"){
 loadProducts();
@@ -1486,7 +1433,6 @@ loadSellerOrders();
 
 }
 
-
 /* =========================
 LOAD REGIONS
 ========================= */
@@ -1501,7 +1447,6 @@ document.getElementById("region");
 
 const searchRegion =
 document.getElementById("searchRegion");
-
 
 if(region){
 
@@ -1521,7 +1466,6 @@ region.appendChild(option);
 });
 
 }
-
 
 if(searchRegion){
 
@@ -1543,7 +1487,6 @@ searchRegion.appendChild(option);
 }
 
 }
-
 
 /* =========================
 LOAD DISTRICTS
@@ -1595,7 +1538,6 @@ district.appendChild(option);
 
 }
 
-
 /* =========================
 LOAD LOCALITIES
 ========================= */
@@ -1639,7 +1581,6 @@ locality.appendChild(option);
 
 }
 
-
 /* =========================
 SEARCH DISTRICTS
 ========================= */
@@ -1647,14 +1588,10 @@ SEARCH DISTRICTS
 function loadSearchDistricts(){
 
 const region =
-document.getElementById(
-"searchRegion"
-).value;
+document.getElementById("searchRegion").value;
 
 const district =
-document.getElementById(
-"searchDistrict"
-);
+document.getElementById("searchDistrict");
 
 if(!district){
 return;
@@ -1664,11 +1601,8 @@ district.innerHTML =
 '<option value="">Wilaya zote</option>';
 
 if(!region){
-
 searchProducts();
-
 return;
-
 }
 
 const districts =
@@ -1690,7 +1624,6 @@ district.appendChild(option);
 searchProducts();
 
 }
-
 
 /* =========================
 PHONE
@@ -1714,7 +1647,6 @@ return p;
 
 }
 
-
 /* =========================
 IMAGE
 ========================= */
@@ -1724,11 +1656,8 @@ function compressImage(file){
 return new Promise(function(resolve,reject){
 
 if(!file){
-
 resolve("");
-
 return;
-
 }
 
 const reader =
@@ -1808,9 +1737,7 @@ reader.readAsDataURL(file);
 
 });
 
-
 }
-
 
 /* =========================
 ADD PRODUCT
@@ -1819,9 +1746,7 @@ ADD PRODUCT
 async function addProduct(){
 
 const msg =
-document.getElementById(
-"addMessage"
-);
+document.getElementById("addMessage");
 
 msg.innerHTML =
 '<div class="message">⏳ Inahifadhi bidhaa...</div>';
@@ -1829,50 +1754,36 @@ msg.innerHTML =
 try{
 
 const name =
-document.getElementById("name")
-.value.trim();
+document.getElementById("name").value.trim();
 
 const price =
-document.getElementById("price")
-.value;
+document.getElementById("price").value;
 
 const category =
-document.getElementById("category")
-.value;
+document.getElementById("category").value;
 
 const region =
-document.getElementById("region")
-.value;
+document.getElementById("region").value;
 
 const district =
-document.getElementById("district")
-.value;
+document.getElementById("district").value;
 
 const locality =
-document.getElementById("locality")
-.value;
+document.getElementById("locality").value;
 
 const phone =
 formatPhone(
-document.getElementById("phone")
-.value
+document.getElementById("phone").value
 );
 
 const description =
-document.getElementById(
-"description"
-).value.trim();
+document.getElementById("description").value.trim();
 
 const file1 =
-document.getElementById(
-"image1"
-).files[0];
+document.getElementById("image1").files[0];
 
 const file2 =
-document.getElementById(
-"image2"
-).files[0];
-
+document.getElementById("image2").files[0];
 
 if(
 !name||
@@ -1891,7 +1802,6 @@ return;
 
 }
 
-
 if(!/^\+255\d{9}$/.test(phone)){
 
 msg.innerHTML =
@@ -1901,10 +1811,8 @@ return;
 
 }
 
-
 let image1="";
 let image2="";
-
 
 if(file1){
 image1 =
@@ -1915,7 +1823,6 @@ if(file2){
 image2 =
 await compressImage(file2);
 }
-
 
 const result =
 await supabaseClient
@@ -1936,15 +1843,12 @@ status:"accepted"
 
 }]);
 
-
 if(result.error){
 throw result.error;
 }
 
-
 msg.innerHTML =
 '<div class="message">✅ Bidhaa imewekwa PLAM na sasa inaonekana kwa wanunuzi.</div>';
-
 
 document.getElementById("name").value="";
 document.getElementById("price").value="";
@@ -1958,7 +1862,6 @@ document.getElementById("region").value="";
 loadDistricts();
 
 await loadProducts();
-
 
 }catch(error){
 
@@ -1978,7 +1881,6 @@ error.message||String(error)
 
 }
 
-
 /* =========================
 LOAD PRODUCTS
 ========================= */
@@ -1986,9 +1888,7 @@ LOAD PRODUCTS
 async function loadProducts(){
 
 const box =
-document.getElementById(
-"products"
-);
+document.getElementById("products");
 
 if(!box){
 return;
@@ -2029,7 +1929,6 @@ error.message||String(error)
 
 }
 
-
 /* =========================
 RENDER PRODUCTS
 ========================= */
@@ -2045,7 +1944,6 @@ return;
 
 }
 
-
 box.innerHTML =
 data.map(function(p){
 
@@ -2058,7 +1956,6 @@ formatPhone(p.phone);
 
 const wa =
 phone.replace(/\D/g,"");
-
 
 return `
 
@@ -2075,13 +1972,11 @@ onerror="this.src='https://via.placeholder.com/900x600?text=PLAM+TANZANIA'"
 
 </div>
 
-
 <div class="product-body">
 
 <h3>
 ${escapeHTML(p.name)}
 </h3>
-
 
 <div class="price-box">
 
@@ -2096,7 +1991,6 @@ p.price||0
 </div>
 
 </div>
-
 
 <div class="location">
 
@@ -2115,7 +2009,6 @@ ${escapeHTML(p.place||"-")}
 
 </div>
 
-
 ${
 p.description
 ?
@@ -2128,7 +2021,6 @@ ${escapeHTML(p.description)}
 :
 ""
 }
-
 
 ${
 p.image_url_2
@@ -2152,9 +2044,7 @@ alt="Picha ya pili ya ${escapeHTML(p.name)}"
 ""
 }
 
-
 <div class="actions">
-
 
 <button
 type="button"
@@ -2164,7 +2054,6 @@ onclick="placeOrder(${Number(p.id)})"
 🛒 Agiza Bidhaa
 </button>
 
-
 <a
 class="download"
 href="${image}"
@@ -2173,14 +2062,12 @@ download="PLAM-${encodeURIComponent(p.name||"bidhaa")}.jpg"
 📥 Pakua Picha
 </a>
 
-
 <a
 class="call"
 href="tel:${phone}"
 >
 📞 Piga Simu
 </a>
-
 
 <a
 class="whatsapp"
@@ -2189,7 +2076,6 @@ target="_blank"
 >
 💬 WhatsApp
 </a>
-
 
 </div>
 
@@ -2202,7 +2088,6 @@ target="_blank"
 }).join("");
 
 }
-
 
 /* =========================
 ESCAPE
@@ -2219,7 +2104,6 @@ return String(value||"")
 
 }
 
-
 /* =========================
 SEARCH
 ========================= */
@@ -2227,17 +2111,12 @@ SEARCH
 async function searchProducts(text){
 
 const box =
-document.getElementById(
-"searchResults"
-) ||
-document.getElementById(
-"products"
-);
+document.getElementById("searchResults") ||
+document.getElementById("products");
 
 if(!box){
 return;
 }
-
 
 let query =
 supabaseClient
@@ -2247,39 +2126,27 @@ supabaseClient
 ascending:false
 });
 
-
 const region =
-document.getElementById(
-"searchRegion"
-)?.value||"";
+document.getElementById("searchRegion")?.value||"";
 
 const district =
-document.getElementById(
-"searchDistrict"
-)?.value||"";
-
+document.getElementById("searchDistrict")?.value||"";
 
 if(region){
-
 query =
 query.eq(
 "region",
 region
 );
-
 }
 
-
 if(district){
-
 query =
 query.eq(
 "district",
 district
 );
-
 }
-
 
 try{
 
@@ -2293,21 +2160,15 @@ throw result.error;
 let products =
 result.data||[];
 
-
 const word =
 String(
 text||
-document.getElementById(
-"searchInput"
-)?.value||
-document.getElementById(
-"homeSearch"
-)?.value||
+document.getElementById("searchInput")?.value||
+document.getElementById("homeSearch")?.value||
 ""
 )
 .toLowerCase()
 .trim();
-
 
 if(word){
 
@@ -2338,12 +2199,10 @@ String(p.category||"")
 
 }
 
-
 renderProducts(
 products,
 box
 );
-
 
 }catch(error){
 
@@ -2358,7 +2217,6 @@ error.message||String(error)
 
 }
 
-
 /* =========================
 PLACE ORDER
 ========================= */
@@ -2368,12 +2226,10 @@ async function placeOrder(productId){
 try{
 
 const userResult =
-await supabaseClient.auth
-.getUser();
+await supabaseClient.auth.getUser();
 
 const user =
 userResult.data?.user;
-
 
 if(!user){
 
@@ -2387,7 +2243,6 @@ return;
 
 }
 
-
 const result =
 await supabaseClient
 .from("Production")
@@ -2395,26 +2250,21 @@ await supabaseClient
 .eq("id",productId)
 .single();
 
-
 if(result.error){
 throw result.error;
 }
 
-
 const product =
 result.data;
-
 
 const buyerName =
 user.user_metadata?.full_name||
 user.email||
 "Mnunuzi";
 
-
 const buyerPhone =
 user.user_metadata?.phone||
 "";
-
 
 const orderResult =
 await supabaseClient
@@ -2431,18 +2281,15 @@ status:"pending"
 
 }]);
 
-
 if(orderResult.error){
 throw orderResult.error;
 }
-
 
 alert(
 "✅ Agizo limetumwa kwa muuzaji.\n\nHali ya sasa: 🟡 Bado hajafanya uamuzi."
 );
 
 loadMyOrders();
-
 
 }catch(error){
 
@@ -2454,7 +2301,6 @@ alert(
 }
 
 }
-
 
 /* =========================
 STATUS
@@ -2490,7 +2336,6 @@ return `
 
 }
 
-
 /* =========================
 BUYER ORDERS
 ========================= */
@@ -2498,21 +2343,17 @@ BUYER ORDERS
 async function loadMyOrders(){
 
 const box =
-document.getElementById(
-"myOrders"
-);
+document.getElementById("myOrders");
 
 if(!box){
 return;
 }
 
 const result =
-await supabaseClient.auth
-.getUser();
+await supabaseClient.auth.getUser();
 
 const user =
 result.data?.user;
-
 
 if(!user){
 
@@ -2523,10 +2364,8 @@ return;
 
 }
 
-
 box.innerHTML =
 "⏳ Inapakia maagizo...";
-
 
 try{
 
@@ -2539,11 +2378,9 @@ await supabaseClient
 ascending:false
 });
 
-
 if(orders.error){
 throw orders.error;
 }
-
 
 if(!orders.data?.length){
 
@@ -2553,7 +2390,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 orders.data.map(function(o){
@@ -2590,7 +2426,6 @@ o.created_at
 
 }).join("");
 
-
 }catch(error){
 
 box.innerHTML =
@@ -2604,7 +2439,6 @@ error.message||String(error)
 
 }
 
-
 /* =========================
 SELLER ORDERS
 ========================= */
@@ -2612,21 +2446,17 @@ SELLER ORDERS
 async function loadSellerOrders(){
 
 const box =
-document.getElementById(
-"sellerOrders"
-);
+document.getElementById("sellerOrders");
 
 if(!box){
 return;
 }
 
 const result =
-await supabaseClient.auth
-.getUser();
+await supabaseClient.auth.getUser();
 
 const user =
 result.data?.user;
-
 
 if(!user){
 
@@ -2637,12 +2467,10 @@ return;
 
 }
 
-
 const sellerPhone =
 formatPhone(
 user.user_metadata?.phone||""
 );
-
 
 if(!sellerPhone){
 
@@ -2653,10 +2481,8 @@ return;
 
 }
 
-
 box.innerHTML =
 "⏳ Inapakia maagizo...";
-
 
 try{
 
@@ -2669,11 +2495,9 @@ await supabaseClient
 ascending:false
 });
 
-
 if(result.error){
 throw result.error;
 }
-
 
 if(!result.data?.length){
 
@@ -2683,7 +2507,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 result.data.map(function(o){
@@ -2727,7 +2550,6 @@ o.created_at
 ).toLocaleString("sw-TZ")
 }
 
-
 ${
 o.status==="pending"
 ?
@@ -2764,7 +2586,6 @@ onclick="sellerOrderStatus(${Number(o.id)},'rejected')"
 
 }).join("");
 
-
 }catch(error){
 
 box.innerHTML =
@@ -2778,7 +2599,6 @@ error.message||String(error)
 
 }
 
-
 /* =========================
 SELLER STATUS
 ========================= */
@@ -2786,12 +2606,10 @@ SELLER STATUS
 async function sellerOrderStatus(id,status){
 
 const result =
-await supabaseClient.auth
-.getUser();
+await supabaseClient.auth.getUser();
 
 const user =
 result.data?.user;
-
 
 if(!user){
 
@@ -2803,12 +2621,10 @@ return;
 
 }
 
-
 const sellerPhone =
 formatPhone(
 user.user_metadata?.phone||""
 );
-
 
 if(!sellerPhone){
 
@@ -2819,7 +2635,6 @@ alert(
 return;
 
 }
-
 
 try{
 
@@ -2835,11 +2650,9 @@ status:status
 sellerPhone
 );
 
-
 if(result.error){
 throw result.error;
 }
-
 
 alert(
 status==="accepted"
@@ -2850,7 +2663,6 @@ status==="accepted"
 );
 
 loadSellerOrders();
-
 
 }catch(error){
 
@@ -2863,7 +2675,6 @@ error.message||error
 }
 
 }
-
 
 /* =========================
 REGISTER
@@ -2896,7 +2707,6 @@ document.getElementById(
 "regPassword"
 ).value;
 
-
 if(!name||!phone||!email||!password){
 
 box.innerHTML =
@@ -2905,7 +2715,6 @@ box.innerHTML =
 return;
 
 }
-
 
 if(password.length<6){
 
@@ -2916,10 +2725,8 @@ return;
 
 }
 
-
 box.innerHTML =
 "⏳ Inafungua akaunti...";
-
 
 try{
 
@@ -2939,11 +2746,9 @@ phone:formatPhone(phone)
 
 });
 
-
 if(result.error){
 throw result.error;
 }
-
 
 if(
 result.data?.session&&
@@ -2963,7 +2768,6 @@ email:email
 
 }
 
-
 box.innerHTML =
 '<div class="message">✅ Akaunti imeundwa.<br><br>'+
 (
@@ -2974,7 +2778,6 @@ result.data?.session
 "Angalia email yako kama uthibitisho umeombwa, kisha ingia."
 )+
 '</div>';
-
 
 }catch(error){
 
@@ -2988,7 +2791,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 LOGIN
@@ -3011,7 +2813,6 @@ document.getElementById(
 "loginPassword"
 ).value;
 
-
 if(!email||!password){
 
 box.innerHTML =
@@ -3021,10 +2822,8 @@ return;
 
 }
 
-
 box.innerHTML =
 "⏳ Inaingia...";
-
 
 try{
 
@@ -3037,15 +2836,12 @@ password:password
 
 });
 
-
 if(result.error){
 throw result.error;
 }
 
-
 const user =
 result.data.user;
-
 
 await supabaseClient
 .from("profiles")
@@ -3065,7 +2861,6 @@ email:user.email
 
 });
 
-
 box.innerHTML =
 '<div class="message">✅ Umeingia.<br><br>Karibu '+
 escapeHTML(
@@ -3074,10 +2869,8 @@ user.email
 )+
 '.</div>';
 
-
 loadMyOrders();
 loadSellerOrders();
-
 
 }catch(error){
 
@@ -3091,7 +2884,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 LOGOUT
@@ -3118,7 +2910,6 @@ document.getElementById(
 
 }
 
-
 /* =========================
 ADMIN CHECK
 ========================= */
@@ -3126,12 +2917,10 @@ ADMIN CHECK
 async function checkAdmin(){
 
 const result =
-await supabaseClient.auth
-.getUser();
+await supabaseClient.auth.getUser();
 
 const user =
 result.data?.user;
-
 
 if(
 user &&
@@ -3156,7 +2945,6 @@ loadAdminProducts();
 loadAdminOrders();
 loadUsers();
 
-
 }else{
 
 document.getElementById(
@@ -3170,7 +2958,6 @@ document.getElementById(
 }
 
 }
-
 
 /* =========================
 ADMIN LOGIN
@@ -3193,7 +2980,6 @@ document.getElementById(
 "adminMessage"
 );
 
-
 if(
 email.toLowerCase()!==
 ADMIN_EMAIL.toLowerCase()
@@ -3206,10 +2992,8 @@ return;
 
 }
 
-
 box.innerHTML =
 "⏳ Inaingia...";
-
 
 try{
 
@@ -3222,11 +3006,9 @@ password:password
 
 });
 
-
 if(result.error){
 throw result.error;
 }
-
 
 document.getElementById(
 "adminLogin"
@@ -3245,7 +3027,6 @@ loadAdminProducts();
 loadAdminOrders();
 loadUsers();
 
-
 }catch(error){
 
 box.innerHTML =
@@ -3258,7 +3039,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 ADMIN PRODUCTS
@@ -3274,7 +3054,6 @@ document.getElementById(
 box.innerHTML =
 "⏳ Inapakia...";
 
-
 try{
 
 const result =
@@ -3285,15 +3064,12 @@ await supabaseClient
 ascending:false
 });
 
-
 if(result.error){
 throw result.error;
 }
 
-
 const products =
 result.data||[];
-
 
 if(!products.length){
 
@@ -3303,7 +3079,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 products.map(function(p){
@@ -3359,7 +3134,6 @@ onclick="deleteProduct(${Number(p.id)})"
 
 }).join("");
 
-
 }catch(error){
 
 box.innerHTML =
@@ -3372,7 +3146,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 DELETE PRODUCT
@@ -3388,7 +3161,6 @@ return;
 
 }
 
-
 try{
 
 const result =
@@ -3397,11 +3169,9 @@ await supabaseClient
 .delete()
 .eq("id",id);
 
-
 if(result.error){
 throw result.error;
 }
-
 
 alert(
 "🗑️ Bidhaa imefutwa."
@@ -3409,7 +3179,6 @@ alert(
 
 loadAdminProducts();
 loadProducts();
-
 
 }catch(error){
 
@@ -3422,7 +3191,6 @@ error.message||error
 }
 
 }
-
 
 /* =========================
 ADMIN ORDERS
@@ -3442,7 +3210,6 @@ return;
 box.innerHTML =
 "⏳ Inapakia...";
 
-
 try{
 
 const result =
@@ -3453,11 +3220,9 @@ await supabaseClient
 ascending:false
 });
 
-
 if(result.error){
 throw result.error;
 }
-
 
 if(!result.data?.length){
 
@@ -3467,7 +3232,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 result.data.map(function(o){
@@ -3522,7 +3286,6 @@ o.created_at
 
 }).join("");
 
-
 }catch(error){
 
 box.innerHTML =
@@ -3535,7 +3298,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 ADMIN USERS
@@ -3555,7 +3317,6 @@ return;
 box.innerHTML =
 "⏳ Inapakia watumiaji...";
 
-
 try{
 
 const result =
@@ -3568,11 +3329,9 @@ await supabaseClient
 ascending:false
 });
 
-
 if(result.error){
 throw result.error;
 }
-
 
 if(!result.data?.length){
 
@@ -3582,7 +3341,6 @@ box.innerHTML =
 return;
 
 }
-
 
 box.innerHTML =
 result.data.map(function(u){
@@ -3627,7 +3385,6 @@ u.created_at
 
 }).join("");
 
-
 }catch(error){
 
 box.innerHTML =
@@ -3640,7 +3397,6 @@ error.message||String(error)
 }
 
 }
-
 
 /* =========================
 ADMIN LOGOUT
@@ -3660,7 +3416,6 @@ document.getElementById(
 
 }
 
-
 /* =========================
 START PLAM
 ========================= */
@@ -3676,7 +3431,6 @@ loadRegions();
 loadProducts();
 
 }
-
 
 /* =========================
 START
@@ -3696,7 +3450,6 @@ startPLAM
 startPLAM();
 
 }
-
 
 /* =========================
 AUTH STATE
@@ -3723,4 +3476,4 @@ loadSellerOrders();
 
 </body>
 
-   </html>
+</html>
