@@ -1,19 +1,14 @@
 <!doctype html>
 <html lang="sw">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>PLAM TANZANIA</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -110,6 +105,11 @@ font-weight:bold;
 cursor:pointer;
 text-decoration:none;
 display:inline-block;
+}
+
+button:active,
+.btn:active{
+transform:scale(.98);
 }
 
 .primary{
@@ -324,6 +324,23 @@ margin-top:14px;
 margin-bottom:5px;
 }
 
+.loading{
+text-align:center;
+padding:25px;
+background:white;
+border-radius:12px;
+color:#087a38;
+font-weight:bold;
+}
+
+.error-box{
+text-align:center;
+padding:20px;
+background:#fff3f3;
+border-radius:12px;
+color:#c62828;
+}
+
 @media(max-width:500px){
 
 header h1{
@@ -355,22 +372,15 @@ flex:100%;
 }
 
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-
 <h1>🇹🇿 PLAM TANZANIA</h1>
-
-<p>
-Jenga biashara yako. Fikia wateja zaidi.
-</p>
-
+<p>Jenga biashara yako. Fikia wateja zaidi.</p>
 </header>
-
 
 <nav>
 
@@ -396,19 +406,14 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 </nav>
 
-
 <main>
 
-
 <!-- HOME -->
-
 <section id="home">
 
 <div class="card welcome">
 
-<h2>
-Karibu PLAM TANZANIA 🇹🇿
-</h2>
+<h2>Karibu PLAM TANZANIA 🇹🇿</h2>
 
 <p>
 Jukwaa la kuunganisha wanunuzi na wauzaji Tanzania.
@@ -424,12 +429,9 @@ onclick="showSection('add')"
 
 </div>
 
-
 <div class="card">
 
-<h2>
-🔎 Tafuta Bidhaa
-</h2>
+<h2>🔎 Tafuta Bidhaa</h2>
 
 <input
 id="homeSearch"
@@ -440,17 +442,11 @@ oninput="searchProducts(this.value)"
 
 </div>
 
+<h2>🛍️ Bidhaa Zote</h2>
 
-<h2>
-🛍️ Bidhaa Zote
-</h2>
+<div id="products" class="product-grid">
 
-<div
-id="products"
-class="product-grid"
->
-
-<div class="empty">
+<div class="loading">
 ⏳ Inapakia bidhaa...
 </div>
 
@@ -460,17 +456,11 @@ class="product-grid"
 
 
 <!-- SEARCH -->
-
-<section
-id="search"
-class="hidden"
->
+<section id="search" class="hidden">
 
 <div class="card">
 
-<h2>
-🔎 Tafuta Bidhaa
-</h2>
+<h2>🔎 Tafuta Bidhaa</h2>
 
 <input
 id="searchInput"
@@ -484,53 +474,34 @@ id="searchRegion"
 onchange="loadDistrictSearch();runSearch()"
 >
 
-<option value="">
-Mikoa yote
-</option>
+<option value="">Mikoa yote</option>
 
 </select>
-
 
 <select
 id="searchDistrict"
 onchange="runSearch()"
 >
 
-<option value="">
-Wilaya zote
-</option>
+<option value="">Wilaya zote</option>
 
 </select>
 
 </div>
 
-
-<div
-id="searchResults"
-class="product-grid"
->
-</div>
+<div id="searchResults" class="product-grid"></div>
 
 </section>
 
 
-<!-- ADD PRODUCT -->
-
-<section
-id="add"
-class="hidden"
->
+<!-- ADD -->
+<section id="add" class="hidden">
 
 <div class="card">
 
-<h2>
-➕ Weka Bidhaa
-</h2>
+<h2>➕ Weka Bidhaa</h2>
 
-
-<label>
-Jina la bidhaa
-</label>
+<label>Jina la bidhaa</label>
 
 <input
 id="productName"
@@ -538,10 +509,7 @@ type="text"
 placeholder="Mfano: Samsung A05"
 >
 
-
-<label>
-Bei
-</label>
+<label>Bei</label>
 
 <input
 id="productPrice"
@@ -549,84 +517,42 @@ type="number"
 placeholder="Mfano: 250000"
 >
 
-
-<label>
-Kundi
-</label>
+<label>Kundi</label>
 
 <select id="productCategory">
 
-<option value="">
-Chagua kundi
-</option>
-
-<option>
-Mavazi
-</option>
-
-<option>
-Electronics
-</option>
-
-<option>
-Nyumba
-</option>
-
-<option>
-Magari
-</option>
-
-<option>
-Kilimo
-</option>
-
-<option>
-Urembo
-</option>
-
-<option>
-Elimu
-</option>
-
-<option>
-Huduma
-</option>
+<option value="">Chagua kundi</option>
+<option>Mavazi</option>
+<option>Electronics</option>
+<option>Nyumba</option>
+<option>Magari</option>
+<option>Kilimo</option>
+<option>Urembo</option>
+<option>Elimu</option>
+<option>Huduma</option>
 
 </select>
 
-
-<label>
-Mkoa
-</label>
+<label>Mkoa</label>
 
 <select
 id="productRegion"
 onchange="loadDistricts()"
 >
 
-<option value="">
-Chagua mkoa
-</option>
+<option value="">Chagua mkoa</option>
 
 </select>
 
-
-<label>
-Wilaya
-</label>
+<label>Wilaya</label>
 
 <select id="productDistrict">
 
-<option value="">
-Chagua wilaya
-</option>
+<option value="">Chagua wilaya</option>
 
 </select>
 
-
-<label>
-Eneo / Mtaa
-</label>
+<label>Eneo / Mtaa</label>
 
 <input
 id="productPlace"
@@ -634,10 +560,7 @@ type="text"
 placeholder="Mfano: Iyunga"
 >
 
-
-<label>
-Namba ya simu ya muuzaji
-</label>
+<label>Namba ya simu ya muuzaji</label>
 
 <input
 id="sellerPhone"
@@ -645,20 +568,14 @@ type="tel"
 placeholder="Mfano: 0625053021"
 >
 
-
-<label>
-Maelezo ya bidhaa
-</label>
+<label>Maelezo ya bidhaa</label>
 
 <textarea
 id="productDescription"
 placeholder="Andika maelezo ya bidhaa..."
 ></textarea>
 
-
-<label>
-Picha ya kwanza
-</label>
+<label>Picha ya kwanza</label>
 
 <input
 id="image1"
@@ -670,20 +587,14 @@ onchange="previewImage(this,'preview1')"
 <img
 id="preview1"
 class="preview"
-alt="Preview picha ya kwanza"
+alt="Preview"
 >
 
-
-<small>
-Picha hii itaonekana kwenye bidhaa.
-</small>
+<small>Picha hii itaonekana kwenye bidhaa.</small>
 
 <br><br>
 
-
-<label>
-Picha ya pili
-</label>
+<label>Picha ya pili</label>
 
 <input
 id="image2"
@@ -695,16 +606,12 @@ onchange="previewImage(this,'preview2')"
 <img
 id="preview2"
 class="preview"
-alt="Preview picha ya pili"
+alt="Preview"
 >
 
-
-<small>
-Unaweza kuweka picha ya upande wa pili wa bidhaa.
-</small>
+<small>Unaweza kuweka picha ya upande wa pili.</small>
 
 <br><br>
-
 
 <button
 type="button"
@@ -714,11 +621,7 @@ onclick="addProduct()"
 🚀 Weka Bidhaa PLAM
 </button>
 
-
-<div
-id="addMessage"
-class="success-message"
-></div>
+<div id="addMessage" class="success-message"></div>
 
 </div>
 
@@ -726,25 +629,15 @@ class="success-message"
 
 
 <!-- ACCOUNT -->
-
-<section
-id="account"
-class="hidden"
->
+<section id="account" class="hidden">
 
 <div class="card">
 
-<h2>
-👤 Akaunti
-</h2>
-
+<h2>👤 Akaunti</h2>
 
 <div id="loggedOut">
 
-<h3>
-Fungua Akaunti
-</h3>
-
+<h3>Fungua Akaunti</h3>
 
 <input
 id="registerName"
@@ -752,13 +645,11 @@ type="text"
 placeholder="Jina kamili"
 >
 
-
 <input
 id="registerPhone"
 type="tel"
 placeholder="Namba ya simu"
 >
-
 
 <input
 id="registerEmail"
@@ -766,13 +657,11 @@ type="email"
 placeholder="Barua pepe"
 >
 
-
 <input
 id="registerPassword"
 type="password"
 placeholder="Password"
 >
-
 
 <button
 type="button"
@@ -782,14 +671,9 @@ onclick="registerUser()"
 Fungua Akaunti
 </button>
 
-
 <hr>
 
-
-<h3>
-Ingia
-</h3>
-
+<h3>Ingia</h3>
 
 <input
 id="loginEmail"
@@ -797,13 +681,11 @@ type="email"
 placeholder="Barua pepe"
 >
 
-
 <input
 id="loginPassword"
 type="password"
 placeholder="Password"
 >
-
 
 <button
 type="button"
@@ -815,15 +697,9 @@ Ingia
 
 </div>
 
+<div id="loggedIn" class="hidden">
 
-<div
-id="loggedIn"
-class="hidden"
->
-
-<h3>
-Karibu 👋
-</h3>
+<h3>Karibu 👋</h3>
 
 <div id="userInfo"></div>
 
@@ -839,29 +715,17 @@ Toka
 
 </div>
 
+<div id="buyerOrders" class="card hidden">
 
-<div
-id="buyerOrders"
-class="card hidden"
->
-
-<h2>
-🛒 Oda Zangu
-</h2>
+<h2>🛒 Oda Zangu</h2>
 
 <div id="buyerOrdersList"></div>
 
 </div>
 
+<div id="sellerOrders" class="card hidden">
 
-<div
-id="sellerOrders"
-class="card hidden"
->
-
-<h2>
-📦 Oda za Bidhaa Zangu
-</h2>
+<h2>📦 Oda za Bidhaa Zangu</h2>
 
 <div id="sellerOrdersList"></div>
 
@@ -871,21 +735,11 @@ class="card hidden"
 
 
 <!-- ADMIN -->
+<section id="admin" class="hidden">
 
-<section
-id="admin"
-class="hidden"
->
+<div id="adminLoginBox" class="card">
 
-<div
-id="adminLoginBox"
-class="card"
->
-
-<h2>
-🛡️ Admin
-</h2>
-
+<h2>🛡️ Admin</h2>
 
 <input
 id="adminEmail"
@@ -893,13 +747,11 @@ type="email"
 placeholder="Admin email"
 >
 
-
 <input
 id="adminPassword"
 type="password"
 placeholder="Admin password"
 >
-
 
 <button
 type="button"
@@ -911,50 +763,35 @@ Ingia Admin
 
 </div>
 
-
-<div
-id="adminDashboard"
-class="hidden"
->
+<div id="adminDashboard" class="hidden">
 
 <div class="card">
 
-<h2>
-📊 Admin Dashboard
-</h2>
+<h2>📊 Admin Dashboard</h2>
 
 <div id="adminStats"></div>
 
 </div>
 
-
 <div class="card">
 
-<h2>
-🛍️ Bidhaa
-</h2>
+<h2>🛍️ Bidhaa</h2>
 
 <div id="adminProducts"></div>
 
 </div>
 
-
 <div class="card">
 
-<h2>
-📦 Oda
-</h2>
+<h2>📦 Oda</h2>
 
 <div id="adminOrders"></div>
 
 </div>
 
-
 <div class="card">
 
-<h2>
-👥 Watumiaji
-</h2>
+<h2>👥 Watumiaji</h2>
 
 <div id="adminUsers"></div>
 
@@ -966,14 +803,11 @@ class="hidden"
 
 
 <!-- CONTACT -->
-
 <section>
 
 <div class="card contact-card">
 
-<h2>
-📞 Mawasiliano ya PLAM
-</h2>
+<h2>📞 Mawasiliano ya PLAM</h2>
 
 <p>
 Kwa msaada au mawasiliano na msimamizi wa PLAM:
@@ -983,7 +817,6 @@ Kwa msaada au mawasiliano na msimamizi wa PLAM:
 📱 0625 053 021
 </div>
 
-
 <div class="actions">
 
 <a
@@ -992,7 +825,6 @@ href="tel:+255625053021"
 >
 📞 Piga Simu
 </a>
-
 
 <a
 class="btn whatsapp"
@@ -1011,12 +843,9 @@ rel="noopener"
 
 </main>
 
-
 <footer>
 
-<strong>
-🇹🇿 PLAM TANZANIA
-</strong>
+<strong>🇹🇿 PLAM TANZANIA</strong>
 
 <br>
 
@@ -1031,10 +860,12 @@ Jenga biashara yako. Fikia wateja zaidi.
 
 <script>
 
+/* ==================================================
+   PLAM TANZANIA
+   SAFE JAVASCRIPT START
+================================================== */
 
-/* =========================
-SUPABASE
-========================= */
+let supabaseClient = null;
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -1042,27 +873,63 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-const supabase =
+const ADMIN_EMAIL =
+"lucasmwingira323@gmail.com";
+
+let currentUser = null;
+let allProducts = [];
+
+
+/* ==================================================
+   SUPABASE SAFE INITIALIZATION
+================================================== */
+
+function initSupabase(){
+
+try{
+
+if(
+window.supabase &&
+typeof window.supabase.createClient === "function"
+){
+
+supabaseClient =
 window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
+console.log("PLAM Supabase imeunganishwa.");
 
-const ADMIN_EMAIL =
-"lucasmwingira323@gmail.com";
+return true;
+
+}
+
+console.error(
+"Supabase library haijapatikana."
+);
+
+return false;
+
+}catch(error){
+
+console.error(
+"SUPABASE INIT ERROR:",
+error
+);
+
+return false;
+
+}
+
+}
 
 
-let currentUser = null;
+/* ==================================================
+   LOCATIONS
+================================================== */
 
-let allProducts = [];
-
-
-/* =========================
-LOCATIONS
-========================= */
-
-const LOCATIONS = {
+const LOCATIONS={
 
 "Mbeya":{
 "Mbeya City":["Iyunga","Mabatini","Soweto","Ruanda","Mwanjelwa"],
@@ -1173,16 +1040,23 @@ const LOCATIONS = {
 };
 
 
-/* =========================
-SHOW SECTION
-========================= */
+/* ==================================================
+   SHOW SECTION
+================================================== */
 
 function showSection(id){
 
-document
-.querySelectorAll("main > section")
-.forEach(section=>{
+try{
+
+const sections =
+document.querySelectorAll(
+"main > section"
+);
+
+sections.forEach(function(section){
+
 section.classList.add("hidden");
+
 });
 
 
@@ -1192,7 +1066,9 @@ document.getElementById(id);
 
 if(!target){
 
-alert("Sehemu haijapatikana.");
+alert(
+"Sehemu haijapatikana: "+id
+);
 
 return;
 
@@ -1203,15 +1079,23 @@ target.classList.remove("hidden");
 
 
 if(id==="home"){
+
 loadProducts();
+
 }
 
 
 if(id==="search"){
 
 loadRegions();
-
 runSearch();
+
+}
+
+
+if(id==="add"){
+
+loadRegions();
 
 }
 
@@ -1223,17 +1107,38 @@ checkUser();
 }
 
 
+if(id==="admin"){
+
+/* Admin dashboard itaendelea kubaki login. */
+
+}
+
+
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
 
+
+}catch(error){
+
+console.error(
+"SHOW SECTION ERROR:",
+error
+);
+
+alert(
+"Hitilafu ya kufungua sehemu."
+);
+
+}
+
 }
 
 
-/* =========================
-REGIONS
-========================= */
+/* ==================================================
+   REGIONS
+================================================== */
 
 function loadRegions(){
 
@@ -1246,16 +1151,15 @@ document.getElementById("searchRegion");
 
 if(productRegion){
 
-productRegion.innerHTML =
+productRegion.innerHTML=
 '<option value="">Chagua mkoa</option>';
 
-Object.keys(LOCATIONS).forEach(region=>{
+Object.keys(LOCATIONS).forEach(function(region){
 
 const option =
 document.createElement("option");
 
 option.value=region;
-
 option.textContent=region;
 
 productRegion.appendChild(option);
@@ -1267,16 +1171,15 @@ productRegion.appendChild(option);
 
 if(searchRegion){
 
-searchRegion.innerHTML =
+searchRegion.innerHTML=
 '<option value="">Mikoa yote</option>';
 
-Object.keys(LOCATIONS).forEach(region=>{
+Object.keys(LOCATIONS).forEach(function(region){
 
 const option =
 document.createElement("option");
 
 option.value=region;
-
 option.textContent=region;
 
 searchRegion.appendChild(option);
@@ -1288,9 +1191,9 @@ searchRegion.appendChild(option);
 }
 
 
-/* =========================
-DISTRICTS
-========================= */
+/* ==================================================
+   DISTRICTS
+================================================== */
 
 function loadDistricts(){
 
@@ -1301,21 +1204,23 @@ const district =
 document.getElementById("productDistrict");
 
 
-district.innerHTML =
+if(!district)return;
+
+
+district.innerHTML=
 '<option value="">Chagua wilaya</option>';
 
 
-if(!region) return;
+if(!region)return;
 
 
-Object.keys(LOCATIONS[region])
-.forEach(item=>{
+Object.keys(LOCATIONS[region] || {})
+.forEach(function(item){
 
 const option =
 document.createElement("option");
 
 option.value=item;
-
 option.textContent=item;
 
 district.appendChild(option);
@@ -1334,21 +1239,23 @@ const district =
 document.getElementById("searchDistrict");
 
 
-district.innerHTML =
+if(!district)return;
+
+
+district.innerHTML=
 '<option value="">Wilaya zote</option>';
 
 
-if(!region) return;
+if(!region)return;
 
 
-Object.keys(LOCATIONS[region])
-.forEach(item=>{
+Object.keys(LOCATIONS[region] || {})
+.forEach(function(item){
 
 const option =
 document.createElement("option");
 
 option.value=item;
-
 option.textContent=item;
 
 district.appendChild(option);
@@ -1358,13 +1265,13 @@ district.appendChild(option);
 }
 
 
-/* =========================
-PHONE
-========================= */
+/* ==================================================
+   PHONE
+================================================== */
 
 function formatPhone(phone){
 
-phone =
+phone=
 String(phone || "")
 .trim()
 .replace(/\s+/g,"");
@@ -1374,25 +1281,22 @@ if(phone.startsWith("+255")){
 return phone;
 }
 
-
 if(phone.startsWith("255")){
 return "+"+phone;
 }
 
-
 if(phone.startsWith("0")){
 return "+255"+phone.substring(1);
 }
-
 
 return phone;
 
 }
 
 
-/* =========================
-MONEY
-========================= */
+/* ==================================================
+   MONEY
+================================================== */
 
 function money(value){
 
@@ -1403,9 +1307,9 @@ return Number(value || 0)
 }
 
 
-/* =========================
-ESCAPE
-========================= */
+/* ==================================================
+   ESCAPE
+================================================== */
 
 function escapeHTML(value){
 
@@ -1419,28 +1323,21 @@ return String(value ?? "")
 }
 
 
-/* =========================
-IMAGE COMPRESS
-========================= */
+/* ==================================================
+   IMAGE COMPRESS
+================================================== */
 
 async function compressImage(file){
 
-if(!file){
-return null;
-}
+if(!file)return null;
 
+return new Promise(function(resolve,reject){
 
-return new Promise((resolve,reject)=>{
-
-const reader =
-new FileReader();
-
+const reader=new FileReader();
 
 reader.onload=function(event){
 
-const img =
-new Image();
-
+const img=new Image();
 
 img.onload=function(){
 
@@ -1449,37 +1346,34 @@ let height=img.height;
 
 const max=1200;
 
-
 if(width>max){
 
-height=
-Math.round(height*max/width);
+height=Math.round(
+height*max/width
+);
 
 width=max;
 
 }
 
-
 if(height>max){
 
-width=
-Math.round(width*max/height);
+width=Math.round(
+width*max/height
+);
 
 height=max;
 
 }
 
-
-const canvas =
+const canvas=
 document.createElement("canvas");
 
 canvas.width=width;
 canvas.height=height;
 
-
-const ctx =
+const ctx=
 canvas.getContext("2d");
-
 
 ctx.drawImage(
 img,
@@ -1488,7 +1382,6 @@ img,
 width,
 height
 );
-
 
 resolve(
 canvas.toDataURL(
@@ -1499,7 +1392,6 @@ canvas.toDataURL(
 
 };
 
-
 img.onerror=function(){
 
 reject(
@@ -1508,11 +1400,9 @@ new Error("Picha haikuweza kusomwa.")
 
 };
 
-
 img.src=event.target.result;
 
 };
-
 
 reader.onerror=function(){
 
@@ -1522,7 +1412,6 @@ new Error("Faili la picha limeshindwa kusomwa.")
 
 };
 
-
 reader.readAsDataURL(file);
 
 });
@@ -1530,18 +1419,18 @@ reader.readAsDataURL(file);
 }
 
 
-/* =========================
-PREVIEW
-========================= */
+/* ==================================================
+   PREVIEW
+================================================== */
 
 function previewImage(input,previewId){
 
-const file =
-input.files[0];
+const file=input.files[0];
 
-const preview =
+const preview=
 document.getElementById(previewId);
 
+if(!preview)return;
 
 if(!file){
 
@@ -1552,99 +1441,86 @@ return;
 
 }
 
-
-const reader =
-new FileReader();
-
+const reader=new FileReader();
 
 reader.onload=function(e){
 
 preview.src=e.target.result;
-
 preview.style.display="block";
 
 };
-
 
 reader.readAsDataURL(file);
 
 }
 
 
-/* =========================
-ADD PRODUCT
-========================= */
+/* ==================================================
+   ADD PRODUCT
+================================================== */
 
 async function addProduct(){
 
-const message =
-document.getElementById("addMessage");
+if(!supabaseClient){
 
+alert(
+"PLAM bado inaunganisha mfumo. Tafadhali subiri sekunde chache kisha jaribu tena."
+);
+
+initSupabase();
+
+return;
+
+}
 
 try{
+
+const message=
+document.getElementById("addMessage");
 
 message.style.display="none";
 
 
-const name =
-document
-.getElementById("productName")
+const name=
+document.getElementById("productName")
 .value.trim();
 
-
-const price =
-document
-.getElementById("productPrice")
+const price=
+document.getElementById("productPrice")
 .value;
 
-
-const category =
-document
-.getElementById("productCategory")
+const category=
+document.getElementById("productCategory")
 .value;
 
-
-const region =
-document
-.getElementById("productRegion")
+const region=
+document.getElementById("productRegion")
 .value;
 
-
-const district =
-document
-.getElementById("productDistrict")
+const district=
+document.getElementById("productDistrict")
 .value;
 
-
-const place =
-document
-.getElementById("productPlace")
+const place=
+document.getElementById("productPlace")
 .value.trim();
 
-
-const phone =
+const phone=
 formatPhone(
-document
-.getElementById("sellerPhone")
+document.getElementById("sellerPhone")
 .value
 );
 
-
-const description =
-document
-.getElementById("productDescription")
+const description=
+document.getElementById("productDescription")
 .value.trim();
 
-
-const file1 =
-document
-.getElementById("image1")
+const file1=
+document.getElementById("image1")
 .files[0];
 
-
-const file2 =
-document
-.getElementById("image2")
+const file2=
+document.getElementById("image2")
 .files[0];
 
 
@@ -1669,11 +1545,9 @@ return;
 let image1=null;
 let image2=null;
 
-
 if(file1){
 image1=await compressImage(file1);
 }
-
 
 if(file2){
 image2=await compressImage(file2);
@@ -1683,32 +1557,22 @@ image2=await compressImage(file2);
 const productData={
 
 name:name,
-
 price:Number(price),
-
 category:category,
-
 region:region,
-
 district:district,
-
 place:place,
-
 phone:phone,
-
 description:description,
-
 image_url:image1,
-
 image_url_2:image2,
-
 status:"active"
 
 };
 
 
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("Production")
 .insert([productData])
 .select();
@@ -1717,13 +1581,13 @@ await supabase
 if(result.error){
 
 console.error(
-"SUPABASE INSERT ERROR:",
+"INSERT ERROR:",
 result.error
 );
 
 alert(
-"Imeshindikana kuhifadhi bidhaa:\n\n"
-+result.error.message
+"Imeshindikana kuhifadhi bidhaa:\n\n"+
+result.error.message
 );
 
 return;
@@ -1777,8 +1641,8 @@ error
 );
 
 alert(
-"Hitilafu imetokea:\n\n"
-+(error.message || error)
+"Hitilafu imetokea:\n\n"+
+(error.message || error)
 );
 
 }
@@ -1786,67 +1650,66 @@ alert(
 }
 
 
-/* =========================
-LOAD PRODUCTS
-IMPORTANT FIX
-========================= */
+/* ==================================================
+   LOAD PRODUCTS
+================================================== */
 
 async function loadProducts(){
 
-const container =
+const container=
 document.getElementById("products");
 
-
-if(!container){
-return;
-}
+if(!container)return;
 
 
 container.innerHTML=
 `
-<div class="empty">
+<div class="loading">
 ⏳ Inapakia bidhaa...
 </div>
 `;
 
 
+if(!supabaseClient){
+
+container.innerHTML=
+`
+<div class="error-box">
+⚠️ Mfumo wa bidhaa bado unaunganisha.
+<br><br>
+Jaribu kubonyeza Home tena baada ya sekunde chache.
+</div>
+`;
+
+return;
+
+}
+
+
 try{
 
-/*
-  HAPA HATUTUMII .order("created_at")
-  kwa sababu kama column hiyo haipo,
-  bidhaa zote zilikuwa hazionekani.
-*/
-
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("Production")
 .select("*");
 
 
-const data =
-result.data;
-
-const error =
-result.error;
-
-
-if(error){
+if(result.error){
 
 console.error(
 "LOAD PRODUCTS ERROR:",
-error
+result.error
 );
 
 container.innerHTML=
 `
-<div class="empty">
+<div class="error-box">
 
 ❌ Bidhaa hazijaweza kupakiwa.
 
 <br><br>
 
-${escapeHTML(error.message)}
+${escapeHTML(result.error.message)}
 
 </div>
 `;
@@ -1856,25 +1719,20 @@ return;
 }
 
 
-allProducts =
-data || [];
+allProducts=
+result.data || [];
 
-
-/*
-  Panga mpya kwanza ikiwa created_at ipo.
-  Kama haipo, bidhaa bado zitaonekana.
-*/
 
 allProducts.sort(function(a,b){
 
-const dateA =
+const dateA=
 new Date(
 a.created_at ||
 a["Created at"] ||
 0
 );
 
-const dateB =
+const dateB=
 new Date(
 b.created_at ||
 b["Created at"] ||
@@ -1899,10 +1757,9 @@ console.error(
 error
 );
 
-
 container.innerHTML=
 `
-<div class="empty">
+<div class="error-box">
 
 ❌ Hitilafu ya kupakia bidhaa.
 
@@ -1920,18 +1777,13 @@ error.message || error
 }
 
 
-/* =========================
-RENDER PRODUCTS
-========================= */
+/* ==================================================
+   RENDER PRODUCTS
+================================================== */
 
-function renderProducts(
-products,
-container
-){
+function renderProducts(products,container){
 
-if(!container){
-return;
-}
+if(!container)return;
 
 
 if(
@@ -1947,14 +1799,13 @@ container.innerHTML=
 
 <br><br>
 
-<a
-href="#"
+<button
+type="button"
 class="btn primary"
-onclick="showSection('add');return false;"
+onclick="showSection('add')"
 >
 ➕ Weka Bidhaa
-
-</a>
+</button>
 
 </div>
 `;
@@ -1969,42 +1820,33 @@ container.innerHTML="";
 
 products.forEach(function(product){
 
-const id =
+const id=
 product.id ??
 product.Id ??
 "";
 
-
-const name =
+const name=
 product.name ||
 "Bidhaa";
 
-
-const safeName =
+const safeName=
 escapeHTML(name);
 
-
-const price =
+const price=
 money(product.price);
 
-
-const phone =
+const phone=
 formatPhone(product.phone);
 
+const image1=
+product.image_url || "";
 
-const image1 =
-product.image_url ||
-"";
-
-
-const image2 =
-product.image_url_2 ||
-"";
+const image2=
+product.image_url_2 || "";
 
 
-const article =
+const article=
 document.createElement("article");
-
 
 article.className="product";
 
@@ -2023,7 +1865,7 @@ class="main-image"
 src="${image1}"
 alt="${safeName}"
 loading="lazy"
-onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;empty&quot;>📷 Picha haikuweza kuonekana</div>';"
+onerror="this.style.display='none'"
 >
 
 </div>
@@ -2035,7 +1877,7 @@ imageHTML=
 `
 <div
 class="product-image-box"
-style="height:220px;"
+style="height:220px"
 >
 
 <div class="empty">
@@ -2070,7 +1912,7 @@ loading="lazy"
 
 <a
 class="btn secondary"
-style="margin-top:8px;width:100%;text-align:center;"
+style="margin-top:8px;width:100%;text-align:center"
 href="${image2}"
 download="PLAM-picha-2.jpg"
 >
@@ -2083,19 +1925,16 @@ download="PLAM-picha-2.jpg"
 }
 
 
-const region =
+const region=
 escapeHTML(product.region || "");
 
-
-const district =
+const district=
 escapeHTML(product.district || "");
 
-
-const place =
+const place=
 escapeHTML(product.place || "");
 
-
-const description =
+const description=
 escapeHTML(
 product.description ||
 "Hakuna maelezo."
@@ -2129,14 +1968,14 @@ rel="noopener"
 }
 
 
-const imageDownload =
+const imageDownload=
 image1
 ?
 `
 <a
 class="btn secondary"
 href="${image1}"
-download="PLAM-${safeName}.jpg"
+download="PLAM-picha.jpg"
 >
 📥 Pakua Picha
 </a>
@@ -2144,11 +1983,6 @@ download="PLAM-${safeName}.jpg"
 :
 "";
 
-
-/*
-  Button ya oda imewekwa moja kwa moja.
-  Hata kama hakuna picha, button bado itaonekana.
-*/
 
 const orderButton=
 `
@@ -2169,9 +2003,7 @@ ${imageHTML}
 
 <div class="product-content">
 
-<h3>
-${safeName}
-</h3>
+<h3>${safeName}</h3>
 
 <div class="price">
 ${price}
@@ -2179,11 +2011,8 @@ ${price}
 
 <div class="location">
 📍 ${region}
-
 ${district ? " • "+district : ""}
-
 ${place ? " • "+place : ""}
-
 </div>
 
 <div class="description">
@@ -2217,17 +2046,16 @@ container.appendChild(article);
 }
 
 
-/* =========================
-ORDER BUTTON
-========================= */
+/* ==================================================
+   ORDER BUTTON
+================================================== */
 
 function placeOrderFromButton(button){
 
-const id =
+const id=
 button.getAttribute(
 "data-product-id"
 );
-
 
 if(!id){
 
@@ -2239,19 +2067,18 @@ return;
 
 }
 
-
 placeOrder(id);
 
 }
 
 
-/* =========================
-SEARCH HOME
-========================= */
+/* ==================================================
+   HOME SEARCH
+================================================== */
 
 function searchProducts(value){
 
-const query =
+const query=
 String(value || "")
 .toLowerCase()
 .trim();
@@ -2269,7 +2096,7 @@ return;
 }
 
 
-const results =
+const results=
 allProducts.filter(function(product){
 
 return(
@@ -2315,22 +2142,22 @@ document.getElementById("products")
 }
 
 
-/* =========================
-SEARCH PAGE
-========================= */
+/* ==================================================
+   SEARCH PAGE
+================================================== */
 
 function runSearch(){
 
-const input =
+const input=
 document.getElementById("searchInput");
 
-const regionSelect =
+const regionSelect=
 document.getElementById("searchRegion");
 
-const districtSelect =
+const districtSelect=
 document.getElementById("searchDistrict");
 
-const resultsBox =
+const resultsBox=
 document.getElementById("searchResults");
 
 
@@ -2346,21 +2173,17 @@ return;
 }
 
 
-const query =
-input.value
-.toLowerCase()
-.trim();
+const query=
+input.value.toLowerCase().trim();
 
-
-const region =
+const region=
 regionSelect.value;
 
-
-const district =
+const district=
 districtSelect.value;
 
 
-const results =
+const results=
 allProducts.filter(function(product){
 
 const text=
@@ -2377,25 +2200,18 @@ String(product.district || "")
 ).toLowerCase();
 
 
-const matchText=
-!query ||
-text.includes(query);
-
-
-const matchRegion=
-!region ||
-product.region===region;
-
-
-const matchDistrict=
-!district ||
-product.district===district;
-
-
 return(
-matchText &&
-matchRegion &&
-matchDistrict
+
+(!query || text.includes(query))
+
+&&
+
+(!region || product.region===region)
+
+&&
+
+(!district || product.district===district)
+
 );
 
 });
@@ -2409,35 +2225,39 @@ resultsBox
 }
 
 
-/* =========================
-REGISTER
-========================= */
+/* ==================================================
+   REGISTER
+================================================== */
 
 async function registerUser(){
 
+if(!supabaseClient){
+
+alert(
+"PLAM bado inaunganisha mfumo."
+);
+
+return;
+
+}
+
+
 try{
 
-const name =
-document
-.getElementById("registerName")
+const name=
+document.getElementById("registerName")
 .value.trim();
 
-
-const phone =
-document
-.getElementById("registerPhone")
+const phone=
+document.getElementById("registerPhone")
 .value.trim();
 
-
-const email =
-document
-.getElementById("registerEmail")
+const email=
+document.getElementById("registerEmail")
 .value.trim();
 
-
-const password =
-document
-.getElementById("registerPassword")
+const password=
+document.getElementById("registerPassword")
 .value;
 
 
@@ -2457,11 +2277,10 @@ return;
 }
 
 
-const result =
-await supabase.auth.signUp({
+const result=
+await supabaseClient.auth.signUp({
 
 email:email,
-
 password:password,
 
 options:{
@@ -2477,33 +2296,28 @@ phone:phone
 if(result.error){
 
 alert(result.error.message);
-
 return;
 
 }
 
 
-const user =
+const user=
 result.data.user;
 
 
 if(user){
 
-const profile =
-await supabase
+const profile=
+await supabaseClient
 .from("profiles")
 .upsert({
 
 id:user.id,
-
 full_name:name,
-
 phone:phone,
-
 email:email
 
 });
-
 
 if(profile.error){
 
@@ -2535,23 +2349,31 @@ alert(
 }
 
 
-/* =========================
-LOGIN
-========================= */
+/* ==================================================
+   LOGIN
+================================================== */
 
 async function loginUser(){
 
+if(!supabaseClient){
+
+alert(
+"PLAM bado inaunganisha mfumo."
+);
+
+return;
+
+}
+
+
 try{
 
-const email =
-document
-.getElementById("loginEmail")
+const email=
+document.getElementById("loginEmail")
 .value.trim();
 
-
-const password =
-document
-.getElementById("loginPassword")
+const password=
+document.getElementById("loginPassword")
 .value;
 
 
@@ -2569,12 +2391,11 @@ return;
 }
 
 
-const result =
-await supabase.auth
+const result=
+await supabaseClient.auth
 .signInWithPassword({
 
 email:email,
-
 password:password
 
 });
@@ -2583,18 +2404,15 @@ password:password
 if(result.error){
 
 alert(result.error.message);
-
 return;
 
 }
 
 
-currentUser =
+currentUser=
 result.data.user;
 
-
 await checkUser();
-
 
 alert(
 "✅ Umeingia kwenye PLAM."
@@ -2614,13 +2432,15 @@ alert(
 }
 
 
-/* =========================
-LOGOUT
-========================= */
+/* ==================================================
+   LOGOUT
+================================================== */
 
 async function logoutUser(){
 
-await supabase.auth.signOut();
+if(!supabaseClient)return;
+
+await supabaseClient.auth.signOut();
 
 currentUser=null;
 
@@ -2633,43 +2453,42 @@ alert(
 }
 
 
-/* =========================
-CHECK USER
-========================= */
+/* ==================================================
+   CHECK USER
+================================================== */
 
 async function checkUser(){
 
+if(!supabaseClient)return;
+
+
 try{
 
-const result =
-await supabase.auth.getUser();
+const result=
+await supabaseClient.auth.getUser();
+
+currentUser=
+result.data.user || null;
 
 
-currentUser =
-result.data.user;
-
-
-const loggedOut =
+const loggedOut=
 document.getElementById("loggedOut");
 
-const loggedIn =
+const loggedIn=
 document.getElementById("loggedIn");
 
-const buyerOrders =
+const buyerOrders=
 document.getElementById("buyerOrders");
 
-const sellerOrders =
+const sellerOrders=
 document.getElementById("sellerOrders");
 
 
 if(!currentUser){
 
 loggedOut.classList.remove("hidden");
-
 loggedIn.classList.add("hidden");
-
 buyerOrders.classList.add("hidden");
-
 sellerOrders.classList.add("hidden");
 
 return;
@@ -2678,29 +2497,22 @@ return;
 
 
 loggedOut.classList.add("hidden");
-
 loggedIn.classList.remove("hidden");
-
 buyerOrders.classList.remove("hidden");
-
 sellerOrders.classList.remove("hidden");
 
 
-const name =
+const name=
 currentUser.user_metadata?.full_name ||
 currentUser.email;
 
-
-const phone =
+const phone=
 currentUser.user_metadata?.phone ||
 "";
 
 
-document
-.getElementById("userInfo")
-.innerHTML=
+document.getElementById("userInfo").innerHTML=
 `
-
 <p>
 <strong>Jina:</strong>
 ${escapeHTML(name)}
@@ -2715,12 +2527,10 @@ ${escapeHTML(currentUser.email)}
 <strong>Simu:</strong>
 ${escapeHTML(phone)}
 </p>
-
 `;
 
 
 await loadBuyerOrders();
-
 await loadSellerOrders();
 
 
@@ -2736,11 +2546,22 @@ error
 }
 
 
-/* =========================
-PLACE ORDER
-========================= */
+/* ==================================================
+   PLACE ORDER
+================================================== */
 
 async function placeOrder(productId){
+
+if(!supabaseClient){
+
+alert(
+"PLAM bado inaunganisha mfumo."
+);
+
+return;
+
+}
+
 
 try{
 
@@ -2757,7 +2578,7 @@ return;
 }
 
 
-const product =
+const product=
 allProducts.find(function(item){
 
 return String(
@@ -2778,17 +2599,15 @@ return;
 }
 
 
-const buyerName =
+const buyerName=
 currentUser.user_metadata?.full_name ||
 currentUser.email;
 
-
-const buyerPhone =
+const buyerPhone=
 currentUser.user_metadata?.phone ||
 "";
 
-
-const sellerPhone =
+const sellerPhone=
 formatPhone(product.phone);
 
 
@@ -2826,14 +2645,13 @@ formatPhone(buyerPhone),
 buyer_email:
 currentUser.email,
 
-status:
-"pending"
+status:"pending"
 
 };
 
 
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("orders")
 .insert([orderData]);
 
@@ -2859,7 +2677,6 @@ alert(
 "✅ Oda yako imetumwa kwa muuzaji."
 );
 
-
 await loadBuyerOrders();
 
 
@@ -2880,30 +2697,28 @@ alert(
 }
 
 
-/* =========================
-BUYER ORDERS
-========================= */
+/* ==================================================
+   BUYER ORDERS
+================================================== */
 
 async function loadBuyerOrders(){
 
-if(!currentUser){
-return;
-}
+if(
+!supabaseClient ||
+!currentUser
+)return;
 
 
-const container =
+const container=
 document.getElementById("buyerOrdersList");
 
-
-if(!container){
-return;
-}
+if(!container)return;
 
 
 try{
 
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("orders")
 .select("*")
 .eq(
@@ -2914,11 +2729,6 @@ currentUser.email
 
 if(result.error){
 
-console.error(
-"BUYER ORDERS ERROR:",
-result.error
-);
-
 container.innerHTML=
 "<p>Oda hazijaweza kupakiwa.</p>";
 
@@ -2927,8 +2737,18 @@ return;
 }
 
 
-const data =
+const data=
 result.data || [];
+
+
+if(data.length===0){
+
+container.innerHTML=
+"<p>Huna oda bado.</p>";
+
+return;
+
+}
 
 
 data.sort(function(a,b){
@@ -2942,16 +2762,6 @@ a.created_at || 0
 );
 
 });
-
-
-if(data.length===0){
-
-container.innerHTML=
-"<p>Huna oda bado.</p>";
-
-return;
-
-}
 
 
 container.innerHTML=
@@ -2996,28 +2806,25 @@ container.innerHTML=
 }
 
 
-/* =========================
-SELLER ORDERS
-========================= */
+/* ==================================================
+   SELLER ORDERS
+================================================== */
 
 async function loadSellerOrders(){
 
-if(!currentUser){
-return;
-}
+if(
+!supabaseClient ||
+!currentUser
+)return;
 
 
-const sellerPhone =
+const sellerPhone=
 currentUser.user_metadata?.phone;
 
-
-const container =
+const container=
 document.getElementById("sellerOrdersList");
 
-
-if(!container){
-return;
-}
+if(!container)return;
 
 
 if(!sellerPhone){
@@ -3032,26 +2839,17 @@ return;
 
 try{
 
-const possiblePhone =
-formatPhone(sellerPhone);
-
-
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("orders")
 .select("*")
 .eq(
 "seller_phone",
-possiblePhone
+formatPhone(sellerPhone)
 );
 
 
 if(result.error){
-
-console.error(
-"SELLER ORDERS ERROR:",
-result.error
-);
 
 container.innerHTML=
 "<p>Oda za muuzaji hazijaweza kupakiwa.</p>";
@@ -3061,21 +2859,8 @@ return;
 }
 
 
-const data =
+const data=
 result.data || [];
-
-
-data.sort(function(a,b){
-
-return new Date(
-b.created_at || 0
-)
--
-new Date(
-a.created_at || 0
-);
-
-});
 
 
 if(data.length===0){
@@ -3091,7 +2876,7 @@ return;
 container.innerHTML=
 data.map(function(order){
 
-const orderId =
+const orderId=
 order.id ??
 order.Id ??
 "";
@@ -3163,50 +2948,37 @@ container.innerHTML=
 }
 
 
-/* =========================
-UPDATE ORDER BUTTON
-========================= */
+/* ==================================================
+   UPDATE ORDER
+================================================== */
 
-function updateOrderFromButton(
-button,
-status
-){
+function updateOrderFromButton(button,status){
 
-const id =
-button.getAttribute(
-"data-order-id"
-);
-
+const id=
+button.getAttribute("data-order-id");
 
 if(!id){
 
-alert(
-"Oda hii haina ID."
-);
+alert("Oda hii haina ID.");
 
 return;
 
 }
-
 
 updateOrder(id,status);
 
 }
 
 
-/* =========================
-UPDATE ORDER
-========================= */
+async function updateOrder(id,status){
 
-async function updateOrder(
-id,
-status
-){
+if(!supabaseClient)return;
+
 
 try{
 
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("orders")
 .update({
 status:status
@@ -3216,10 +2988,7 @@ status:status
 
 if(result.error){
 
-alert(
-result.error.message
-);
-
+alert(result.error.message);
 return;
 
 }
@@ -3235,7 +3004,6 @@ status==="accepted"
 
 
 await loadSellerOrders();
-
 await loadBuyerOrders();
 
 
@@ -3250,21 +3018,29 @@ error.message || error
 }
 
 
-/* =========================
-ADMIN LOGIN
-========================= */
+/* ==================================================
+   ADMIN LOGIN
+================================================== */
 
 async function adminLogin(){
 
-const email =
-document
-.getElementById("adminEmail")
+if(!supabaseClient){
+
+alert(
+"PLAM bado inaunganisha mfumo."
+);
+
+return;
+
+}
+
+
+const email=
+document.getElementById("adminEmail")
 .value.trim();
 
-
-const password =
-document
-.getElementById("adminPassword")
+const password=
+document.getElementById("adminPassword")
 .value;
 
 
@@ -3290,12 +3066,11 @@ return;
 }
 
 
-const result =
-await supabase.auth
+const result=
+await supabaseClient.auth
 .signInWithPassword({
 
 email:email,
-
 password:password
 
 });
@@ -3304,7 +3079,6 @@ password:password
 if(result.error){
 
 alert(result.error.message);
-
 return;
 
 }
@@ -3313,7 +3087,6 @@ return;
 document
 .getElementById("adminLoginBox")
 .classList.add("hidden");
-
 
 document
 .getElementById("adminDashboard")
@@ -3325,55 +3098,48 @@ await loadAdmin();
 }
 
 
-/* =========================
-ADMIN
-========================= */
+/* ==================================================
+   ADMIN
+================================================== */
 
 async function loadAdmin(){
 
 await loadAdminStats();
-
 await loadAdminProducts();
-
 await loadAdminOrders();
-
 await loadAdminUsers();
 
 }
 
 
-/* =========================
-ADMIN STATS
-========================= */
-
 async function loadAdminStats(){
 
-const stats =
+const stats=
 document.getElementById("adminStats");
+
+if(!supabaseClient)return;
 
 
 try{
 
-const products =
-await supabase
+const products=
+await supabaseClient
 .from("Production")
 .select("*",{
 count:"exact",
 head:true
 });
 
-
-const orders =
-await supabase
+const orders=
+await supabaseClient
 .from("orders")
 .select("*",{
 count:"exact",
 head:true
 });
 
-
-const users =
-await supabase
+const users=
+await supabaseClient
 .from("profiles")
 .select("*",{
 count:"exact",
@@ -3383,29 +3149,22 @@ head:true
 
 stats.innerHTML=
 `
-
 <p>
 🛍️ Bidhaa:
-<strong>
-${products.count || 0}
-</strong>
+<strong>${products.count || 0}</strong>
 </p>
 
 <p>
 📦 Oda:
-<strong>
-${orders.count || 0}
-</strong>
+<strong>${orders.count || 0}</strong>
 </p>
 
 <p>
 👥 Watumiaji:
-<strong>
-${users.count || 0}
-</strong>
+<strong>${users.count || 0}</strong>
 </p>
-
 `;
+
 
 }catch(error){
 
@@ -3417,18 +3176,20 @@ stats.innerHTML=
 }
 
 
-/* =========================
-ADMIN PRODUCTS
-========================= */
+/* ==================================================
+   ADMIN PRODUCTS
+================================================== */
 
 async function loadAdminProducts(){
 
-const box =
+const box=
 document.getElementById("adminProducts");
 
+if(!supabaseClient)return;
 
-const result =
-await supabase
+
+const result=
+await supabaseClient
 .from("Production")
 .select("*");
 
@@ -3443,7 +3204,7 @@ return;
 }
 
 
-const data =
+const data=
 result.data || [];
 
 
@@ -3460,7 +3221,7 @@ return;
 box.innerHTML=
 data.map(function(product){
 
-const id =
+const id=
 product.id ??
 product.Id ??
 "";
@@ -3502,39 +3263,27 @@ onclick="deleteProductFromButton(this)"
 }
 
 
-/* =========================
-DELETE PRODUCT BUTTON
-========================= */
-
 function deleteProductFromButton(button){
 
-const id =
-button.getAttribute(
-"data-product-id"
-);
-
+const id=
+button.getAttribute("data-product-id");
 
 if(!id){
 
-alert(
-"Bidhaa hii haina ID."
-);
-
+alert("Bidhaa hii haina ID.");
 return;
 
 }
-
 
 deleteProduct(id);
 
 }
 
 
-/* =========================
-DELETE PRODUCT
-========================= */
-
 async function deleteProduct(id){
+
+if(!supabaseClient)return;
+
 
 if(!confirm(
 "Una uhakika unataka kufuta bidhaa hii?"
@@ -3545,8 +3294,8 @@ return;
 }
 
 
-const result =
-await supabase
+const result=
+await supabaseClient
 .from("Production")
 .delete()
 .eq("id",id);
@@ -3554,10 +3303,7 @@ await supabase
 
 if(result.error){
 
-alert(
-result.error.message
-);
-
+alert(result.error.message);
 return;
 
 }
@@ -3569,24 +3315,25 @@ alert(
 
 
 await loadProducts();
-
 await loadAdminProducts();
 
 }
 
 
-/* =========================
-ADMIN ORDERS
-========================= */
+/* ==================================================
+   ADMIN ORDERS
+================================================== */
 
 async function loadAdminOrders(){
 
-const box =
+const box=
 document.getElementById("adminOrders");
 
+if(!supabaseClient)return;
 
-const result =
-await supabase
+
+const result=
+await supabaseClient
 .from("orders")
 .select("*");
 
@@ -3601,7 +3348,7 @@ return;
 }
 
 
-const data =
+const data=
 result.data || [];
 
 
@@ -3652,18 +3399,20 @@ ${escapeHTML(order.status)}
 }
 
 
-/* =========================
-ADMIN USERS
-========================= */
+/* ==================================================
+   ADMIN USERS
+================================================== */
 
 async function loadAdminUsers(){
 
-const box =
+const box=
 document.getElementById("adminUsers");
 
+if(!supabaseClient)return;
 
-const result =
-await supabase
+
+const result=
+await supabaseClient
 .from("profiles")
 .select("*");
 
@@ -3678,7 +3427,7 @@ return;
 }
 
 
-const data =
+const data=
 result.data || [];
 
 
@@ -3706,13 +3455,11 @@ user.full_name || "Mtumiaji"
 </strong>
 
 <p>
-📞
-${escapeHTML(user.phone || "")}
+📞 ${escapeHTML(user.phone || "")}
 </p>
 
 <p>
-✉️
-${escapeHTML(user.email || "")}
+✉️ ${escapeHTML(user.email || "")}
 </p>
 
 </div>
@@ -3724,18 +3471,23 @@ ${escapeHTML(user.email || "")}
 }
 
 
-/* =========================
-AUTH LISTENER
-========================= */
+/* ==================================================
+   AUTH LISTENER
+================================================== */
 
-supabase.auth.onAuthStateChange(
+function setupAuthListener(){
+
+if(!supabaseClient)return;
+
+
+supabaseClient.auth.onAuthStateChange(
 function(event,session){
 
-currentUser =
+currentUser=
 session?.user || null;
 
 
-const account =
+const account=
 document.getElementById("account");
 
 
@@ -3748,32 +3500,66 @@ setTimeout(
 function(){
 checkUser();
 },
-0
+100
 );
 
 }
 
 });
 
+}
 
-/* =========================
-START PLAM
-========================= */
+
+/* ==================================================
+   START PLAM
+================================================== */
 
 async function startPLAM(){
 
-try{
+/*
+  Muhimu:
+  Vitufe vimeshawekwa kama functions
+  za global, hivyo havitategemea
+  Supabase kuanza.
+*/
 
 loadRegions();
 
-}catch(error){
 
-console.error(
-"REGIONS ERROR:",
-error
-);
+const connected=
+initSupabase();
+
+
+if(!connected){
+
+const products=
+document.getElementById("products");
+
+if(products){
+
+products.innerHTML=
+`
+<div class="error-box">
+
+⚠️ Mfumo wa bidhaa haujaunganishwa bado.
+
+<br><br>
+
+Lakini unaweza kutumia
+vitufe vya Home, Tafuta, Weka,
+Akaunti na Admin.
+
+</div>
+`;
 
 }
+
+return;
+
+}
+
+
+setupAuthListener();
 
 
 try{
@@ -3783,7 +3569,7 @@ await loadProducts();
 }catch(error){
 
 console.error(
-"PRODUCTS ERROR:",
+"START PRODUCTS ERROR:",
 error
 );
 
@@ -3797,7 +3583,7 @@ await checkUser();
 }catch(error){
 
 console.error(
-"USER ERROR:",
+"START USER ERROR:",
 error
 );
 
@@ -3806,7 +3592,9 @@ error
 }
 
 
-/* START */
+/* ==================================================
+   START
+================================================== */
 
 startPLAM();
 
