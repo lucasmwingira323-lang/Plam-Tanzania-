@@ -883,4 +883,441 @@ function displayProducts(
 
   let list =
     Array.isArray(products)
-   
+    ? [...products]
+    : [];
+
+
+  /*
+    Sponsored first
+  */
+
+  if(settings.sponsored_enabled){
+
+    list.sort(
+      function(a,b){
+
+        const aSponsored =
+          a.ad_status === "sponsored";
+
+        const bSponsored =
+          b.ad_status === "sponsored";
+
+
+        return (
+          Number(bSponsored) -
+          Number(aSponsored)
+        );
+
+      }
+    );
+
+  }
+
+
+  if(list.length === 0){
+
+    box.innerHTML =
+      `<div class="empty">
+        📦 Hakuna bidhaa zilizopatikana.
+      </div>`;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    list
+    .map(createProductCard)
+    .join("");
+
+}
+
+
+/* =================================
+   PRODUCT CARD
+================================= */
+
+function createProductCard(p){
+
+  const name =
+    p.name ||
+    p.Name ||
+    "Bidhaa";
+
+
+  const price =
+    p.Price ??
+    p.price ??
+    0;
+
+
+  const category =
+    p.Category ||
+    p.category ||
+    "";
+
+
+  const place =
+    p.Place ||
+    p.place ||
+    "";
+
+
+  const description =
+    p.Description ||
+    p.description ||
+    "";
+
+
+  const phone =
+    p.phone ||
+    p.sellerPhone ||
+    p.seller_phone ||
+    "";
+
+
+  const sponsored =
+    settings.sponsored_enabled &&
+    p.ad_status === "sponsored";
+
+
+  const safePhone =
+    formatPhone(
+      phone
+    );
+
+
+  return `
+
+    <div class="card
+      ${sponsored ? "sponsored" : ""}">
+
+      ${
+        sponsored
+
+        ? `<div class="badge">
+             ⭐ SPONSORED
+           </div>`
+
+        : ""
+      }
+
+
+      <h2>
+        ${escapeHTML(name)}
+      </h2>
+
+
+      <div class="price">
+
+        TSh
+        ${Number(price || 0)
+          .toLocaleString()}
+
+      </div>
+
+
+      ${
+        category
+
+        ? `<p>
+             📂 ${escapeHTML(category)}
+           </p>`
+
+        : ""
+      }
+
+
+      ${
+        place
+
+        ? `<p>
+             📍 ${escapeHTML(place)}
+           </p>`
+
+        : ""
+      }
+
+
+      ${
+        description
+
+        ? `<p>
+             ${escapeHTML(description)}
+           </p>`
+
+        : ""
+      }
+
+
+      ${
+        phone
+
+        ? `
+
+        <p>
+          📞 ${escapeHTML(phone)}
+        </p>
+
+
+        <button
+          class="call"
+          onclick="callSeller('${safePhone}')">
+
+          📞 Piga Simu
+
+        </button>
+
+
+        <button
+          class="whatsapp"
+          onclick="openWhatsApp('${safePhone}')">
+
+          💬 WhatsApp
+
+        </button>
+
+        `
+
+        : ""
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =================================
+   FORMAT PHONE
+================================= */
+
+function formatPhone(
+  phone
+){
+
+  let value =
+    String(phone || "")
+    .replace(/\D/g,"");
+
+
+  if(value.startsWith("0")){
+
+    value =
+      "255" +
+      value.substring(1);
+
+  }
+
+
+  if(value.startsWith("255")){
+
+    return value;
+
+  }
+
+
+  return value;
+
+}
+
+
+/* =================================
+   CALL SELLER
+================================= */
+
+function callSeller(
+  phone
+){
+
+  if(!phone){
+
+    alert(
+      "Namba ya muuzaji haipo."
+    );
+
+    return;
+
+  }
+
+
+  window.location.href =
+    "tel:+" + phone;
+
+}
+
+
+/* =================================
+   WHATSAPP
+================================= */
+
+function openWhatsApp(
+  phone
+){
+
+  if(!phone){
+
+    alert(
+      "Namba ya muuzaji haipo."
+    );
+
+    return;
+
+  }
+
+
+  window.open(
+
+    "https://wa.me/" +
+    phone,
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =================================
+   ADMIN
+================================= */
+
+function showAdmin(){
+
+  document
+    .getElementById(
+      "adminPanel"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  window.scrollTo({
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/* =================================
+   HOME
+================================= */
+
+function showHome(){
+
+  document
+    .getElementById(
+      "adminPanel"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/* =================================
+   SEARCH BUTTON
+================================= */
+
+function focusSearch(){
+
+  showHome();
+
+
+  const input =
+    document.getElementById(
+      "search"
+    );
+
+
+  input.focus();
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/* =================================
+   ESCAPE HTML
+================================= */
+
+function escapeHTML(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =================================
+   START
+================================= */
+
+async function startPLAM(){
+
+  await loadSettings();
+
+  await loadProducts();
+
+}
+
+
+startPLAM();
+
+</script>
+
+</body>
+</html>
