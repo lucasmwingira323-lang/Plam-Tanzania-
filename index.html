@@ -127,6 +127,7 @@ button{
   align-items:center;
   padding:15px 0;
   border-bottom:1px solid #eee;
+  gap:10px;
 }
 
 .switch button{
@@ -143,6 +144,24 @@ button{
   color:white;
 }
 
+.error{
+  background:#fff0f0;
+  color:#b00020;
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
+  font-size:13px;
+}
+
+.success{
+  background:#eaf8ef;
+  color:#0b6b3a;
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
+  font-size:13px;
+}
+
 nav{
   position:fixed;
   bottom:0;
@@ -153,6 +172,7 @@ nav{
   display:flex;
   justify-content:space-around;
   padding:8px;
+  z-index:1000;
 }
 
 nav button{
@@ -163,6 +183,25 @@ nav button{
 
 main{
   padding-bottom:75px;
+}
+
+.empty{
+  background:white;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+}
+
+.loading{
+  background:white;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+}
+
+.small{
+  font-size:12px;
+  color:#666;
 }
 </style>
 </head>
@@ -175,64 +214,131 @@ main{
 </header>
 
 <main>
+
 <div class="container">
 
   <input
     id="search"
     class="search"
+    type="search"
     placeholder="🔎 Tafuta bidhaa..."
-    oninput="loadProducts()"
+    oninput="filterProducts()"
   >
 
   <div class="status">
+
     <b>PLAM V2</b><br>
-    Malipo: <span id="paymentStatus">Inapakia...</span><br>
-    Sponsored Ads: <span id="sponsoredStatus">Inapakia...</span>
+
+    Malipo:
+    <span id="paymentStatus">
+      Inapakia...
+    </span>
+
+    <br>
+
+    Sponsored Ads:
+    <span id="sponsoredStatus">
+      Inapakia...
+    </span>
+
   </div>
+
+  <div id="message"></div>
 
   <div id="products">
-    Inapakia bidhaa...
+    <div class="loading">
+      Inapakia bidhaa...
+    </div>
   </div>
 
-  <section id="adminPanel" class="panel hidden">
+
+  <section
+    id="adminPanel"
+    class="panel hidden"
+  >
+
     <h2>⚙️ PLAM Admin</h2>
 
     <div class="switch">
+
       <span>
         <b>💰 Mfumo wa Malipo</b><br>
-        <small>Washa ili kuanza malipo baadaye.</small>
+        <small>
+          Washa ili kuanza malipo baadaye.
+        </small>
       </span>
-      <button id="paymentBtn" onclick="togglePayment()">
+
+      <button
+        id="paymentBtn"
+        class="off"
+        onclick="togglePayment()"
+      >
         OFF
       </button>
+
     </div>
+
 
     <div class="switch">
+
       <span>
         <b>⭐ Sponsored Ads</b><br>
-        <small>Washa ili kuanza matangazo maalum.</small>
+        <small>
+          Washa ili kuanza matangazo maalum.
+        </small>
       </span>
-      <button id="sponsoredBtn" onclick="toggleSponsored()">
+
+      <button
+        id="sponsoredBtn"
+        class="off"
+        onclick="toggleSponsored()"
+      >
         OFF
       </button>
+
     </div>
 
+
     <p>
-      <b>Kwa sasa:</b> mifumo yote imewekwa OFF.
+      <b>Kwa sasa:</b>
+      mifumo yote imewekwa OFF.
       Hakuna malipo yatakayodaiwa.
     </p>
+
+    <p class="small">
+      PLAM V2 - mfumo wa maandalizi ya Payment
+      na Sponsored Ads.
+    </p>
+
   </section>
 
 </div>
+
 </main>
 
+
 <nav>
-  <button onclick="showHome()">🏠 Mwanzo</button>
-  <button onclick="loadProducts()">🔎 Tafuta</button>
-  <button onclick="showAdmin()">⚙️ Admin</button>
+
+  <button onclick="showHome()">
+    🏠 Mwanzo
+  </button>
+
+  <button onclick="focusSearch()">
+    🔎 Tafuta
+  </button>
+
+  <button onclick="showAdmin()">
+    ⚙️ Admin
+  </button>
+
 </nav>
 
+
 <script>
+
+/* =================================
+   SUPABASE
+================================= */
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -241,434 +347,540 @@ const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
 const supabaseClient =
-supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =================================
+   SETTINGS
+================================= */
 
 let settings = {
+
   payment_enabled:false,
+
   sponsored_enabled:false
+
 };
 
 
-/* =========================
+/* =================================
+   PRODUCTS CACHE
+================================= */
+
+let allProducts = [];
+
+
+/* =================================
+   MESSAGE
+================================= */
+
+function showMessage(
+  text,
+  type="success"
+){
+
+  const box =
+    document.getElementById("message");
+
+  box.innerHTML =
+    `<div class="${type}">
+      ${escapeHTML(text)}
+    </div>`;
+
+}
+
+
+/* =================================
    LOAD SETTINGS
-========================= */
+================================= */
 
 async function loadSettings(){
 
-  const {data,error} =
-    await supabaseClient
-    .from("PLAM_Settings")
-    .select("*")
-    .eq("id",1)
-    .maybeSingle();
+  try{
 
-  if(error){
+    const result =
+      await supabaseClient
+      .from("PLAM_Settings")
+      .select("*")
+      .eq("id",1)
+      .maybeSingle();
+
+    const data =
+      result.data;
+
+    const error =
+      result.error;
+
+
+    if(error){
+
+      console.log(
+        "SETTINGS ERROR:",
+        error
+      );
+
+      setDefaultSettings();
+
+      return;
+
+    }
+
+
+    if(data){
+
+      settings = {
+
+        payment_enabled:
+          data.payment_enabled === true,
+
+        sponsored_enabled:
+          data.sponsored_enabled === true
+
+      };
+
+    }
+
+
+    updateSettingsUI();
+
+  }catch(error){
+
     console.log(error);
+
     setDefaultSettings();
-    return;
+
   }
 
-  if(data){
-    settings = data;
-  }
-
-  updateSettingsUI();
 }
 
 
-/* =========================
+/* =================================
    DEFAULT SETTINGS
-========================= */
+================================= */
 
 function setDefaultSettings(){
 
-  settings.payment_enabled=false;
-  settings.sponsored_enabled=false;
+  settings = {
+
+    payment_enabled:false,
+
+    sponsored_enabled:false
+
+  };
 
   updateSettingsUI();
+
 }
 
 
-/* =========================
-   UPDATE UI
-========================= */
+/* =================================
+   SETTINGS UI
+================================= */
 
 function updateSettingsUI(){
 
-  document.getElementById("paymentStatus").textContent =
-    settings.payment_enabled ? "🟢 ON" : "🔴 OFF";
+  const paymentStatus =
+    document.getElementById(
+      "paymentStatus"
+    );
 
-  document.getElementById("sponsoredStatus").textContent =
-    settings.sponsored_enabled ? "🟢 ON" : "🔴 OFF";
+  const sponsoredStatus =
+    document.getElementById(
+      "sponsoredStatus"
+    );
 
   const paymentBtn =
-    document.getElementById("paymentBtn");
+    document.getElementById(
+      "paymentBtn"
+    );
 
   const sponsoredBtn =
-    document.getElementById("sponsoredBtn");
+    document.getElementById(
+      "sponsoredBtn"
+    );
+
+
+  paymentStatus.textContent =
+    settings.payment_enabled
+    ? "🟢 ON"
+    : "🔴 OFF";
+
+
+  sponsoredStatus.textContent =
+    settings.sponsored_enabled
+    ? "🟢 ON"
+    : "🔴 OFF";
+
 
   paymentBtn.textContent =
-    settings.payment_enabled ? "ON" : "OFF";
+    settings.payment_enabled
+    ? "ON"
+    : "OFF";
+
 
   sponsoredBtn.textContent =
-    settings.sponsored_enabled ? "ON" : "OFF";
+    settings.sponsored_enabled
+    ? "ON"
+    : "OFF";
+
 
   paymentBtn.className =
-    settings.payment_enabled ? "on" : "off";
+    settings.payment_enabled
+    ? "on"
+    : "off";
+
 
   sponsoredBtn.className =
-    settings.sponsored_enabled ? "on" : "off";
+    settings.sponsored_enabled
+    ? "on"
+    : "off";
+
 }
 
 
-/* =========================
-   PAYMENT SWITCH
-========================= */
+/* =================================
+   PAYMENT TOGGLE
+================================= */
 
 async function togglePayment(){
 
   const newValue =
     !settings.payment_enabled;
 
+
   const {error} =
     await supabaseClient
     .from("PLAM_Settings")
     .update({
+
       payment_enabled:newValue,
-      updated_at:new Date().toISOString()
+
+      updated_at:
+        new Date().toISOString()
+
     })
     .eq("id",1);
 
+
   if(error){
-    alert("Imeshindikana kubadilisha Payment.");
-    console.log(error);
+
+    console.log(
+      "PAYMENT UPDATE ERROR:",
+      error
+    );
+
+    showMessage(
+      "Imeshindikana kubadilisha Payment. " +
+      error.message,
+      "error"
+    );
+
     return;
+
   }
 
-  settings.payment_enabled=newValue;
+
+  settings.payment_enabled =
+    newValue;
+
 
   updateSettingsUI();
 
-  alert(
+
+  showMessage(
+
     newValue
     ? "Payment sasa iko ON."
-    : "Payment sasa iko OFF."
+    : "Payment sasa iko OFF.",
+
+    "success"
+
   );
+
 }
 
 
-/* =========================
-   SPONSORED SWITCH
-========================= */
+/* =================================
+   SPONSORED TOGGLE
+================================= */
 
 async function toggleSponsored(){
 
   const newValue =
     !settings.sponsored_enabled;
 
+
   const {error} =
     await supabaseClient
     .from("PLAM_Settings")
     .update({
+
       sponsored_enabled:newValue,
-      updated_at:new Date().toISOString()
+
+      updated_at:
+        new Date().toISOString()
+
     })
     .eq("id",1);
 
+
   if(error){
-    alert("Imeshindikana kubadilisha Sponsored Ads.");
-    console.log(error);
+
+    console.log(
+      "SPONSORED UPDATE ERROR:",
+      error
+    );
+
+    showMessage(
+      "Imeshindikana kubadilisha Sponsored Ads. " +
+      error.message,
+      "error"
+    );
+
     return;
+
   }
 
-  settings.sponsored_enabled=newValue;
+
+  settings.sponsored_enabled =
+    newValue;
+
 
   updateSettingsUI();
 
-  alert(
+
+  showMessage(
+
     newValue
     ? "Sponsored Ads sasa iko ON."
-    : "Sponsored Ads sasa iko OFF."
+    : "Sponsored Ads sasa iko OFF.",
+
+    "success"
+
   );
 
-  loadProducts();
+
+  displayProducts(
+    allProducts
+  );
+
 }
 
 
-/* =========================
+/* =================================
    LOAD PRODUCTS
-========================= */
+================================= */
 
 async function loadProducts(){
 
   const box =
-    document.getElementById("products");
+    document.getElementById(
+      "products"
+    );
+
 
   box.innerHTML =
-    "Inapakia bidhaa...";
+    `<div class="loading">
+      Inapakia bidhaa...
+    </div>`;
 
-  const search =
-    document.getElementById("search").value
-    .trim()
-    .toLowerCase();
 
-  const {data,error} =
-    await supabaseClient
-    .from("Production")
-    .select("*")
-    .order("Created at",{ascending:false});
+  try{
 
-  if(error){
+    /*
+      Tunatumia Id badala ya
+      Created at ili kuepuka tatizo
+      la jina lenye nafasi.
+    */
+
+    let result =
+      await supabaseClient
+      .from("Production")
+      .select("*")
+      .order(
+        "Id",
+        {
+          ascending:false
+        }
+      );
+
+
+    /*
+      Kama Id haikubali,
+      tunajaribu bila order.
+    */
+
+    if(result.error){
+
+      console.log(
+        "ORDER ERROR:",
+        result.error
+      );
+
+
+      result =
+        await supabaseClient
+        .from("Production")
+        .select("*");
+
+    }
+
+
+    if(result.error){
+
+      console.log(
+        "PRODUCT ERROR:",
+        result.error
+      );
+
+
+      box.innerHTML =
+        `<div class="empty">
+
+          <b>Imeshindikana kupakia bidhaa.</b>
+
+          <div class="error">
+            ${escapeHTML(
+              result.error.message ||
+              "Kuna tatizo la Supabase."
+            )}
+          </div>
+
+        </div>`;
+
+      return;
+
+    }
+
+
+    allProducts =
+      result.data || [];
+
+
+    displayProducts(
+      allProducts
+    );
+
+
+  }catch(error){
 
     console.log(error);
 
-    box.innerHTML =
-      "<p>Imeshindikana kupakia bidhaa.</p>";
-
-    return;
-  }
-
-  let products =
-    data || [];
-
-  if(search){
-
-    products =
-      products.filter(p => {
-
-        const text =
-          [
-            p.name,
-            p.Category,
-            p.category,
-            p.Place,
-            p.place,
-            p.Description,
-            p.description
-          ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-
-        return text.includes(search);
-      });
-  }
-
-
-  /* Sponsored first */
-
-  if(settings.sponsored_enabled){
-
-    products.sort((a,b) => {
-
-      const aSponsored =
-        a.ad_status === "sponsored";
-
-      const bSponsored =
-        b.ad_status === "sponsored";
-
-      return Number(bSponsored) -
-             Number(aSponsored);
-    });
-  }
-
-
-  if(products.length === 0){
 
     box.innerHTML =
-      "<p>Hakuna bidhaa zilizopatikana.</p>";
+      `<div class="empty">
 
-    return;
+        <b>Imeshindikana kupakia bidhaa.</b>
+
+        <div class="error">
+          ${escapeHTML(
+            error.message ||
+            "Kosa lisilojulikana."
+          )}
+        </div>
+
+      </div>`;
+
   }
 
-
-  box.innerHTML =
-    products.map(createProductCard).join("");
 }
 
 
-/* =========================
-   PRODUCT CARD
-========================= */
+/* =================================
+   FILTER PRODUCTS
+================================= */
 
-function createProductCard(p){
+function filterProducts(){
 
-  const name =
-    p.name || "Bidhaa";
+  const input =
+    document.getElementById(
+      "search"
+    );
 
-  const price =
-    p.Price ?? p.price ?? 0;
 
-  const category =
-    p.Category ||
-    p.category ||
-    "";
+  const search =
+    input.value
+    .trim()
+    .toLowerCase();
 
-  const place =
-    p.Place ||
-    p.place ||
-    "";
 
-  const description =
-    p.Description ||
-    p.description ||
-    "";
+  if(!search){
 
-  const phone =
-    p.phone ||
-    p.sellerPhone ||
-    p.seller_phone ||
-    "";
+    displayProducts(
+      allProducts
+    );
 
-  const sponsored =
-    settings.sponsored_enabled &&
-    p.ad_status === "sponsored";
+    return;
 
-  const safePhone =
-    String(phone).replace(/\D/g,"");
+  }
 
-  return `
-    <div class="card ${sponsored ? "sponsored" : ""}">
 
-      ${
-        sponsored
-        ? `<div class="badge">⭐ SPONSORED</div>`
-        : ""
+  const filtered =
+    allProducts.filter(
+      function(p){
+
+        const text = [
+
+          p.name,
+
+          p.Name,
+
+          p.Category,
+
+          p.category,
+
+          p.Place,
+
+          p.place,
+
+          p.Description,
+
+          p.description,
+
+          p.phone,
+
+          p.sellerPhone,
+
+          p.seller_phone
+
+        ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+
+        return text.includes(
+          search
+        );
+
       }
-
-      <h2>${escapeHTML(name)}</h2>
-
-      <div class="price">
-        TSh ${Number(price).toLocaleString()}
-      </div>
-
-      <p>📂 ${escapeHTML(category)}</p>
-
-      <p>📍 ${escapeHTML(place)}</p>
-
-      <p>${escapeHTML(description)}</p>
-
-      ${
-        phone
-        ? `
-        <p>📞 ${escapeHTML(phone)}</p>
-
-        <button
-          class="call"
-          onclick="callSeller('${safePhone}')">
-          📞 Piga Simu
-        </button>
-
-        <button
-          class="whatsapp"
-          onclick="openWhatsApp('${safePhone}')">
-          💬 WhatsApp
-        </button>
-        `
-        : ""
-      }
-
-    </div>
-  `;
-}
+    );
 
 
-/* =========================
-   CALL
-========================= */
-
-function callSeller(phone){
-
-  if(!phone){
-
-    alert("Namba ya muuzaji haipo.");
-
-    return;
-  }
-
-  window.location.href =
-    "tel:+" + phone.replace(/^255/,"255");
-}
-
-
-/* =========================
-   WHATSAPP
-========================= */
-
-function openWhatsApp(phone){
-
-  if(!phone){
-
-    alert("Namba ya muuzaji haipo.");
-
-    return;
-  }
-
-  window.open(
-    "https://wa.me/" +
-    phone.replace(/^0/,"255"),
-    "_blank"
+  displayProducts(
+    filtered
   );
+
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+/* =================================
+   DISPLAY PRODUCTS
+================================= */
 
-function showAdmin(){
+function displayProducts(
+  products
+){
 
-  document
-    .getElementById("adminPanel")
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:"smooth"
-  });
-}
+  const box =
+    document.getElementById(
+      "products"
+    );
 
 
-/* =========================
-   HOME
-========================= */
-
-function showHome(){
-
-  document
-    .getElementById("adminPanel")
-    .classList.add("hidden");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* =========================
-   START
-========================= */
-
-loadSettings()
-.then(loadProducts);
-
-</script>
-
-</body>
-  </html>
+  let list =
+    Array.isArray(products)
+   
