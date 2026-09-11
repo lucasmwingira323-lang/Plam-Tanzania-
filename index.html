@@ -629,16 +629,12 @@ Toka
 
 </div>
 
-<!-- =========================
-     BIDHAA ZANGU
-========================= -->
-
 <div class="card">
 
 <h2>🛍️ Bidhaa Zangu</h2>
 
 <p>
-Hapa utaona bidhaa ulizoweka kwenye PLAM kwa kutumia namba yako ya simu.
+Hapa utaona bidhaa ulizoweka kwenye PLAM.
 </p>
 
 <button
@@ -660,7 +656,7 @@ Ingia kwenye akaunti kuona bidhaa zako.
 <h2>🛒 Maagizo Yangu</h2>
 
 <p>
-Hapa utaona hali ya bidhaa ulizoagiza.
+Hapa utaona maagizo yako na hali yake.
 </p>
 
 <button
@@ -682,7 +678,7 @@ Ingia kwenye akaunti kuona maagizo yako.
 <h2>🏪 Maagizo ya Wateja Wangu</h2>
 
 <p>
-Kama wewe ni muuzaji, hapa utaona maagizo ya bidhaa zako.
+Hapa utaona maagizo ya wateja walioagiza bidhaa zako.
 </p>
 
 <button
@@ -694,7 +690,7 @@ onclick="loadSellerOrders()"
 </button>
 
 <div id="sellerOrders">
-Ingia kwenye akaunti na hakikisha namba yako ya simu iko kwenye akaunti.
+Ingia kwenye akaunti kuona maagizo ya wateja.
 </div>
 
 </div>
@@ -1176,6 +1172,10 @@ reader.readAsDataURL(file);
 
 }
 
+/* =========================
+ADD PRODUCT
+========================= */
+
 async function addProduct(){
 
 const msg=document.getElementById("addMessage");
@@ -1184,6 +1184,24 @@ msg.innerHTML=
 '<div class="message">⏳ Inahifadhi bidhaa...</div>';
 
 try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+msg.innerHTML=
+`
+<div class="message">
+⚠️ Tafadhali fungua akaunti au ingia kwanza kabla ya kuweka bidhaa.
+</div>
+`;
+
+show("account");
+return;
+}
 
 const name=document.getElementById("name").value.trim();
 const price=document.getElementById("price").value;
@@ -1223,6 +1241,12 @@ let image2="";
 if(file1)image1=await compressImage(file1);
 if(file2)image2=await compressImage(file2);
 
+/*
+Sasa bidhaa inaunganishwa na akaunti
+ya muuzaji kupitia user_id.
+Status mpya ni pending.
+*/
+
 const result=
 await supabaseClient
 .from("Production")
@@ -1238,14 +1262,20 @@ phone:phone,
 description:description,
 image_url:image1||null,
 image_url_2:image2||null,
-status:"accepted"
+user_id:user.id,
+status:"pending"
 
 }]);
 
 if(result.error)throw result.error;
 
 msg.innerHTML=
-'<div class="message">✅ Bidhaa imewekwa PLAM na sasa inaonekana kwa wanunuzi.</div>';
+`
+<div class="message">
+✅ Bidhaa imehifadhiwa PLAM.<br><br>
+<b>Status: Pending</b>
+</div>
+`;
 
 document.getElementById("name").value="";
 document.getElementById("price").value="";
@@ -1259,6 +1289,7 @@ document.getElementById("region").value="";
 loadDistricts();
 
 await loadProducts();
+await loadMyProducts();
 
 }catch(error){
 
@@ -1272,6 +1303,10 @@ escapeHTML(error.message||String(error))+
 }
 
 }
+
+/* =========================
+LOAD PRODUCTS
+========================= */
 
 async function loadProducts(){
 
@@ -1458,6 +1493,10 @@ return String(value||"")
 
 }
 
+/* =========================
+SEARCH
+========================= */
+
 async function searchProducts(text){
 
 const box=
@@ -1562,13 +1601,59 @@ user.user_metadata?.full_name||
 user.email||
 "Mnunuzi";
 
-const buyerPhone=
+let buyerPhone=
 formatPhone(
 user.user_metadata?.phone||""
 );
 
+/*
+Kama phone haipo kwenye metadata,
+jaribu kuipata kwenye profiles.
+*/
+
+if(!buyerPhone){
+
+const profileResult=
+await supabaseClient
+.from("profiles")
+.select("phone")
+.eq("id",user.id)
+.maybeSingle();
+
+if(profileResult.data?.phone){
+buyerPhone=formatPhone(profileResult.data.phone);
+}
+
+}
+
 const sellerPhone=
 formatPhone(product.phone||"");
+
+/*
+Muhimu:
+Bidhaa mpya ina user_id.
+Kwa bidhaa za zamani ambazo user_id ni NULL,
+tunajaribu kumtafuta muuzaji kupitia phone.
+*/
+
+let sellerId=product.user_id||null;
+
+if(!sellerId && sellerPhone){
+
+const sellerResult=
+await supabaseClient
+.from("profiles")
+.select("id")
+.eq("phone",sellerPhone)
+.maybeSingle();
+
+if(!sellerResult.error && sellerResult.data?.id){
+
+sellerId=sellerResult.data.id;
+
+}
+
+}
 
 if(!sellerPhone){
 
@@ -1576,15 +1661,29 @@ alert("⚠️ Bidhaa hii haina namba ya muuzaji.");
 return;
 }
 
+if(!sellerId){
+
+alert(
+"⚠️ Bidhaa hii bado haijaunganishwa na akaunti ya muuzaji."
+);
+
+return;
+}
+
 const orderData={
 
 product_id:product.id,
 product_name:product.name,
+
+seller_id:sellerId,
+
 buyer_id:user.id,
 buyer_name:buyerName,
 buyer_phone:buyerPhone,
-buyer_email:user.email,
+buyer_email:user.email||"",
+
 seller_phone:sellerPhone,
+
 quantity:1,
 message:"",
 status:"pending"
@@ -1599,8 +1698,8 @@ await supabaseClient
 if(orderResult.error)throw orderResult.error;
 
 alert(
-"✅ Agizo limetumwa kwa muuzaji.\n\n"+
-"Hali ya sasa: 🟡 Bado hajafanya uamuzi."
+"✅ Order sent successfully.\n\n"+
+"Status: Pending"
 );
 
 await loadMyOrders();
@@ -1610,7 +1709,7 @@ await loadMyOrders();
 console.error("PLACE ORDER ERROR:",error);
 
 alert(
-"❌ Imeshindikana kutuma agizo.\n\n"+
+"❌ Imeshindikana kutuma order.\n\n"+
 (error.message||String(error))
 );
 
@@ -1618,23 +1717,29 @@ alert(
 
 }
 
+/* =========================
+STATUS - ENGLISH
+========================= */
+
 function statusHTML(status){
 
-if(status==="accepted"){
+const current=String(status||"pending").toLowerCase();
+
+if(current==="accepted"){
 
 return `
 <span class="status accepted">
-🟢 Muuzaji Amekubali
+🟢 Accepted
 </span>
 `;
 
 }
 
-if(status==="rejected"){
+if(current==="rejected"){
 
 return `
 <span class="status rejected">
-🔴 Muuzaji Amekataa
+🔴 Rejected
 </span>
 `;
 
@@ -1642,7 +1747,7 @@ return `
 
 return `
 <span class="status pending">
-🟡 Bado Hajafanya Uamuzi
+🟡 Pending
 </span>
 `;
 
@@ -1671,43 +1776,65 @@ box.innerHTML=
 return;
 }
 
-const sellerPhone=
-formatPhone(
-user.user_metadata?.phone||""
-);
-
-if(!sellerPhone){
-
-box.innerHTML=
-'<div class="message">⚠️ Akaunti yako haina namba ya simu iliyosajiliwa.</div>';
-
-return;
-}
-
 box.innerHTML=
 "⏳ Inapakia bidhaa zako...";
 
 try{
 
-const result=
+/*
+Kwanza tunatumia user_id.
+Hii ndiyo njia mpya na salama.
+*/
+
+let result=
 await supabaseClient
 .from("Production")
 .select("*")
-.eq("phone",sellerPhone)
+.eq("user_id",user.id)
 .order("created_at",{ascending:false});
 
 if(result.error)throw result.error;
 
-const products=result.data||[];
+let products=result.data||[];
+
+/*
+Kwa bidhaa za zamani ambazo user_id ni NULL,
+tunatumia phone kama fallback.
+*/
+
+if(!products.length){
+
+const sellerPhone=
+formatPhone(
+user.user_metadata?.phone||""
+);
+
+if(sellerPhone){
+
+const oldResult=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("phone",sellerPhone)
+.is("user_id",null)
+.order("created_at",{ascending:false});
+
+if(!oldResult.error){
+
+products=oldResult.data||[];
+
+}
+
+}
+
+}
 
 if(!products.length){
 
 box.innerHTML=
 `
 <div class="message">
-🛍️ Huna bidhaa ulizoweka kwa namba hii bado.
-<br><br>
-Ukiweka bidhaa kupitia PLAM, zitaonekana hapa.
+🛍️ Huna bidhaa ulizoweka bado.
 </div>
 `;
 
@@ -1765,6 +1892,12 @@ ${escapeHTML(p.place||"-")}
 
 📞 <b>Simu:</b>
 ${escapeHTML(p.phone||"-")}
+
+<br><br>
+
+<b>Status:</b>
+
+${statusHTML(p.status||"pending")}
 
 </div>
 
@@ -1851,52 +1984,31 @@ box.innerHTML="⏳ Inapakia maagizo...";
 
 try{
 
-const byId=
+/*
+Sasa tunatafuta orders kwa buyer_id tu.
+*/
+
+const ordersResult=
 await supabaseClient
 .from("orders")
 .select("*")
 .eq("buyer_id",user.id)
 .order("created_at",{ascending:false});
 
-const byEmail=
-await supabaseClient
-.from("orders")
-.select("*")
-.eq("buyer_email",user.email)
-.order("created_at",{ascending:false});
+if(ordersResult.error)throw ordersResult.error;
 
-if(byId.error&&byEmail.error){
-throw byId.error;
-}
+const orders=ordersResult.data||[];
 
-const merged=[
-...(byId.data||[]),
-...(byEmail.data||[])
-];
-
-const unique=
-Array.from(
-new Map(
-merged.map(function(o){
-return [String(o.id),o];
-})
-).values()
-);
-
-unique.sort(function(a,b){
-return new Date(b.created_at)-new Date(a.created_at);
-});
-
-if(!unique.length){
+if(!orders.length){
 
 box.innerHTML=
-'<div class="message">Hujawa na agizo lolote bado.</div>';
+'<div class="message">Hujawa na order lolote bado.</div>';
 
 return;
 }
 
 box.innerHTML=
-unique.map(function(o){
+orders.map(function(o){
 
 return `
 
@@ -1913,7 +2025,7 @@ ${Number(o.quantity||1)}
 
 <br><br>
 
-<b>Hali ya agizo:</b>
+<b>Status:</b>
 
 <br>
 
@@ -1982,34 +2094,29 @@ box.innerHTML=
 return;
 }
 
-const sellerPhone=
-formatPhone(
-user.user_metadata?.phone||""
-);
-
-if(!sellerPhone){
-
-box.innerHTML=
-'<div class="message">⚠️ Akaunti yako haina namba ya simu.</div>';
-
-return;
-}
-
 box.innerHTML=
 "⏳ Inapakia maagizo ya wateja...";
 
 try{
 
-const result=
+/*
+Muhimu:
+Seller anaona orders ambazo seller_id
+inalingana na account yake.
+*/
+
+const ordersResult=
 await supabaseClient
 .from("orders")
 .select("*")
-.eq("seller_phone",sellerPhone)
+.eq("seller_id",user.id)
 .order("created_at",{ascending:false});
 
-if(result.error)throw result.error;
+if(ordersResult.error)throw ordersResult.error;
 
-if(!result.data?.length){
+const orders=ordersResult.data||[];
+
+if(!orders.length){
 
 box.innerHTML=
 '<div class="message">Hakuna maagizo ya wateja kwa bidhaa zako bado.</div>';
@@ -2018,7 +2125,7 @@ return;
 }
 
 box.innerHTML=
-result.data.map(function(o){
+orders.map(function(o){
 
 return `
 
@@ -2030,12 +2137,12 @@ return `
 
 <br><br>
 
-👤 <b>Mnunuzi:</b>
+👤 <b>Buyer:</b>
 ${escapeHTML(o.buyer_name||"-")}
 
 <br>
 
-📞 <b>Simu:</b>
+📞 <b>Phone:</b>
 ${escapeHTML(o.buyer_phone||"-")}
 
 <br>
@@ -2045,12 +2152,14 @@ ${escapeHTML(o.buyer_email||"-")}
 
 <br>
 
-📦 <b>Idadi:</b>
+📦 <b>Quantity:</b>
 ${Number(o.quantity||1)}
 
 <br><br>
 
-<b>Hali:</b>
+<b>Status:</b>
+
+<br>
 
 ${statusHTML(o.status)}
 
@@ -2066,7 +2175,7 @@ o.message
 ?
 `
 <br><br>
-💬 <b>Ujumbe wa mnunuzi:</b><br>
+💬 <b>Buyer message:</b><br>
 ${escapeHTML(o.message)}
 `
 :""
@@ -2084,7 +2193,7 @@ type="button"
 class="order"
 onclick="sellerOrderStatus(${Number(o.id)},'accepted')"
 >
-✅ Kubali
+✅ Accept
 </button>
 
 <button
@@ -2092,7 +2201,7 @@ type="button"
 class="red"
 onclick="sellerOrderStatus(${Number(o.id)},'rejected')"
 >
-❌ Kataa
+❌ Reject
 </button>
 
 </div>
@@ -2123,6 +2232,10 @@ escapeHTML(error.message||String(error))+
 
 }
 
+/* =========================
+SELLER CHANGE ORDER STATUS
+========================= */
+
 async function sellerOrderStatus(id,status){
 
 const result=
@@ -2136,35 +2249,41 @@ alert("Tafadhali ingia kwanza.");
 return;
 }
 
-const sellerPhone=
-formatPhone(
-user.user_metadata?.phone||""
-);
+if(status!=="accepted"&&status!=="rejected"){
+
+alert("Invalid status.");
+return;
+}
 
 try{
 
-const result=
+const updateResult=
 await supabaseClient
 .from("orders")
 .update({
 status:status
 })
 .eq("id",id)
-.eq("seller_phone",sellerPhone);
+.eq("seller_id",user.id);
 
-if(result.error)throw result.error;
+if(updateResult.error)throw updateResult.error;
 
 alert(
 status==="accepted"
 ?
-"✅ Agizo limekubaliwa."
+"✅ Order accepted successfully."
 :
-"❌ Agizo limekataliwa."
+"❌ Order rejected successfully."
 );
 
 await loadSellerOrders();
 
 }catch(error){
+
+console.error(
+"SELLER ORDER STATUS ERROR:",
+error
+);
 
 alert(
 "❌ "+
@@ -2227,7 +2346,7 @@ phone:formattedPhone
 
 if(result.error)throw result.error;
 
-if(result.data?.session&&result.data?.user){
+if(result.data?.user){
 
 await supabaseClient
 .from("profiles")
@@ -2505,6 +2624,11 @@ class="admin-product-image"
 📞 ${escapeHTML(p.phone||"-")}
 </p>
 
+<p>
+<b>Status:</b>
+${statusHTML(p.status||"pending")}
+</p>
+
 <button
 type="button"
 class="main red"
@@ -2618,7 +2742,7 @@ ${Number(o.quantity||1)}
 
 <br><br>
 
-<b>Hali:</b>
+<b>Status:</b>
 
 ${statusHTML(o.status||"pending")}
 
@@ -2780,4 +2904,4 @@ loadSellerOrders();
 </script>
 
 </body>
-   </html>
+</html>
