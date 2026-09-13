@@ -174,7 +174,8 @@ gap:2px;
 .product-images img{
 width:100%;
 height:auto;
-max-height:420px;
+max-height:650px;
+min-height:300px;
 object-fit:contain;
 background:#f5f5f5;
 display:block;
@@ -333,6 +334,12 @@ text-align:center;
 color:#666;
 }
 
+.admin-action{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+}
+
 @media(max-width:600px){
 
 header h1{
@@ -346,7 +353,8 @@ top:70px;
 .product-images img{
 width:100%;
 height:auto;
-max-height:420px;
+max-height:650px;
+min-height:300px;
 object-fit:contain;
 }
 
@@ -387,20 +395,22 @@ padding:11px 13px;
 
 <main>
 
-<!-- HOME -->
+<!-- ================= HOME ================= -->
+
 <section id="home" class="active">
 
 <div class="card">
+
 <h2>🛍️ Bidhaa na Huduma</h2>
 
 <input
 id="homeSearch"
 placeholder="Tafuta bidhaa..."
-oninput="quickSearch()">
+oninput="quickSearch">
+
 </div>
 
 
-<!-- ADVERTISE BUTTON -->
 <div class="card center">
 
 <button
@@ -424,7 +434,6 @@ litaonekana baada ya Admin kulikubali.
 </div>
 
 
-<!-- PUBLIC ADS -->
 <div id="publicAds"></div>
 
 
@@ -447,7 +456,8 @@ class="products">
 </section>
 
 
-<!-- SEARCH -->
+<!-- ================= SEARCH ================= -->
+
 <section id="search">
 
 <div class="card">
@@ -502,7 +512,8 @@ class="products">
 </section>
 
 
-<!-- ADD PRODUCT -->
+<!-- ================= ADD PRODUCT ================= -->
+
 <section id="add">
 
 <div class="card">
@@ -533,18 +544,14 @@ id="productForm"
 class="hidden"
 onsubmit="addProduct(event)">
 
-<label>
-Jina la bidhaa/huduma
-</label>
+<label>Jina la bidhaa/huduma</label>
 
 <input
 id="pName"
 required>
 
 
-<label>
-Bei
-</label>
+<label>Bei</label>
 
 <input
 id="pPrice"
@@ -553,9 +560,7 @@ min="0"
 required>
 
 
-<label>
-Kategoria
-</label>
+<label>Kategoria</label>
 
 <select
 id="pCategory"
@@ -581,9 +586,7 @@ Chagua kategoria
 </select>
 
 
-<label>
-Mkoa
-</label>
+<label>Mkoa</label>
 
 <select
 id="pRegion"
@@ -597,9 +600,7 @@ Chagua mkoa
 </select>
 
 
-<label>
-Wilaya
-</label>
+<label>Wilaya</label>
 
 <select
 id="pDistrict"
@@ -613,9 +614,7 @@ Chagua wilaya
 </select>
 
 
-<label>
-Mtaa / Kijiji
-</label>
+<label>Mtaa / Kijiji</label>
 
 <select
 id="pPlace"
@@ -628,9 +627,7 @@ Chagua eneo
 </select>
 
 
-<label>
-Namba ya simu ya muuzaji
-</label>
+<label>Namba ya simu ya muuzaji</label>
 
 <input
 id="pPhone"
@@ -639,9 +636,7 @@ placeholder="Mfano 0625053021"
 required>
 
 
-<label>
-Maelezo
-</label>
+<label>Maelezo</label>
 
 <textarea
 id="pDescription"
@@ -649,9 +644,7 @@ placeholder="Eleza bidhaa yako...">
 </textarea>
 
 
-<label>
-Picha ya kwanza
-</label>
+<label>Picha ya kwanza</label>
 
 <input
 id="pImage1"
@@ -660,9 +653,7 @@ accept="image/*"
 required>
 
 
-<label>
-Picha ya pili
-</label>
+<label>Picha ya pili</label>
 
 <input
 id="pImage2"
@@ -685,14 +676,13 @@ type="submit">
 </div>
 
 
-<!-- SPONSORED SELLER AREA -->
+<!-- ================= SELLER ADS ================= -->
+
 <div
 id="sellerAdArea"
 class="card hidden">
 
-<h2>
-📢 Tangaza Bidhaa
-</h2>
+<h2>📢 Tangaza Bidhaa</h2>
 
 <div id="adStatusMessage"></div>
 
@@ -702,10 +692,7 @@ id="adForm"
 onsubmit="createSponsoredAd(event)"
 class="hidden">
 
-
-<label>
-Chagua bidhaa yako
-</label>
+<label>Chagua bidhaa yako</label>
 
 <select
 id="adProduct"
@@ -718,9 +705,7 @@ Inapakia bidhaa zako...
 </select>
 
 
-<label>
-Muda wa tangazo
-</label>
+<label>Muda wa tangazo</label>
 
 <select
 id="adDuration"
@@ -743,7 +728,6 @@ Chagua muda wa tangazo.
 </div>
 
 
-<!-- FREE NOTICE -->
 <div
 id="freeAdNotice"
 class="message success hidden">
@@ -761,20 +745,15 @@ Chagua bidhaa na muda, kisha tuma ombi.
 </div>
 
 
-<!-- PAID AREA -->
 <div
 id="paidAdFields"
 class="hidden">
 
-<h3>
-💳 Taarifa za malipo
-</h3>
+<h3>💳 Taarifa za malipo</h3>
 
 <div class="message">
 
-<b>
-Namba ya malipo ya PLAM:
-</b>
+<b>Namba ya malipo ya PLAM:</b>
 
 <br>
 
@@ -789,55 +768,27 @@ Tuma malipo kwa namba hiyo kisha jaza taarifa hapa chini.
 </div>
 
 
-<label>
-Mtandao wa malipo
-</label>
+<label>Mtandao wa malipo</label>
 
-<select
-id="adPaymentMethod">
+<select id="adPaymentMethod">
 
 <option value="">
 Chagua mtandao
 </option>
 
-<option>
-Vodacom M-Pesa
-</option>
-
-<option>
-Mixx by Yas
-</option>
-
-<option>
-Airtel Money
-</option>
-
-<option>
-Halopesa
-</option>
-
-<option>
-Azam Pesa
-</option>
-
-<option>
-NMB Mkononi
-</option>
-
-<option>
-CRDB
-</option>
-
-<option>
-Nyingine
-</option>
+<option>Vodacom M-Pesa</option>
+<option>Mixx by Yas</option>
+<option>Airtel Money</option>
+<option>Halopesa</option>
+<option>Azam Pesa</option>
+<option>NMB Mkononi</option>
+<option>CRDB</option>
+<option>Nyingine</option>
 
 </select>
 
 
-<label>
-Namba iliyotumika kulipa
-</label>
+<label>Namba iliyotumika kulipa</label>
 
 <input
 id="adPhone"
@@ -845,9 +796,7 @@ type="tel"
 placeholder="Mfano 07XXXXXXXX">
 
 
-<label>
-Transaction ID / Control number
-</label>
+<label>Transaction ID / Control number</label>
 
 <input
 id="adTransaction"
@@ -873,23 +822,20 @@ type="submit">
 </section>
 
 
-<!-- ACCOUNT -->
+<!-- ================= ACCOUNT ================= -->
+
 <section id="account">
 
 <div id="authArea">
 
 <div class="card">
 
-<h2>
-👤 Akaunti
-</h2>
+<h2>👤 Akaunti</h2>
 
 
 <div id="loggedOutArea">
 
-<h3>
-Jisajili
-</h3>
+<h3>Jisajili</h3>
 
 <input
 id="regName"
@@ -919,9 +865,7 @@ Jisajili
 
 <hr>
 
-<h3>
-Ingia
-</h3>
+<h3>Ingia</h3>
 
 <input
 id="loginEmail"
@@ -980,9 +924,7 @@ class="hidden">
 
 <div class="card">
 
-<h2>
-📦 Bidhaa Zangu
-</h2>
+<h2>📦 Bidhaa Zangu</h2>
 
 <div
 id="myProducts"
@@ -994,9 +936,7 @@ class="products">
 
 <div class="card">
 
-<h2>
-🛒 Orders Nilizoagiza
-</h2>
+<h2>🛒 Orders Nilizoagiza</h2>
 
 <div id="myOrders"></div>
 
@@ -1005,9 +945,7 @@ class="products">
 
 <div class="card">
 
-<h2>
-📋 Orders za Wateja Wangu
-</h2>
+<h2>📋 Orders za Wateja Wangu</h2>
 
 <div id="sellerOrders"></div>
 
@@ -1016,9 +954,7 @@ class="products">
 
 <div class="card">
 
-<h2>
-📢 Matangazo Yangu
-</h2>
+<h2>📢 Matangazo Yangu</h2>
 
 <div id="myAds"></div>
 
@@ -1029,16 +965,15 @@ class="products">
 </section>
 
 
-<!-- ADMIN -->
+<!-- ================= ADMIN ================= -->
+
 <section id="admin">
 
 <div
 id="adminLoginArea"
 class="card">
 
-<h2>
-⚙️ Admin
-</h2>
+<h2>⚙️ Admin</h2>
 
 <input
 id="adminEmail"
@@ -1070,9 +1005,7 @@ class="hidden">
 
 <div class="card">
 
-<h2>
-📊 PLAM Admin Dashboard
-</h2>
+<h2>📊 PLAM Admin Dashboard</h2>
 
 <div id="adminWelcome"></div>
 
@@ -1088,20 +1021,16 @@ onclick="adminLogout()">
 
 
 <!-- SETTINGS -->
+
 <div class="card">
 
-<h2>
-⚙️ Udhibiti wa PLAM
-</h2>
-
+<h2>⚙️ Udhibiti wa PLAM</h2>
 
 <div class="message">
 
 <p>
 
-📢 <b>
-Sponsored Ads
-</b>
+📢 <b>Sponsored Ads</b>
 
 <br>
 
@@ -1110,7 +1039,6 @@ Washa au zima mfumo wa matangazo.
 </small>
 
 </p>
-
 
 <button
 type="button"
@@ -1128,9 +1056,7 @@ onclick="toggleSponsored()">
 
 <p>
 
-💳 <b>
-Payment
-</b>
+💳 <b>Payment</b>
 
 <br>
 
@@ -1139,7 +1065,6 @@ Washa au zima mfumo wa malipo.
 </small>
 
 </p>
-
 
 <button
 type="button"
@@ -1157,9 +1082,7 @@ onclick="togglePayment()">
 
 <p>
 
-💰 <b>
-Commission
-</b>
+💰 <b>Commission</b>
 
 <br>
 
@@ -1168,7 +1091,6 @@ Commission ya PLAM ni 5%.
 </small>
 
 </p>
-
 
 <button
 type="button"
@@ -1189,11 +1111,10 @@ onclick="toggleCommission()">
 
 
 <!-- AD PAYMENTS -->
+
 <div class="card">
 
-<h2>
-💳 Malipo ya Matangazo
-</h2>
+<h2>💳 Malipo ya Matangazo</h2>
 
 <div id="adminAdPayments">
 
@@ -1207,11 +1128,10 @@ onclick="toggleCommission()">
 
 
 <!-- SPONSORED ADS -->
+
 <div class="card">
 
-<h2>
-📢 Sponsored Ads
-</h2>
+<h2>📢 Sponsored Ads</h2>
 
 <div id="adminSponsoredAds">
 
@@ -1225,11 +1145,10 @@ onclick="toggleCommission()">
 
 
 <!-- PRODUCTS -->
+
 <div class="card">
 
-<h2>
-📦 Bidhaa zote
-</h2>
+<h2>📦 Bidhaa zote</h2>
 
 <div id="adminProducts"></div>
 
@@ -1237,11 +1156,10 @@ onclick="toggleCommission()">
 
 
 <!-- ORDERS -->
+
 <div class="card">
 
-<h2>
-🛒 Orders zote
-</h2>
+<h2>🛒 Orders zote</h2>
 
 <div id="adminOrders"></div>
 
@@ -1249,11 +1167,10 @@ onclick="toggleCommission()">
 
 
 <!-- USERS -->
+
 <div class="card">
 
-<h2>
-👥 Watumiaji
-</h2>
+<h2>👥 Watumiaji</h2>
 
 <div id="adminUsers"></div>
 
@@ -1268,9 +1185,7 @@ onclick="toggleCommission()">
 
 <footer>
 
-<b>
-PLAM TANZANIA
-</b>
+<b>PLAM TANZANIA</b>
 
 <br>
 
@@ -2162,11 +2077,8 @@ box.innerHTML=
 
 const {data,error}=
 await supabaseClient
-
 .from("Production")
-
 .select("*")
-
 .order(
 "created_at",
 {ascending:false}
@@ -2566,7 +2478,9 @@ document
 .getElementById("productForm")
 .reset();
 
-loadProducts();
+await loadProducts();
+
+await loadMyProducts();
 
 }catch(error){
 
@@ -3257,6 +3171,9 @@ ${Number(o.id)},
 
 async function changeOrderStatus(id,status){
 
+if(!currentUser)
+return;
+
 const {error}=
 await supabaseClient
 .from("orders")
@@ -3272,7 +3189,7 @@ return;
 
 }
 
-loadSellerOrders();
+await loadSellerOrders();
 
 }
 
@@ -3470,11 +3387,15 @@ updateSettingsButtons();
 
 updateAddArea();
 
-loadSponsoredAds();
+await loadSponsoredAds();
 
-loadAdminSponsoredAds();
+if(isAdmin){
 
-loadAdminAdPayments();
+await loadAdminSponsoredAds();
+
+await loadAdminAdPayments();
+
+}
 
 }catch(error){
 
@@ -3617,6 +3538,20 @@ freeNotice.classList.remove("hidden");
 if(paidFields)
 paidFields.classList.add("hidden");
 
+
+document
+.getElementById("adPaymentMethod")
+.required=false;
+
+document
+.getElementById("adPhone")
+.required=false;
+
+document
+.getElementById("adTransaction")
+.required=false;
+
+
 status.innerHTML=
 `
 
@@ -3640,9 +3575,9 @@ Matangazo ni BURE kwa sasa.
 
 `;
 
-loadAdPrices();
+await loadAdPrices();
 
-loadSellerAdProducts();
+await loadSellerAdProducts();
 
 return;
 
@@ -3660,8 +3595,6 @@ if(paidFields)
 paidFields.classList.remove("hidden");
 
 
-/* Payment fields become required only when ON */
-
 document
 .getElementById("adPaymentMethod")
 .required=true;
@@ -3669,9 +3602,6 @@ document
 document
 .getElementById("adPhone")
 .required=true;
-
-
-/* Transaction is NEVER required */
 
 document
 .getElementById("adTransaction")
@@ -3702,9 +3632,9 @@ ${plamSettings.commission_percent||5}%
 
 `;
 
-loadAdPrices();
+await loadAdPrices();
 
-loadSellerAdProducts();
+await loadSellerAdProducts();
 
 }
 
@@ -3753,6 +3683,9 @@ const select=
 document.getElementById(
 "adDuration"
 );
+
+if(!select)
+return;
 
 select.innerHTML=
 `
@@ -3904,6 +3837,9 @@ const select=
 document.getElementById(
 "adProduct"
 );
+
+if(!select)
+return;
 
 const {data,error}=
 await supabaseClient
@@ -4077,7 +4013,9 @@ document
 .innerHTML=
 "Chagua muda wa tangazo.";
 
-loadMyAds();
+await loadMyAds();
+
+await loadAdminSponsoredAdsIfAdmin();
 
 return;
 
@@ -4099,9 +4037,8 @@ document
 .value
 .trim();
 
-/*
-Transaction ID ni optional
-*/
+
+/* Transaction ID ni optional */
 
 const transaction=
 document
@@ -4152,14 +4089,17 @@ Number(price.amount),
 
 commission_percent:
 plamSettings.commission_enabled
-
 ?
 Number(
 plamSettings.commission_percent||5
 )
-
 :
 0,
+
+commission_amount:0,
+
+seller_amount:
+Number(price.amount),
 
 status:
 "pending",
@@ -4208,12 +4148,10 @@ status:
 
 commission_percent:
 plamSettings.commission_enabled
-
 ?
 Number(
 plamSettings.commission_percent||5
 )
-
 :
 0
 
@@ -4258,7 +4196,7 @@ document
 .innerHTML=
 "Chagua muda wa tangazo.";
 
-loadMyAds();
+await loadMyAds();
 
 }catch(error){
 
@@ -4278,6 +4216,16 @@ error.message||String(error)
 `;
 
 }
+
+}
+
+
+async function loadAdminSponsoredAdsIfAdmin(){
+
+if(!isAdmin)
+return;
+
+await loadAdminSponsoredAds();
 
 }
 
@@ -4355,15 +4303,15 @@ ${a.duration_days} siku
 <b>Kiasi:</b>
 
 ${
-plamSettings.payment_enabled
+a.payment_status==="free"
 
 ?
 
-`TSh ${money(a.amount)}`
+`BURE`
 
 :
 
-`BURE`
+`TSh ${money(a.amount)}`
 
 }
 
@@ -4866,7 +4814,7 @@ ${escapeHTML(currentUser.email)}
 
 await loadPLAMSettings();
 
-loadAdminData();
+await loadAdminData();
 
 }
 
@@ -5105,6 +5053,8 @@ await loadAdminSponsoredAds();
 
 await loadSponsoredAds();
 
+await loadMyAds();
+
 }
 
 
@@ -5151,6 +5101,8 @@ await loadAdminAdPayments();
 
 await loadAdminSponsoredAds();
 
+await loadMyAds();
+
 }
 
 
@@ -5164,6 +5116,19 @@ const box=
 document.getElementById(
 "adminSponsoredAds"
 );
+
+if(!isAdmin){
+
+box.innerHTML=
+`
+<div class="message error">
+❌ Ruhusa ya Admin inahitajika.
+</div>
+`;
+
+return;
+
+}
 
 const {data,error}=
 await supabaseClient
@@ -5253,15 +5218,15 @@ ${a.duration_days}
 <td>
 
 ${
-plamSettings.payment_enabled
+a.payment_status==="free"
 
 ?
 
-`TSh ${money(a.amount)}`
+"BURE"
 
 :
 
-"BURE"
+`TSh ${money(a.amount)}`
 
 }
 
@@ -5301,6 +5266,8 @@ a.status==="pending"
 
 `
 
+<div class="admin-action">
+
 <button
 class="main"
 onclick="approveSponsoredAd(
@@ -5321,9 +5288,21 @@ ${Number(a.id)}
 
 </button>
 
+</div>
+
 `
 
-:""
+:
+
+a.status==="active"
+
+?
+
+`<span class="badge active">IMEWASHWA</span>`
+
+:
+
+`<span class="badge rejected">IMEKATALIWA</span>`
 
 }
 
@@ -5352,14 +5331,14 @@ async function approveSponsoredAd(id){
 
 if(!isAdmin){
 
-alert("Not authorized.");
+alert("❌ Ruhusa ya Admin inahitajika.");
 
 return;
 
 }
 
 if(!confirm(
-"Unataka kuruhusu tangazo hili?"
+"Unataka kuruhusu tangazo hili?\n\nTangazo litaanza kuonekana kwa wateja."
 ))
 return;
 
@@ -5368,7 +5347,7 @@ await supabaseClient.rpc(
 "admin_update_plam_sponsored_ad_status",
 {
 
-p_ad_id:id,
+p_ad_id:Number(id),
 
 p_status:"active"
 
@@ -5377,7 +5356,10 @@ p_status:"active"
 
 if(error){
 
-alert(error.message);
+alert(
+"❌ Imeshindikana kukubali tangazo:\n"+
+error.message
+);
 
 return;
 
@@ -5404,7 +5386,7 @@ async function rejectSponsoredAd(id){
 
 if(!isAdmin){
 
-alert("Not authorized.");
+alert("❌ Ruhusa ya Admin inahitajika.");
 
 return;
 
@@ -5420,7 +5402,7 @@ await supabaseClient.rpc(
 "admin_update_plam_sponsored_ad_status",
 {
 
-p_ad_id:id,
+p_ad_id:Number(id),
 
 p_status:"rejected"
 
@@ -5429,7 +5411,10 @@ p_status:"rejected"
 
 if(error){
 
-alert(error.message);
+alert(
+"❌ Imeshindikana kukataa tangazo:\n"+
+error.message
+);
 
 return;
 
@@ -5600,37 +5585,56 @@ ${Number(p.id)}
 }
 
 
+/* =========================================
+   SECURE ADMIN DELETE PRODUCT
+========================================= */
+
 async function deleteProduct(id){
 
-if(!isAdmin)
+if(!isAdmin){
+
+alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
 return;
 
+}
+
 if(!confirm(
-"Una uhakika unataka kufuta bidhaa hii?"
+"⚠️ Una uhakika unataka kufuta bidhaa hii?\n\n"+
+"Bidhaa hii itaondolewa kabisa kwenye PLAM."
 ))
 return;
 
 const {error}=
-await supabaseClient
-.from("Production")
-.delete()
-.eq("id",id);
+await supabaseClient.rpc(
+"admin_delete_plam_product",
+{
+p_product_id:Number(id)
+}
+);
 
 if(error){
 
-alert(error.message);
+alert(
+"❌ Imeshindikana kufuta bidhaa:\n"+
+error.message
+);
 
 return;
 
 }
 
 alert(
-"✅ Bidhaa imefutwa."
+"✅ Bidhaa imefutwa kabisa."
 );
 
-loadAdminProducts();
+await loadAdminProducts();
 
-loadProducts();
+await loadProducts();
+
+await loadSponsoredAds();
 
 }
 
@@ -5929,6 +5933,20 @@ await loadSponsoredAds();
 
 updateAccountUI();
 
+if(isAdmin){
+
+document
+.getElementById("adminLoginArea")
+.classList.add("hidden");
+
+document
+.getElementById("adminDashboard")
+.classList.remove("hidden");
+
+await loadAdminData();
+
+}
+
 }
 
 
@@ -5956,8 +5974,7 @@ await saveProfile();
 
 }
 
-}
-);
+});
 
 
 startup();
