@@ -1,0 +1,5575 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAM TANZANIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f2f5f3;
+color:#222
+}
+
+header{
+background:linear-gradient(135deg,#087a38,#00a651);
+color:#fff;
+text-align:center;
+padding:24px 12px;
+box-shadow:0 3px 10px #0003
+}
+
+header h1{margin:0;font-size:29px}
+header p{margin:8px 0 0}
+
+nav{
+display:flex;
+background:#fff;
+border-bottom:1px solid #ddd;
+position:sticky;
+top:0;
+z-index:20;
+box-shadow:0 2px 7px #0001
+}
+
+nav button{
+flex:1;
+border:0;
+background:#fff;
+padding:13px 2px;
+color:#087a38;
+font-weight:bold;
+font-size:11px;
+cursor:pointer
+}
+
+nav button:active{background:#dff5e5}
+
+section{
+max-width:900px;
+margin:auto;
+padding:14px
+}
+
+.hidden{display:none!important}
+
+.card{
+background:#fff;
+padding:16px;
+border-radius:15px;
+margin-bottom:16px;
+box-shadow:0 3px 12px #0002
+}
+
+h2{
+color:#087a38;
+margin-top:4px
+}
+
+input,select,textarea{
+width:100%;
+padding:14px;
+margin:6px 0 13px;
+border:1px solid #bbb;
+border-radius:10px;
+font-size:16px;
+background:#fff;
+outline:none
+}
+
+textarea{
+min-height:110px;
+resize:vertical
+}
+
+input:focus,select:focus,textarea:focus{
+border-color:#087a38;
+box-shadow:0 0 0 2px #087a3820
+}
+
+.main{
+width:100%;
+padding:14px;
+border:0;
+border-radius:10px;
+background:#087a38;
+color:#fff;
+font-size:16px;
+font-weight:bold;
+margin:6px 0;
+cursor:pointer
+}
+
+.main:active{transform:scale(.98)}
+.gray{background:#555}
+.red{background:#d00000}
+.blue{background:#1769aa}
+.orange{background:#e68a00}
+
+.message{
+padding:13px;
+margin-top:10px;
+border-radius:10px;
+background:#eef8f0;
+line-height:1.6
+}
+
+/* PRODUCTS */
+
+.product{
+background:#fff;
+border-radius:16px;
+overflow:hidden;
+margin-bottom:18px;
+box-shadow:0 4px 14px #0002;
+border:1px solid #e4e4e4
+}
+
+.product-image-box{
+background:#f0f2f1;
+padding:10px;
+text-align:center
+}
+
+.product img.main-image{
+width:100%;
+height:auto;
+display:block;
+object-fit:contain;
+border-radius:10px
+}
+
+.product-body{padding:16px}
+
+.product-body h3{
+margin:0 0 8px;
+font-size:21px
+}
+
+.price-box{
+background:#eef8f0;
+border-radius:10px;
+padding:10px;
+margin:10px 0
+}
+
+.price-label{
+font-size:13px;
+color:#666
+}
+
+.price{
+color:#087a38;
+font-size:23px;
+font-weight:800
+}
+
+.location{
+background:#f4f8f5;
+padding:11px;
+border-radius:10px;
+margin:12px 0;
+line-height:1.8;
+border-left:4px solid #087a38
+}
+
+.description{
+line-height:1.6;
+color:#444;
+margin:12px 0
+}
+
+.second-image-box{
+margin-top:13px
+}
+
+.second-image-title{
+font-weight:bold;
+color:#087a38;
+margin-bottom:7px
+}
+
+.second-image{
+width:100%;
+height:auto;
+display:block;
+border-radius:10px;
+border:1px solid #ddd
+}
+
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:14px
+}
+
+.actions a,.actions button{
+width:100%;
+min-height:48px;
+padding:11px 5px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+text-decoration:none;
+color:#fff;
+border:0;
+border-radius:10px;
+font-weight:bold;
+font-size:14px;
+cursor:pointer
+}
+
+.call{background:#087a38}
+.whatsapp{background:#20bd5a}
+.order{background:#1769aa}
+.download{background:#555}
+
+/* STATUS */
+
+.status{
+display:inline-block;
+padding:6px 11px;
+border-radius:20px;
+font-weight:bold;
+margin:5px 0
+}
+
+.status.pending{
+background:#fff2d8;
+color:#c66a00
+}
+
+.status.accepted{
+background:#dff5e5;
+color:#087a38
+}
+
+.status.rejected{
+background:#ffe1e1;
+color:#c00000
+}
+
+/* ORDERS */
+
+.order-box{
+border-left:5px solid #087a38;
+background:#f8faf8;
+padding:13px;
+border-radius:9px;
+margin:10px 0;
+line-height:1.6
+}
+
+/* MY PRODUCTS */
+
+.my-product{
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+overflow:hidden;
+margin:12px 0;
+box-shadow:0 3px 10px #0001
+}
+
+.my-product img{
+width:100%;
+height:auto;
+display:block;
+object-fit:contain;
+background:#f0f2f1
+}
+
+.my-product-body{padding:14px}
+
+.my-product-price{
+color:#087a38;
+font-weight:bold;
+font-size:20px;
+margin:8px 0
+}
+
+.my-product-location{
+line-height:1.7;
+background:#f4f8f5;
+padding:10px;
+border-radius:9px
+}
+
+.my-product-second{margin-top:10px}
+
+.my-product-second img{
+width:100%;
+border-radius:10px;
+border:1px solid #ddd
+}
+
+/* =========================
+MATANGAZO
+========================= */
+
+.ads-section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px
+}
+
+.ads-section-title h2{
+margin:0
+}
+
+.ad-slider{
+position:relative;
+overflow:hidden;
+border-radius:18px;
+background:#fff;
+box-shadow:0 4px 15px #0003;
+border:2px solid #f0b400
+}
+
+.ad-card{
+display:none;
+background:#fff
+}
+
+.ad-card.active{
+display:block
+}
+
+.ad-image-box{
+position:relative;
+background:#f0f2f1;
+padding:8px
+}
+
+.ad-image{
+width:100%;
+max-height:420px;
+object-fit:contain;
+display:block;
+border-radius:12px
+}
+
+.ad-badge{
+position:absolute;
+top:18px;
+left:18px;
+background:#f0a500;
+color:#fff;
+font-weight:bold;
+padding:8px 12px;
+border-radius:20px;
+box-shadow:0 2px 6px #0003
+}
+
+.ad-premium{
+background:#d00000
+}
+
+.ad-standard{
+background:#1769aa
+}
+
+.ad-basic{
+background:#087a38
+}
+
+.ad-body{
+padding:16px
+}
+
+.ad-body h3{
+margin:0 0 8px;
+font-size:22px
+}
+
+.ad-price{
+font-size:22px;
+font-weight:800;
+color:#087a38;
+margin:8px 0
+}
+
+.ad-location{
+background:#f4f8f5;
+padding:10px;
+border-radius:10px;
+line-height:1.7;
+margin:10px 0
+}
+
+.ad-controls{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+padding:10px 12px 14px
+}
+
+.ad-control-btn{
+border:0;
+background:#087a38;
+color:#fff;
+border-radius:50%;
+width:42px;
+height:42px;
+font-size:20px;
+cursor:pointer
+}
+
+.ad-dots{
+display:flex;
+justify-content:center;
+gap:5px;
+flex:1;
+flex-wrap:wrap
+}
+
+.ad-dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#bbb;
+cursor:pointer
+}
+
+.ad-dot.active{
+background:#087a38;
+transform:scale(1.2)
+}
+
+.ad-count{
+text-align:center;
+font-size:12px;
+color:#666;
+padding-bottom:10px
+}
+
+.no-ads{
+background:#fff;
+border:1px dashed #ccc;
+padding:18px;
+border-radius:14px;
+text-align:center;
+color:#666
+}
+
+/* AD PACKAGES */
+
+.package-card{
+border:2px solid #ddd;
+border-radius:14px;
+padding:15px;
+margin:10px 0;
+cursor:pointer;
+background:#fff
+}
+
+.package-card:hover{
+border-color:#087a38
+}
+
+.package-card input{
+width:auto;
+margin:0 8px 0 0
+}
+
+.package-title{
+font-size:20px;
+font-weight:bold;
+color:#087a38
+}
+
+.package-price{
+font-size:22px;
+font-weight:800;
+margin-top:7px
+}
+
+.package-desc{
+color:#666;
+margin-top:5px
+}
+
+.ad-request{
+background:#f8faf8;
+border-left:5px solid #f0a500;
+padding:14px;
+border-radius:10px;
+margin:10px 0;
+line-height:1.7
+}
+
+/* CONTACT */
+
+.contact-card{
+background:linear-gradient(135deg,#fff,#eef8f0);
+border:2px solid #d7efdd;
+text-align:center
+}
+
+.contact-title{
+color:#087a38;
+font-size:23px;
+font-weight:800
+}
+
+.contact-number{
+font-size:24px;
+font-weight:800;
+color:#087a38;
+margin:16px 0
+}
+
+.contact-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.contact-actions a{
+min-height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+color:#fff;
+border-radius:11px;
+font-weight:bold
+}
+
+.contact-call{background:#087a38}
+.contact-whatsapp{background:#25d366}
+
+/* ADMIN */
+
+.admin-product-image{
+width:100%;
+height:auto;
+border-radius:10px;
+background:#eee
+}
+
+.admin-ad{
+border:2px solid #eee;
+border-left:5px solid #f0a500;
+padding:14px;
+border-radius:10px;
+margin:12px 0;
+background:#fff;
+line-height:1.7
+}
+
+.admin-ad img{
+width:100%;
+max-height:300px;
+object-fit:contain;
+border-radius:10px;
+background:#f0f2f1;
+margin-bottom:10px
+}
+
+footer{
+background:#075c2b;
+color:#fff;
+text-align:center;
+padding:26px 10px;
+margin-top:20px;
+line-height:1.5
+}
+
+@media(max-width:500px){
+
+header h1{font-size:25px}
+
+nav button{
+font-size:10px;
+padding:12px 1px
+}
+
+section{
+padding:10px
+}
+
+.actions{
+grid-template-columns:1fr 1fr
+}
+
+.contact-actions{
+grid-template-columns:1fr
+}
+
+}
+
+@media(max-width:350px){
+
+nav button{
+font-size:9px
+}
+
+.actions{
+grid-template-columns:1fr
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🇹🇿 PLAM TANZANIA</h1>
+<p>Jenga biashara yako. Fikia wateja zaidi.</p>
+</header>
+
+<nav>
+<button type="button" onclick="show('home')">🏠 Home</button>
+<button type="button" onclick="show('search')">🔎 Tafuta</button>
+<button type="button" onclick="show('add')">➕ Weka</button>
+<button type="button" onclick="show('account')">👤 Akaunti</button>
+<button type="button" onclick="show('admin')">🔐 Admin</button>
+</nav>
+
+
+<!-- =========================
+HOME
+========================= -->
+
+<section id="home">
+
+<div class="card">
+
+<h2>Karibu PLAM TANZANIA</h2>
+
+<p>
+Tafuta bidhaa na huduma kutoka kwa wauzaji mbalimbali Tanzania.
+</p>
+
+<input
+id="homeSearch"
+placeholder="🔎 Tafuta bidhaa..."
+oninput="searchProducts(this.value)"
+>
+
+<button
+type="button"
+class="main"
+onclick="show('add')"
+>
+➕ Weka Bidhaa Yako
+</button>
+
+<button
+type="button"
+class="main orange"
+onclick="openAdvertise()"
+>
+📢 Tangaza Bidhaa Yako
+</button>
+
+</div>
+
+
+<!-- MATANGAZO -->
+
+<div id="adsHome">
+
+<div class="ads-section-title">
+<h2>🔥 MATANGAZO</h2>
+</div>
+
+<div id="adsBox">
+<div class="no-ads">
+⏳ Inapakia matangazo...
+</div>
+</div>
+
+</div>
+
+
+<h2>🛍️ Bidhaa Zote</h2>
+
+<div id="products">
+⏳ Inapakia bidhaa...
+</div>
+
+</section>
+
+
+<!-- =========================
+SEARCH
+========================= -->
+
+<section id="search" class="hidden">
+
+<div class="card">
+
+<h2>🔎 Tafuta Bidhaa</h2>
+
+<input
+id="searchInput"
+placeholder="Andika jina la bidhaa..."
+oninput="searchProducts(this.value)"
+>
+
+<select
+id="searchRegion"
+onchange="loadSearchDistricts()"
+>
+<option value="">Mikoa yote</option>
+</select>
+
+<select
+id="searchDistrict"
+onchange="searchProducts()"
+>
+<option value="">Wilaya zote</option>
+</select>
+
+</div>
+
+<div id="searchResults"></div>
+
+</section>
+
+
+<!-- =========================
+ADD PRODUCT
+========================= -->
+
+<section id="add" class="hidden">
+
+<div class="card">
+
+<h2>➕ Weka Bidhaa</h2>
+
+<label><b>Jina la bidhaa</b></label>
+
+<input
+id="name"
+placeholder="Mfano: Samsung A05"
+>
+
+<label><b>Bei (TSh)</b></label>
+
+<input
+id="price"
+type="number"
+placeholder="Mfano: 250000"
+>
+
+<label><b>Kundi</b></label>
+
+<select id="category">
+
+<option value="">Chagua kundi</option>
+<option>Mavazi</option>
+<option>Electronics</option>
+<option>Nyumba</option>
+<option>Magari</option>
+<option>Kilimo</option>
+<option>Urembo</option>
+<option>Elimu</option>
+<option>Huduma</option>
+
+</select>
+
+<h3>📍 Eneo la Muuzaji</h3>
+
+<label><b>Mkoa</b></label>
+
+<select
+id="region"
+onchange="loadDistricts()"
+>
+<option value="">Chagua Mkoa</option>
+</select>
+
+<label><b>Wilaya</b></label>
+
+<select
+id="district"
+onchange="loadLocalities()"
+>
+<option value="">Chagua Wilaya</option>
+</select>
+
+<label><b>Mtaa / Kijiji</b></label>
+
+<select id="locality">
+<option value="">Chagua Mtaa au Kijiji</option>
+</select>
+
+<label><b>📞 Namba ya simu ya muuzaji</b></label>
+
+<input
+id="phone"
+type="tel"
+placeholder="Mfano: 0625053021"
+>
+
+<label><b>Maelezo ya bidhaa</b></label>
+
+<textarea
+id="description"
+placeholder="Eleza bidhaa yako..."
+></textarea>
+
+<label><b>🖼️ Picha ya kwanza</b></label>
+
+<input
+id="image1"
+type="file"
+accept="image/*"
+>
+
+<label><b>🖼️ Picha ya pili</b></label>
+
+<input
+id="image2"
+type="file"
+accept="image/*"
+>
+
+<button
+type="button"
+class="main"
+onclick="addProduct()"
+>
+🚀 Weka Bidhaa PLAM
+</button>
+
+<div id="addMessage"></div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ADVERTISE
+========================= -->
+
+<section id="advertise" class="hidden">
+
+<div class="card">
+
+<h2>📢 Tangaza Bidhaa Yako</h2>
+
+<p>
+Chagua bidhaa yako kisha chagua kifurushi cha matangazo.
+</p>
+
+<div class="message">
+💡 Baada ya kutuma ombi, Admin atalipitia na kulikubali.
+<br><br>
+💳 <b>Malipo bado hayajaunganishwa.</b>
+</div>
+
+<br>
+
+<label>
+<b>🛍️ Chagua bidhaa ya kutangaza</b>
+</label>
+
+<select id="adProduct">
+<option value="">⏳ Inapakia bidhaa zako...</option>
+</select>
+
+<br>
+
+<label>
+<b>📦 Chagua kifurushi</b>
+</label>
+
+
+<label class="package-card">
+
+<input
+type="radio"
+name="adPackage"
+value="basic"
+data-days="3"
+data-price="1500"
+checked
+>
+
+<span class="package-title">
+🟢 Basic
+</span>
+
+<div class="package-price">
+TSh 1,500
+</div>
+
+<div class="package-desc">
+Siku 3
+</div>
+
+</label>
+
+
+<label class="package-card">
+
+<input
+type="radio"
+name="adPackage"
+value="standard"
+data-days="7"
+data-price="3000"
+>
+
+<span class="package-title">
+🔵 Standard
+</span>
+
+<div class="package-price">
+TSh 3,000
+</div>
+
+<div class="package-desc">
+Siku 7
+</div>
+
+</label>
+
+
+<label class="package-card">
+
+<input
+type="radio"
+name="adPackage"
+value="premium"
+data-days="30"
+data-price="10000"
+>
+
+<span class="package-title">
+🔴 Premium
+</span>
+
+<div class="package-price">
+TSh 10,000
+</div>
+
+<div class="package-desc">
+Siku 30
+</div>
+
+</label>
+
+
+<button
+type="button"
+class="main orange"
+onclick="submitAd()"
+>
+📢 Tuma Ombi la Tangazo
+</button>
+
+<div id="adMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Matangazo Yangu</h2>
+
+<button
+type="button"
+class="main"
+onclick="loadMyAds()"
+>
+🔄 Angalia Matangazo Yangu
+</button>
+
+<div id="myAds">
+Ingia kwenye akaunti kuona matangazo yako.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ACCOUNT
+========================= -->
+
+<section id="account" class="hidden">
+
+<div class="card">
+
+<h2>👤 Fungua Akaunti</h2>
+
+<input
+id="regName"
+placeholder="Jina kamili"
+>
+
+<input
+id="regPhone"
+placeholder="Namba ya simu"
+>
+
+<input
+id="regEmail"
+type="email"
+placeholder="Barua pepe"
+>
+
+<input
+id="regPassword"
+type="password"
+placeholder="Password"
+>
+
+<button
+type="button"
+class="main"
+onclick="registerUser()"
+>
+Fungua Akaunti
+</button>
+
+<div id="registerMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔑 Ingia</h2>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Barua pepe"
+>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+>
+
+<button
+type="button"
+class="main"
+onclick="loginUser()"
+>
+Ingia
+</button>
+
+<button
+type="button"
+class="main gray"
+onclick="logoutUser()"
+>
+Toka
+</button>
+
+<div id="loginMessage"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📢 Tangaza Bidhaa</h2>
+
+<p>
+Unataka bidhaa yako ionekane kwenye sehemu ya matangazo?
+</p>
+
+<button
+type="button"
+class="main orange"
+onclick="openAdvertise()"
+>
+📢 Tangaza Bidhaa Yako
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🛍️ Bidhaa Zangu</h2>
+
+<p>
+Hapa utaona bidhaa ulizoweka kwenye PLAM.
+</p>
+
+<button
+type="button"
+class="main"
+onclick="loadMyProducts()"
+>
+🔄 Angalia Bidhaa Zangu
+</button>
+
+<div id="myProducts">
+Ingia kwenye akaunti kuona bidhaa zako.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🛒 Maagizo Yangu</h2>
+
+<p>
+Hapa utaona maagizo yako na hali yake.
+</p>
+
+<button
+type="button"
+class="main blue"
+onclick="loadMyOrders()"
+>
+🔄 Angalia Maagizo
+</button>
+
+<div id="myOrders">
+Ingia kwenye akaunti kuona maagizo yako.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🏪 Maagizo ya Wateja Wangu</h2>
+
+<p>
+Hapa utaona maagizo ya wateja walioagiza bidhaa zako.
+</p>
+
+<button
+type="button"
+class="main"
+onclick="loadSellerOrders()"
+>
+🔄 Angalia Maagizo ya Wateja
+</button>
+
+<div id="sellerOrders">
+Ingia kwenye akaunti kuona maagizo ya wateja.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ADMIN
+========================= -->
+
+<section id="admin" class="hidden">
+
+<div id="adminLogin" class="card">
+
+<h2>🔐 Admin</h2>
+
+<input
+id="adminEmail"
+type="email"
+placeholder="Email ya Admin"
+>
+
+<input
+id="adminPassword"
+type="password"
+placeholder="Password"
+>
+
+<button
+type="button"
+class="main"
+onclick="adminLogin()"
+>
+Ingia Admin
+</button>
+
+<div id="adminMessage"></div>
+
+</div>
+
+
+<div id="dashboard" class="hidden">
+
+<div class="card">
+
+<h2>📊 Admin Dashboard</h2>
+
+<p id="adminWelcome"></p>
+
+</div>
+
+
+<!-- ADMIN ADS -->
+
+<div class="card">
+
+<h2>📢 Matangazo</h2>
+
+<p>
+Hapa Admin anaweza kuona maombi ya matangazo na kuyakubali au kuyakataa.
+</p>
+
+<button
+type="button"
+class="main orange"
+onclick="loadAdminAds()"
+>
+🔄 Angalia Matangazo
+</button>
+
+<div id="adminAds">
+Inapakia...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📦 Bidhaa Zote</h2>
+
+<div id="adminProducts">
+Inapakia...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🛒 Maagizo</h2>
+
+<div id="adminOrders">
+Inapakia...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>👥 Watumiaji</h2>
+
+<button
+type="button"
+class="main"
+onclick="loadUsers()"
+>
+🔄 Onyesha Watumiaji
+</button>
+
+<div id="users"></div>
+
+</div>
+
+
+<button
+type="button"
+class="main gray"
+onclick="adminLogout()"
+>
+Toka Admin
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+CONTACT
+========================= -->
+
+<section>
+
+<div class="card contact-card">
+
+<div class="contact-title">
+📞 Mawasiliano ya PLAM
+</div>
+
+<p>
+Kwa msaada au mawasiliano na
+<b>msimamizi wa PLAM TANZANIA</b>:
+</p>
+
+<div class="contact-number">
+📱 0625 053 021
+</div>
+
+<div class="contact-actions">
+
+<a
+class="contact-call"
+href="tel:+255625053021"
+>
+📞 Piga Simu
+</a>
+
+<a
+class="contact-whatsapp"
+href="https://wa.me/255625053021"
+target="_blank"
+>
+💬 WhatsApp
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<strong>🇹🇿 PLAM TANZANIA</strong>
+
+<br><br>
+
+Jenga biashara yako. Fikia wateja zaidi.
+
+<br><br>
+
+📞 0625 053 021
+
+<br><br>
+
+© 2026 PLAM TANZANIA
+
+</footer>
+
+
+<script>
+
+/* =========================
+SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://igcgcxkttzeaordqhqqy.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+const ADMIN_EMAIL =
+"lucasmwingira323@gmail.com";
+
+
+/* =========================
+AD SETTINGS
+========================= */
+
+const AD_PACKAGES = {
+
+basic:{
+days:3,
+price:1500,
+name:"Basic"
+},
+
+standard:{
+days:7,
+price:3000,
+name:"Standard"
+},
+
+premium:{
+days:30,
+price:10000,
+name:"Premium"
+}
+
+};
+
+let adsData=[];
+let adsIndex=0;
+let adsTimer=null;
+
+
+/* =========================
+LOCATIONS
+========================= */
+
+const LOCATIONS={
+
+"Mbeya":{
+"Mbeya Mjini":["Soweto","Forest","Sisimba","Nonde","Mabatini","Maendeleo","Ruanda","Iyunga"],
+"Rungwe":["Tukuyu","Kiwira","Kisiba","Bulyaga"],
+"Kyela":["Kyela Mjini","Ipinda","Matema","Busale"],
+"Chunya":["Chunya Mjini","Makongolosi"]
+},
+
+"Ruvuma":{
+"Songea Mjini":["Matarawe","Mashangano","Msamala","Mjimwema","Ruhuwiko"],
+"Songea DC":["Peramiho","Mpitimbi","Matimira"],
+"Mbinga":["Mbinga Mjini","Kigonsera","Mikalanga"],
+"Tunduru":["Tunduru Mjini","Namikango","Namasakata"]
+},
+
+"Dar es Salaam":{
+"Ilala":["Kariakoo","Upanga","Tabata","Buguruni","Vingunguti"],
+"Kinondoni":["Sinza","Manzese","Mwananyamala","Mikocheni","Kijitonyama"],
+"Temeke":["Mbagala","Kurasini","Chang'ombe","Yombo","Temeke"],
+"Ubungo":["Ubungo","Kimara","Kibamba","Sinza"],
+"Kigamboni":["Kigamboni","Mjimwema","Somangila"]
+},
+
+"Arusha":{
+"Arusha Mjini":["Kaloleni","Sekei","Sakina","Sanawari","Ngarenaro"],
+"Arusha DC":["Usa River","Kikatiti","Ngaramtoni","Kisongo"]
+},
+
+"Mwanza":{
+"Nyamagana":["Pamba","Isamilo","Mabatini","Kirumba"],
+"Ilemela":["Pasiansi","Nyakato","Buzuruga","Mkolani"]
+},
+
+"Dodoma":{
+"Dodoma Mjini":["Kikuyu","Majengo","Kisasa","Area C","Miyuji"],
+"Bahi":["Bahi Mjini","Chipanga","Mpalanga"],
+"Chamwino":["Chamwino","Fufu","Buigiri"]
+},
+
+"Morogoro":{
+"Morogoro Mjini":["Kihonda","Mazimbu","Mji Mpya","Sabasaba","Kingo"],
+"Morogoro DC":["Mgeta","Mikese","Matombo"]
+},
+
+"Shinyanga":{
+"Shinyanga Mjini":["Kambarage","Ibadakuli","Kizumbi","Chibe"],
+"Kahama":["Kahama Mjini","Isaka","Bugarama"]
+},
+
+"Tabora":{
+"Tabora Mjini":["Chemchem","Ipuli","Isevya","Kanyenye"],
+"Nzega":["Nzega Mjini","Mbutu","Nata"]
+},
+
+"Tanga":{
+"Tanga Mjini":["Ngamiani","Mzingani","Chumbageni","Mabawa"],
+"Muheza":["Muheza Mjini","Amani","Magila"],
+"Korogwe":["Korogwe Mjini","Mombo","Mkomazi"]
+},
+
+"Kilimanjaro":{
+"Moshi Mjini":["Bondeni","Rau","Majengo","Kiboriloni"],
+"Moshi DC":["Himo","Marangu","Uru","Machame"]
+},
+
+"Manyara":{
+"Babati":["Babati Mjini","Gallapo","Dareda"],
+"Hanang":["Katesh","Endasak"]
+},
+
+"Singida":{
+"Singida Mjini":["Unyianga","Misuna","Ipembe","Kindai"],
+"Manyoni":["Manyoni Mjini","Itigi","Sanjaranda"]
+},
+
+"Iringa":{
+"Iringa Mjini":["Gangilonga","Mkwawa","Kitanzini","Mshindo"],
+"Iringa DC":["Kalenga","Izazi","Ilula"]
+},
+
+"Njombe":{
+"Njombe Mjini":["Ramadhani","Mji Mpya","Luponde","Matola"],
+"Makete":["Makete Mjini","Ipelele","Tandala"]
+},
+
+"Pwani":{
+"Kibaha":["Tumbi","Mailimoja","Mkuza","Visiga"],
+"Bagamoyo":["Bagamoyo Mjini","Dunda","Zinga"]
+},
+
+"Zanzibar":{
+"Mjini Magharibi":["Stone Town","Mwanakwerekwe","Mombasa","Kisauni"],
+"Kaskazini Unguja":["Kijini","Nungwi","Kendwa"]
+},
+
+"Rukwa":{
+"Sumbawanga Mjini":["Sumbawanga Mjini","Mazwi","Pito","Chanji"],
+"Sumbawanga DC":["Laela","Muze","Msanda"]
+},
+
+"Kigoma":{
+"Kigoma Ujiji":["Kibwe","Katubuka","Bangwe"],
+"Kigoma DC":["Kibirizi","Kagongo"]
+},
+
+"Mara":{
+"Musoma Mjini":["Mukendo","Mwigobero","Kitaji"],
+"Tarime":["Tarime Mjini","Sirari","Nyamongo"]
+},
+
+"Kagera":{
+"Bukoba Mjini":["Bilele","Kahororo","Miembeni"],
+"Muleba":["Muleba Mjini","Kimwani","Magata"]
+},
+
+"Lindi":{
+"Lindi Mjini":["Mtanda","Mnazimmoja","Mingumbi"],
+"Kilwa":["Nanjirinji","Masoko","Njinjo"]
+},
+
+"Mtwara":{
+"Mtwara Mjini":["Shangani","Majengo","Rahaleo"],
+"Masasi":["Masasi Mjini","Mbuyuni","Chanikanguo"]
+},
+
+"Geita":{
+"Geita Mjini":["Kalangalala","Bombambili","Nzera"],
+"Chato":["Chato Mjini","Buziku","Kachwamba"]
+}
+
+};
+
+
+/* =========================
+HELPERS
+========================= */
+
+function escapeHTML(value){
+
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function formatPhone(phone){
+
+let p=String(phone||"").replace(/\D/g,"");
+
+if(p.startsWith("255"))
+return "+"+p;
+
+if(p.startsWith("0"))
+return "+255"+p.substring(1);
+
+return p;
+
+}
+
+
+/* =========================
+SHOW SECTION
+========================= */
+
+function show(id){
+
+document.querySelectorAll("section")
+.forEach(function(s){
+s.classList.add("hidden");
+});
+
+const target=document.getElementById(id);
+
+if(!target){
+
+console.error("Section haipo:",id);
+return;
+
+}
+
+target.classList.remove("hidden");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+if(id==="home"){
+
+loadProducts();
+loadAds();
+
+}
+
+if(id==="search")
+searchProducts();
+
+if(id==="admin")
+checkAdmin();
+
+if(id==="account"){
+
+loadMyProducts();
+loadMyOrders();
+loadSellerOrders();
+loadMyAds();
+
+}
+
+if(id==="advertise"){
+
+loadMyAdProducts();
+loadMyAds();
+
+}
+
+}
+
+
+/* =========================
+OPEN ADVERTISE
+========================= */
+
+async function openAdvertise(){
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+alert(
+"⚠️ Tafadhali fungua akaunti au ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+show("advertise");
+
+await loadMyAdProducts();
+await loadMyAds();
+
+}
+
+
+/* =========================
+LOCATIONS
+========================= */
+
+function loadRegions(){
+
+const regions=
+Object.keys(LOCATIONS).sort();
+
+const region=
+document.getElementById("region");
+
+const searchRegion=
+document.getElementById("searchRegion");
+
+if(region){
+
+region.innerHTML=
+'<option value="">Chagua Mkoa</option>';
+
+regions.forEach(function(r){
+
+const o=
+document.createElement("option");
+
+o.value=r;
+o.textContent=r;
+
+region.appendChild(o);
+
+});
+
+}
+
+if(searchRegion){
+
+searchRegion.innerHTML=
+'<option value="">Mikoa yote</option>';
+
+regions.forEach(function(r){
+
+const o=
+document.createElement("option");
+
+o.value=r;
+o.textContent=r;
+
+searchRegion.appendChild(o);
+
+});
+
+}
+
+}
+
+
+function loadDistricts(){
+
+const region=
+document.getElementById("region");
+
+const district=
+document.getElementById("district");
+
+const locality=
+document.getElementById("locality");
+
+if(!region||!district||!locality)
+return;
+
+district.innerHTML=
+'<option value="">Chagua Wilaya</option>';
+
+locality.innerHTML=
+'<option value="">Chagua Mtaa au Kijiji</option>';
+
+if(!region.value)return;
+
+Object.keys(
+LOCATIONS[region.value]||{}
+).forEach(function(d){
+
+const o=
+document.createElement("option");
+
+o.value=d;
+o.textContent=d;
+
+district.appendChild(o);
+
+});
+
+}
+
+
+function loadLocalities(){
+
+const region=
+document.getElementById("region").value;
+
+const district=
+document.getElementById("district").value;
+
+const locality=
+document.getElementById("locality");
+
+if(!locality)return;
+
+locality.innerHTML=
+'<option value="">Chagua Mtaa au Kijiji</option>';
+
+if(!region||!district)return;
+
+(
+LOCATIONS[region]?.[district]||[]
+).forEach(function(p){
+
+const o=
+document.createElement("option");
+
+o.value=p;
+o.textContent=p;
+
+locality.appendChild(o);
+
+});
+
+}
+
+
+function loadSearchDistricts(){
+
+const region=
+document.getElementById("searchRegion").value;
+
+const district=
+document.getElementById("searchDistrict");
+
+district.innerHTML=
+'<option value="">Wilaya zote</option>';
+
+if(region){
+
+Object.keys(
+LOCATIONS[region]||{}
+).forEach(function(d){
+
+const o=
+document.createElement("option");
+
+o.value=d;
+o.textContent=d;
+
+district.appendChild(o);
+
+});
+
+}
+
+searchProducts();
+
+}
+
+
+/* =========================
+IMAGE
+========================= */
+
+function compressImage(file){
+
+return new Promise(function(resolve,reject){
+
+if(!file){
+
+resolve("");
+return;
+
+}
+
+const reader=
+new FileReader();
+
+reader.onload=function(event){
+
+const img=
+new Image();
+
+img.onload=function(){
+
+const canvas=
+document.createElement("canvas");
+
+const max=1200;
+
+let width=img.width;
+let height=img.height;
+
+if(width>max){
+
+height=
+Math.round(height*max/width);
+
+width=max;
+
+}
+
+if(height>max){
+
+width=
+Math.round(width*max/height);
+
+height=max;
+
+}
+
+canvas.width=width;
+canvas.height=height;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+resolve(
+canvas.toDataURL(
+"image/jpeg",
+0.75
+)
+);
+
+};
+
+img.onerror=reject;
+
+img.src=event.target.result;
+
+};
+
+reader.onerror=reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =========================
+ADD PRODUCT
+========================= */
+
+async function addProduct(){
+
+const msg=
+document.getElementById("addMessage");
+
+msg.innerHTML=
+'<div class="message">⏳ Inahifadhi bidhaa...</div>';
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+msg.innerHTML=`
+<div class="message">
+⚠️ Tafadhali ingia kwenye akaunti kwanza.
+</div>`;
+
+show("account");
+return;
+
+}
+
+const name=
+document.getElementById("name")
+.value.trim();
+
+const price=
+document.getElementById("price")
+.value;
+
+const category=
+document.getElementById("category")
+.value;
+
+const region=
+document.getElementById("region")
+.value;
+
+const district=
+document.getElementById("district")
+.value;
+
+const locality=
+document.getElementById("locality")
+.value;
+
+const phone=
+formatPhone(
+document.getElementById("phone").value
+);
+
+const description=
+document.getElementById("description")
+.value.trim();
+
+const file1=
+document.getElementById("image1")
+.files[0];
+
+const file2=
+document.getElementById("image2")
+.files[0];
+
+
+if(
+!name||
+!price||
+!category||
+!region||
+!district||
+!locality||
+!phone
+){
+
+msg.innerHTML=`
+<div class="message">
+⚠️ Tafadhali jaza taarifa zote muhimu.
+</div>`;
+
+return;
+
+}
+
+
+if(!/^\+255\d{9}$/.test(phone)){
+
+msg.innerHTML=`
+<div class="message">
+⚠️ Weka namba sahihi ya Tanzania.<br>
+Mfano: 0625053021
+</div>`;
+
+return;
+
+}
+
+let image1="";
+let image2="";
+
+if(file1)
+image1=await compressImage(file1);
+
+if(file2)
+image2=await compressImage(file2);
+
+
+const result=
+await supabaseClient
+.from("Production")
+.insert([{
+
+name:name,
+price:Number(price),
+category:category,
+region:region,
+district:district,
+place:locality,
+phone:phone,
+description:description,
+image_url:image1||null,
+image_url_2:image2||null,
+user_id:user.id,
+status:"pending"
+
+}]);
+
+
+if(result.error)
+throw result.error;
+
+
+msg.innerHTML=`
+<div class="message">
+✅ Bidhaa imehifadhiwa PLAM.<br><br>
+<b>Status: PENDING</b>
+</div>`;
+
+
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("category").value="";
+document.getElementById("phone").value="";
+document.getElementById("description").value="";
+document.getElementById("image1").value="";
+document.getElementById("image2").value="";
+document.getElementById("region").value="";
+
+loadDistricts();
+
+await loadProducts();
+await loadMyProducts();
+
+
+}catch(error){
+
+console.error(error);
+
+msg.innerHTML=`
+<div class="message">
+❌ Imeshindikana kuhifadhi bidhaa.<br><br>
+<b>${escapeHTML(
+error.message||String(error)
+)}</b>
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+LOAD PRODUCTS
+========================= */
+
+async function loadProducts(){
+
+const box=
+document.getElementById("products");
+
+if(!box)return;
+
+box.innerHTML=
+"⏳ Inapakia bidhaa...";
+
+try{
+
+const result=
+await supabaseClient
+.from("Production")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(result.error)
+throw result.error;
+
+renderProducts(
+result.data||[],
+box
+);
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+RENDER PRODUCTS
+========================= */
+
+function renderProducts(data,box){
+
+if(!data.length){
+
+box.innerHTML=`
+<div class="card">
+Hakuna bidhaa zilizowekwa bado.
+</div>`;
+
+return;
+
+}
+
+box.innerHTML=
+data.map(function(p){
+
+const image=
+p.image_url||
+"https://via.placeholder.com/900x600?text=PLAM+TANZANIA";
+
+const phone=
+formatPhone(p.phone);
+
+const wa=
+phone.replace(/\D/g,"");
+
+
+return `
+<div class="product">
+
+<div class="product-image-box">
+
+<img
+class="main-image"
+src="${image}"
+alt="${escapeHTML(p.name)}"
+onerror="this.src='https://via.placeholder.com/900x600?text=PLAM+TANZANIA'"
+>
+
+</div>
+
+<div class="product-body">
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+<div class="price-box">
+
+<div class="price-label">
+Bei ya bidhaa
+</div>
+
+<div class="price">
+TSh ${Number(
+p.price||0
+).toLocaleString()}
+</div>
+
+</div>
+
+<div class="location">
+
+📍 <b>Mkoa:</b>
+${escapeHTML(p.region||"-")}
+
+<br>
+
+🏘️ <b>Wilaya:</b>
+${escapeHTML(p.district||"-")}
+
+<br>
+
+🛣️ <b>Mtaa/Kijiji:</b>
+${escapeHTML(p.place||"-")}
+
+</div>
+
+
+${p.description?`
+
+<div class="description">
+
+<b>📝 Maelezo:</b>
+<br>
+
+${escapeHTML(p.description)}
+
+</div>
+
+`:""}
+
+
+${p.image_url_2?`
+
+<div class="second-image-box">
+
+<div class="second-image-title">
+🖼️ Picha ya pili
+</div>
+
+<img
+class="second-image"
+src="${p.image_url_2}"
+>
+
+</div>
+
+`:""}
+
+
+<div class="actions">
+
+<button
+type="button"
+class="order"
+onclick="placeOrder(${Number(p.id)})"
+>
+🛒 Agiza Bidhaa
+</button>
+
+<a
+class="download"
+href="${image}"
+download="PLAM-${encodeURIComponent(
+p.name||"bidhaa"
+)}.jpg"
+>
+📥 Pakua Picha
+</a>
+
+<a
+class="call"
+href="tel:${phone}"
+>
+📞 Piga Simu
+</a>
+
+<a
+class="whatsapp"
+href="https://wa.me/${wa}"
+target="_blank"
+>
+💬 WhatsApp
+</a>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+SEARCH
+========================= */
+
+async function searchProducts(text){
+
+const box=
+document.getElementById("searchResults")||
+document.getElementById("products");
+
+if(!box)return;
+
+let query=
+supabaseClient
+.from("Production")
+.select("*")
+.order("created_at",{ascending:false});
+
+const region=
+document.getElementById(
+"searchRegion"
+)?.value||"";
+
+const district=
+document.getElementById(
+"searchDistrict"
+)?.value||"";
+
+
+if(region)
+query=query.eq("region",region);
+
+if(district)
+query=query.eq("district",district);
+
+
+try{
+
+const result=await query;
+
+if(result.error)
+throw result.error;
+
+let products=result.data||[];
+
+const word=
+String(
+text||
+document.getElementById(
+"searchInput"
+)?.value||
+document.getElementById(
+"homeSearch"
+)?.value||
+""
+)
+.toLowerCase()
+.trim();
+
+
+if(word){
+
+products=
+products.filter(function(p){
+
+return String(
+p.name||""
+)
+.toLowerCase()
+.includes(word)||
+
+String(
+p.description||""
+)
+.toLowerCase()
+.includes(word)||
+
+String(
+p.category||""
+)
+.toLowerCase()
+.includes(word);
+
+});
+
+}
+
+renderProducts(
+products,
+box
+);
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+PLACE ORDER
+========================= */
+
+async function placeOrder(productId){
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+alert(
+"⚠️ Tafadhali fungua akaunti au ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+
+const result=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("id",productId)
+.single();
+
+if(result.error)
+throw result.error;
+
+const product=result.data;
+
+
+const buyerName=
+user.user_metadata?.full_name||
+user.email||
+"Mnunuzi";
+
+
+let buyerPhone=
+formatPhone(
+user.user_metadata?.phone||""
+);
+
+
+if(!buyerPhone){
+
+const profile=
+await supabaseClient
+.from("profiles")
+.select("phone")
+.eq("id",user.id)
+.maybeSingle();
+
+if(profile.data?.phone){
+
+buyerPhone=
+formatPhone(
+profile.data.phone
+);
+
+}
+
+}
+
+
+const sellerPhone=
+formatPhone(
+product.phone||""
+);
+
+let sellerId=
+product.user_id||null;
+
+
+if(!sellerId&&sellerPhone){
+
+const seller=
+await supabaseClient
+.from("profiles")
+.select("id")
+.eq("phone",sellerPhone)
+.maybeSingle();
+
+if(!seller.error&&seller.data?.id){
+
+sellerId=seller.data.id;
+
+}
+
+}
+
+
+if(!sellerPhone){
+
+alert(
+"⚠️ Bidhaa hii haina namba ya muuzaji."
+);
+
+return;
+
+}
+
+
+if(!sellerId){
+
+alert(
+"⚠️ Bidhaa hii bado haijaunganishwa na akaunti ya muuzaji."
+);
+
+return;
+
+}
+
+
+const orderResult=
+await supabaseClient
+.from("orders")
+.insert([{
+
+product_id:product.id,
+product_name:product.name,
+seller_id:sellerId,
+buyer_id:user.id,
+buyer_name:buyerName,
+buyer_phone:buyerPhone,
+buyer_email:user.email||"",
+seller_phone:sellerPhone,
+quantity:1,
+message:"",
+status:"pending"
+
+}]);
+
+
+if(orderResult.error)
+throw orderResult.error;
+
+
+alert(
+"✅ Order sent successfully.\n\nStatus: PENDING"
+);
+
+loadMyOrders();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Imeshindikana kutuma order.\n\n"+
+(error.message||String(error))
+);
+
+}
+
+}
+
+
+/* =========================
+STATUS
+========================= */
+
+function statusHTML(status){
+
+const s=
+String(
+status||"pending"
+).toLowerCase();
+
+
+if(s==="accepted"){
+
+return `
+<span class="status accepted">
+🟢 ACCEPTED
+</span>
+`;
+
+}
+
+
+if(s==="rejected"){
+
+return `
+<span class="status rejected">
+🔴 REJECTED
+</span>
+`;
+
+}
+
+
+return `
+<span class="status pending">
+🟡 PENDING
+</span>
+`;
+
+}
+
+
+/* ==================================================
+MATANGAZO
+================================================== */
+
+
+/* =========================
+LOAD SELLER PRODUCTS FOR ADS
+========================= */
+
+async function loadMyAdProducts(){
+
+const select=
+document.getElementById("adProduct");
+
+if(!select)return;
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+select.innerHTML=
+'<option value="">Ingia kwanza</option>';
+
+return;
+
+}
+
+select.innerHTML=
+'<option value="">⏳ Inapakia bidhaa...</option>';
+
+
+try{
+
+const result=
+await supabaseClient
+.from("Production")
+.select("id,name,price,image_url,region,district,place")
+.eq("user_id",user.id)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+const products=result.data||[];
+
+
+if(!products.length){
+
+select.innerHTML=
+'<option value="">Huna bidhaa za kutangaza</option>';
+
+return;
+
+}
+
+
+select.innerHTML=
+'<option value="">Chagua bidhaa</option>';
+
+
+products.forEach(function(p){
+
+const option=
+document.createElement("option");
+
+option.value=p.id;
+
+option.textContent=
+`${p.name} — TSh ${Number(
+p.price||0
+).toLocaleString()}`;
+
+select.appendChild(option);
+
+});
+
+
+}catch(error){
+
+select.innerHTML=
+'<option value="">Imeshindikana kupakia bidhaa</option>';
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================
+SUBMIT AD
+========================= */
+
+async function submitAd(){
+
+const box=
+document.getElementById("adMessage");
+
+box.innerHTML=
+'<div class="message">⏳ Inatuma ombi la tangazo...</div>';
+
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Tafadhali ingia kwenye akaunti kwanza.
+</div>`;
+
+return;
+
+}
+
+
+const productId=
+document.getElementById(
+"adProduct"
+).value;
+
+
+if(!productId){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Chagua bidhaa unayotaka kutangaza.
+</div>`;
+
+return;
+
+}
+
+
+const selected=
+document.querySelector(
+'input[name="adPackage"]:checked'
+);
+
+
+if(!selected){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Chagua kifurushi cha tangazo.
+</div>`;
+
+return;
+
+}
+
+
+const packageName=
+selected.value;
+
+const packageInfo=
+AD_PACKAGES[packageName];
+
+
+if(!packageInfo){
+
+box.innerHTML=`
+<div class="message">
+❌ Kifurushi hakitambuliki.
+</div>`;
+
+return;
+
+}
+
+
+/*
+HAIJAUNGANISHWA MALIPO.
+TUNATUMA OMBI TU.
+*/
+
+const result=
+await supabaseClient
+.from("ads")
+.insert([{
+
+product_id:Number(productId),
+seller_id:user.id,
+package:packageName,
+duration_days:packageInfo.days,
+price:packageInfo.price,
+status:"pending",
+starts_at:null,
+expires_at:null
+
+}]);
+
+
+if(result.error)
+throw result.error;
+
+
+box.innerHTML=`
+<div class="message">
+
+✅ Ombi la tangazo limetumwa.
+
+<br><br>
+
+📦 Kifurushi:
+<b>${packageInfo.name}</b>
+
+<br>
+
+⏳ Muda:
+<b>${packageInfo.days} siku</b>
+
+<br>
+
+💰 Bei:
+<b>TSh ${packageInfo.price.toLocaleString()}</b>
+
+<br><br>
+
+🟡 <b>WAITING FOR ADMIN APPROVAL</b>
+
+<br><br>
+
+Admin atalipitia ombi lako.
+
+</div>
+`;
+
+
+await loadMyAds();
+
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML=`
+<div class="message">
+
+❌ Imeshindikana kutuma ombi.
+
+<br><br>
+
+<b>${escapeHTML(
+error.message||String(error)
+)}</b>
+
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+LOAD MY ADS
+========================= */
+
+async function loadMyAds(){
+
+const box=
+document.getElementById("myAds");
+
+if(!box)return;
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+box.innerHTML=
+"Ingia kwenye akaunti kuona matangazo yako.";
+
+return;
+
+}
+
+box.innerHTML=
+"⏳ Inapakia matangazo yako...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("ads")
+.select("*")
+.eq("seller_id",user.id)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+const ads=result.data||[];
+
+
+if(!ads.length){
+
+box.innerHTML=`
+<div class="message">
+📢 Hujatuma ombi la tangazo bado.
+</div>`;
+
+return;
+
+}
+
+
+/*
+FETCH PRODUCTS
+*/
+
+const productIds=
+[
+...new Set(
+ads.map(a=>a.product_id)
+)
+];
+
+
+let productMap={};
+
+
+if(productIds.length){
+
+const products=
+await supabaseClient
+.from("Production")
+.select("id,name,image_url,price")
+.in("id",productIds);
+
+
+if(!products.error){
+
+(products.data||[])
+.forEach(function(p){
+
+productMap[p.id]=p;
+
+});
+
+}
+
+}
+
+
+box.innerHTML=
+ads.map(function(a){
+
+const p=
+productMap[a.product_id]||{};
+
+const packageInfo=
+AD_PACKAGES[a.package]||
+{
+name:a.package||"-",
+days:a.duration_days||0,
+price:a.price||0
+};
+
+
+let extra="";
+
+
+if(a.status==="accepted"){
+
+if(a.expires_at){
+
+const expired=
+new Date(a.expires_at)
+<=new Date();
+
+if(expired){
+
+extra=`
+<br>
+⏰ <b>Tangazo limekwisha muda.</b>
+`;
+
+}else{
+
+extra=`
+<br>
+📅 Linaisha:
+<b>${new Date(
+a.expires_at
+).toLocaleString("sw-TZ")}</b>
+`;
+
+}
+
+}
+
+}
+
+
+return `
+<div class="ad-request">
+
+<b>📢 ${escapeHTML(
+p.name||"Bidhaa"
+)}</b>
+
+<br>
+
+📦 Kifurushi:
+<b>${escapeHTML(
+packageInfo.name
+)}</b>
+
+<br>
+
+⏳ Muda:
+${Number(
+packageInfo.days
+)} siku
+
+<br>
+
+💰 Bei:
+TSh ${Number(
+packageInfo.price
+).toLocaleString()}
+
+<br>
+
+<b>Status:</b>
+${statusHTML(a.status)}
+
+${extra}
+
+<br>
+
+📅 Ombi:
+${a.created_at
+?new Date(
+a.created_at
+).toLocaleString("sw-TZ")
+:"-"}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+LOAD ACTIVE ADS FOR HOME
+========================= */
+
+async function loadAds(){
+
+const box=
+document.getElementById("adsBox");
+
+if(!box)return;
+
+
+/*
+STOP OLD TIMER
+*/
+
+if(adsTimer){
+
+clearInterval(adsTimer);
+adsTimer=null;
+
+}
+
+adsData=[];
+adsIndex=0;
+
+
+try{
+
+const result=
+await supabaseClient
+.from("ads")
+.select("*")
+.eq("status","accepted")
+.gt(
+"expires_at",
+new Date().toISOString()
+)
+.order("package",{ascending:false})
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+
+const ads=result.data||[];
+
+
+if(!ads.length){
+
+box.innerHTML=`
+<div class="no-ads">
+📢 Hakuna tangazo linaloendelea kwa sasa.
+<br><br>
+Tangazo lako linaweza kuonekana hapa.
+</div>`;
+
+return;
+
+}
+
+
+/*
+GET PRODUCTS
+*/
+
+const productIds=
+[
+...new Set(
+ads.map(a=>a.product_id)
+)
+];
+
+
+let productMap={};
+
+
+if(productIds.length){
+
+const products=
+await supabaseClient
+.from("Production")
+.select("*")
+.in("id",productIds);
+
+
+if(products.error)
+throw products.error;
+
+
+(products.data||[])
+.forEach(function(p){
+
+productMap[p.id]=p;
+
+});
+
+}
+
+
+/*
+KEEP ADS ONLY WITH PRODUCTS
+*/
+
+adsData=
+ads
+.map(function(a){
+
+return {
+
+ad:a,
+product:productMap[a.product_id]
+
+};
+
+})
+.filter(function(item){
+
+return !!item.product;
+
+});
+
+
+if(!adsData.length){
+
+box.innerHTML=`
+<div class="no-ads">
+📢 Hakuna bidhaa za matangazo zinazopatikana.
+</div>`;
+
+return;
+
+}
+
+
+/*
+RENDER
+*/
+
+renderAds();
+
+
+/*
+ROTATE EVERY 5 SECONDS
+*/
+
+if(adsData.length>1){
+
+adsTimer=
+setInterval(function(){
+
+nextAd();
+
+},5000);
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML=`
+<div class="no-ads">
+❌ Imeshindikana kupakia matangazo.
+<br><br>
+${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+RENDER ADS
+========================= */
+
+function renderAds(){
+
+const box=
+document.getElementById("adsBox");
+
+if(!box)return;
+
+if(!adsData.length){
+
+box.innerHTML=
+'<div class="no-ads">Hakuna matangazo.</div>';
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<div class="ad-slider" id="adSlider">
+
+${adsData.map(function(item,index){
+
+const a=item.ad;
+const p=item.product;
+
+const image=
+p.image_url||
+"https://via.placeholder.com/900x600?text=PLAM+TANZANIA";
+
+const phone=
+formatPhone(p.phone);
+
+const wa=
+phone.replace(/\D/g,"");
+
+let badgeClass="ad-basic";
+let badgeText="🟢 BASIC";
+
+if(a.package==="standard"){
+
+badgeClass="ad-standard";
+badgeText="🔵 STANDARD";
+
+}
+
+if(a.package==="premium"){
+
+badgeClass="ad-premium";
+badgeText="👑 PREMIUM";
+
+}
+
+
+return `
+<div
+class="ad-card ${index===0?"active":""}"
+data-ad-index="${index}"
+>
+
+<div class="ad-image-box">
+
+<img
+class="ad-image"
+src="${image}"
+alt="${escapeHTML(p.name)}"
+onerror="this.src='https://via.placeholder.com/900x600?text=PLAM+TANZANIA'"
+>
+
+<div class="ad-badge ${badgeClass}">
+${badgeText}
+</div>
+
+</div>
+
+
+<div class="ad-body">
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+<div class="ad-price">
+TSh ${Number(
+p.price||0
+).toLocaleString()}
+</div>
+
+<div class="ad-location">
+
+📍 ${escapeHTML(
+p.region||"-"
+)}
+
+<br>
+
+🏘️ ${escapeHTML(
+p.district||"-"
+)}
+
+<br>
+
+🛣️ ${escapeHTML(
+p.place||"-"
+)}
+
+</div>
+
+
+${p.description?`
+
+<div class="description">
+
+${escapeHTML(
+p.description
+)}
+
+</div>
+
+`:""}
+
+
+<div class="actions">
+
+<button
+type="button"
+class="order"
+onclick="placeOrder(${Number(p.id)})"
+>
+🛒 Agiza
+</button>
+
+<a
+class="call"
+href="tel:${phone}"
+>
+📞 Simu
+</a>
+
+<a
+class="whatsapp"
+href="https://wa.me/${wa}"
+target="_blank"
+>
+💬 WhatsApp
+</a>
+
+<a
+class="download"
+href="${image}"
+download="PLAM-${encodeURIComponent(
+p.name||"bidhaa"
+)}.jpg"
+>
+📥 Picha
+</a>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+}).join("")}
+
+
+<div class="ad-controls">
+
+<button
+type="button"
+class="ad-control-btn"
+onclick="prevAd()"
+>
+‹
+</button>
+
+<div
+class="ad-dots"
+id="adDots"
+>
+${adsData.map(function(_,index){
+
+return `
+<span
+class="ad-dot ${index===0?"active":""}"
+onclick="goToAd(${index})"
+></span>
+`;
+
+}).join("")}
+</div>
+
+<button
+type="button"
+class="ad-control-btn"
+onclick="nextAd()"
+>
+›
+</button>
+
+</div>
+
+<div
+class="ad-count"
+id="adCount"
+>
+Tangazo 1 kati ya ${adsData.length}
+</div>
+
+</div>
+`;
+
+adsIndex=0;
+
+}
+
+
+/* =========================
+GO TO AD
+========================= */
+
+function goToAd(index){
+
+if(!adsData.length)return;
+
+adsIndex=
+(index+adsData.length)%
+adsData.length;
+
+const cards=
+document.querySelectorAll(".ad-card");
+
+cards.forEach(function(card,i){
+
+card.classList.toggle(
+"active",
+i===adsIndex
+);
+
+});
+
+
+const dots=
+document.querySelectorAll(".ad-dot");
+
+dots.forEach(function(dot,i){
+
+dot.classList.toggle(
+"active",
+i===adsIndex
+);
+
+});
+
+
+const count=
+document.getElementById("adCount");
+
+if(count){
+
+count.textContent=
+`Tangazo ${adsIndex+1} kati ya ${adsData.length}`;
+
+}
+
+}
+
+
+/* =========================
+NEXT / PREVIOUS
+========================= */
+
+function nextAd(){
+
+if(!adsData.length)return;
+
+goToAd(
+(adsIndex+1)%
+adsData.length
+);
+
+}
+
+
+function prevAd(){
+
+if(!adsData.length)return;
+
+goToAd(
+(adsIndex-1+adsData.length)%
+adsData.length
+);
+
+}
+
+
+/* ==================================================
+MY PRODUCTS
+================================================== */
+
+async function loadMyProducts(){
+
+const box=
+document.getElementById("myProducts");
+
+if(!box)return;
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+box.innerHTML=
+"Ingia kwenye akaunti kuona bidhaa zako.";
+
+return;
+
+}
+
+box.innerHTML=
+"⏳ Inapakia bidhaa zako...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("user_id",user.id)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+let products=
+result.data||[];
+
+
+if(!products.length){
+
+box.innerHTML=`
+<div class="message">
+🛍️ Huna bidhaa ulizoweka bado.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<div class="message">
+✅ Una bidhaa <b>${products.length}</b>
+kwenye PLAM.
+</div>
+
+`+
+products.map(function(p){
+
+return `
+<div class="my-product">
+
+${p.image_url?`
+<img src="${p.image_url}">
+`:""}
+
+<div class="my-product-body">
+
+<h3>
+${escapeHTML(
+p.name||"Bidhaa"
+)}
+</h3>
+
+<div class="my-product-price">
+
+TSh ${Number(
+p.price||0
+).toLocaleString()}
+
+</div>
+
+<div class="my-product-location">
+
+📍 <b>Mkoa:</b>
+${escapeHTML(p.region||"-")}
+
+<br>
+
+🏘️ <b>Wilaya:</b>
+${escapeHTML(p.district||"-")}
+
+<br>
+
+🛣️ <b>Mtaa/Kijiji:</b>
+${escapeHTML(p.place||"-")}
+
+<br>
+
+📞 <b>Simu:</b>
+${escapeHTML(p.phone||"-")}
+
+<br><br>
+
+<b>Status:</b>
+<br>
+
+${statusHTML(p.status)}
+
+</div>
+
+
+${p.description?`
+
+<div class="description">
+
+<b>📝 Maelezo:</b>
+<br>
+
+${escapeHTML(p.description)}
+
+</div>
+
+`:""}
+
+
+${p.image_url_2?`
+
+<div class="my-product-second">
+
+<b>🖼️ Picha ya pili</b>
+
+<br><br>
+
+<img src="${p.image_url_2}">
+
+</div>
+
+`:""}
+
+</div>
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+MY ORDERS
+================================================== */
+
+async function loadMyOrders(){
+
+const box=
+document.getElementById("myOrders");
+
+if(!box)return;
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+if(!user){
+
+box.innerHTML=
+"Ingia kwenye akaunti kuona maagizo yako.";
+
+return;
+
+}
+
+box.innerHTML=
+"⏳ Inapakia maagizo...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("buyer_id",user.id)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+const orders=
+result.data||[];
+
+
+if(!orders.length){
+
+box.innerHTML=`
+<div class="message">
+Hujawa na order lolote bado.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+orders.map(function(o){
+
+return `
+<div class="order-box">
+
+<b>🛍️ ${escapeHTML(
+o.product_name||"Bidhaa"
+)}</b>
+
+<br><br>
+
+📦 <b>Quantity:</b>
+${Number(o.quantity||1)}
+
+<br>
+
+<b>Status:</b>
+<br>
+
+${statusHTML(o.status)}
+
+<br>
+
+📅 ${
+o.created_at
+?new Date(
+o.created_at
+).toLocaleString("sw-TZ")
+:"-"
+}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+SELLER ORDERS
+================================================== */
+
+async function loadSellerOrders(){
+
+const box=
+document.getElementById("sellerOrders");
+
+if(!box)return;
+
+box.innerHTML=
+"⏳ Inapakia maagizo ya wateja...";
+
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+
+if(!user){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Tafadhali ingia kwenye akaunti kwanza.
+</div>`;
+
+return;
+
+}
+
+
+const result=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("seller_id",user.id)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+const orders=
+result.data||[];
+
+
+if(!orders.length){
+
+box.innerHTML=`
+<div class="message">
+📭 Hakuna maagizo ya wateja kwa bidhaa zako bado.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+orders.map(function(o){
+
+const s=
+String(
+o.status||"pending"
+).toLowerCase();
+
+
+return `
+<div class="order-box">
+
+<b>🛍️ ${escapeHTML(
+o.product_name||"Bidhaa"
+)}</b>
+
+<br><br>
+
+👤 <b>Buyer:</b>
+${escapeHTML(
+o.buyer_name||"-"
+)}
+
+<br>
+
+📞 <b>Phone:</b>
+${escapeHTML(
+o.buyer_phone||"-"
+)}
+
+<br>
+
+📧 <b>Email:</b>
+${escapeHTML(
+o.buyer_email||"-"
+)}
+
+<br>
+
+📦 <b>Quantity:</b>
+${Number(
+o.quantity||1
+)}
+
+<br><br>
+
+<b>Status:</b>
+<br>
+
+${statusHTML(o.status)}
+
+<br>
+
+📅 ${
+o.created_at
+?new Date(
+o.created_at
+).toLocaleString("sw-TZ")
+:"-"
+}
+
+
+${
+s==="pending"
+?`
+
+<div class="actions">
+
+<button
+type="button"
+class="order"
+onclick="sellerOrderStatus(
+${Number(o.id)},
+'accepted'
+)"
+>
+✅ Accept
+</button>
+
+<button
+type="button"
+class="red"
+onclick="sellerOrderStatus(
+${Number(o.id)},
+'rejected'
+)"
+>
+❌ Reject
+</button>
+
+</div>
+
+`
+:""
+}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+
+❌ Imeshindikana kupakia maagizo.
+
+<br><br>
+
+<b>${escapeHTML(
+error.message||String(error)
+)}</b>
+
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+SELLER ORDER STATUS
+========================= */
+
+async function sellerOrderStatus(id,status){
+
+if(
+status!=="accepted"&&
+status!=="rejected"
+)return;
+
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+
+if(!user){
+
+alert(
+"Tafadhali ingia kwanza."
+);
+
+return;
+
+}
+
+
+try{
+
+const result=
+await supabaseClient
+.from("orders")
+.update({
+status:status
+})
+.eq("id",id)
+.eq("seller_id",user.id);
+
+
+if(result.error)
+throw result.error;
+
+
+alert(
+status==="accepted"
+?
+"✅ Order ACCEPTED successfully."
+:
+"❌ Order REJECTED successfully."
+);
+
+
+loadSellerOrders();
+
+
+}catch(error){
+
+alert(
+"❌ "+
+(error.message||String(error))
+);
+
+}
+
+}
+
+
+/* ==================================================
+REGISTER
+================================================== */
+
+async function registerUser(){
+
+const box=
+document.getElementById(
+"registerMessage"
+);
+
+const name=
+document.getElementById(
+"regName"
+).value.trim();
+
+const phone=
+formatPhone(
+document.getElementById(
+"regPhone"
+).value
+);
+
+const email=
+document.getElementById(
+"regEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"regPassword"
+).value;
+
+
+if(!name||!phone||!email||!password){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Jaza taarifa zote.
+</div>`;
+
+return;
+
+}
+
+
+if(password.length<6){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Password iwe na angalau herufi 6.
+</div>`;
+
+return;
+
+}
+
+
+if(!/^\+255\d{9}$/.test(phone)){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Weka namba sahihi ya Tanzania.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+"⏳ Inafungua akaunti...";
+
+
+try{
+
+const result=
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name,
+phone:phone
+}
+}
+
+});
+
+
+if(result.error)
+throw result.error;
+
+
+if(result.data?.user){
+
+await supabaseClient
+.from("profiles")
+.upsert({
+
+id:result.data.user.id,
+full_name:name,
+phone:phone,
+email:email
+
+});
+
+}
+
+
+box.innerHTML=`
+<div class="message">
+
+✅ Akaunti imeundwa.
+
+<br><br>
+
+${
+result.data?.session
+?
+"Umeingia moja kwa moja."
+:
+"Angalia email yako kama uthibitisho umeombwa, kisha ingia."
+}
+
+</div>`;
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+LOGIN
+================================================== */
+
+async function loginUser(){
+
+const box=
+document.getElementById(
+"loginMessage"
+);
+
+const email=
+document.getElementById(
+"loginEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"loginPassword"
+).value;
+
+
+if(!email||!password){
+
+box.innerHTML=`
+<div class="message">
+⚠️ Weka email na password.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+"⏳ Inaingia...";
+
+
+try{
+
+const result=
+await supabaseClient.auth
+.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+
+if(result.error)
+throw result.error;
+
+
+const user=result.data.user;
+
+
+const oldProfile=
+await supabaseClient
+.from("profiles")
+.select(
+"full_name,phone,email"
+)
+.eq("id",user.id)
+.maybeSingle();
+
+
+const oldPhone=
+oldProfile.data?.phone||
+user.user_metadata?.phone||
+"";
+
+
+const oldName=
+oldProfile.data?.full_name||
+user.user_metadata?.full_name||
+"";
+
+
+await supabaseClient
+.from("profiles")
+.upsert({
+
+id:user.id,
+full_name:oldName,
+phone:formatPhone(oldPhone),
+email:user.email
+
+});
+
+
+box.innerHTML=`
+<div class="message">
+
+✅ Umeingia.
+
+<br><br>
+
+Karibu ${
+escapeHTML(
+oldName||user.email
+)
+}.
+
+</div>`;
+
+
+await loadMyProducts();
+await loadMyOrders();
+await loadSellerOrders();
+await loadMyAds();
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+LOGOUT
+================================================== */
+
+async function logoutUser(){
+
+await supabaseClient.auth.signOut();
+
+
+document.getElementById(
+"loginMessage"
+).innerHTML=`
+<div class="message">
+Umetoka kwenye akaunti.
+</div>`;
+
+
+document.getElementById(
+"myProducts"
+).innerHTML=
+"Ingia kwenye akaunti kuona bidhaa zako.";
+
+
+document.getElementById(
+"myOrders"
+).innerHTML=
+"Ingia kwenye akaunti kuona maagizo yako.";
+
+
+document.getElementById(
+"sellerOrders"
+).innerHTML=
+"Ingia kwenye akaunti kuona maagizo ya wateja.";
+
+
+const myAds=
+document.getElementById("myAds");
+
+if(myAds){
+
+myAds.innerHTML=
+"Ingia kwenye akaunti kuona matangazo yako.";
+
+}
+
+}
+
+
+/* ==================================================
+ADMIN
+================================================== */
+
+async function checkAdmin(){
+
+const result=
+await supabaseClient.auth.getUser();
+
+const user=result.data?.user;
+
+
+if(
+user&&
+user.email?.toLowerCase()===
+ADMIN_EMAIL.toLowerCase()
+){
+
+document.getElementById(
+"adminLogin"
+).classList.add("hidden");
+
+
+document.getElementById(
+"dashboard"
+).classList.remove("hidden");
+
+
+document.getElementById(
+"adminWelcome"
+).textContent=
+"Admin: "+user.email;
+
+
+loadAdminAds();
+loadAdminProducts();
+loadAdminOrders();
+loadUsers();
+
+
+}else{
+
+document.getElementById(
+"adminLogin"
+).classList.remove("hidden");
+
+
+document.getElementById(
+"dashboard"
+).classList.add("hidden");
+
+}
+
+}
+
+
+/* =========================
+ADMIN LOGIN
+========================= */
+
+async function adminLogin(){
+
+const email=
+document.getElementById(
+"adminEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"adminPassword"
+).value;
+
+const box=
+document.getElementById(
+"adminMessage"
+);
+
+
+if(
+email.toLowerCase()!==
+ADMIN_EMAIL.toLowerCase()
+){
+
+box.innerHTML=`
+<div class="message">
+❌ Hii si email ya Admin.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+"⏳ Inaingia...";
+
+
+try{
+
+const result=
+await supabaseClient.auth
+.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+
+if(result.error)
+throw result.error;
+
+
+document.getElementById(
+"adminLogin"
+).classList.add("hidden");
+
+
+document.getElementById(
+"dashboard"
+).classList.remove("hidden");
+
+
+document.getElementById(
+"adminWelcome"
+).textContent=
+"Admin: "+
+result.data.user.email;
+
+
+loadAdminAds();
+loadAdminProducts();
+loadAdminOrders();
+loadUsers();
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+ADMIN ADS
+================================================== */
+
+async function loadAdminAds(){
+
+const box=
+document.getElementById("adminAds");
+
+if(!box)return;
+
+box.innerHTML=
+"⏳ Inapakia matangazo...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("ads")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+
+const ads=result.data||[];
+
+
+if(!ads.length){
+
+box.innerHTML=`
+<div class="message">
+📢 Hakuna maombi ya matangazo bado.
+</div>`;
+
+return;
+
+}
+
+
+/*
+PRODUCTS
+*/
+
+const productIds=
+[
+...new Set(
+ads.map(a=>a.product_id)
+)
+];
+
+
+let productMap={};
+
+
+if(productIds.length){
+
+const products=
+await supabaseClient
+.from("Production")
+.select("*")
+.in("id",productIds);
+
+
+if(!products.error){
+
+(products.data||[])
+.forEach(function(p){
+
+productMap[p.id]=p;
+
+});
+
+}
+
+}
+
+
+/*
+SELLER PROFILES
+*/
+
+const sellerIds=
+[
+...new Set(
+ads.map(a=>a.seller_id)
+)
+];
+
+
+let sellerMap={};
+
+
+if(sellerIds.length){
+
+const sellers=
+await supabaseClient
+.from("profiles")
+.select(
+"id,full_name,phone,email"
+)
+.in("id",sellerIds);
+
+
+if(!sellers.error){
+
+(sellers.data||[])
+.forEach(function(s){
+
+sellerMap[s.id]=s;
+
+});
+
+}
+
+}
+
+
+box.innerHTML=
+ads.map(function(a){
+
+const p=
+productMap[a.product_id]||{};
+
+const seller=
+sellerMap[a.seller_id]||{};
+
+const info=
+AD_PACKAGES[a.package]||
+{
+name:a.package||"-",
+days:a.duration_days||0,
+price:a.price||0
+};
+
+
+const image=
+p.image_url||"";
+
+
+const status=
+String(
+a.status||"pending"
+).toLowerCase();
+
+
+let buttons="";
+
+
+if(status==="pending"){
+
+buttons=`
+
+<div class="actions">
+
+<button
+type="button"
+class="main"
+onclick="adminAcceptAd(${Number(a.id)})"
+>
+✅ Kubali Tangazo
+</button>
+
+<button
+type="button"
+class="main red"
+onclick="adminRejectAd(${Number(a.id)})"
+>
+❌ Kataa Tangazo
+</button>
+
+</div>
+
+`;
+
+}
+
+
+if(status==="accepted"){
+
+buttons=`
+
+<button
+type="button"
+class="main red"
+onclick="adminRejectAd(${Number(a.id)})"
+>
+❌ Zima Tangazo
+</button>
+
+`;
+
+}
+
+
+return `
+<div class="admin-ad">
+
+${image?`
+
+<img src="${image}">
+
+`:""}
+
+
+<b>📢 BIDHAA</b>
+
+<br>
+
+🛍️ <b>${escapeHTML(
+p.name||"-"
+)}</b>
+
+<br>
+
+💰 TSh ${Number(
+p.price||0
+).toLocaleString()}
+
+<br><br>
+
+
+<b>👤 MUUZAJI</b>
+
+<br>
+
+${escapeHTML(
+seller.full_name||"Bila jina"
+)}
+
+<br>
+
+📞 ${escapeHTML(
+seller.phone||p.phone||"-"
+)}
+
+<br>
+
+📧 ${escapeHTML(
+seller.email||"-"
+)}
+
+<br><br>
+
+
+<b>📦 KIFURUSHI</b>
+
+<br>
+
+${escapeHTML(info.name)}
+
+<br>
+
+⏳ ${Number(
+info.days
+)} siku
+
+<br>
+
+💰 TSh ${Number(
+info.price
+).toLocaleString()}
+
+<br><br>
+
+
+<b>Status:</b>
+
+${statusHTML(a.status)}
+
+<br>
+
+📅 Ombi:
+${a.created_at
+?new Date(
+a.created_at
+).toLocaleString("sw-TZ")
+:"-"}
+
+${a.starts_at?`
+
+<br>
+
+▶️ Ilianza:
+${new Date(
+a.starts_at
+).toLocaleString("sw-TZ")}
+
+`:""}
+
+
+${a.expires_at?`
+
+<br>
+
+⏰ Inaisha:
+${new Date(
+a.expires_at
+).toLocaleString("sw-TZ")}
+
+`:""}
+
+
+${buttons}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+
+❌ Imeshindikana kupakia matangazo.
+
+<br><br>
+
+<b>${escapeHTML(
+error.message||String(error)
+)}</b>
+
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+ADMIN ACCEPT AD
+========================= */
+
+async function adminAcceptAd(id){
+
+if(
+!confirm(
+"Unataka kukubali tangazo hili?"
+)
+)return;
+
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+
+if(
+!user||
+user.email?.toLowerCase()!==
+ADMIN_EMAIL.toLowerCase()
+){
+
+alert(
+"❌ Huna ruhusa ya Admin."
+);
+
+return;
+
+}
+
+
+/*
+GET AD
+*/
+
+const adResult=
+await supabaseClient
+.from("ads")
+.select("*")
+.eq("id",id)
+.single();
+
+
+if(adResult.error)
+throw adResult.error;
+
+
+const ad=adResult.data;
+
+
+const now=
+new Date();
+
+const expires=
+new Date(
+now.getTime()+
+Number(ad.duration_days||0)*
+24*60*60*1000
+);
+
+
+const result=
+await supabaseClient
+.from("ads")
+.update({
+
+status:"accepted",
+
+starts_at:now.toISOString(),
+
+expires_at:expires.toISOString()
+
+})
+.eq("id",id);
+
+
+if(result.error)
+throw result.error;
+
+
+alert(
+"✅ Tangazo limekubaliwa."
+);
+
+
+loadAdminAds();
+loadAds();
+
+
+}catch(error){
+
+alert(
+"❌ "+(
+error.message||String(error)
+)
+);
+
+}
+
+}
+
+
+/* =========================
+ADMIN REJECT AD
+========================= */
+
+async function adminRejectAd(id){
+
+if(
+!confirm(
+"Unataka kukataa/kuzima tangazo hili?"
+)
+)return;
+
+
+try{
+
+const auth=
+await supabaseClient.auth.getUser();
+
+const user=auth.data?.user;
+
+
+if(
+!user||
+user.email?.toLowerCase()!==
+ADMIN_EMAIL.toLowerCase()
+){
+
+alert(
+"❌ Huna ruhusa ya Admin."
+);
+
+return;
+
+}
+
+
+const result=
+await supabaseClient
+.from("ads")
+.update({
+
+status:"rejected",
+
+starts_at:null,
+
+expires_at:null
+
+})
+.eq("id",id);
+
+
+if(result.error)
+throw result.error;
+
+
+alert(
+"❌ Tangazo limekataliwa/kuzimwa."
+);
+
+
+loadAdminAds();
+loadAds();
+
+
+}catch(error){
+
+alert(
+"❌ "+(
+error.message||String(error)
+)
+);
+
+}
+
+}
+
+
+/* ==================================================
+ADMIN PRODUCTS
+================================================== */
+
+async function loadAdminProducts(){
+
+const box=
+document.getElementById(
+"adminProducts"
+);
+
+box.innerHTML=
+"⏳ Inapakia...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("Production")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+
+if(!result.data?.length){
+
+box.innerHTML=
+"Hakuna bidhaa.";
+
+return;
+
+}
+
+
+box.innerHTML=
+result.data.map(function(p){
+
+return `
+<div class="card">
+
+${p.image_url?`
+
+<img
+src="${p.image_url}"
+class="admin-product-image"
+>
+
+`:""}
+
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+
+<p>
+💰 TSh ${Number(
+p.price||0
+).toLocaleString()}
+</p>
+
+
+<p>
+📍 ${escapeHTML(
+p.region||"-"
+)}
+
+→ ${escapeHTML(
+p.district||"-"
+)}
+
+→ ${escapeHTML(
+p.place||"-"
+)}
+
+</p>
+
+
+<p>
+📞 ${escapeHTML(
+p.phone||"-"
+)}
+</p>
+
+
+<p>
+
+<b>Status:</b>
+
+${statusHTML(p.status)}
+
+</p>
+
+
+<button
+type="button"
+class="main red"
+onclick="deleteProduct(${Number(p.id)})"
+>
+🗑️ Futa Bidhaa
+</button>
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+DELETE PRODUCT
+========================= */
+
+async function deleteProduct(id){
+
+if(
+!confirm(
+"Una uhakika unataka kufuta bidhaa hii?"
+)
+)return;
+
+
+try{
+
+const result=
+await supabaseClient
+.from("Production")
+.delete()
+.eq("id",id);
+
+
+if(result.error)
+throw result.error;
+
+
+alert(
+"🗑️ Bidhaa imefutwa."
+);
+
+
+loadAdminProducts();
+loadProducts();
+loadAds();
+
+
+}catch(error){
+
+alert(
+"❌ "+
+(error.message||String(error))
+);
+
+}
+
+}
+
+
+/* ==================================================
+ADMIN ORDERS
+================================================== */
+
+async function loadAdminOrders(){
+
+const box=
+document.getElementById(
+"adminOrders"
+);
+
+if(!box)return;
+
+box.innerHTML=
+"⏳ Inapakia...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("orders")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+
+if(!result.data?.length){
+
+box.innerHTML=`
+<div class="message">
+Hakuna maagizo bado.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+result.data.map(function(o){
+
+return `
+<div class="order-box">
+
+<b>🛍️ ${escapeHTML(
+o.product_name||"-"
+)}</b>
+
+<br><br>
+
+👤 ${escapeHTML(
+o.buyer_name||"-"
+)}
+
+<br>
+
+📞 ${escapeHTML(
+o.buyer_phone||"-"
+)}
+
+<br>
+
+📧 ${escapeHTML(
+o.buyer_email||"-"
+)}
+
+<br>
+
+📦 Idadi:
+${Number(
+o.quantity||1
+)}
+
+<br><br>
+
+<b>Status:</b>
+
+${statusHTML(o.status)}
+
+<br>
+
+📅 ${
+o.created_at
+?new Date(
+o.created_at
+).toLocaleString("sw-TZ")
+:"-"
+}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+USERS
+================================================== */
+
+async function loadUsers(){
+
+const box=
+document.getElementById("users");
+
+if(!box)return;
+
+box.innerHTML=
+"⏳ Inapakia watumiaji...";
+
+
+try{
+
+const result=
+await supabaseClient
+.from("profiles")
+.select(
+"full_name,phone,email,created_at"
+)
+.order("created_at",{ascending:false});
+
+
+if(result.error)
+throw result.error;
+
+
+if(!result.data?.length){
+
+box.innerHTML=`
+<div class="message">
+Hakuna watumiaji.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+result.data.map(function(u){
+
+return `
+<div class="card">
+
+<b>👤 ${escapeHTML(
+u.full_name||"Bila jina"
+)}</b>
+
+<br><br>
+
+📧 ${escapeHTML(
+u.email||"-"
+)}
+
+<br>
+
+📞 ${escapeHTML(
+u.phone||"-"
+)}
+
+<br>
+
+📅 ${
+u.created_at
+?new Date(
+u.created_at
+).toLocaleString("sw-TZ")
+:"-"
+}
+
+</div>
+`;
+
+}).join("");
+
+
+}catch(error){
+
+box.innerHTML=`
+<div class="message">
+❌ ${escapeHTML(
+error.message||String(error)
+)}
+</div>`;
+
+}
+
+}
+
+
+/* ==================================================
+ADMIN LOGOUT
+================================================== */
+
+async function adminLogout(){
+
+await supabaseClient.auth.signOut();
+
+
+document.getElementById(
+"dashboard"
+).classList.add("hidden");
+
+
+document.getElementById(
+"adminLogin"
+).classList.remove("hidden");
+
+
+}
+
+
+/* ==================================================
+START PLAM
+================================================== */
+
+async function startPLAM(){
+
+console.log(
+"🇹🇿 PLAM TANZANIA inaanza..."
+);
+
+
+loadRegions();
+
+loadProducts();
+
+loadAds();
+
+}
+
+
+if(
+document.readyState==="loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+startPLAM
+);
+
+}else{
+
+startPLAM();
+
+}
+
+
+/* ==================================================
+AUTH STATE
+================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+function(event,session){
+
+console.log(
+"Auth:",
+event
+);
+
+
+if(session?.user){
+
+setTimeout(
+function(){
+
+loadMyProducts();
+loadMyOrders();
+loadSellerOrders();
+loadMyAds();
+
+},
+500
+);
+
+}
+
+});
+
+</script>
+
+</body>
+               </html>
