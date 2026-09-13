@@ -9,371 +9,259 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#f2f5f3;
-color:#222;
+color:#222
 }
-
 header{
-background:#087f23;
+background:#087f3f;
 color:white;
-padding:15px 10px;
-text-align:center;
+padding:15px;
 position:sticky;
 top:0;
-z-index:20;
+z-index:1000;
+box-shadow:0 2px 8px #999
 }
-
-header h1{
-margin:0;
+.logo{
 font-size:25px;
+font-weight:bold;
+text-align:center
 }
-
-header p{
-margin:5px 0 0;
+.tagline{
+text-align:center;
 font-size:13px;
+margin-top:3px
 }
-
 nav{
 display:flex;
-gap:5px;
+gap:6px;
 overflow-x:auto;
-background:#fff;
-padding:8px;
-position:sticky;
-top:78px;
-z-index:19;
-box-shadow:0 2px 7px #0002;
+margin-top:12px
 }
-
 nav button{
 border:0;
-background:#087f23;
-color:#fff;
 padding:10px 13px;
 border-radius:8px;
-white-space:nowrap;
+background:white;
+color:#087f3f;
 font-weight:bold;
+white-space:nowrap
 }
-
-main{
+.container{
 max-width:1100px;
 margin:auto;
-padding:12px;
+padding:12px
 }
-
-section{
-display:none;
-}
-
-section.active{
-display:block;
-}
-
+.page{display:none}
+.page.active{display:block}
 .card{
 background:white;
 border-radius:12px;
 padding:15px;
-margin-bottom:15px;
-box-shadow:0 2px 8px #0001;
+margin:12px 0;
+box-shadow:0 2px 8px #ddd
 }
-
-h2,h3{
-color:#087f23;
-}
-
+h1,h2,h3{color:#087f3f}
 input,select,textarea{
 width:100%;
 padding:12px;
-margin:6px 0 10px;
+margin:7px 0 12px;
 border:1px solid #ccc;
 border-radius:8px;
-font-size:15px;
+font-size:15px
 }
-
-textarea{
-min-height:100px;
-resize:vertical;
-}
-
+textarea{min-height:100px}
 button{
-cursor:pointer;
+cursor:pointer
 }
-
-.main{
-background:#087f23;
+button.main{
+background:#087f3f;
 color:white;
 border:0;
 padding:12px 16px;
 border-radius:8px;
-font-weight:bold;
-margin:3px;
+font-weight:bold
 }
-
-.gray{
-background:#777!important;
+button.danger{
+background:#d71920;
+color:white;
+border:0;
+padding:10px 14px;
+border-radius:8px
 }
-
-.red{
-background:#d71920!important;
+button.warn{
+background:#f0a000;
+color:white;
+border:0;
+padding:10px 14px;
+border-radius:8px
 }
-
-.orange{
-background:#e67e00!important;
+button.gray{
+background:#666;
+color:white;
+border:0;
+padding:10px 14px;
+border-radius:8px
 }
-
-.blue{
-background:#1266d6!important;
-}
-
-.small{
-font-size:12px;
-}
-
-.message{
-padding:10px;
-background:#eef8f0;
-border-radius:8px;
-margin:8px 0;
-}
-
-.error{
-background:#ffeaea;
-color:#a40000;
-}
-
-.success{
-background:#e9f9ed;
-color:#087f23;
-}
-
-.products{
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:14px;
+gap:15px
 }
-
 .product{
-background:#fff;
+background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 2px 8px #0002;
+box-shadow:0 2px 8px #ccc
 }
-
-.product-images{
-background:#eee;
-width:100%;
-display:flex;
-flex-direction:column;
-gap:2px;
-}
-
-.product-images img{
+.product img{
+display:block;
 width:100%;
 height:auto;
 max-height:650px;
 min-height:300px;
 object-fit:contain;
-background:#f5f5f5;
-display:block;
+background:#f5f5f5
 }
-
 .product-body{
-padding:12px;
+padding:13px
 }
-
 .price{
 font-size:20px;
 font-weight:bold;
-color:#087f23;
+color:#087f3f
 }
-
-.meta{
-font-size:13px;
-color:#555;
-line-height:1.6;
-}
-
-.actions{
-display:flex;
-flex-wrap:wrap;
-gap:5px;
-margin-top:10px;
-}
-
-.actions a{
-text-decoration:none;
-}
-
-.ad-wrap{
-position:relative;
-overflow:hidden;
-border-radius:12px;
-}
-
-.ad-track{
-display:flex;
-transition:transform .5s ease;
-}
-
-.ad-slide{
-min-width:100%;
-}
-
-.sponsored-label{
+.badge{
 display:inline-block;
-background:#e67e00;
-color:white;
 padding:5px 9px;
 border-radius:20px;
 font-size:12px;
 font-weight:bold;
-margin-bottom:7px;
+background:#eee;
+margin:3px
 }
-
-.ad-dots{
-text-align:center;
-padding:7px;
+.accepted{background:#d9f7e5;color:#087f3f}
+.pending{background:#fff0c2;color:#8a6200}
+.rejected{background:#ffd9d9;color:#b00000}
+.actions{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin-top:10px
 }
-
-.ad-dot{
-display:inline-block;
-width:9px;
-height:9px;
-border-radius:50%;
-background:#aaa;
-margin:3px;
+.actions button{
+flex:1;
+min-width:90px
 }
-
-.ad-dot.active{
-background:#087f23;
+.message{
+padding:12px;
+border-radius:8px;
+margin:10px 0;
+background:#eee
 }
-
+.message.success{
+background:#dff7e7;
+color:#075c2e
+}
+.message.error{
+background:#ffe0e0;
+color:#a00000
+}
+.message.info{
+background:#e2f0ff;
+color:#07558f
+}
+.searchbox{
+display:flex;
+gap:8px
+}
+.searchbox input{margin:0}
+.searchbox button{margin:0}
 table{
 width:100%;
 border-collapse:collapse;
-font-size:13px;
+font-size:13px
 }
-
 th,td{
 border:1px solid #ddd;
 padding:8px;
-text-align:left;
-vertical-align:top;
+text-align:left
 }
-
 th{
-background:#087f23;
-color:white;
+background:#087f3f;
+color:white
 }
-
 .table-wrap{
-overflow-x:auto;
+overflow-x:auto
 }
-
-.badge{
-display:inline-block;
-padding:5px 9px;
-border-radius:15px;
-font-size:12px;
-font-weight:bold;
+.sponsored{
+border:3px solid #f0a000
 }
-
-.pending{
-background:#fff1c7;
-color:#875c00;
+.sponsored-title{
+background:#f0a000;
+color:white;
+padding:10px;
+font-weight:bold
 }
-
-.accepted,.active{
-background:#d9f7df;
-color:#087f23;
-}
-
-.rejected{
-background:#ffdede;
-color:#a40000;
-}
-
-.unpaid{
-background:#ffe8d0;
-color:#934b00;
-}
-
 footer{
-background:#087f23;
+background:#075b30;
 color:white;
 text-align:center;
-padding:20px 10px;
-margin-top:20px;
+padding:25px;
+margin-top:30px
 }
-
 footer a{
-text-decoration:none;
+color:white
 }
-
+.small{
+font-size:12px;
+color:#666
+}
+.center{text-align:center}
 hr{
 border:0;
 border-top:1px solid #ddd;
-margin:15px 0;
+margin:20px 0
 }
-
-.hidden{
-display:none!important;
-}
-
-.center{
-text-align:center;
-}
-
 .loading{
-padding:20px;
 text-align:center;
-color:#666;
+padding:25px
 }
-
-.admin-action{
+.setting-row{
 display:flex;
-flex-wrap:wrap;
-gap:5px;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:12px;
+border-bottom:1px solid #ddd
 }
-
+.on{
+color:#087f3f;
+font-weight:bold
+}
+.off{
+color:#d71920;
+font-weight:bold
+}
+.ad-slide{
+display:none
+}
+.ad-slide.active{
+display:block
+}
 @media(max-width:600px){
-
-header h1{
-font-size:21px;
+.logo{font-size:22px}
+.grid{
+grid-template-columns:1fr
 }
-
-nav{
-top:70px;
+.product img{
+min-height:250px
 }
-
-.product-images img{
-width:100%;
-height:auto;
-max-height:650px;
-min-height:300px;
-object-fit:contain;
+nav button{
+padding:9px 11px
 }
-
-.product-body{
-padding:11px;
-}
-
-.products{
-grid-template-columns:1fr;
-}
-
-table{
-font-size:12px;
-}
-
-.main{
-padding:11px 13px;
-}
-
 }
 </style>
 </head>
@@ -381,152 +269,56 @@ padding:11px 13px;
 <body>
 
 <header>
-<h1>PLAM TANZANIA</h1>
-<p>Jenga biashara yako. Fikia wateja zaidi.</p>
-</header>
+<div class="logo">🟢 PLAM TANZANIA</div>
+<div class="tagline">Jenga biashara yako. Fikia wateja zaidi.</div>
 
 <nav>
-<button onclick="show('home')">🏠 Nyumbani</button>
+<button onclick="show('home')">🏠 Mwanzo</button>
 <button onclick="show('search')">🔎 Tafuta</button>
 <button onclick="show('add')">➕ Weka Bidhaa</button>
-<button onclick="show('account')">👤 Akaunti</button>
-<button onclick="show('admin')">⚙️ Admin</button>
+<button onclick="show('account')">👤 Account</button>
+<button id="adminNav" onclick="show('admin')" style="display:none">⚙️ Admin</button>
 </nav>
+</header>
 
-<main>
+<div class="container">
 
-<section id="home" class="active">
+<!-- HOME -->
+<section id="home" class="page active">
 
 <div class="card">
+<h2>🛍️ PLAM TANZANIA</h2>
 
-<h2>🛍️ Bidhaa na Huduma</h2>
-
+<div class="searchbox">
 <input
 id="homeSearch"
-placeholder="Tafuta bidhaa..."
+placeholder="🔎 Tafuta bidhaa..."
 oninput="quickSearch()">
-
+<button class="main" onclick="show('search')">Tafuta</button>
+</div>
 </div>
 
-<div class="card center">
-
-<button
-class="main"
-style="font-size:18px;padding:15px 20px;width:100%;"
-onclick="goToAdvertise()">
-
-📢 TANGAZA BIDHAA HAPA
-
-</button>
-
-<div class="small" style="margin-top:6px">
-
-Tangazo ni BURE kwa sasa —
-litaonekana baada ya Admin kulikubali.
-
-</div>
-
-</div>
-
-<div id="publicAds"></div>
+<div id="sponsoredBox"></div>
 
 <div class="card">
-
-<h2>Bidhaa zote</h2>
-
-<div id="products" class="products">
-
-<div class="loading">
-⏳ Inapakia bidhaa...
+<h2>🔥 Bidhaa Mpya</h2>
+<div id="homeProducts" class="grid">
+<div class="loading">⏳ Inapakia bidhaa...</div>
 </div>
-
-</div>
-
 </div>
 
 </section>
 
-
-<section id="search">
+<!-- SEARCH -->
+<section id="search" class="page">
 
 <div class="card">
-
 <h2>🔎 Tafuta Bidhaa</h2>
 
-<input
-id="searchText"
-placeholder="Jina la bidhaa au maelezo">
+<input id="searchText" placeholder="Jina la bidhaa..." oninput="searchProducts()">
 
-<select
-id="searchRegion"
-onchange="searchDistricts()">
-
-<option value="">
-Mikoa yote
-</option>
-
-</select>
-
-<select id="searchDistrict">
-
-<option value="">
-Wilaya zote
-</option>
-
-</select>
-
-<button class="main" onclick="searchProducts()">
-Tafuta
-</button>
-
-<button class="main gray" onclick="loadProducts()">
-Onyesha zote
-</button>
-
-</div>
-
-<div id="searchResults" class="products"></div>
-
-</section>
-
-
-<section id="add">
-
-<div class="card">
-
-<h2>➕ Weka Bidhaa / Huduma</h2>
-
-<div id="loginRequiredAdd" class="message">
-
-Lazima uwe umeingia kwenye akaunti ili kuweka bidhaa.
-
-<br><br>
-
-<button class="main" onclick="show('account')">
-Ingia / Jisajili
-</button>
-
-</div>
-
-<form
-id="productForm"
-class="hidden"
-onsubmit="addProduct(event)">
-
-<label>Jina la bidhaa/huduma</label>
-<input id="pName" required>
-
-<label>Bei</label>
-<input id="pPrice" type="number" min="0" required>
-
-<label>Kategoria</label>
-
-<select id="pCategory" required>
-
-<option value="">
-Chagua kategoria
-</option>
-
+<select id="searchCategory" onchange="searchProducts()">
+<option value="">Makundi yote</option>
 <option>Mavazi</option>
 <option>Electronics</option>
 <option>Nyumba</option>
@@ -539,223 +331,103 @@ Chagua kategoria
 <option>Chakula</option>
 <option>Samani</option>
 <option>Nyingine</option>
+</select>
 
+<select id="searchRegion" onchange="searchProducts()">
+<option value="">Mikoa yote</option>
+</select>
+
+<div id="searchResults" class="grid"></div>
+</div>
+
+</section>
+
+<!-- ADD PRODUCT -->
+<section id="add" class="page">
+
+<div class="card">
+<h2>➕ Weka Bidhaa</h2>
+
+<div id="addMessage"></div>
+
+<div id="paymentNotice"></div>
+
+<label>Jina la bidhaa</label>
+<input id="productName" placeholder="Mfano: Samsung Note 9">
+
+<label>Bei</label>
+<input id="productPrice" type="number" placeholder="Mfano: 350000">
+
+<label>Category</label>
+<select id="productCategory">
+<option>Mavazi</option>
+<option>Electronics</option>
+<option>Nyumba</option>
+<option>Magari</option>
+<option>Kilimo</option>
+<option>Urembo</option>
+<option>Elimu</option>
+<option>Huduma</option>
+<option>Simu</option>
+<option>Chakula</option>
+<option>Samani</option>
+<option>Nyingine</option>
 </select>
 
 <label>Mkoa</label>
-
-<select
-id="pRegion"
-required
-onchange="productDistricts()">
-
-<option value="">
-Chagua mkoa
-</option>
-
+<select id="productRegion" onchange="loadDistricts()">
+<option value="">Chagua Mkoa</option>
 </select>
 
 <label>Wilaya</label>
-
-<select
-id="pDistrict"
-required
-onchange="productPlaces()">
-
-<option value="">
-Chagua wilaya
-</option>
-
+<select id="productDistrict">
+<option value="">Chagua Wilaya</option>
 </select>
 
-<label>Mtaa / Kijiji</label>
-
-<select id="pPlace" required>
-
-<option value="">
-Chagua eneo
-</option>
-
-</select>
+<label>Mtaa / Kijiji / Eneo</label>
+<input id="productPlace" placeholder="Mfano: Mwanjelwa">
 
 <label>Namba ya simu ya muuzaji</label>
+<input id="productPhone" placeholder="Mfano: 0625053021">
 
-<input
-id="pPhone"
-type="tel"
-placeholder="Mfano 0625053021"
-required>
-
-<label>Maelezo</label>
-
-<textarea
-id="pDescription"
-placeholder="Eleza bidhaa yako..."></textarea>
+<label>Maelezo ya bidhaa</label>
+<textarea id="productDescription" placeholder="Elezea bidhaa yako..."></textarea>
 
 <label>Picha ya kwanza</label>
-
-<input
-id="pImage1"
-type="file"
-accept="image/*"
-required>
+<input id="productImage1" type="file" accept="image/*">
 
 <label>Picha ya pili</label>
+<input id="productImage2" type="file" accept="image/*">
 
-<input
-id="pImage2"
-type="file"
-accept="image/*">
-
-<button class="main" type="submit">
-📤 Weka Bidhaa
+<button class="main" style="width:100%" onclick="addProduct()">
+📤 WEKA BIDHAA
 </button>
 
-<div id="productMessage"></div>
+<hr>
 
-</form>
-
-</div>
-
-
-<div id="sellerAdArea" class="card hidden">
-
-<h2>📢 Tangaza Bidhaa</h2>
-
-<div id="adStatusMessage"></div>
-
-<form
-id="adForm"
-onsubmit="createSponsoredAd(event)"
-class="hidden">
-
-<label>Chagua bidhaa yako</label>
-
-<select id="adProduct" required>
-
-<option value="">
-Inapakia bidhaa zako...
-</option>
-
-</select>
-
-<label>Muda wa tangazo</label>
-
-<select
-id="adDuration"
-required
-onchange="updateAdPrice()">
-
-<option value="">
-Chagua muda
-</option>
-
-</select>
-
-<div id="adPriceBox" class="message">
-Chagua muda wa tangazo.
-</div>
-
-<div id="freeAdNotice" class="message success hidden">
-
-🟢 <b>Matangazo ni BURE kwa sasa.</b>
-
-<br>
-
-Chagua bidhaa na muda, kisha tuma ombi.
-
-<br>
-
-⏳ Tangazo litaanza baada ya Admin kulikubali.
-
-</div>
-
-<div id="paidAdFields" class="hidden">
-
-<h3>💳 Taarifa za malipo</h3>
-
-<div class="message">
-
-<b>Namba ya malipo ya PLAM:</b>
-
-<br>
-
-<span style="font-size:22px">
-0625 053 021
-</span>
-
-<br><br>
-
-Tuma malipo kwa namba hiyo kisha jaza taarifa hapa chini.
-
-</div>
-
-<label>Mtandao wa malipo</label>
-
-<select id="adPaymentMethod">
-
-<option value="">
-Chagua mtandao
-</option>
-
-<option>Vodacom M-Pesa</option>
-<option>Mixx by Yas</option>
-<option>Airtel Money</option>
-<option>Halopesa</option>
-<option>Azam Pesa</option>
-<option>NMB Mkononi</option>
-<option>CRDB</option>
-<option>Nyingine</option>
-
-</select>
-
-<label>Namba iliyotumika kulipa</label>
-
-<input
-id="adPhone"
-type="tel"
-placeholder="Mfano 07XXXXXXXX">
-
-<label>Transaction ID / Control number</label>
-
-<input
-id="adTransaction"
-placeholder="Weka namba ya muamala (si lazima)">
-
-</div>
-
-<button class="main" type="submit">
-📢 Tuma Tangazo
-</button>
-
-<div id="adMessage"></div>
-
-</form>
+<div id="adRequestBox"></div>
 
 </div>
 
 </section>
 
-
-<section id="account">
+<!-- ACCOUNT -->
+<section id="account" class="page">
 
 <div id="authArea">
 
 <div class="card">
+<h2>👤 Account</h2>
 
-<h2>👤 Akaunti</h2>
-
-<div id="loggedOutArea">
+<div id="authMessage"></div>
 
 <h3>Jisajili</h3>
 
-<input id="regName" placeholder="Jina kamili">
-<input id="regPhone" placeholder="Namba ya simu">
-<input id="regEmail" type="email" placeholder="Email">
-<input id="regPassword" type="password" placeholder="Password">
+<input id="registerEmail" type="email" placeholder="Email">
+<input id="registerPassword" type="password" placeholder="Password">
 
 <button class="main" onclick="registerUser()">
-Jisajili
+📝 JISAJILI
 </button>
 
 <hr>
@@ -766,60 +438,39 @@ Jisajili
 <input id="loginPassword" type="password" placeholder="Password">
 
 <button class="main" onclick="loginUser()">
-Ingia
+🔐 INGIA
 </button>
 
-<div id="authMessage"></div>
+</div>
 
 </div>
 
-<div id="loggedInArea" class="hidden">
+<div id="userArea" style="display:none">
 
-<div class="message success">
-✅ Umeingia kwenye akaunti.
-</div>
+<div class="card">
+<h2>👤 Account Yangu</h2>
 
 <div id="userInfo"></div>
 
-<button class="main red" onclick="logoutUser()">
-🚪 Toka
+<button class="danger" onclick="logoutUser()">
+🚪 TOKA
 </button>
-
 </div>
-
-</div>
-
-</div>
-
-
-<div id="accountContent" class="hidden">
 
 <div class="card">
-
 <h2>📦 Bidhaa Zangu</h2>
-
-<div id="myProducts" class="products"></div>
-
+<div id="myProducts"></div>
 </div>
 
-
 <div class="card">
-
-<h2>🛒 Orders Nilizoagiza</h2>
-
+<h2>🛒 Orders Nilizoweka</h2>
 <div id="myOrders"></div>
-
 </div>
-
 
 <div class="card">
-
-<h2>📋 Orders za Wateja Wangu</h2>
-
+<h2>📥 Orders za Wateja</h2>
 <div id="sellerOrders"></div>
-
 </div>
-
 
 <div class="card">
 
@@ -828,7 +479,6 @@ Ingia
 <div id="myAds"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -851,38 +501,22 @@ Ingia
 <label>Chagua bidhaa yako</label>
 
 <select id="buyerAdProduct">
-
-<option value="">
-⏳ Inapakia bidhaa zako...
-</option>
-
+<option value="">⏳ Inapakia bidhaa zako...</option>
 </select>
 
 <label>Muda wa tangazo</label>
 
 <select id="buyerAdDuration">
-
-<option value="3">
-3 siku — BURE
-</option>
-
-<option value="7">
-7 siku — BURE
-</option>
-
-<option value="30">
-30 siku — BURE
-</option>
-
+<option value="3">3 siku — BURE</option>
+<option value="7">7 siku — BURE</option>
+<option value="30">30 siku — BURE</option>
 </select>
 
 <button
 class="main"
 style="width:100%;margin-top:10px"
 onclick="createBuyerSponsoredAd()">
-
 📢 TUMA OMBI LA TANGAZO
-
 </button>
 
 <div id="buyerAdMessage"></div>
@@ -893,196 +527,129 @@ onclick="createBuyerSponsoredAd()">
 
 </section>
 
+<!-- ADMIN -->
+<section id="admin" class="page">
 
-<section id="admin">
-
-<div id="adminLoginArea" class="card">
+<div id="adminLoginBox" class="card">
 
 <h2>⚙️ Admin</h2>
 
-<input id="adminEmail" type="email" placeholder="Admin email">
-
+<input id="adminEmail" type="email" placeholder="Admin Email">
 <input id="adminPassword" type="password" placeholder="Password">
 
 <button class="main" onclick="adminLogin()">
-🔐 Ingia Admin
+🔐 INGIA ADMIN
 </button>
 
 <div id="adminMessage"></div>
 
 </div>
 
-
-<div id="adminDashboard" class="hidden">
-
-<div class="card">
-
-<h2>📊 PLAM Admin Dashboard</h2>
-
-<div id="adminWelcome"></div>
-
-<button class="main red" onclick="adminLogout()">
-🚪 Logout Admin
-</button>
-
-</div>
-
+<div id="adminDashboard" style="display:none">
 
 <div class="card">
+<h2>⚙️ PLAM Admin Dashboard</h2>
 
-<h2>⚙️ Udhibiti wa PLAM</h2>
-
-<div class="message">
-
-<p>
-📢 <b>Sponsored Ads</b>
-<br>
-<small>Washa au zima mfumo wa matangazo.</small>
-</p>
-
-<button
-type="button"
-id="sponsoredToggle"
-class="main"
-onclick="toggleSponsored()">
-
-⏳ Inapakia...
-
-</button>
-
-<hr>
-
-<p>
-💳 <b>Payment</b>
-<br>
-<small>Washa au zima mfumo wa malipo.</small>
-</p>
-
-<button
-type="button"
-id="paymentToggle"
-class="main"
-onclick="togglePayment()">
-
-⏳ Inapakia...
-
-</button>
-
-<hr>
-
-<p>
-💰 <b>Commission</b>
-<br>
-<small>Commission ya PLAM ni 5%.</small>
-</p>
-
-<button
-type="button"
-id="commissionToggle"
-class="main"
-onclick="toggleCommission()">
-
-⏳ Inapakia...
-
-</button>
-
-<div id="settingsMessage"></div>
-
+<div id="adminStats"></div>
 </div>
-
-</div>
-
 
 <div class="card">
+<h2>🎛️ Udhibiti wa Mfumo</h2>
 
-<h2>💳 Malipo ya Matangazo</h2>
+<div id="settingsStatus"></div>
 
-<div id="adminAdPayments">
+<div class="setting-row">
+<div>
+<b>📢 Sponsored Ads</b>
+<div class="small">Washa/kuzima matangazo</div>
+</div>
+<button class="main" onclick="toggleSponsored()">ON / OFF</button>
+</div>
 
-<div class="loading">
-⏳ Inapakia...
+<div class="setting-row">
+<div>
+<b>💳 Payment</b>
+<div class="small">Washa/kuzima mfumo wa malipo</div>
+</div>
+<button class="main" onclick="togglePayment()">ON / OFF</button>
+</div>
+
+<div class="setting-row">
+<div>
+<b>💰 Commission</b>
+<div class="small">Washa/kuzima commission</div>
+</div>
+<button class="main" onclick="toggleCommission()">ON / OFF</button>
+</div>
+
+<div class="message info">
+Commission ya sasa: <b>5%</b>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="card">
+<h2>💳 Malipo ya Sponsored Ads</h2>
+<div id="adminPayments"></div>
+</div>
 
+<div class="card">
 <h2>📢 Sponsored Ads</h2>
-
-<div id="adminSponsoredAds">
-
-<div class="loading">
-⏳ Inapakia...
+<div id="adminSponsoredAds"></div>
 </div>
-
-</div>
-
-</div>
-
 
 <div class="card">
-
 <h2>📦 Bidhaa zote</h2>
-
 <div id="adminProducts"></div>
-
 </div>
 
-
 <div class="card">
-
 <h2>🛒 Orders zote</h2>
-
 <div id="adminOrders"></div>
-
 </div>
 
-
 <div class="card">
-
 <h2>👥 Watumiaji</h2>
-
 <div id="adminUsers"></div>
-
 </div>
 
 </div>
 
 </section>
 
-</main>
-
+</div>
 
 <footer>
-
 <b>PLAM TANZANIA</b>
-
 <br>
-
 Jenga biashara yako. Fikia wateja zaidi.
-
 <br><br>
-
-📞 0625 053 021
-
+📞 0625053021
 <br>
-
-<a
-style="color:white"
-href="https://wa.me/255625053021"
-target="_blank">
-
+<a href="https://wa.me/255625053021" target="_blank">
 💬 WhatsApp
-
 </a>
-
+<br><br>
+© 2026 PLAM TANZANIA
 </footer>
 
 
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+let supabaseClient = null;
+let currentUser = null;
+let isAdmin = false;
+
+let plamSettings = {
+sponsored_enabled:true,
+payment_enabled:false,
+commission_enabled:false,
+commission_percent:5
+};
 
 const SUPABASE_URL =
 "https://igcgcxkttzeaordqhqqy.supabase.co";
@@ -1090,171 +657,90 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
 
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
 
-const ADMIN_EMAIL =
-"lucasmwingira323@gmail.com";
+/* =========================
+   LOCATIONS
+========================= */
 
+const LOCATIONS = {
 
-const LOCATIONS={
+"Mbeya":[
+"Mbeya Mjini",
+"Mbeya Vijijini",
+"Rungwe",
+"Kyela",
+"Chunya",
+"Mbarali",
+"Busokelo"
+],
 
-"Mbeya":{
-"Mbeya Mjini":["Soweto","Forest","Sisimba","Nonde","Mabatini","Maendeleo","Ruanda","Iyunga"],
-"Rungwe":["Tukuyu","Kiwira","Kisiba","Bulyaga"],
-"Kyela":["Kyela Mjini","Ipinda","Matema","Busale"],
-"Chunya":["Chunya Mjini","Makongolosi"]
-},
+"Dar es Salaam":[
+"Ilala",
+"Kinondoni",
+"Temeke",
+"Kigamboni",
+"Ubungo"
+],
 
-"Ruvuma":{
-"Songea Mjini":["Matarawe","Mashangano","Msamala","Mjimwema","Ruhuwiko"],
-"Songea DC":["Peramiho","Mpitimbi","Matimira"],
-"Mbinga":["Mbinga Mjini","Kigonsera","Mikalanga"],
-"Tunduru":["Tunduru Mjini","Namikango","Namasakata"]
-},
+"Ruvuma":[
+"Songea Mjini",
+"Songea Vijijini",
+"Mbinga",
+"Namtumbo",
+"Tunduru",
+"Nyasa"
+],
 
-"Dar es Salaam":{
-"Ilala":["Kariakoo","Upanga","Tabata","Buguruni","Vingunguti"],
-"Kinondoni":["Sinza","Manzese","Mwananyamala","Mikocheni","Kijitonyama"],
-"Temeke":["Mbagala","Kurasini","Chang'ombe","Yombo","Temeke"],
-"Ubungo":["Ubungo","Kimara","Kibamba","Sinza"],
-"Kigamboni":["Kigamboni","Mjimwema","Somangila"]
-},
+"Arusha":[
+"Arusha Mjini",
+"Arumeru",
+"Longido",
+"Meru",
+"Ngorongoro"
+],
 
-"Arusha":{
-"Arusha Mjini":["Kaloleni","Sekei","Sakina","Sanawari","Ngarenaro"],
-"Arusha DC":["Usa River","Kikatiti","Ngaramtoni","Kisongo"]
-},
+"Mwanza":[
+"Ilemela",
+"Nyamagana",
+"Kwimba",
+"Magu",
+"Misungwi",
+"Sengerema"
+],
 
-"Mwanza":{
-"Nyamagana":["Pamba","Isamilo","Mabatini","Kirumba"],
-"Ilemela":["Pasiansi","Nyakato","Buzuruga","Mkolani"]
-},
+"Dodoma":[
+"Dodoma Mjini",
+"Bahi",
+"Chamwino",
+"Chemba",
+"Kondoa",
+"Kongwa"
+],
 
-"Dodoma":{
-"Dodoma Mjini":["Kikuyu","Majengo","Kisasa","Area C","Miyuji"],
-"Bahi":["Bahi Mjini","Chipanga","Mpalanga"],
-"Chamwino":["Chamwino","Fufu","Buigiri"]
-},
+"Morogoro":[
+"Morogoro Mjini",
+"Morogoro Vijijini",
+"Kilosa",
+"Kilombero",
+"Ulanga"
+],
 
-"Morogoro":{
-"Morogoro Mjini":["Kihonda","Mazimbu","Mji Mpya","Sabasaba","Kingo"],
-"Morogoro DC":["Mgeta","Mikese","Matombo"]
-},
-
-"Shinyanga":{
-"Shinyanga Mjini":["Kambarage","Ibadakuli","Kizumbi","Chibe"],
-"Kahama":["Kahama Mjini","Isaka","Bugarama"]
-},
-
-"Tabora":{
-"Tabora Mjini":["Chemchem","Ipuli","Isevya","Kanyenye"],
-"Nzega":["Nzega Mjini","Mbutu","Nata"]
-},
-
-"Tanga":{
-"Tanga Mjini":["Ngamiani","Mzingani","Chumbageni","Mabawa"],
-"Muheza":["Muheza Mjini","Amani","Magila"],
-"Korogwe":["Korogwe Mjini","Mombo","Mkomazi"]
-},
-
-"Kilimanjaro":{
-"Moshi Mjini":["Bondeni","Rau","Majengo","Kiboriloni"],
-"Moshi DC":["Himo","Marangu","Uru","Machame"]
-},
-
-"Manyara":{
-"Babati":["Babati Mjini","Gallapo","Dareda"],
-"Hanang":["Katesh","Endasak"]
-},
-
-"Singida":{
-"Singida Mjini":["Unyianga","Misuna","Ipembe","Kindai"],
-"Manyoni":["Manyoni Mjini","Itigi","Sanjaranda"]
-},
-
-"Iringa":{
-"Iringa Mjini":["Gangilonga","Mkwawa","Kitanzini","Mshindo"],
-"Iringa DC":["Kalenga","Izazi","Ilula"]
-},
-
-"Njombe":{
-"Njombe Mjini":["Ramadhani","Mji Mpya","Luponde","Matola"],
-"Makete":["Makete Mjini","Ipelele","Tandala"]
-},
-
-"Pwani":{
-"Kibaha":["Tumbi","Mailimoja","Mkuza","Visiga"],
-"Bagamoyo":["Bagamoyo Mjini","Dunda","Zinga"]
-},
-
-"Zanzibar":{
-"Mjini Magharibi":["Stone Town","Mwanakwerekwe","Mombasa","Kisauni"],
-"Kaskazini Unguja":["Kijini","Nungwi","Kendwa"]
-},
-
-"Rukwa":{
-"Sumbawanga Mjini":["Sumbawanga Mjini","Mazwi","Pito","Chanji"],
-"Sumbawanga DC":["Laela","Muze","Msanda"]
-},
-
-"Kigoma":{
-"Kigoma Ujiji":["Kibwe","Katubuka","Bangwe"],
-"Kigoma DC":["Kibirizi","Kagongo"]
-},
-
-"Mara":{
-"Musoma Mjini":["Mukendo","Mwigobero","Kitaji"],
-"Tarime":["Tarime Mjini","Sirari","Nyamongo"]
-},
-
-"Kagera":{
-"Bukoba Mjini":["Bilele","Kahororo","Miembeni"],
-"Muleba":["Muleba Mjini","Kimwani","Magata"]
-},
-
-"Lindi":{
-"Lindi Mjini":["Mtanda","Mnazimmoja","Mingumbi"],
-"Kilwa":["Nanjirinji","Masoko","Njinjo"]
-},
-
-"Mtwara":{
-"Mtwara Mjini":["Shangani","Majengo","Rahaleo"],
-"Masasi":["Masasi Mjini","Mbuyuni","Chanikanguo"]
-},
-
-"Geita":{
-"Geita Mjini":["Kalangalala","Bombambili","Nzera"],
-"Chato":["Chato Mjini","Buziku","Kachwamba"]
-}
+"Zanzibar":[
+"Mjini Magharibi",
+"Kaskazini Unguja",
+"Kusini Unguja"
+]
 
 };
 
 
-let plamSettings={
-sponsored_enabled:false,
-payment_enabled:false,
-commission_enabled:false,
-commission_percent:5
-};
-
-let currentUser=null;
-let isAdmin=false;
-let sponsoredAds=[];
-let adTimer=null;
-let adIndex=0;
-let adPrices=[];
-
+/* =========================
+   HELPERS
+========================= */
 
 function escapeHTML(value){
 
-if(value===null||value===undefined)
-return "";
-
-return String(value)
+return String(value ?? "")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -1263,91 +749,204 @@ return String(value)
 
 }
 
-
 function money(value){
-return Number(value||0).toLocaleString("en-US");
+
+return Number(value || 0).toLocaleString("en-US");
+
 }
-
-
-function statusBadge(status){
-
-const s=String(status||"pending").toLowerCase();
-
-if(s==="accepted")
-return `<span class="badge accepted">ACCEPTED</span>`;
-
-if(s==="rejected")
-return `<span class="badge rejected">REJECTED</span>`;
-
-if(s==="active")
-return `<span class="badge active">ACTIVE</span>`;
-
-return `<span class="badge pending">${escapeHTML(status||"PENDING")}</span>`;
-}
-
-
-function getImage(url){
-if(!url)return "";
-return url;
-}
-
 
 function show(id){
 
-document.querySelectorAll("section")
-.forEach(s=>s.classList.remove("active"));
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
 
-const el=document.getElementById(id);
+const page=document.getElementById(id);
 
-if(el)
-el.classList.add("active");
+if(page){
+page.classList.add("active");
+}
 
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
 
-if(id==="account"){
-updateAccountUI();
+if(id==="search"){
+searchProducts();
 }
 
-if(id==="admin" && isAdmin){
-loadAdminData();
+if(id==="account" && currentUser){
+loadAccount();
 }
 
-if(id==="add"){
-updateAddArea();
+if(id==="admin" && currentUser && isAdmin){
+loadAdmin();
 }
-
-}
-
-
-function goToAdvertise(){
-
-show("add");
-
-setTimeout(()=>{
-
-const area=document.getElementById("sellerAdArea");
-
-if(area){
-area.scrollIntoView({
-behavior:"smooth"
-});
-}
-
-},250);
 
 }
 
+window.show=show;
 
-function fillRegions(){
 
-const ids=["pRegion","searchRegion"];
+/* =========================
+   SUPABASE START
+========================= */
 
-ids.forEach(id=>{
+function initSupabase(){
 
-const select=document.getElementById(id);
+try{
+
+if(!window.supabase){
+
+document.body.insertAdjacentHTML(
+"afterbegin",
+`
+<div style="
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:99999;
+background:#d71920;
+color:white;
+padding:15px;
+font-family:Arial;
+">
+❌ Supabase haijapakia.<br>
+Tafadhali hakikisha una internet kisha refresh ukurasa.
+</div>
+`
+);
+
+return false;
+}
+
+supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+return true;
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Mfumo wa PLAM haujaweza kuanzishwa.\n"+
+error.message
+);
+
+return false;
+
+}
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+async function loadPLAMSettings(){
+
+if(!supabaseClient)return;
+
+const {data,error} =
+await supabaseClient
+.from("PLAM_Settings")
+.select("*")
+.eq("id",1)
+.maybeSingle();
+
+if(error){
+
+console.error("Settings:",error);
+return;
+
+}
+
+if(data){
+
+plamSettings=data;
+
+}
+
+updatePaymentUI();
+
+}
+
+function updatePaymentUI(){
+
+const notice=document.getElementById("paymentNotice");
+const adBox=document.getElementById("adRequestBox");
+
+if(notice){
+
+if(plamSettings.payment_enabled){
+
+notice.innerHTML=`
+<div class="message info">
+💳 <b>Mfumo wa malipo UMEWASHWA.</b>
+<br><br>
+Matangazo ya kulipia yanaweza kutumika.
+</div>
+`;
+
+}else{
+
+notice.innerHTML=`
+<div class="message success">
+🆓 <b>Mfumo wa malipo UMEZIMWA.</b>
+<br>
+Kwa sasa kutumia PLAM ni bure.
+</div>
+`;
+
+}
+
+}
+
+if(adBox){
+
+if(plamSettings.sponsored_enabled){
+
+adBox.innerHTML=`
+<div class="message success">
+📢 Sponsored Ads zipo <b>ON</b>.
+<br>
+Kwa sasa ni BURE.
+</div>
+`;
+
+}else{
+
+adBox.innerHTML=`
+<div class="message error">
+📢 Sponsored Ads zimezimwa kwa sasa.
+</div>
+`;
+
+}
+
+}
+
+}
+
+
+/* =========================
+   REGIONS
+========================= */
+
+function loadRegions(){
+
+const selects=[
+document.getElementById("productRegion"),
+document.getElementById("searchRegion")
+];
+
+selects.forEach(select=>{
 
 if(!select)return;
 
@@ -1366,79 +965,36 @@ select.appendChild(option);
 
 }
 
+function loadDistricts(){
 
-function productDistricts(){
+const region=
+document.getElementById("productRegion").value;
 
-const region=document.getElementById("pRegion").value;
+const select=
+document.getElementById("productDistrict");
 
-const district=document.getElementById("pDistrict");
-const place=document.getElementById("pPlace");
+select.innerHTML=
+'<option value="">Chagua Wilaya</option>';
 
-district.innerHTML='<option value="">Chagua wilaya</option>';
-place.innerHTML='<option value="">Chagua eneo</option>';
+if(!LOCATIONS[region])return;
 
-if(!region)return;
+LOCATIONS[region].forEach(district=>{
 
-Object.keys(LOCATIONS[region]||{}).forEach(d=>{
+const option=document.createElement("option");
 
-const o=document.createElement("option");
+option.value=district;
+option.textContent=district;
 
-o.value=d;
-o.textContent=d;
-
-district.appendChild(o);
-
-});
-
-}
-
-
-function productPlaces(){
-
-const region=document.getElementById("pRegion").value;
-const district=document.getElementById("pDistrict").value;
-const place=document.getElementById("pPlace");
-
-place.innerHTML='<option value="">Chagua eneo</option>';
-
-if(!region||!district)return;
-
-(LOCATIONS[region][district]||[]).forEach(p=>{
-
-const o=document.createElement("option");
-
-o.value=p;
-o.textContent=p;
-
-place.appendChild(o);
+select.appendChild(option);
 
 });
 
 }
 
 
-function searchDistricts(){
-
-const region=document.getElementById("searchRegion").value;
-const district=document.getElementById("searchDistrict");
-
-district.innerHTML='<option value="">Wilaya zote</option>';
-
-if(!region)return;
-
-Object.keys(LOCATIONS[region]||{}).forEach(d=>{
-
-const o=document.createElement("option");
-
-o.value=d;
-o.textContent=d;
-
-district.appendChild(o);
-
-});
-
-}
-
+/* =========================
+   IMAGE COMPRESSION
+========================= */
 
 function compressImage(file){
 
@@ -1451,547 +1007,566 @@ return;
 
 const reader=new FileReader();
 
-reader.onload=e=>{
+reader.onload=function(e){
 
 const img=new Image();
 
-img.onload=()=>{
-
-const max=1200;
-
-let w=img.width;
-let h=img.height;
-
-if(w>max||h>max){
-
-if(w>h){
-
-h=Math.round(h*max/w);
-w=max;
-
-}else{
-
-w=Math.round(w*max/h);
-h=max;
-
-}
-
-}
+img.onload=function(){
 
 const canvas=document.createElement("canvas");
 
-canvas.width=w;
-canvas.height=h;
+const max=1400;
 
-const ctx=canvas.getContext("2d");
+let width=img.width;
+let height=img.height;
 
-ctx.drawImage(img,0,0,w,h);
+if(width>max){
+
+height=
+height*max/width;
+
+width=max;
+
+}
+
+if(height>max){
+
+width=
+width*max/height;
+
+height=max;
+
+}
+
+canvas.width=width;
+canvas.height=height;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
 
 resolve(
-canvas.toDataURL("image/jpeg",0.75)
+canvas.toDataURL(
+"image/jpeg",
+0.80
+)
 );
 
 };
 
 img.onerror=reject;
+
 img.src=e.target.result;
 
 };
 
 reader.onerror=reject;
+
 reader.readAsDataURL(file);
-
-}
-
-
-async function loadProducts(){
-
-const box=document.getElementById("products");
-
-box.innerHTML=
-'<div class="loading">⏳ Inapakia bidhaa...</div>';
-
-const {data,error}=
-await supabaseClient
-.from("Production")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-
-box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
-
-return;
-}
-
-renderProducts(data||[],box);
-
-}
-
-
-function renderProducts(rows,box){
-
-if(!rows.length){
-
-box.innerHTML=
-`<div class="message">
-Hakuna bidhaa kwa sasa.
-</div>`;
-
-return;
-
-}
-
-box.innerHTML=rows.map(p=>{
-
-const phone=p.phone||"";
-
-const whatsapp=
-phone.replace(/\D/g,"").replace(/^0/,"255");
-
-return `
-
-<div class="product">
-
-<div class="product-images">
-
-${p.image_url?
-`<img
-src="${getImage(p.image_url)}"
-alt="${escapeHTML(p.name)}">`
-:""}
-
-${p.image_url_2?
-`<img
-src="${getImage(p.image_url_2)}"
-alt="${escapeHTML(p.name)}">`
-:""}
-
-</div>
-
-<div class="product-body">
-
-<h3>${escapeHTML(p.name)}</h3>
-
-<div class="price">
-TSh ${money(p.price)}
-</div>
-
-<div class="meta">
-
-<b>Kategoria:</b>
-${escapeHTML(p.category||"")}
-
-<br>
-
-<b>Mahali:</b>
-${escapeHTML(p.place||"")},
-${escapeHTML(p.district||"")},
-${escapeHTML(p.region||"")}
-
-<br>
-
-<b>Muuzaji:</b>
-${escapeHTML(phone)}
-
-</div>
-
-<p>
-${escapeHTML(p.description||"")}
-</p>
-
-<div class="actions">
-
-<a
-class="main"
-href="tel:${escapeHTML(phone)}">
-
-📞 Piga Simu
-
-</a>
-
-<a
-class="main"
-style="background:#25D366"
-href="https://wa.me/${whatsapp}"
-target="_blank">
-
-💬 WhatsApp
-
-</a>
-
-${p.image_url?
-`<a
-class="main blue"
-href="${p.image_url}"
-download>
-
-⬇️ Picha
-
-</a>`
-:""}
-
-<button
-class="main orange"
-onclick="openOrder(${Number(p.id)})">
-
-🛒 Agiza
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-function quickSearch(){
-
-const text=
-document.getElementById("homeSearch")
-.value
-.toLowerCase()
-.trim();
-
-const products=
-document.querySelectorAll("#products .product");
-
-products.forEach(card=>{
-
-const ok=
-card.innerText
-.toLowerCase()
-.includes(text);
-
-card.style.display=ok?"":"none";
 
 });
 
 }
 
 
-async function searchProducts(){
+/* =========================
+   PRODUCTS
+========================= */
 
-const text=
-document.getElementById("searchText")
-.value
-.trim();
+async function loadProducts(){
 
-const region=
-document.getElementById("searchRegion")
-.value;
+if(!supabaseClient)return;
 
-const district=
-document.getElementById("searchDistrict")
-.value;
-
-let query=
-supabaseClient
+const {data,error} =
+await supabaseClient
 .from("Production")
-.select("*");
-
-if(text){
-
-query=query.or(
-`name.ilike.%${text}%,description.ilike.%${text}%,category.ilike.%${text}%`
-);
-
-}
-
-if(region)
-query=query.eq("region",region);
-
-if(district)
-query=query.eq("district",district);
-
-const {data,error}=
-await query.order(
-"created_at",
-{ascending:false}
-);
-
-const box=
-document.getElementById("searchResults");
+.select("*")
+.eq("status","accepted")
+.order("created_at",{ascending:false});
 
 if(error){
 
-box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+console.error(error);
+
+document.getElementById("homeProducts").innerHTML=
+`<div class="message error">❌ ${escapeHTML(error.message)}</div>`;
 
 return;
 
 }
 
-renderProducts(data||[],box);
+renderProducts(
+data || [],
+document.getElementById("homeProducts")
+);
+
+}
+
+function renderProducts(products,container){
+
+if(!container)return;
+
+if(!products.length){
+
+container.innerHTML=
+`<div class="message">Hakuna bidhaa kwa sasa.</div>`;
+
+return;
+
+}
+
+container.innerHTML="";
+
+products.forEach(product=>{
+
+const card=
+document.createElement("div");
+
+card.className="product";
+
+const image1=
+product.image_url ||
+"";
+
+const image2=
+product.image_url_2 ||
+"";
+
+card.innerHTML=`
+
+${image1?
+`<img src="${escapeHTML(image1)}" alt="${escapeHTML(product.name)}">`
+:""}
+
+${image2?
+`<img src="${escapeHTML(image2)}" alt="${escapeHTML(product.name)}">`
+:""}
+
+<div class="product-body">
+
+<h3>${escapeHTML(product.name)}</h3>
+
+<div class="price">
+TSh ${money(product.price)}
+</div>
+
+<div>
+<span class="badge">
+${escapeHTML(product.category)}
+</span>
+
+<span class="badge">
+${escapeHTML(product.region || "")}
+</span>
+
+<span class="badge">
+${escapeHTML(product.district || "")}
+</span>
+</div>
+
+<p>
+${escapeHTML(product.description || "")}
+</p>
+
+<p>
+📍 ${escapeHTML(product.place || "")}
+</p>
+
+<div class="actions">
+
+<a
+href="tel:${escapeHTML(product.phone || "")}"
+style="flex:1">
+<button class="main" style="width:100%">
+📞 Piga
+</button>
+</a>
+
+<a
+href="https://wa.me/255${String(product.phone || "").replace(/^0/,"")}"
+target="_blank"
+style="flex:1">
+<button class="main" style="width:100%">
+💬 WhatsApp
+</button>
+</a>
+
+<button
+class="warn"
+onclick="openOrder(${product.id})">
+🛒 Agiza
+</button>
+
+</div>
+
+<div class="actions">
+
+${image1?
+`<a href="${escapeHTML(image1)}" download style="flex:1">
+<button class="gray" style="width:100%">
+⬇️ Picha 1
+</button>
+</a>`
+:""}
+
+${image2?
+`<a href="${escapeHTML(image2)}" download style="flex:1">
+<button class="gray" style="width:100%">
+⬇️ Picha 2
+</button>
+</a>`
+:""}
+
+</div>
+
+</div>
+`;
+
+container.appendChild(card);
+
+});
 
 }
 
 
-async function addProduct(e){
+/* =========================
+   SEARCH
+========================= */
 
-e.preventDefault();
+async function quickSearch(){
+
+const text=
+document.getElementById("homeSearch").value.trim();
+
+show("search");
+
+document.getElementById("searchText").value=text;
+
+await searchProducts();
+
+}
+
+async function searchProducts(){
+
+if(!supabaseClient)return;
+
+const text=
+document.getElementById("searchText").value.trim();
+
+const category=
+document.getElementById("searchCategory").value;
+
+const region=
+document.getElementById("searchRegion").value;
+
+let query=
+supabaseClient
+.from("Production")
+.select("*")
+.eq("status","accepted")
+.order("created_at",{ascending:false});
+
+if(category){
+query=query.eq("category",category);
+}
+
+if(region){
+query=query.eq("region",region);
+}
+
+if(text){
+
+query=query.or(
+`name.ilike.%${text}%,description.ilike.%${text}%,place.ilike.%${text}%`
+);
+
+}
+
+const {data,error}=await query;
+
+if(error){
+
+document.getElementById("searchResults").innerHTML=
+`<div class="message error">❌ ${escapeHTML(error.message)}</div>`;
+
+return;
+
+}
+
+renderProducts(
+data || [],
+document.getElementById("searchResults")
+);
+
+}
+
+
+/* =========================
+   ADD PRODUCT
+========================= */
+
+async function addProduct(){
 
 if(!currentUser){
 
+alert("❌ Tafadhali ingia kwenye Account kwanza.");
+
 show("account");
+
 return;
 
 }
 
 const msg=
-document.getElementById("productMessage");
+document.getElementById("addMessage");
+
+const name=
+document.getElementById("productName").value.trim();
+
+const price=
+Number(document.getElementById("productPrice").value);
+
+const category=
+document.getElementById("productCategory").value;
+
+const region=
+document.getElementById("productRegion").value;
+
+const district=
+document.getElementById("productDistrict").value;
+
+const place=
+document.getElementById("productPlace").value.trim();
+
+const phone=
+document.getElementById("productPhone").value.trim();
+
+const description=
+document.getElementById("productDescription").value.trim();
+
+const file1=
+document.getElementById("productImage1").files[0];
+
+const file2=
+document.getElementById("productImage2").files[0];
+
+if(!name || !price || !category ||
+!region || !district || !phone){
+
+alert(
+"⚠️ Tafadhali jaza taarifa zote muhimu."
+);
+
+return;
+
+}
 
 msg.innerHTML=
-`<div class="message">
-⏳ Inapakia bidhaa...
-</div>`;
+`<div class="message">⏳ Inaweka bidhaa...</div>`;
 
 try{
 
 const image1=
-await compressImage(
-document.getElementById("pImage1").files[0]
-);
+await compressImage(file1);
 
 const image2=
-await compressImage(
-document.getElementById("pImage2").files[0]
-);
+await compressImage(file2);
 
-const product={
-
-name:
-document.getElementById("pName").value.trim(),
-
-price:
-Number(document.getElementById("pPrice").value),
-
-category:
-document.getElementById("pCategory").value,
-
-region:
-document.getElementById("pRegion").value,
-
-district:
-document.getElementById("pDistrict").value,
-
-place:
-document.getElementById("pPlace").value,
-
-phone:
-document.getElementById("pPhone").value.trim(),
-
-description:
-document.getElementById("pDescription").value.trim(),
-
-image_url:image1,
-
-image_url_2:image2,
-
-user_id:currentUser.id,
-
-status:"pending"
-
-};
-
-const {error}=
+const {data,error}=
 await supabaseClient
 .from("Production")
-.insert(product);
+.insert({
 
-if(error)
-throw error;
+name:name,
+price:price,
+category:category,
+region:region,
+district:district,
+place:place,
+phone:phone,
+description:description,
+image_url:image1,
+image_url_2:image2,
+user_id:currentUser.id,
+status:"pending"
 
-msg.innerHTML=
-`<div class="message success">
-✅ Bidhaa imewekwa kikamilifu.
-</div>`;
+})
+.select()
+.single();
 
-document.getElementById("productForm").reset();
+if(error)throw error;
+
+msg.innerHTML=`
+<div class="message success">
+✅ <b>Bidhaa imewekwa!</b>
+<br><br>
+⏳ Inasubiri Admin kuikubali.
+</div>
+`;
+
+document.getElementById("productName").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productPlace").value="";
+document.getElementById("productPhone").value="";
+document.getElementById("productDescription").value="";
+document.getElementById("productImage1").value="";
+document.getElementById("productImage2").value="";
 
 await loadProducts();
-await loadMyProducts();
 
 }catch(error){
 
 console.error(error);
 
-msg.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message||String(error))}
-</div>`;
+msg.innerHTML=`
+<div class="message error">
+❌ ${escapeHTML(error.message)}
+</div>
+`;
 
 }
 
 }
 
+
+/* =========================
+   ORDER
+========================= */
 
 async function openOrder(productId){
 
 if(!currentUser){
 
-alert("Tafadhali ingia kwenye akaunti kwanza.");
+alert("❌ Ingia kwenye Account kwanza.");
+
 show("account");
+
 return;
 
 }
 
-const {data,error}=
+const buyerName=
+prompt("Jina lako:");
+
+if(!buyerName)return;
+
+const buyerPhone=
+prompt("Namba yako ya simu:");
+
+if(!buyerPhone)return;
+
+const quantity=
+Number(prompt("Idadi:", "1")) || 1;
+
+const message=
+prompt("Ujumbe kwa muuzaji:", "");
+
+const {data:product,error:pError}=
 await supabaseClient
 .from("Production")
 .select("*")
 .eq("id",productId)
 .single();
 
-if(error){
+if(pError){
 
-alert(error.message);
+alert(pError.message);
+
 return;
 
 }
 
-const name=
-prompt(
-"Jina lako:",
-currentUser.user_metadata?.full_name||""
-);
-
-if(name===null)return;
-
-const phone=prompt("Namba yako ya simu:");
-
-if(phone===null)return;
-
-const quantity=prompt("Idadi:","1");
-
-if(quantity===null)return;
-
-const message=prompt("Ujumbe kwa muuzaji:","");
-
-const sellerId=data.user_id;
-
-if(!sellerId){
-
-alert("Bidhaa hii haina taarifa ya muuzaji.");
-return;
-
-}
-
-const {error:orderError}=
-await supabaseClient
+const {error}=await supabaseClient
 .from("orders")
 .insert({
 
-buyer_name:name,
-buyer_phone:phone,
-product_id:data.id,
-seller_id:sellerId,
+buyer_name:buyerName,
+buyer_phone:buyerPhone,
+product_id:productId,
+seller_id:product.user_id,
 buyer_id:currentUser.id,
-quantity:Number(quantity)||1,
-message:message||"",
+quantity:quantity,
+message:message || "",
 status:"pending",
-product_name:data.name,
+product_name:product.name,
 buyer_email:currentUser.email,
-seller_phone:data.phone
+seller_phone:product.phone
 
 });
 
-if(orderError){
+if(error){
 
-alert(orderError.message);
+alert("❌ "+error.message);
+
 return;
 
 }
 
-alert("✅ Order imetumwa kwa muuzaji.");
+alert(
+"✅ Order imetumwa kwa muuzaji."
+);
 
 }
 
+
+/* =========================
+   AUTH
+========================= */
 
 async function registerUser(){
 
-const name=document.getElementById("regName").value.trim();
-const phone=document.getElementById("regPhone").value.trim();
-const email=document.getElementById("regEmail").value.trim();
-const password=document.getElementById("regPassword").value;
+if(!supabaseClient)return;
 
-const msg=document.getElementById("authMessage");
+const email=
+document.getElementById("registerEmail").value.trim();
 
-if(!email||!password){
+const password=
+document.getElementById("registerPassword").value;
 
-msg.innerHTML=
-`<div class="message error">
-Weka email na password.
-</div>`;
+const msg=
+document.getElementById("authMessage");
+
+if(!email || !password){
+
+alert("Jaza email na password.");
 
 return;
 
 }
 
-try{
-
 const {data,error}=
 await supabaseClient.auth.signUp({
-
-email,
-password,
-
-options:{
-data:{
-full_name:name,
-phone:phone
-}
-}
-
+email:email,
+password:password
 });
 
-if(error)
-throw error;
-
-if(data.user){
-
-await supabaseClient
-.from("profiles")
-.upsert({
-
-id:data.user.id,
-full_name:name,
-phone:phone,
-email:email
-
-});
-
-}
+if(error){
 
 msg.innerHTML=
-`<div class="message success">
+`<div class="message error">❌ ${escapeHTML(error.message)}</div>`;
+
+return;
+
+}
+
+msg.innerHTML=`
+<div class="message success">
 ✅ Usajili umefanikiwa.
-Angalia email kama verification inahitajika.
-</div>`;
-
-}catch(error){
-
-msg.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+<br>
+${data.session?
+"Umeingia moja kwa moja."
+:"Angalia email yako kuthibitisha account."}
+</div>
+`;
 
 }
-
-}
-
 
 async function loginUser(){
 
@@ -2006,16 +1581,14 @@ document.getElementById("authMessage");
 
 const {data,error}=
 await supabaseClient.auth.signInWithPassword({
-email,
-password
+email:email,
+password:password
 });
 
 if(error){
 
 msg.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">❌ ${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -2023,41 +1596,9 @@ return;
 
 currentUser=data.user;
 
-await saveProfile();
-
-msg.innerHTML=
-`<div class="message success">
-✅ Umeingia.
-</div>`;
-
-updateAccountUI();
+await afterLogin();
 
 }
-
-
-async function saveProfile(){
-
-if(!currentUser)return;
-
-const name=
-currentUser.user_metadata?.full_name||"";
-
-const phone=
-currentUser.user_metadata?.phone||"";
-
-await supabaseClient
-.from("profiles")
-.upsert({
-
-id:currentUser.id,
-full_name:name,
-phone:phone,
-email:currentUser.email
-
-});
-
-}
-
 
 async function logoutUser(){
 
@@ -2066,59 +1607,70 @@ await supabaseClient.auth.signOut();
 currentUser=null;
 isAdmin=false;
 
-updateAccountUI();
+document.getElementById("adminNav").style.display="none";
+
 show("home");
 
 }
 
-
-function updateAccountUI(){
-
-const out=document.getElementById("loggedOutArea");
-const logged=document.getElementById("loggedInArea");
-const content=document.getElementById("accountContent");
-const addForm=document.getElementById("productForm");
-const addLogin=document.getElementById("loginRequiredAdd");
-
-if(currentUser){
-
-out.classList.add("hidden");
-logged.classList.remove("hidden");
-content.classList.remove("hidden");
-addForm.classList.remove("hidden");
-addLogin.classList.add("hidden");
-
-document.getElementById("userInfo").innerHTML=
-
-`<b>Email:</b>
-${escapeHTML(currentUser.email)}
-<br>
-<b>User ID:</b>
-${escapeHTML(currentUser.id)}`;
-
-loadMyProducts();
-loadMyOrders();
-loadSellerOrders();
-loadMyAds();
-loadBuyerAdProducts();
-updateAddArea();
-
-}else{
-
-out.classList.remove("hidden");
-logged.classList.add("hidden");
-content.classList.add("hidden");
-addForm.classList.add("hidden");
-addLogin.classList.remove("hidden");
-
-}
-
-}
-
-
-async function loadMyProducts(){
+async function afterLogin(){
 
 if(!currentUser)return;
+
+const {data,error}=
+await supabaseClient.rpc("is_plam_admin");
+
+isAdmin=!error && data===true;
+
+document.getElementById("adminNav").style.display=
+isAdmin ? "block":"none";
+
+await loadAccount();
+
+}
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+async function loadAccount(){
+
+if(!currentUser){
+
+document.getElementById("authArea").style.display="block";
+document.getElementById("userArea").style.display="none";
+
+return;
+
+}
+
+document.getElementById("authArea").style.display="none";
+document.getElementById("userArea").style.display="block";
+
+document.getElementById("userInfo").innerHTML=`
+<p>
+📧 <b>${escapeHTML(currentUser.email)}</b>
+</p>
+<p>
+🆔 ${escapeHTML(currentUser.id)}
+</p>
+`;
+
+await loadMyProducts();
+await loadMyOrders();
+await loadSellerOrders();
+await loadMyAds();
+await loadBuyerAdProducts();
+
+}
+
+
+/* =========================
+   MY PRODUCTS
+========================= */
+
+async function loadMyProducts(){
 
 const box=document.getElementById("myProducts");
 
@@ -2132,22 +1684,58 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
 }
 
-renderProducts(data||[],box);
+if(!data.length){
+
+box.innerHTML=
+`<div class="message">Huna bidhaa ulizoweka.</div>`;
+
+return;
+
+}
+
+box.innerHTML="";
+
+data.forEach(p=>{
+
+box.innerHTML+=`
+
+<div class="card">
+
+<h3>${escapeHTML(p.name)}</h3>
+
+<div class="price">
+TSh ${money(p.price)}
+</div>
+
+<p>${escapeHTML(p.category)}</p>
+
+<p>
+Status:
+<span class="badge ${p.status}">
+${escapeHTML(p.status)}
+</span>
+</p>
+
+</div>
+
+`;
+
+});
 
 }
 
 
-async function loadMyOrders(){
+/* =========================
+   MY ORDERS
+========================= */
 
-if(!currentUser)return;
+async function loadMyOrders(){
 
 const box=document.getElementById("myOrders");
 
@@ -2161,9 +1749,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -2172,51 +1758,52 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Huna order ulizoagiza.
-</div>`;
+`<div class="message">Huna orders bado.</div>`;
 
 return;
 
 }
 
-box.innerHTML=data.map(o=>`
+box.innerHTML="";
+
+data.forEach(o=>{
+
+box.innerHTML+=`
 
 <div class="card">
 
-<h3>
-${escapeHTML(o.product_name||"Bidhaa")}
-</h3>
+<b>${escapeHTML(o.product_name)}</b>
 
-<p>
-<b>Idadi:</b>
-${escapeHTML(o.quantity)}
-</p>
+<br>
 
-<p>
-<b>Status:</b>
-${statusBadge(o.status)}
-</p>
+Idadi: ${escapeHTML(o.quantity)}
 
-<p>
-<b>Ujumbe:</b>
-${escapeHTML(o.message||"")}
-</p>
+<br>
 
-<p class="small">
-${escapeHTML(o.created_at||"")}
-</p>
+Status:
+
+<span class="badge ${o.status}">
+${escapeHTML(o.status)}
+</span>
+
+<br><br>
+
+📞 ${escapeHTML(o.seller_phone || "")}
 
 </div>
 
-`).join("");
+`;
+
+});
 
 }
 
 
-async function loadSellerOrders(){
+/* =========================
+   SELLER ORDERS
+========================= */
 
-if(!currentUser)return;
+async function loadSellerOrders(){
 
 const box=document.getElementById("sellerOrders");
 
@@ -2230,9 +1817,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -2241,939 +1826,111 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Huna orders za wateja bado.
-</div>`;
+`<div class="message">Huna orders za wateja bado.</div>`;
 
 return;
 
 }
 
-box.innerHTML=data.map(o=>`
+box.innerHTML="";
+
+data.forEach(o=>{
+
+box.innerHTML+=`
 
 <div class="card">
 
-<h3>
-${escapeHTML(o.product_name||"Bidhaa")}
-</h3>
+<h3>🛒 ${escapeHTML(o.product_name)}</h3>
 
 <p>
-👤 <b>Mteja:</b>
-${escapeHTML(o.buyer_name)}
+👤 ${escapeHTML(o.buyer_name)}
 </p>
 
 <p>
-📞 <b>Simu:</b>
-${escapeHTML(o.buyer_phone)}
+📞 ${escapeHTML(o.buyer_phone)}
 </p>
 
 <p>
-🔢 <b>Idadi:</b>
-${escapeHTML(o.quantity)}
+📦 Idadi: ${escapeHTML(o.quantity)}
 </p>
 
 <p>
-💬 <b>Ujumbe:</b>
-${escapeHTML(o.message||"")}
+💬 ${escapeHTML(o.message || "")}
 </p>
 
 <p>
-<b>Status:</b>
-${statusBadge(o.status)}
+Status:
+<span class="badge ${o.status}">
+${escapeHTML(o.status)}
+</span>
 </p>
 
-${
-o.status==="pending"
-
-?
-
-`
+<div class="actions">
 
 <button
 class="main"
-onclick="changeOrderStatus(${Number(o.id)},'accepted')">
-
+onclick="updateOrderStatus(${o.id},'accepted')">
 ✅ Kubali
-
 </button>
 
 <button
-class="main red"
-onclick="changeOrderStatus(${Number(o.id)},'rejected')">
-
+class="danger"
+onclick="updateOrderStatus(${o.id},'rejected')">
 ❌ Kataa
-
 </button>
-
-`
-
-:""
-
-}
 
 </div>
 
-`).join("");
+</div>
+
+`;
+
+});
 
 }
 
-
-async function changeOrderStatus(id,status){
-
-if(!currentUser)return;
+async function updateOrderStatus(id,status){
 
 const {error}=
 await supabaseClient
 .from("orders")
-.update({status})
+.update({status:status})
 .eq("id",id)
 .eq("seller_id",currentUser.id);
 
 if(error){
 
 alert(error.message);
+
 return;
 
 }
+
+alert(
+status==="accepted"?
+"✅ Order imekubaliwa."
+:"❌ Order imekataliwa."
+);
 
 await loadSellerOrders();
 
-}
-
-
-async function loadPLAMSettings(){
-
-try{
-
-const {data,error}=
-await supabaseClient
-.from("PLAM_Settings")
-.select(
-"sponsored_enabled,payment_enabled,commission_enabled,commission_percent"
-)
-.eq("id",1)
-.single();
-
-if(error)
-throw error;
-
-plamSettings=data;
-
-updateSettingsButtons();
-updateAddArea();
-
-}catch(error){
-
-console.error("Settings:",error);
-
-const box=document.getElementById("settingsMessage");
-
-if(box){
-
-box.innerHTML=
-`<div class="message error">
-❌ Imeshindikana kupakia settings.
-</div>`;
-
-}
-
-}
+await loadMyOrders();
 
 }
 
 
-function updateSettingsButtons(){
-
-const sponsored=document.getElementById("sponsoredToggle");
-const payment=document.getElementById("paymentToggle");
-const commission=document.getElementById("commissionToggle");
-
-if(sponsored){
-
-sponsored.textContent=
-plamSettings.sponsored_enabled
-?"🟢 Sponsored Ads: ON"
-:"🔴 Sponsored Ads: OFF";
-
-sponsored.className=
-plamSettings.sponsored_enabled
-?"main"
-:"main gray";
-
-}
-
-if(payment){
-
-payment.textContent=
-plamSettings.payment_enabled
-?"🟢 Payment: ON"
-:"🔴 Payment: OFF";
-
-payment.className=
-plamSettings.payment_enabled
-?"main"
-:"main gray";
-
-}
-
-if(commission){
-
-commission.textContent=
-plamSettings.commission_enabled
-?
-`🟢 Commission ${plamSettings.commission_percent||5}%: ON`
-:
-"🔴 Commission: OFF";
-
-commission.className=
-plamSettings.commission_enabled
-?"main"
-:"main gray";
-
-}
-
-}
-
-
-async function savePLAMSettings(){
-
-const box=document.getElementById("settingsMessage");
-
-box.innerHTML=
-`<div class="message">
-⏳ Inahifadhi...
-</div>`;
-
-try{
-
-const {error}=
-await supabaseClient.rpc(
-"set_plam_settings",
-{
-
-p_sponsored:plamSettings.sponsored_enabled,
-p_payment:plamSettings.payment_enabled,
-p_commission:plamSettings.commission_enabled
-
-}
-);
-
-if(error)
-throw error;
-
-box.innerHTML=
-`<div class="message success">
-✅ Mipangilio imehifadhiwa.
-</div>`;
-
-updateSettingsButtons();
-updateAddArea();
-
-await loadSponsoredAds();
-
-if(isAdmin){
-
-await loadAdminSponsoredAds();
-await loadAdminAdPayments();
-
-}
-
-}catch(error){
-
-console.error(error);
-
-box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message||String(error))}
-</div>`;
-
-}
-
-}
-
-
-async function toggleSponsored(){
-
-plamSettings.sponsored_enabled=
-!plamSettings.sponsored_enabled;
-
-await savePLAMSettings();
-
-}
-
-
-async function togglePayment(){
-
-plamSettings.payment_enabled=
-!plamSettings.payment_enabled;
-
-await savePLAMSettings();
-
-}
-
-
-async function toggleCommission(){
-
-plamSettings.commission_enabled=
-!plamSettings.commission_enabled;
-
-await savePLAMSettings();
-
-}
-
-
-async function updateAddArea(){
-
-const area=document.getElementById("sellerAdArea");
-const form=document.getElementById("adForm");
-const status=document.getElementById("adStatusMessage");
-const freeNotice=document.getElementById("freeAdNotice");
-const paidFields=document.getElementById("paidAdFields");
-
-if(!area||!form||!status)
-return;
-
-if(!currentUser){
-
-area.classList.add("hidden");
-return;
-
-}
-
-area.classList.remove("hidden");
-
-if(!plamSettings.sponsored_enabled){
-
-form.classList.add("hidden");
-
-if(freeNotice)
-freeNotice.classList.add("hidden");
-
-if(paidFields)
-paidFields.classList.add("hidden");
-
-status.innerHTML=
-`
-<div class="message">
-🔴 <b>Sponsored Ads zimezimwa kwa sasa.</b>
-<br>
-Admin hajawasha mfumo wa matangazo.
-</div>
-`;
-
-return;
-
-}
-
-
-if(!plamSettings.payment_enabled){
-
-form.classList.remove("hidden");
-
-if(freeNotice)
-freeNotice.classList.remove("hidden");
-
-if(paidFields)
-paidFields.classList.add("hidden");
-
-document.getElementById("adPaymentMethod").required=false;
-document.getElementById("adPhone").required=false;
-document.getElementById("adTransaction").required=false;
-
-status.innerHTML=
-`
-<div class="message success">
-
-🟢 <b>Sponsored Ads zipo ON.</b>
-
-<br>
-
-🆓 <b>Matangazo ni BURE kwa sasa.</b>
-
-<br>
-
-⏳ Ombi litasubiri Admin kulikubali.
-
-</div>
-`;
-
-await loadAdPrices();
-await loadSellerAdProducts();
-
-return;
-
-}
-
-
-form.classList.remove("hidden");
-
-if(freeNotice)
-freeNotice.classList.add("hidden");
-
-if(paidFields)
-paidFields.classList.remove("hidden");
-
-document.getElementById("adPaymentMethod").required=true;
-document.getElementById("adPhone").required=true;
-document.getElementById("adTransaction").required=false;
-
-status.innerHTML=
-`
-<div class="message success">
-
-🟢 <b>Sponsored Ads zipo ON.</b>
-
-<br>
-
-💳 <b>Payment zipo ON.</b>
-
-<br>
-
-💰 Commission ya sasa:
-${plamSettings.commission_percent||5}%
-
-</div>
-`;
-
-await loadAdPrices();
-await loadSellerAdProducts();
-
-}
-
-
-async function loadAdPrices(){
-
-const {data,error}=
-await supabaseClient
-.from("PLAM_Ad_Prices")
-.select("*")
-.eq("enabled",true)
-.order("duration_days",{ascending:true});
-
-if(error){
-
-const box=document.getElementById("adPriceBox");
-
-if(box){
-
-box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
-
-}
-
-return;
-
-}
-
-adPrices=data||[];
-
-const select=document.getElementById("adDuration");
-
-if(!select)return;
-
-select.innerHTML=
-`
-<option value="">
-Chagua muda
-</option>
-`;
-
-adPrices.forEach(p=>{
-
-const o=document.createElement("option");
-
-o.value=p.duration_days;
-
-o.textContent=
-plamSettings.payment_enabled
-?
-`${p.duration_days} siku - TSh ${money(p.amount)}`
-:
-`${p.duration_days} siku - BURE`;
-
-select.appendChild(o);
-
-});
-
-}
-
-
-function updateAdPrice(){
-
-const days=
-Number(document.getElementById("adDuration").value);
-
-const price=
-adPrices.find(p=>Number(p.duration_days)===days);
-
-const box=document.getElementById("adPriceBox");
-
-if(!price){
-
-box.innerHTML="Chagua muda wa tangazo.";
-return;
-
-}
-
-if(!plamSettings.payment_enabled){
-
-box.innerHTML=
-`
-<b>⏱️ Muda:</b>
-${days} siku
-
-<br>
-
-<b>💰 Bei:</b>
-BURE
-
-<br>
-
-<b>⏳ Status:</b>
-Ombi litatumwa kwa Admin kwa idhini.
-`;
-
-return;
-
-}
-
-const commission=
-plamSettings.commission_enabled
-?
-(Number(price.amount)*
-Number(plamSettings.commission_percent||5)/100)
-:
-0;
-
-const sellerAmount=
-Number(price.amount)-commission;
-
-box.innerHTML=
-`
-<b>💵 Bei:</b>
-TSh ${money(price.amount)}
-
-<br>
-
-<b>⏱️ Muda:</b>
-${days} siku
-
-<br>
-
-<b>💰 Commission ya PLAM:</b>
-TSh ${money(commission)}
-
-<br>
-
-<b>💵 Kiasi baada ya commission:</b>
-TSh ${money(sellerAmount)}
-`;
-
-}
-
-
-async function loadSellerAdProducts(){
-
-if(!currentUser)return;
-
-const select=document.getElementById("adProduct");
-
-if(!select)return;
-
-const {data,error}=
-await supabaseClient
-.from("Production")
-.select("id,name,price")
-.eq("user_id",currentUser.id)
-.order("created_at",{ascending:false});
-
-if(error){
-
-select.innerHTML=
-`<option>
-Imeshindikana kupakia
-</option>`;
-
-return;
-
-}
-
-select.innerHTML=
-`
-<option value="">
-Chagua bidhaa
-</option>
-`;
-
-(data||[]).forEach(p=>{
-
-const o=document.createElement("option");
-
-o.value=p.id;
-
-o.textContent=
-`${p.name} - TSh ${money(p.price)}`;
-
-select.appendChild(o);
-
-});
-
-}
-
-
-async function createSponsoredAd(e){
-
-e.preventDefault();
-
-if(!currentUser){
-
-alert("Ingia kwanza.");
-return;
-
-}
-
-if(!plamSettings.sponsored_enabled){
-
-alert("Sponsored Ads zimezimwa.");
-return;
-
-}
-
-const msg=document.getElementById("adMessage");
-
-msg.innerHTML=
-`
-<div class="message">
-⏳ Inatuma ombi...
-</div>
-`;
-
-try{
-
-const productId=
-Number(document.getElementById("adProduct").value);
-
-const days=
-Number(document.getElementById("adDuration").value);
-
-if(!productId||!days){
-
-throw new Error(
-"Chagua bidhaa na muda wa tangazo."
-);
-
-}
-
-
-if(!plamSettings.payment_enabled){
-
-const {data,error}=
-await supabaseClient.rpc(
-"create_free_plam_ad",
-{
-p_product_id:productId,
-p_duration_days:days
-}
-);
-
-if(error)
-throw error;
-
-msg.innerHTML=
-`
-<div class="message success">
-
-✅ <b>Ombi la tangazo limetumwa.</b>
-
-<br>
-
-🆓 Tangazo ni BURE.
-
-<br>
-
-⏳ <b>Status: Pending</b>
-
-<br>
-
-👨‍💼 Admin atalipitia na kulikubali au kulikataa.
-
-</div>
-`;
-
-document.getElementById("adForm").reset();
-
-document.getElementById("adPriceBox").innerHTML=
-"Chagua muda wa tangazo.";
-
-await loadMyAds();
-await loadAdminSponsoredAdsIfAdmin();
-
-return;
-
-}
-
-
-const method=
-document.getElementById("adPaymentMethod").value;
-
-const phone=
-document.getElementById("adPhone").value.trim();
-
-const transaction=
-document.getElementById("adTransaction").value.trim();
-
-const price=
-adPrices.find(p=>Number(p.duration_days)===days);
-
-if(!price){
-
-throw new Error(
-"Chagua muda sahihi wa tangazo."
-);
-
-}
-
-if(!method||!phone){
-
-throw new Error(
-"Jaza mtandao wa malipo na namba iliyotumika kulipa."
-);
-
-}
-
-
-const {data:ad,error:adError}=
-await supabaseClient
-.from("PLAM_Sponsored_Ads")
-.insert({
-
-product_id:productId,
-seller_id:currentUser.id,
-duration_days:days,
-amount:Number(price.amount),
-
-commission_percent:
-plamSettings.commission_enabled
-?
-Number(plamSettings.commission_percent||5)
-:
-0,
-
-commission_amount:0,
-
-seller_amount:Number(price.amount),
-
-status:"pending",
-payment_status:"unpaid"
-
-})
-.select()
-.single();
-
-if(adError)
-throw adError;
-
-
-const {error:payError}=
-await supabaseClient
-.from("PLAM_Ad_Payments")
-.insert({
-
-ad_id:ad.id,
-buyer_id:currentUser.id,
-amount:Number(price.amount),
-duration_days:days,
-payment_method:method,
-phone:phone,
-transaction_id:transaction||null,
-status:"pending",
-
-commission_percent:
-plamSettings.commission_enabled
-?
-Number(plamSettings.commission_percent||5)
-:
-0
-
-});
-
-if(payError)
-throw payError;
-
-
-msg.innerHTML=
-`
-<div class="message success">
-
-✅ <b>Ombi la tangazo limetumwa.</b>
-
-<br>
-
-⏳ Status: Pending
-
-<br>
-
-💳 Admin atakagua malipo na ku-approve.
-
-<br>
-
-🧾 Transaction ID:
-si lazima.
-
-</div>
-`;
-
-document.getElementById("adForm").reset();
-
-document.getElementById("adPriceBox").innerHTML=
-"Chagua muda wa tangazo.";
-
-await loadMyAds();
-
-}catch(error){
-
-console.error(error);
-
-msg.innerHTML=
-`
-<div class="message error">
-❌ ${escapeHTML(error.message||String(error))}
-</div>
-`;
-
-}
-
-}
-
-
-async function loadAdminSponsoredAdsIfAdmin(){
-
-if(!isAdmin)return;
-
-await loadAdminSponsoredAds();
-
-}
-
-
-async function loadMyAds(){
-
-if(!currentUser)return;
-
-const box=document.getElementById("myAds");
-
-const {data,error}=
-await supabaseClient
-.from("PLAM_Sponsored_Ads")
-.select("*")
-.eq("seller_id",currentUser.id)
-.order("created_at",{ascending:false});
-
-if(error){
-
-box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
-
-return;
-
-}
-
-if(!data.length){
-
-box.innerHTML=
-`<div class="message">
-Huna tangazo lililotumwa.
-</div>`;
-
-return;
-
-}
-
-box.innerHTML=data.map(a=>`
-
-<div class="card">
-
-<h3>
-📢 Tangazo #${a.id}
-</h3>
-
-<p>
-<b>Bidhaa ID:</b>
-${a.product_id}
-</p>
-
-<p>
-<b>Muda:</b>
-${a.duration_days} siku
-</p>
-
-<p>
-<b>Kiasi:</b>
-
-${
-a.payment_status==="free"
-?
-"BURE"
-:
-`TSh ${money(a.amount)}`
-}
-
-</p>
-
-<p>
-<b>Status:</b>
-${statusBadge(a.status)}
-</p>
-
-<p>
-<b>Payment:</b>
-
-${
-a.payment_status==="free"
-?
-"BURE"
-:
-escapeHTML(a.payment_status||"unpaid")
-}
-
-</p>
-
-${
-a.expires_at
-?
-`
-<p>
-<b>Inaisha:</b>
-${escapeHTML(a.expires_at)}
-</p>
-`
-:""
-}
-
-</div>
-
-`).join("");
-
-}
-
-
-/* =========================================
-ACCOUNT - OMBA SPONSORED AD
-========================================= */
+/* =========================
+   FREE BUYER AD
+========================= */
 
 async function loadBuyerAdProducts(){
 
-if(!currentUser)
-return;
+if(!currentUser)return;
 
 const select=
 document.getElementById("buyerAdProduct");
 
-if(!select)
-return;
+if(!select)return;
 
 select.innerHTML=
 '<option value="">⏳ Inapakia bidhaa zako...</option>';
@@ -3197,7 +1954,7 @@ return;
 select.innerHTML=
 '<option value="">-- Chagua bidhaa --</option>';
 
-if(!data||!data.length){
+if(!data || !data.length){
 
 select.innerHTML=
 '<option value="">Huna bidhaa ulizoweka</option>';
@@ -3222,7 +1979,6 @@ select.appendChild(option);
 
 }
 
-
 async function createBuyerSponsoredAd(){
 
 if(!currentUser){
@@ -3246,7 +2002,6 @@ alert(
 return;
 
 }
-
 
 if(plamSettings.payment_enabled){
 
@@ -3307,8 +2062,7 @@ return;
 
 }
 
-msg.innerHTML=
-`
+msg.innerHTML=`
 <div class="message">
 ⏳ Inatuma ombi kwa Admin...
 </div>
@@ -3325,14 +2079,9 @@ p_duration_days:days
 
 if(error){
 
-msg.innerHTML=
-`
+msg.innerHTML=`
 <div class="message error">
-
-❌ ${escapeHTML(
-error.message||String(error)
-)}
-
+❌ ${escapeHTML(error.message)}
 </div>
 `;
 
@@ -3340,8 +2089,7 @@ return;
 
 }
 
-msg.innerHTML=
-`
+msg.innerHTML=`
 <div class="message success">
 
 ✅ <b>Ombi limetumwa kikamilifu!</b>
@@ -3375,34 +2123,114 @@ productSelect.value="";
 await loadMyAds();
 
 if(isAdmin){
-
 await loadAdminSponsoredAds();
-
 }
 
 }
 
 
-/* =========================================
-PUBLIC SPONSORED ADS
-========================================= */
+/* =========================
+   MY ADS
+========================= */
 
-async function loadSponsoredAds(){
+async function loadMyAds(){
 
-const box=document.getElementById("publicAds");
+const box=document.getElementById("myAds");
 
-if(!plamSettings.sponsored_enabled){
+if(!box || !currentUser)return;
 
-box.innerHTML="";
+const {data,error}=
+await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.select("*")
+.eq("seller_id",currentUser.id)
+.order("created_at",{ascending:false});
 
-if(adTimer)
-clearInterval(adTimer);
+if(error){
+
+box.innerHTML=
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
 }
 
-const {data:ads,error}=
+if(!data.length){
+
+box.innerHTML=
+`<div class="message">Huna matangazo bado.</div>`;
+
+return;
+
+}
+
+box.innerHTML="";
+
+data.forEach(ad=>{
+
+box.innerHTML+=`
+
+<div class="card sponsored">
+
+<h3>📢 Tangazo #${ad.id}</h3>
+
+<p>
+Muda: ${ad.duration_days} siku
+</p>
+
+<p>
+Bei:
+<b>
+${ad.amount==0?"BURE":"TSh "+money(ad.amount)}
+</b>
+</p>
+
+<p>
+Status:
+<span class="badge ${ad.status}">
+${escapeHTML(ad.status)}
+</span>
+</p>
+
+<p>
+Malipo:
+<span class="badge">
+${escapeHTML(ad.payment_status)}
+</span>
+</p>
+
+${ad.expires_at?
+`<p>Inaisha: ${escapeHTML(ad.expires_at)}</p>`:""}
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+   SPONSORED ADS DISPLAY
+========================= */
+
+async function loadSponsoredAds(){
+
+const box=
+document.getElementById("sponsoredBox");
+
+if(!box)return;
+
+if(!plamSettings.sponsored_enabled){
+
+box.innerHTML="";
+
+return;
+
+}
+
+const {data,error}=
 await supabaseClient
 .from("PLAM_Sponsored_Ads")
 .select("*")
@@ -3414,257 +2242,124 @@ await supabaseClient
 if(error){
 
 console.error(error);
+
 box.innerHTML="";
+
 return;
 
 }
 
-if(!ads||!ads.length){
+if(!data || !data.length){
 
 box.innerHTML="";
+
 return;
 
 }
 
-const ids=ads.map(a=>a.product_id);
+const ids=
+data.map(x=>x.product_id);
 
-const {data:products,error:productError}=
-await supabaseClient
+const {data:products}=await supabaseClient
 .from("Production")
 .select("*")
 .in("id",ids);
 
-if(productError){
+if(!products || !products.length){
 
-console.error(productError);
 box.innerHTML="";
+
 return;
 
 }
 
-const map={};
+box.innerHTML=`
+<div class="card sponsored">
 
-(products||[]).forEach(p=>{
-map[p.id]=p;
-});
+<div class="sponsored-title">
+📢 SPONSORED ADS
+</div>
 
-const validAds=
-ads.filter(a=>map[a.product_id]);
+<div id="adCarousel"></div>
 
-if(!validAds.length){
+</div>
+`;
 
-box.innerHTML="";
-return;
+const carousel=
+document.getElementById("adCarousel");
 
-}
+products.forEach((p,i)=>{
 
-sponsoredAds=validAds;
-adIndex=0;
+carousel.innerHTML+=`
 
-box.innerHTML=
-`
-
-<div class="card">
-
-<h2>
-📢 Sponsored Ads
-</h2>
-
-<div class="ad-wrap">
-
-<div id="adTrack" class="ad-track">
-
-${validAds.map(a=>{
-
-const p=map[a.product_id];
-
-const phone=p.phone||"";
-
-const whatsapp=
-phone.replace(/\D/g,"").replace(/^0/,"255");
-
-return `
-
-<div class="ad-slide">
-
-<div class="product">
-
-<div class="product-images">
+<div class="ad-slide ${i===0?"active":""}">
 
 ${p.image_url?
 `<img
-src="${p.image_url}"
-alt="${escapeHTML(p.name)}">`
+src="${escapeHTML(p.image_url)}"
+style="width:100%;max-height:500px;object-fit:contain">`
 :""}
-
-${p.image_url_2?
-`<img
-src="${p.image_url_2}"
-alt="${escapeHTML(p.name)}">`
-:""}
-
-</div>
 
 <div class="product-body">
 
-<span class="sponsored-label">
-📢 SPONSORED
-</span>
-
-<h3>
-${escapeHTML(p.name)}
-</h3>
+<h2>${escapeHTML(p.name)}</h2>
 
 <div class="price">
 TSh ${money(p.price)}
 </div>
 
-<div class="meta">
-
-${escapeHTML(p.region||"")}
--
-${escapeHTML(p.district||"")}
--
-${escapeHTML(p.place||"")}
-
-</div>
-
 <p>
-${escapeHTML(p.description||"")}
+${escapeHTML(p.description || "")}
 </p>
 
 <div class="actions">
 
-<a
-class="main"
-href="tel:${escapeHTML(phone)}">
-
-📞 Piga Simu
-
-</a>
-
-<a
-class="main"
-style="background:#25D366"
-href="https://wa.me/${whatsapp}"
-target="_blank">
-
-💬 WhatsApp
-
-</a>
-
 <button
-class="main orange"
-onclick="openOrder(${Number(p.id)})">
-
+class="main"
+onclick="openOrder(${p.id})">
 🛒 Agiza
-
 </button>
 
-</div>
+<a
+href="https://wa.me/255${String(p.phone||"").replace(/^0/,"")}"
+target="_blank">
+<button class="main">
+💬 WhatsApp
+</button>
+</a>
 
 </div>
 
 </div>
 
 </div>
-
 `;
 
-}).join("")}
+});
 
-</div>
+let slide=0;
 
-</div>
-
-<div id="adDots" class="ad-dots">
-
-${validAds.map((_,i)=>
-
-`<span class="ad-dot ${
-i===0?"active":""
-}"></span>`
-
-).join("")}
-
-</div>
-
-</div>
-
-`;
-
-if(adTimer)
-clearInterval(adTimer);
-
-if(validAds.length>1){
-
-adTimer=
 setInterval(()=>{
 
-adIndex++;
+const slides=
+document.querySelectorAll(".ad-slide");
 
-if(adIndex>=validAds.length)
-adIndex=0;
+if(!slides.length)return;
 
-moveAd();
+slides.forEach(x=>x.classList.remove("active"));
+
+slide=(slide+1)%slides.length;
+
+slides[slide].classList.add("active");
 
 },5000);
 
 }
 
-}
 
-
-function moveAd(){
-
-const track=document.getElementById("adTrack");
-
-if(!track)return;
-
-track.style.transform=
-`translateX(-${adIndex*100}%)`;
-
-document.querySelectorAll(".ad-dot")
-.forEach((d,i)=>{
-
-d.classList.toggle(
-"active",
-i===adIndex
-);
-
-});
-
-}
-
-
-/* =========================================
-ADMIN CHECK
-========================================= */
-
-async function checkAdmin(){
-
-if(!currentUser){
-
-isAdmin=false;
-return false;
-
-}
-
-const {data,error}=
-await supabaseClient.rpc("is_plam_admin");
-
-if(!error&&data===true){
-
-isAdmin=true;
-return true;
-
-}
-
-isAdmin=false;
-return false;
-
-}
-
+/* =========================
+   ADMIN LOGIN
+========================= */
 
 async function adminLogin(){
 
@@ -3677,29 +2372,16 @@ document.getElementById("adminPassword").value;
 const msg=
 document.getElementById("adminMessage");
 
-if(!email||!password){
-
-msg.innerHTML=
-`<div class="message error">
-Weka email na password.
-</div>`;
-
-return;
-
-}
-
 const {data,error}=
 await supabaseClient.auth.signInWithPassword({
-email,
-password
+email:email,
+password:password
 });
 
 if(error){
 
 msg.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -3707,55 +2389,184 @@ return;
 
 currentUser=data.user;
 
-const admin=await checkAdmin();
+const {data:isAdminResult,error:adminError}=
+await supabaseClient.rpc("is_plam_admin");
 
-if(!admin){
+if(adminError || !isAdminResult){
 
 await supabaseClient.auth.signOut();
 
-currentUser=null;
-
 msg.innerHTML=
 `<div class="message error">
-❌ Akaunti hii si Admin.
+❌ Account hii si Admin.
 </div>`;
 
 return;
 
 }
 
-document.getElementById("adminLoginArea")
-.classList.add("hidden");
+isAdmin=true;
 
-document.getElementById("adminDashboard")
-.classList.remove("hidden");
+document.getElementById("adminNav").style.display="block";
 
-document.getElementById("adminWelcome").innerHTML=
-`Karibu Admin:
-<b>${escapeHTML(currentUser.email)}</b>`;
+document.getElementById("adminLoginBox").style.display="none";
 
-await loadPLAMSettings();
-await loadAdminData();
+document.getElementById("adminDashboard").style.display="block";
+
+await loadAdmin();
 
 }
 
 
-async function loadAdminData(){
+/* =========================
+   ADMIN DASHBOARD
+========================= */
+
+async function loadAdmin(){
 
 if(!isAdmin)return;
 
-await loadAdminAdPayments();
+document.getElementById("adminLoginBox").style.display="none";
+document.getElementById("adminDashboard").style.display="block";
+
+await loadAdminSettings();
+await loadAdminPayments();
 await loadAdminSponsoredAds();
 await loadAdminProducts();
 await loadAdminOrders();
-await loadAdminUsers();
 
 }
 
 
-async function loadAdminAdPayments(){
+/* =========================
+   ADMIN SETTINGS
+========================= */
 
-const box=document.getElementById("adminAdPayments");
+async function loadAdminSettings(){
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Settings")
+.select("*")
+.eq("id",1)
+.single();
+
+if(error){
+
+document.getElementById("settingsStatus").innerHTML=
+`<div class="message error">${escapeHTML(error.message)}</div>`;
+
+return;
+
+}
+
+plamSettings=data;
+
+document.getElementById("settingsStatus").innerHTML=`
+
+<div class="message">
+
+📢 Sponsored Ads:
+<b class="${data.sponsored_enabled?"on":"off"}">
+${data.sponsored_enabled?"ON":"OFF"}
+</b>
+
+<br><br>
+
+💳 Payment:
+<b class="${data.payment_enabled?"on":"off"}">
+${data.payment_enabled?"ON":"OFF"}
+</b>
+
+<br><br>
+
+💰 Commission:
+<b class="${data.commission_enabled?"on":"off"}">
+${data.commission_enabled?"ON":"OFF"}
+</b>
+
+<br><br>
+
+📊 Commission:
+<b>${data.commission_percent || 5}%</b>
+
+</div>
+`;
+
+updatePaymentUI();
+
+}
+
+async function saveSettings(){
+
+const {error}=
+await supabaseClient.rpc(
+"set_plam_settings",
+{
+p_sponsored:plamSettings.sponsored_enabled,
+p_payment:plamSettings.payment_enabled,
+p_commission:plamSettings.commission_enabled
+}
+);
+
+if(error){
+
+alert("❌ "+error.message);
+
+return false;
+
+}
+
+await loadAdminSettings();
+
+await loadSponsoredAds();
+
+return true;
+
+}
+
+async function toggleSponsored(){
+
+if(!isAdmin)return;
+
+plamSettings.sponsored_enabled=
+!plamSettings.sponsored_enabled;
+
+await saveSettings();
+
+}
+
+async function togglePayment(){
+
+if(!isAdmin)return;
+
+plamSettings.payment_enabled=
+!plamSettings.payment_enabled;
+
+await saveSettings();
+
+}
+
+async function toggleCommission(){
+
+if(!isAdmin)return;
+
+plamSettings.commission_enabled=
+!plamSettings.commission_enabled;
+
+await saveSettings();
+
+}
+
+
+/* =========================
+   ADMIN PAYMENTS
+========================= */
+
+async function loadAdminPayments(){
+
+const box=
+document.getElementById("adminPayments");
 
 const {data,error}=
 await supabaseClient
@@ -3766,9 +2577,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -3777,196 +2586,113 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Hakuna malipo ya matangazo.
-</div>`;
+`<div class="message">Hakuna malipo bado.</div>`;
 
 return;
 
 }
 
-box.innerHTML=
-`
+box.innerHTML="";
 
-<div class="table-wrap">
+data.forEach(p=>{
 
-<table>
+box.innerHTML+=`
 
-<thead>
+<div class="card">
 
-<tr>
-<th>ID</th>
-<th>Ad ID</th>
-<th>Amount</th>
-<th>Network</th>
-<th>Phone</th>
-<th>Transaction</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
+<b>Payment #${p.id}</b>
 
-</thead>
+<br>
+Amount: TSh ${money(p.amount)}
 
-<tbody>
+<br>
+Muda: ${p.duration_days} siku
 
-${data.map(p=>`
+<br>
+Simu: ${escapeHTML(p.phone || "")}
 
-<tr>
+<br>
+Transaction ID:
+${escapeHTML(p.transaction_id || "Haijawekwa")}
 
-<td>${p.id}</td>
+<br>
+Status:
+<span class="badge ${p.status}">
+${escapeHTML(p.status)}
+</span>
 
-<td>${p.ad_id||"-"}</td>
+<br><br>
 
-<td>TSh ${money(p.amount)}</td>
-
-<td>${escapeHTML(p.payment_method||"")}</td>
-
-<td>${escapeHTML(p.phone||"")}</td>
-
-<td>${escapeHTML(p.transaction_id||"HAIPO")}</td>
-
-<td>${statusBadge(p.status)}</td>
-
-<td>
-
-${
-p.status==="pending"
-?
+${p.status==="pending"?
 
 `
+<div class="actions">
 
 <button
 class="main"
-onclick="approveAdPayment(${Number(p.id)})">
-
-✅ Approve
-
+onclick="adminUpdatePayment(${p.id},'approved')">
+✅ APPROVE
 </button>
 
 <button
-class="main red"
-onclick="rejectAdPayment(${Number(p.id)})">
-
-❌ Reject
-
+class="danger"
+onclick="adminUpdatePayment(${p.id},'rejected')">
+❌ REJECT
 </button>
 
+</div>
 `
-:""
-}
-
-</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
+:""}
 
 </div>
 
 `;
 
-}
-
-
-async function approveAdPayment(id){
-
-if(!isAdmin){
-
-alert("Not authorized.");
-return;
+});
 
 }
 
-if(!confirm(
-"Una uhakika unataka ku-approve malipo haya?"
-))
-return;
+async function adminUpdatePayment(id,status){
 
 const {error}=
 await supabaseClient.rpc(
 "admin_update_plam_ad_payment",
 {
 p_payment_id:id,
-p_status:"approved"
+p_status:status
 }
 );
 
 if(error){
 
-alert(error.message);
+alert("❌ "+error.message);
+
 return;
 
 }
 
 alert(
-"✅ Malipo yamekubaliwa. Tangazo limewashwa."
+status==="approved"?
+"✅ Malipo yamekubaliwa."
+:"❌ Malipo yamekataliwa."
 );
 
-await loadAdminAdPayments();
+await loadAdminPayments();
 await loadAdminSponsoredAds();
-await loadSponsoredAds();
-await loadMyAds();
 
 }
 
 
-async function rejectAdPayment(id){
-
-if(!isAdmin){
-
-alert("Not authorized.");
-return;
-
-}
-
-if(!confirm(
-"Una uhakika unataka kukataa malipo haya?"
-))
-return;
-
-const {error}=
-await supabaseClient.rpc(
-"admin_update_plam_ad_payment",
-{
-p_payment_id:id,
-p_status:"rejected"
-}
-);
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-alert("❌ Malipo yamekataliwa.");
-
-await loadAdminAdPayments();
-await loadAdminSponsoredAds();
-await loadMyAds();
-
-}
-
+/* =========================
+   ADMIN FREE ADS
+========================= */
 
 async function loadAdminSponsoredAds(){
 
-const box=document.getElementById("adminSponsoredAds");
+const box=
+document.getElementById("adminSponsoredAds");
 
-if(!isAdmin){
-
-box.innerHTML=
-`<div class="message error">
-❌ Ruhusa ya Admin inahitajika.
-</div>`;
-
-return;
-
-}
+if(!box)return;
 
 const {data,error}=
 await supabaseClient
@@ -3977,9 +2703,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -3988,225 +2712,126 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Hakuna Sponsored Ads.
-</div>`;
+`<div class="message">Hakuna Sponsored Ads.</div>`;
 
 return;
 
 }
 
-box.innerHTML=
-`
+box.innerHTML="";
 
-<div class="table-wrap">
+data.forEach(ad=>{
 
-<table>
+box.innerHTML+=`
 
-<thead>
+<div class="card sponsored">
 
-<tr>
+<h3>📢 Ad #${ad.id}</h3>
 
-<th>ID</th>
-<th>Product</th>
-<th>Seller</th>
-<th>Days</th>
-<th>Amount</th>
-<th>Status</th>
-<th>Payment</th>
-<th>Expires</th>
-<th>Action</th>
+<p>
+Product ID: ${ad.product_id}
+</p>
 
-</tr>
+<p>
+Seller:
+${escapeHTML(ad.seller_id)}
+</p>
 
-</thead>
+<p>
+Muda:
+${ad.duration_days} siku
+</p>
 
-<tbody>
+<p>
+Amount:
+<b>
+${ad.amount==0?"BURE":"TSh "+money(ad.amount)}
+</b>
+</p>
 
-${data.map(a=>`
+<p>
+Status:
+<span class="badge ${ad.status}">
+${escapeHTML(ad.status)}
+</span>
+</p>
 
-<tr>
+<p>
+Payment:
+<span class="badge">
+${escapeHTML(ad.payment_status)}
+</span>
+</p>
 
-<td>${a.id}</td>
-
-<td>${a.product_id||"-"}</td>
-
-<td>${escapeHTML(a.seller_id||"")}</td>
-
-<td>${a.duration_days}</td>
-
-<td>
-
-${
-a.payment_status==="free"
-?
-"BURE"
-:
-`TSh ${money(a.amount)}`
-}
-
-</td>
-
-<td>${statusBadge(a.status)}</td>
-
-<td>${escapeHTML(a.payment_status||"")}</td>
-
-<td>
-${a.expires_at?escapeHTML(a.expires_at):"-"}
-</td>
-
-<td>
-
-${
-a.status==="pending"
-
-?
+${ad.status==="pending" && ad.payment_status==="free"?
 
 `
-
-<div class="admin-action">
+<div class="actions">
 
 <button
 class="main"
-onclick="approveSponsoredAd(${Number(a.id)})">
-
+onclick="adminUpdateFreeAd(${ad.id},'active')">
 ✅ KUBALI
-
 </button>
 
 <button
-class="main red"
-onclick="rejectSponsoredAd(${Number(a.id)})">
-
+class="danger"
+onclick="adminUpdateFreeAd(${ad.id},'rejected')">
 ❌ KATAA
-
 </button>
 
 </div>
-
 `
-
-:
-
-a.status==="active"
-
-?
-
-`<span class="badge active">IMEWASHWA</span>`
-
-:
-
-`<span class="badge rejected">IMEKATALIWA</span>`
-
-}
-
-</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
+:""}
 
 </div>
 
 `;
 
-}
-
-
-async function approveSponsoredAd(id){
-
-if(!isAdmin){
-
-alert("❌ Ruhusa ya Admin inahitajika.");
-return;
+});
 
 }
 
-if(!confirm(
-"Unataka kuruhusu tangazo hili?\n\nTangazo litaanza kuonekana kwa wateja."
-))
-return;
+async function adminUpdateFreeAd(id,status){
 
 const {error}=
 await supabaseClient.rpc(
 "admin_update_plam_sponsored_ad_status",
 {
-p_ad_id:Number(id),
-p_status:"active"
+p_ad_id:id,
+p_status:status
 }
 );
 
 if(error){
 
-alert(
-"❌ Imeshindikana kukubali tangazo:\n"+
-error.message
-);
+alert("❌ "+error.message);
 
 return;
 
 }
 
 alert(
-"✅ Tangazo limekubaliwa na limewashwa."
+status==="active"?
+"✅ Tangazo limewashwa."
+:"❌ Tangazo limekataliwa."
 );
 
 await loadAdminSponsoredAds();
+
 await loadSponsoredAds();
-await loadMyAds();
 
 }
 
 
-async function rejectSponsoredAd(id){
-
-if(!isAdmin){
-
-alert("❌ Ruhusa ya Admin inahitajika.");
-return;
-
-}
-
-if(!confirm(
-"Unataka kukataa tangazo hili?"
-))
-return;
-
-const {error}=
-await supabaseClient.rpc(
-"admin_update_plam_sponsored_ad_status",
-{
-p_ad_id:Number(id),
-p_status:"rejected"
-}
-);
-
-if(error){
-
-alert(
-"❌ Imeshindikana kukataa tangazo:\n"+
-error.message
-);
-
-return;
-
-}
-
-alert("❌ Tangazo limekataliwa.");
-
-await loadAdminSponsoredAds();
-await loadMyAds();
-
-}
-
+/* =========================
+   ADMIN PRODUCTS
+========================= */
 
 async function loadAdminProducts(){
 
-const box=document.getElementById("adminProducts");
+const box=
+document.getElementById("adminProducts");
 
 const {data,error}=
 await supabaseClient
@@ -4217,9 +2842,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -4228,41 +2851,32 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Hakuna bidhaa.
-</div>`;
+`<div class="message">Hakuna bidhaa.</div>`;
 
 return;
 
 }
 
-box.innerHTML=
-`
+let html=`
 
 <div class="table-wrap">
 
 <table>
 
-<thead>
-
 <tr>
-
 <th>ID</th>
-<th>Product</th>
-<th>Price</th>
-<th>Category</th>
-<th>Location</th>
-<th>Phone</th>
+<th>Bidhaa</th>
+<th>Bei</th>
 <th>Status</th>
+<th>Seller</th>
 <th>Action</th>
-
 </tr>
 
-</thead>
+`;
 
-<tbody>
+data.forEach(p=>{
 
-${data.map(p=>`
+html+=`
 
 <tr>
 
@@ -4272,98 +2886,80 @@ ${data.map(p=>`
 
 <td>TSh ${money(p.price)}</td>
 
-<td>${escapeHTML(p.category||"")}</td>
-
 <td>
-
-${escapeHTML(p.region||"")}
-/
-${escapeHTML(p.district||"")}
-/
-${escapeHTML(p.place||"")}
-
+<span class="badge ${p.status}">
+${escapeHTML(p.status)}
+</span>
 </td>
 
-<td>${escapeHTML(p.phone||"")}</td>
-
-<td>${statusBadge(p.status)}</td>
+<td>
+${escapeHTML(p.user_id || "")}
+</td>
 
 <td>
 
 <button
-class="main red"
-onclick="deleteProduct(${Number(p.id)})">
-
+class="danger"
+onclick="adminDeleteProduct(${p.id})">
 🗑️ Futa
-
 </button>
 
 </td>
 
 </tr>
 
-`).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
 `;
 
-}
+});
 
+html+=`
 
-async function deleteProduct(id){
+</table>
+</div>
+`;
 
-if(!isAdmin){
-
-alert(
-"❌ Ruhusa ya Admin inahitajika."
-);
-
-return;
+box.innerHTML=html;
 
 }
+
+async function adminDeleteProduct(id){
 
 if(!confirm(
-"⚠️ Una uhakika unataka kufuta bidhaa hii?\n\n"+
-"Bidhaa hii itaondolewa kabisa kwenye PLAM."
-))
-return;
+"Una uhakika unataka kufuta bidhaa hii?"
+))return;
 
 const {error}=
 await supabaseClient.rpc(
 "admin_delete_plam_product",
 {
-p_product_id:Number(id)
+p_product_id:id
 }
 );
 
 if(error){
 
-alert(
-"❌ Imeshindikana kufuta bidhaa:\n"+
-error.message
-);
+alert("❌ "+error.message);
 
 return;
 
 }
 
-alert("✅ Bidhaa imefutwa kabisa.");
+alert("✅ Bidhaa imefutwa.");
 
 await loadAdminProducts();
 await loadProducts();
-await loadSponsoredAds();
 
 }
 
 
+/* =========================
+   ADMIN ORDERS
+========================= */
+
 async function loadAdminOrders(){
 
-const box=document.getElementById("adminOrders");
+const box=
+document.getElementById("adminOrders");
 
 const {data,error}=
 await supabaseClient
@@ -4374,9 +2970,7 @@ await supabaseClient
 if(error){
 
 box.innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
+`<div class="message error">${escapeHTML(error.message)}</div>`;
 
 return;
 
@@ -4385,239 +2979,300 @@ return;
 if(!data.length){
 
 box.innerHTML=
-`<div class="message">
-Hakuna orders.
-</div>`;
+`<div class="message">Hakuna orders.</div>`;
 
 return;
 
 }
 
-box.innerHTML=
-`
+let html=`
 
 <div class="table-wrap">
 
 <table>
 
-<thead>
-
 <tr>
-
 <th>ID</th>
 <th>Product</th>
 <th>Buyer</th>
-<th>Buyer Phone</th>
-<th>Seller Phone</th>
-<th>Quantity</th>
+<th>Seller</th>
 <th>Status</th>
-
 </tr>
+`;
 
-</thead>
+data.forEach(o=>{
 
-<tbody>
-
-${data.map(o=>`
+html+=`
 
 <tr>
 
 <td>${o.id}</td>
 
-<td>${escapeHTML(o.product_name||"")}</td>
+<td>${escapeHTML(o.product_name)}</td>
 
-<td>${escapeHTML(o.buyer_name||"")}</td>
+<td>
+${escapeHTML(o.buyer_name)}
+<br>
+${escapeHTML(o.buyer_phone)}
+</td>
 
-<td>${escapeHTML(o.buyer_phone||"")}</td>
+<td>
+${escapeHTML(o.seller_phone || "")}
+</td>
 
-<td>${escapeHTML(o.seller_phone||"")}</td>
-
-<td>${escapeHTML(o.quantity||"")}</td>
-
-<td>${statusBadge(o.status)}</td>
+<td>
+<span class="badge ${o.status}">
+${escapeHTML(o.status)}
+</span>
+</td>
 
 </tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
 `;
+
+});
+
+html+=`
+</table>
+</div>
+`;
+
+box.innerHTML=html;
 
 }
 
+
+/* =========================
+   ADMIN USERS
+========================= */
 
 async function loadAdminUsers(){
 
-const box=document.getElementById("adminUsers");
+const box=
+document.getElementById("adminUsers");
 
-const {data,error}=
-await supabaseClient
-.from("profiles")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-
-box.innerHTML=
-`<div class="message error">
-❌ ${escapeHTML(error.message)}
-</div>`;
-
-return;
-
-}
-
-if(!data.length){
-
-box.innerHTML=
-`<div class="message">
-Hakuna profiles.
-</div>`;
-
-return;
-
-}
-
-box.innerHTML=
-`
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>ID</th>
-<th>Full Name</th>
-<th>Phone</th>
-<th>Email</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${data.map(u=>`
-
-<tr>
-
-<td>${escapeHTML(u.id||"")}</td>
-
-<td>${escapeHTML(u.full_name||"")}</td>
-
-<td>${escapeHTML(u.phone||"")}</td>
-
-<td>${escapeHTML(u.email||"")}</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
-
+box.innerHTML=`
+<div class="message info">
+👥 Supabase Auth ndiyo inayohifadhi accounts za watumiaji.
+<br><br>
+Admin email:
+<b>lucasmwingira323@gmail.com</b>
+<br>
+Admin mwingine:
+<b>fungamezacostantin8@gmail.com</b>
 </div>
-
 `;
 
 }
 
 
-async function adminLogout(){
+/* =========================
+   STATS
+========================= */
 
-await supabaseClient.auth.signOut();
+async function loadAdminStats(){
 
-currentUser=null;
-isAdmin=false;
+const box=
+document.getElementById("adminStats");
 
-document.getElementById("adminDashboard")
-.classList.add("hidden");
+const {count:products}=await supabaseClient
+.from("Production")
+.select("*",{count:"exact",head:true});
 
-document.getElementById("adminLoginArea")
-.classList.remove("hidden");
+const {count:orders}=await supabaseClient
+.from("orders")
+.select("*",{count:"exact",head:true});
 
-document.getElementById("adminMessage")
-.innerHTML="";
+const {count:ads}=await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.select("*",{count:"exact",head:true});
 
-show("home");
+const {count:payments}=await supabaseClient
+.from("PLAM_Ad_Payments")
+.select("*",{count:"exact",head:true});
+
+box.innerHTML=`
+
+<div class="grid">
+
+<div class="card">
+<h3>📦 Bidhaa</h3>
+<h2>${products || 0}</h2>
+</div>
+
+<div class="card">
+<h3>🛒 Orders</h3>
+<h2>${orders || 0}</h2>
+</div>
+
+<div class="card">
+<h3>📢 Ads</h3>
+<h2>${ads || 0}</h2>
+</div>
+
+<div class="card">
+<h3>💳 Payments</h3>
+<h2>${payments || 0}</h2>
+</div>
+
+</div>
+`;
 
 }
 
+
+/* =========================
+   STARTUP
+========================= */
 
 async function startup(){
 
-fillRegions();
+if(!initSupabase())return;
 
-const {data}=
-await supabaseClient.auth.getSession();
-
-if(data.session){
-
-currentUser=data.session.user;
-
-await checkAdmin();
-
-}
+loadRegions();
 
 await loadPLAMSettings();
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(session){
+
+currentUser=session.user;
+
+await afterLogin();
+
+}
 
 await loadProducts();
 
 await loadSponsoredAds();
 
-updateAccountUI();
-
-if(isAdmin){
-
-document.getElementById("adminLoginArea")
-.classList.add("hidden");
-
-document.getElementById("adminDashboard")
-.classList.remove("hidden");
-
-await loadAdminData();
+await loadAdminStats();
 
 }
 
-}
 
+/* =========================
+   AUTH STATE
+========================= */
+
+function setupAuthListener(){
+
+if(!supabaseClient)return;
 
 supabaseClient.auth.onAuthStateChange(
 async(event,session)=>{
 
-currentUser=session?.user||null;
+currentUser=
+session ? session.user : null;
 
 if(currentUser){
 
-await checkAdmin();
+const {data}=await supabaseClient
+.rpc("is_plam_admin");
+
+isAdmin=data===true;
+
+document.getElementById("adminNav").style.display=
+isAdmin ? "block":"none";
+
+if(isAdmin){
+
+document.getElementById("adminLoginBox").style.display="none";
+document.getElementById("adminDashboard").style.display="block";
+
+}
+
+await loadAccount();
 
 }else{
 
 isAdmin=false;
 
+document.getElementById("adminNav").style.display="none";
+
+document.getElementById("authArea").style.display="block";
+document.getElementById("userArea").style.display="none";
+
 }
 
-updateAccountUI();
+}
+);
 
-if(currentUser){
+}
 
-await saveProfile();
+
+/* =========================
+   LOAD ADMIN FULL
+========================= */
+
+async function loadAdmin(){
+
+if(!isAdmin){
+
+alert("❌ Huna ruhusa ya Admin.");
+
+return;
+
+}
+
+document.getElementById("adminLoginBox").style.display="none";
+document.getElementById("adminDashboard").style.display="block";
+
+await loadAdminSettings();
+await loadAdminStats();
+await loadAdminPayments();
+await loadAdminSponsoredAds();
+await loadAdminProducts();
+await loadAdminOrders();
+await loadAdminUsers();
+
+}
+
+
+/* =========================
+   PAGE LOAD
+========================= */
+
+window.addEventListener("load",async function(){
+
+try{
+
+await startup();
+
+setupAuthListener();
+
+}catch(error){
+
+console.error(error);
+
+document.body.insertAdjacentHTML(
+"afterbegin",
+`
+<div style="
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:99999;
+background:#d71920;
+color:white;
+padding:15px;
+font-family:Arial;
+font-size:14px;
+">
+❌ PLAM imepata kosa la JavaScript:
+<br><br>
+${escapeHTML(error.message || error)}
+</div>
+`
+);
 
 }
 
 });
-
-
-startup();
 
 </script>
 
