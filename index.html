@@ -5979,7 +5979,681 @@ await saveProfile();
 
 startup();
 
-</script>
+/* =========================================
+   PLAM MAINTENANCE MODE
+   ========================================= */
 
-</body>
-  </html>
+let maintenanceEnabled = false;
+let maintenancePollTimer = null;
+
+
+/* -----------------------------------------
+   CREATE MAINTENANCE SCREEN
+----------------------------------------- */
+
+function createMaintenanceScreen(){
+
+    if(document.getElementById("maintenanceOverlay")){
+        return;
+    }
+
+    const style = document.createElement("style");
+
+    style.id = "maintenanceStyle";
+
+    style.innerHTML = `
+    
+    #maintenanceOverlay{
+        position:fixed;
+        inset:0;
+        background:linear-gradient(135deg,#087f23,#064f18);
+        color:white;
+        z-index:999999;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:25px;
+    }
+
+    #maintenanceOverlay .maintenanceBox{
+        width:100%;
+        max-width:520px;
+        background:white;
+        color:#222;
+        border-radius:18px;
+        padding:30px 20px;
+        box-shadow:0 10px 40px #0005;
+    }
+
+    #maintenanceOverlay .maintenanceIcon{
+        font-size:65px;
+        margin-bottom:10px;
+    }
+
+    #maintenanceOverlay h1{
+        color:#087f23;
+        margin:10px 0;
+        font-size:27px;
+    }
+
+    #maintenanceOverlay p{
+        line-height:1.7;
+        margin:10px 0;
+    }
+
+    #maintenanceOverlay .maintenanceButton{
+        border:0;
+        background:#087f23;
+        color:white;
+        padding:13px 20px;
+        border-radius:9px;
+        font-weight:bold;
+        font-size:15px;
+        margin-top:12px;
+        cursor:pointer;
+    }
+
+    #maintenanceOverlay .maintenanceSmall{
+        font-size:12px;
+        color:#666;
+        margin-top:15px;
+    }
+
+    #maintenanceAdminButton{
+        margin-top:10px;
+        width:100%;
+    }
+
+    `;
+
+    document.head.appendChild(style);
+
+
+    const overlay = document.createElement("div");
+
+    overlay.id = "maintenanceOverlay";
+
+    overlay.innerHTML = `
+
+        <div class="maintenanceBox">
+
+            <div class="maintenanceIcon">
+                🔧
+            </div>
+
+            <h1>
+                PLAM TANZANIA
+            </h1>
+
+            <h2>
+                🚧 Mfumo Upo Kwenye Matengenezo
+            </h2>
+
+            <p>
+                Tunafanya maboresho ya mfumo kwa ajili
+                ya kukupa huduma bora zaidi.
+            </p>
+
+            <p>
+                Tafadhali subiri kidogo.
+                <br>
+                Mfumo utarudi kufanya kazi hivi karibuni.
+            </p>
+
+            <button
+                class="maintenanceButton"
+                onclick="tryMaintenanceAdminLogin()">
+
+                🔐 Admin Login
+
+            </button>
+
+            <div class="maintenanceSmall">
+                Jenga biashara yako. Fikia wateja zaidi.
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+}
+
+
+/* -----------------------------------------
+   LOAD MAINTENANCE STATUS
+----------------------------------------- */
+
+async function loadMaintenanceStatus(){
+
+    try{
+
+        const {data,error} =
+        await supabaseClient
+        .from("PLAM_Settings")
+        .select("maintenance_enabled")
+        .eq("id",1)
+        .single();
+
+
+        if(error){
+
+            console.error(
+                "Maintenance status:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        maintenanceEnabled =
+            data?.maintenance_enabled === true;
+
+
+        applyMaintenanceMode();
+
+
+    }catch(error){
+
+        console.error(
+            "Maintenance:",
+            error
+        );
+
+    }
+
+}
+
+
+/* -----------------------------------------
+   APPLY MAINTENANCE MODE
+----------------------------------------- */
+
+function applyMaintenanceMode(){
+
+    const overlay =
+        document.getElementById(
+            "maintenanceOverlay"
+        );
+
+    if(!overlay)
+        return;
+
+
+    /*
+       ADMIN ANAENDELEA KUTUMIA MFUMO
+    */
+
+    if(
+        maintenanceEnabled &&
+        !isAdmin
+    ){
+
+        overlay.style.display =
+            "flex";
+
+        document.body.style.overflow =
+            "hidden";
+
+    }else{
+
+        overlay.style.display =
+            "none";
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* -----------------------------------------
+   ADMIN LOGIN WAKATI WA MAINTENANCE
+----------------------------------------- */
+
+function tryMaintenanceAdminLogin(){
+
+    const overlay =
+        document.getElementById(
+            "maintenanceOverlay"
+        );
+
+    if(overlay){
+
+        /*
+           Tunamruhusu admin kufungua
+           sehemu ya login.
+        */
+
+        overlay.style.display =
+            "none";
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    show("admin");
+
+
+    setTimeout(()=>{
+
+        const email =
+            document.getElementById(
+                "adminEmail"
+            );
+
+        if(email){
+
+            email.focus();
+
+        }
+
+    },300);
+
+}
+
+
+/* -----------------------------------------
+   MAINTENANCE ADMIN BUTTON
+----------------------------------------- */
+
+function addMaintenanceAdminControl(){
+
+    const settingsCard =
+        document.querySelector(
+            "#adminDashboard .card"
+        );
+
+    if(!settingsCard)
+        return;
+
+
+    /*
+       Tafuta card yenye
+       "Udhibiti wa PLAM"
+    */
+
+    const cards =
+        document.querySelectorAll(
+            "#adminDashboard .card"
+        );
+
+
+    let targetCard = null;
+
+
+    cards.forEach(card=>{
+
+        const text =
+            card.innerText || "";
+
+        if(
+            text.includes(
+                "Udhibiti wa PLAM"
+            )
+        ){
+
+            targetCard = card;
+
+        }
+
+    });
+
+
+    if(!targetCard)
+        return;
+
+
+    if(
+        document.getElementById(
+            "maintenanceAdminControl"
+        )
+    ){
+
+        updateMaintenanceButton();
+
+        return;
+
+    }
+
+
+    const divider =
+        document.createElement("hr");
+
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.id =
+        "maintenanceAdminControl";
+
+
+    wrapper.innerHTML = `
+
+        <p>
+
+            🔧 <b>Maintenance Mode</b>
+
+            <br>
+
+            <small>
+                Ukiwasha, watumiaji wataona ujumbe
+                kwamba PLAM ipo kwenye matengenezo.
+            </small>
+
+        </p>
+
+
+        <button
+            type="button"
+            id="maintenanceToggle"
+            class="main">
+
+            ⏳ Inapakia...
+
+        </button>
+
+        <div
+            id="maintenanceMessage">
+        </div>
+
+    `;
+
+
+    targetCard.appendChild(divider);
+
+    targetCard.appendChild(wrapper);
+
+
+    updateMaintenanceButton();
+
+}
+
+
+/* -----------------------------------------
+   UPDATE MAINTENANCE BUTTON
+----------------------------------------- */
+
+function updateMaintenanceButton(){
+
+    const button =
+        document.getElementById(
+            "maintenanceToggle"
+        );
+
+    if(!button)
+        return;
+
+
+    if(maintenanceEnabled){
+
+        button.textContent =
+            "🟢 Maintenance: ON";
+
+        button.className =
+            "main red";
+
+    }else{
+
+        button.textContent =
+            "🔴 Maintenance: OFF";
+
+        button.className =
+            "main";
+
+    }
+
+}
+
+
+/* -----------------------------------------
+   TOGGLE MAINTENANCE
+----------------------------------------- */
+
+async function toggleMaintenance(){
+
+    if(!isAdmin){
+
+        alert(
+            "❌ Ruhusa ya Admin inahitajika."
+        );
+
+        return;
+
+    }
+
+
+    const newStatus =
+        !maintenanceEnabled;
+
+
+    const message =
+        document.getElementById(
+            "maintenanceMessage"
+        );
+
+
+    if(message){
+
+        message.innerHTML = `
+            <div class="message">
+                ⏳ Inahifadhi Maintenance Mode...
+            </div>
+        `;
+
+    }
+
+
+    try{
+
+        const {error} =
+            await supabaseClient.rpc(
+                "set_plam_maintenance",
+                {
+                    p_enabled:newStatus
+                }
+            );
+
+
+        if(error)
+            throw error;
+
+
+        maintenanceEnabled =
+            newStatus;
+
+
+        updateMaintenanceButton();
+
+        applyMaintenanceMode();
+
+
+        if(message){
+
+            message.innerHTML = `
+
+                <div class="message success">
+
+                    ${
+                        newStatus
+
+                        ?
+
+                        "🟢 Maintenance Mode imewashwa. Watumiaji wataona ukurasa wa matengenezo."
+
+                        :
+
+                        "🔴 Maintenance Mode imezimwa. PLAM sasa inapatikana kwa watumiaji."
+
+                    }
+
+                </div>
+
+            `;
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        if(message){
+
+            message.innerHTML = `
+
+                <div class="message error">
+
+                    ❌ Imeshindikana kubadilisha Maintenance Mode.
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message ||
+                        String(error)
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+}
+
+
+/* -----------------------------------------
+   START MAINTENANCE CHECK
+----------------------------------------- */
+
+function startMaintenancePolling(){
+
+    if(maintenancePollTimer){
+
+        clearInterval(
+            maintenancePollTimer
+        );
+
+    }
+
+
+    maintenancePollTimer =
+        setInterval(
+            async()=>{
+
+                await loadMaintenanceStatus();
+
+            },
+            15000
+        );
+
+}
+
+
+/* -----------------------------------------
+   MODIFY EXISTING STARTUP
+----------------------------------------- */
+
+const originalStartup =
+    startup;
+
+
+/*
+   Tunatumia startup yako ya zamani
+   bila kuharibu functionality yake.
+*/
+
+startup = async function(){
+
+    await originalStartup();
+
+
+    createMaintenanceScreen();
+
+    await loadMaintenanceStatus();
+
+    addMaintenanceAdminControl();
+
+    startMaintenancePolling();
+
+};
+
+
+/* -----------------------------------------
+   AUTH STATE
+----------------------------------------- */
+
+const originalAuthStateHandler =
+    supabaseClient.auth.onAuthStateChange;
+
+
+/*
+   Hatuwezi kuchukua handler ya zamani
+   moja kwa moja, kwa hiyo tunaendelea
+   kutumia listener mpya hapa.
+*/
+
+supabaseClient.auth.onAuthStateChange(
+    async(event,session)=>{
+
+        currentUser =
+            session?.user || null;
+
+
+        if(currentUser){
+
+            await checkAdmin();
+
+        }else{
+
+            isAdmin = false;
+
+        }
+
+
+        updateAccountUI();
+
+
+        if(currentUser){
+
+            await saveProfile();
+
+        }
+
+
+        /*
+           Maintenance iheshimu Admin
+        */
+
+        applyMaintenanceMode();
+
+
+        if(isAdmin){
+
+            addMaintenanceAdminControl();
+
+            updateMaintenanceButton();
+
+        }
+
+    }
+);
+
+
+/* -----------------------------------------
+   START PLAM
+----------------------------------------- */
+
+createMaintenanceScreen();
+
+startup();
