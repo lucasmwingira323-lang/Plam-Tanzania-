@@ -493,7 +493,23 @@ min-height:250px
 .user-actions{
 min-width:220px
 }
+#globalCountryBox{
+  position:fixed;
+  top:10px;
+  right:10px;
+  z-index:99999;
+  background:white;
+  padding:6px;
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
 
+#globalCountry{
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+}
 }
 </style>
 </head>
@@ -501,7 +517,28 @@ min-width:220px
 <body>
 
 <!-- ================= MAINTENANCE ================= -->
-
+<!-- GLOBAL COUNTRY -->
+<div id="globalCountryBox">
+  <select id="globalCountry">
+    <option value="TZ">🇹🇿 Tanzania</option>
+    <option value="KE">🇰🇪 Kenya</option>
+    <option value="UG">🇺🇬 Uganda</option>
+    <option value="RW">🇷🇼 Rwanda</option>
+    <option value="ZA">🇿🇦 South Africa</option>
+    <option value="NG">🇳🇬 Nigeria</option>
+    <option value="GH">🇬🇭 Ghana</option>
+    <option value="IN">🇮🇳 India</option>
+    <option value="CN">🇨🇳 China</option>
+    <option value="GB">🇬🇧 United Kingdom</option>
+    <option value="US">🇺🇸 United States</option>
+    <option value="CA">🇨🇦 Canada</option>
+    <option value="AU">🇦🇺 Australia</option>
+    <option value="DE">🇩🇪 Germany</option>
+    <option value="FR">🇫🇷 France</option>
+    <option value="BR">🇧🇷 Brazil</option>
+    <option value="OTHER">🌍 Other Country</option>
+  </select>
+</div>
 <div id="maintenanceOverlay">
 
 <div class="maintenanceBox">
@@ -6542,7 +6579,22 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("Service Worker Error:", err));
   });
 }
+// ================= GLOBAL COUNTRY =================
 
+const globalCountry = document.getElementById("globalCountry");
+
+if (globalCountry) {
+  const savedCountry = localStorage.getItem("plam_country");
+
+  if (savedCountry) {
+    globalCountry.value = savedCountry;
+  }
+
+  globalCountry.addEventListener("change", function () {
+    localStorage.setItem("plam_country", this.value);
+    location.reload();
+  });
+}
 </script>
 
 </body>
