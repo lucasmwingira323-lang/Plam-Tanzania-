@@ -1,0 +1,6549 @@
+<!doctype html>
+<html lang="sw">
+<head>
+   <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b7a3b">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAM TANZANIA</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f2f5f3;
+color:#222
+}
+
+header{
+background:#087f23;
+color:#fff;
+padding:15px 10px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:20
+}
+
+header h1{
+margin:0;
+font-size:25px
+}
+
+header p{
+margin:5px 0 0;
+font-size:13px
+}
+
+nav{
+display:flex;
+gap:5px;
+overflow-x:auto;
+background:#fff;
+padding:8px;
+position:sticky;
+top:78px;
+z-index:19;
+box-shadow:0 2px 7px #0002
+}
+
+nav button{
+border:0;
+background:#087f23;
+color:#fff;
+padding:10px 13px;
+border-radius:8px;
+white-space:nowrap;
+font-weight:bold
+}
+
+main{
+max-width:1100px;
+margin:auto;
+padding:12px
+}
+
+section{
+display:none
+}
+
+section.active{
+display:block
+}
+
+.card{
+background:#fff;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 2px 8px #0001
+}
+
+h2,h3{
+color:#087f23
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:6px 0 10px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px
+}
+
+textarea{
+min-height:100px;
+resize:vertical
+}
+
+button{
+cursor:pointer
+}
+
+.main{
+background:#087f23;
+color:#fff;
+border:0;
+padding:12px 16px;
+border-radius:8px;
+font-weight:bold;
+margin:3px
+}
+
+.gray{
+background:#777!important
+}
+
+.red{
+background:#d71920!important
+}
+
+.orange{
+background:#e67e00!important
+}
+
+.blue{
+background:#1266d6!important
+}
+
+.small{
+font-size:12px
+}
+
+.message{
+padding:10px;
+background:#eef8f0;
+border-radius:8px;
+margin:8px 0
+}
+
+.error{
+background:#ffeaea;
+color:#a40000
+}
+
+.success{
+background:#e9f9ed;
+color:#087f23
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:14px
+}
+
+.product{
+background:#fff;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 2px 8px #0002
+}
+
+.product-images{
+background:#eee;
+width:100%;
+display:flex;
+flex-direction:column;
+gap:2px
+}
+
+.product-images img{
+width:100%;
+height:auto;
+max-height:650px;
+min-height:300px;
+object-fit:contain;
+background:#f5f5f5;
+display:block
+}
+
+.product-body{
+padding:12px
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:#087f23
+}
+
+.meta{
+font-size:13px;
+color:#555;
+line-height:1.6
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+margin-top:10px
+}
+
+.actions a{
+text-decoration:none
+}
+
+.ad-wrap{
+position:relative;
+overflow:hidden;
+border-radius:12px
+}
+
+.ad-track{
+display:flex;
+transition:transform .5s ease
+}
+
+.ad-slide{
+min-width:100%
+}
+
+.sponsored-label{
+display:inline-block;
+background:#e67e00;
+color:#fff;
+padding:5px 9px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:7px
+}
+
+.ad-dots{
+text-align:center;
+padding:7px
+}
+
+.ad-dot{
+display:inline-block;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#aaa;
+margin:3px
+}
+
+.ad-dot.active{
+background:#087f23
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:left;
+vertical-align:top
+}
+
+th{
+background:#087f23;
+color:#fff
+}
+
+.table-wrap{
+overflow-x:auto
+}
+
+.badge{
+display:inline-block;
+padding:5px 9px;
+border-radius:15px;
+font-size:12px;
+font-weight:bold
+}
+
+.badge.pending{
+background:#fff1c7;
+color:#875c00
+}
+
+.badge.accepted,
+.badge.active{
+background:#d9f7df;
+color:#087f23
+}
+
+.badge.rejected{
+background:#ffdede;
+color:#a40000
+}
+
+.badge.unpaid{
+background:#ffe8d0;
+color:#934b00
+}
+
+footer{
+background:#087f23;
+color:#fff;
+text-align:center;
+padding:20px 10px;
+margin-top:20px
+}
+
+footer a{
+text-decoration:none
+}
+
+hr{
+border:0;
+border-top:1px solid #ddd;
+margin:15px 0
+}
+
+.hidden{
+display:none!important
+}
+
+.center{
+text-align:center
+}
+
+.loading{
+padding:20px;
+text-align:center;
+color:#666
+}
+
+.admin-action{
+display:flex;
+flex-wrap:wrap;
+gap:5px
+}
+
+/* =========================================================
+   ACCOUNT CONTROL
+========================================================= */
+
+.account-status{
+display:inline-block;
+padding:5px 9px;
+border-radius:15px;
+font-size:12px;
+font-weight:bold;
+white-space:nowrap
+}
+
+.account-active{
+background:#d9f7df;
+color:#087f23
+}
+
+.account-warning{
+background:#fff1c7;
+color:#875c00
+}
+
+.account-suspended{
+background:#ffe8d0;
+color:#934b00
+}
+
+.account-banned{
+background:#222;
+color:#fff
+}
+
+.user-actions{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+min-width:250px
+}
+
+.user-actions button{
+font-size:12px;
+padding:8px 10px;
+margin:0
+}
+
+.user-reason{
+max-width:230px;
+line-height:1.5;
+word-break:break-word
+}
+
+.user-id{
+font-size:10px;
+word-break:break-all;
+color:#666
+}
+
+/* =========================================================
+   MAINTENANCE
+========================================================= */
+
+#maintenanceOverlay{
+position:fixed;
+inset:0;
+background:#087f23;
+color:#fff;
+z-index:999999;
+display:none;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:25px
+}
+
+#maintenanceOverlay.active{
+display:flex
+}
+
+.maintenanceBox{
+width:100%;
+max-width:500px;
+background:#fff;
+color:#222;
+border-radius:18px;
+padding:30px 20px;
+box-shadow:0 10px 40px #0005
+}
+
+.maintenanceIcon{
+font-size:60px;
+margin-bottom:10px
+}
+
+.maintenanceBox h1{
+color:#087f23;
+margin:5px 0;
+font-size:28px
+}
+
+.maintenanceBox h2{
+color:#d46b00;
+font-size:22px;
+margin:15px 0
+}
+
+.maintenanceBox p{
+line-height:1.7;
+color:#555
+}
+
+.maintenanceAdminBtn{
+background:#087f23!important;
+color:#fff!important;
+border:0;
+padding:13px 20px;
+border-radius:9px;
+font-weight:bold;
+font-size:16px;
+margin-top:10px
+}
+
+@media(max-width:600px){
+
+header h1{
+font-size:21px
+}
+
+nav{
+top:70px
+}
+
+.products{
+grid-template-columns:1fr
+}
+
+table{
+font-size:12px
+}
+
+.main{
+padding:11px 13px
+}
+
+.product-images img{
+min-height:250px
+}
+
+.user-actions{
+min-width:220px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= MAINTENANCE ================= -->
+
+<div id="maintenanceOverlay">
+
+<div class="maintenanceBox">
+
+<div class="maintenanceIcon">🔧</div>
+
+<h1>PLAM TANZANIA</h1>
+
+<h2>🚧 Mfumo Upo Kwenye Matengenezo</h2>
+
+<p>
+Tunaendelea kufanya maboresho ya mfumo wa PLAM TANZANIA
+ili kukupa huduma bora zaidi.
+</p>
+
+<p>
+Tafadhali subiri kidogo. Mfumo utarudi kufanya kazi baada
+ya matengenezo kukamilika.
+</p>
+
+<button
+class="maintenanceAdminBtn"
+onclick="tryMaintenanceAdminLogin()">
+🔐 Admin Login
+</button>
+
+</div>
+</div>
+
+<header>
+
+<h1>PLAM TANZANIA</h1>
+
+<p>
+Jenga biashara yako. Fikia wateja zaidi.
+</p>
+
+</header>
+
+<nav>
+
+<button onclick="show('home')">
+🏠 Nyumbani
+</button>
+
+<button onclick="show('search')">
+🔎 Tafuta
+</button>
+
+<button onclick="show('add')">
+➕ Weka Bidhaa
+</button>
+
+<button onclick="show('account')">
+👤 Akaunti
+</button>
+
+<button onclick="show('admin')">
+⚙️ Admin
+</button>
+
+</nav>
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="active">
+
+<div class="card">
+
+<h2>🛍️ Bidhaa na Huduma</h2>
+
+<input
+id="homeSearch"
+placeholder="Tafuta bidhaa..."
+oninput="quickSearch()">
+
+</div>
+
+<div class="card center">
+
+<button
+class="main"
+style="font-size:18px;padding:15px 20px;width:100%"
+onclick="goToAdvertise()">
+
+📢 TANGAZA BIDHAA HAPA
+
+</button>
+
+<div class="small">
+Tangazo ni BURE kwa sasa — litaonekana baada ya Admin kulikubali.
+</div>
+
+</div>
+
+<div id="publicAds"></div>
+
+<div class="card">
+
+<h2>Bidhaa zote</h2>
+
+<div id="products" class="products">
+
+<div class="loading">
+⏳ Inapakia bidhaa...
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SEARCH ================= -->
+
+<section id="search">
+
+<div class="card">
+
+<h2>🔎 Tafuta Bidhaa</h2>
+
+<input
+id="searchText"
+placeholder="Jina la bidhaa au maelezo">
+
+<select
+id="searchRegion"
+onchange="searchDistricts()">
+
+<option value="">
+Mikoa yote
+</option>
+
+</select>
+
+<select id="searchDistrict">
+
+<option value="">
+Wilaya zote
+</option>
+
+</select>
+
+<button
+class="main"
+onclick="searchProducts()">
+
+Tafuta
+
+</button>
+
+<button
+class="main gray"
+onclick="loadProducts()">
+
+Onyesha zote
+
+</button>
+
+</div>
+
+<div
+id="searchResults"
+class="products">
+</div>
+
+</section>
+
+<!-- ================= ADD ================= -->
+
+<section id="add">
+
+<div class="card">
+
+<h2>➕ Weka Bidhaa / Huduma</h2>
+
+<div
+id="loginRequiredAdd"
+class="message">
+
+Lazima uwe umeingia kwenye akaunti ili kuweka bidhaa.
+
+<br><br>
+
+<button
+class="main"
+onclick="show('account')">
+
+Ingia / Jisajili
+
+</button>
+
+</div>
+
+<form
+id="productForm"
+class="hidden"
+onsubmit="addProduct(event)">
+
+<label>
+Jina la bidhaa/huduma
+</label>
+
+<input
+id="pName"
+required>
+
+<label>
+Bei
+</label>
+
+<input
+id="pPrice"
+type="number"
+min="0"
+required>
+
+<label>
+Kategoria
+</label>
+
+<select
+id="pCategory"
+required>
+
+<option value="">
+Chagua kategoria
+</option>
+
+<option>Mavazi</option>
+<option>Electronics</option>
+<option>Nyumba</option>
+<option>Magari</option>
+<option>Kilimo</option>
+<option>Urembo</option>
+<option>Elimu</option>
+<option>Huduma</option>
+<option>Simu</option>
+<option>Chakula</option>
+<option>Samani</option>
+<option>Nyingine</option>
+
+</select>
+
+<label>
+Mkoa
+</label>
+
+<select
+id="pRegion"
+required
+onchange="productDistricts()">
+
+<option value="">
+Chagua mkoa
+</option>
+
+</select>
+
+<label>
+Wilaya
+</label>
+
+<select
+id="pDistrict"
+required
+onchange="productPlaces()">
+
+<option value="">
+Chagua wilaya
+</option>
+
+</select>
+
+<label>
+Mtaa / Kijiji
+</label>
+
+<select
+id="pPlace"
+required>
+
+<option value="">
+Chagua eneo
+</option>
+
+</select>
+
+<label>
+Namba ya simu ya muuzaji
+</label>
+
+<input
+id="pPhone"
+type="tel"
+placeholder="Mfano 0625053021"
+required>
+
+<label>
+Maelezo
+</label>
+
+<textarea
+id="pDescription"
+placeholder="Eleza bidhaa yako...">
+</textarea>
+
+<label>
+Picha ya kwanza
+</label>
+
+<input
+id="pImage1"
+type="file"
+accept="image/*"
+required>
+
+<label>
+Picha ya pili
+</label>
+
+<input
+id="pImage2"
+type="file"
+accept="image/*">
+
+<button
+class="main"
+type="submit">
+
+📤 Weka Bidhaa
+
+</button>
+
+<div id="productMessage"></div>
+
+</form>
+
+</div>
+
+<!-- ================= ADS ================= -->
+
+<div
+id="sellerAdArea"
+class="card hidden">
+
+<h2>📢 Tangaza Bidhaa</h2>
+
+<div id="adStatusMessage"></div>
+
+<form
+id="adForm"
+onsubmit="createSponsoredAd(event)"
+class="hidden">
+
+<label>
+Chagua bidhaa yako
+</label>
+
+<select
+id="adProduct"
+required>
+
+<option value="">
+Inapakia bidhaa zako...
+</option>
+
+</select>
+
+<label>
+Muda wa tangazo
+</label>
+
+<select
+id="adDuration"
+required
+onchange="updateAdPrice()">
+
+<option value="">
+Chagua muda
+</option>
+
+</select>
+
+<div
+id="adPriceBox"
+class="message">
+
+Chagua muda wa tangazo.
+
+</div>
+
+<div
+id="freeAdNotice"
+class="message success hidden">
+
+🟢 <b>Matangazo ni BURE kwa sasa.</b>
+
+<br>
+
+Chagua bidhaa na muda, kisha tuma ombi.
+
+<br>
+
+⏳ Tangazo litaanza baada ya Admin kulikubali.
+
+</div>
+
+<div
+id="paidAdFields"
+class="hidden">
+
+<h3>💳 Taarifa za malipo</h3>
+
+<div class="message">
+
+<b>Namba ya malipo ya PLAM:</b>
+
+<br>
+
+<span style="font-size:22px">
+0625 053 021
+</span>
+
+<br><br>
+
+Tuma malipo kwa namba hiyo kisha jaza taarifa hapa chini.
+
+</div>
+
+<label>
+Mtandao wa malipo
+</label>
+
+<select id="adPaymentMethod">
+
+<option value="">
+Chagua mtandao
+</option>
+
+<option>
+Vodacom M-Pesa
+</option>
+
+<option>
+Mixx by Yas
+</option>
+
+<option>
+Airtel Money
+</option>
+
+<option>
+Halopesa
+</option>
+
+<option>
+Azam Pesa
+</option>
+
+<option>
+NMB Mkononi
+</option>
+
+<option>
+CRDB
+</option>
+
+<option>
+Nyingine
+</option>
+
+</select>
+
+<label>
+Namba iliyotumika kulipa
+</label>
+
+<input
+id="adPhone"
+type="tel"
+placeholder="Mfano 07XXXXXXXX">
+
+<label>
+Transaction ID / Control number
+</label>
+
+<input
+id="adTransaction"
+placeholder="Weka namba ya muamala">
+
+</div>
+
+<button
+class="main"
+type="submit">
+
+📢 Tuma Tangazo
+
+</button>
+
+<div id="adMessage"></div>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ================= ACCOUNT ================= -->
+
+<section id="account">
+
+<div class="card">
+
+<h2>👤 Akaunti</h2>
+
+<div id="loggedOutArea">
+
+<h3>Jisajili</h3>
+
+<input
+id="regName"
+placeholder="Jina kamili">
+
+<input
+id="regPhone"
+placeholder="Namba ya simu">
+
+<input
+id="regEmail"
+type="email"
+placeholder="Email">
+
+<input
+id="regPassword"
+type="password"
+placeholder="Password">
+
+<button
+class="main"
+onclick="registerUser()">
+
+Jisajili
+
+</button>
+
+<hr>
+
+<h3>Ingia</h3>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Email">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password">
+
+<button
+class="main"
+onclick="loginUser()">
+
+Ingia
+
+</button>
+
+<div id="authMessage"></div>
+
+</div>
+
+<div
+id="loggedInArea"
+class="hidden">
+
+<div class="message success">
+
+✅ Umeingia kwenye akaunti.
+
+</div>
+
+<div id="userInfo"></div>
+
+<button
+class="main red"
+onclick="logoutUser()">
+
+🚪 Toka
+
+</button>
+
+</div>
+
+</div>
+
+<div
+id="accountContent"
+class="hidden">
+
+<div class="card">
+
+<h2>📦 Bidhaa Zangu</h2>
+
+<div
+id="myProducts"
+class="products">
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🛒 Orders Nilizoagiza</h2>
+
+<div id="myOrders"></div>
+
+</div>
+
+<div class="card">
+
+<h2>📋 Orders za Wateja Wangu</h2>
+
+<div id="sellerOrders"></div>
+
+</div>
+
+<div class="card">
+
+<h2>📢 Matangazo Yangu</h2>
+
+<div id="myAds"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ADMIN ================= -->
+
+<section id="admin">
+
+<div
+id="adminLoginArea"
+class="card">
+
+<h2>⚙️ Admin</h2>
+
+<input
+id="adminEmail"
+type="email"
+placeholder="Admin email">
+
+<input
+id="adminPassword"
+type="password"
+placeholder="Password">
+
+<button
+class="main"
+onclick="adminLogin()">
+
+🔐 Ingia Admin
+
+</button>
+
+<div id="adminMessage"></div>
+
+</div>
+
+<div
+id="adminDashboard"
+class="hidden">
+
+<div class="card">
+
+<h2>📊 PLAM Admin Dashboard</h2>
+
+<div id="adminWelcome"></div>
+
+<button
+class="main red"
+onclick="adminLogout()">
+
+🚪 Logout Admin
+
+</button>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="card">
+
+<h2>⚙️ Udhibiti wa PLAM</h2>
+
+<p>
+📢 <b>Sponsored Ads</b>
+</p>
+
+<button
+id="sponsoredToggle"
+class="main"
+onclick="toggleSponsored()">
+
+⏳ Inapakia...
+
+</button>
+
+<hr>
+
+<p>
+💳 <b>Payment</b>
+</p>
+
+<button
+id="paymentToggle"
+class="main"
+onclick="togglePayment()">
+
+⏳ Inapakia...
+
+</button>
+
+<hr>
+
+<p>
+💰 <b>Commission</b>
+</p>
+
+<button
+id="commissionToggle"
+class="main"
+onclick="toggleCommission()">
+
+⏳ Inapakia...
+
+</button>
+
+<hr>
+
+<p>
+🔧 <b>Maintenance Mode</b>
+</p>
+
+<small>
+Ukiwasha, watumiaji wa kawaida wataona ukurasa wa matengenezo.
+Admin ataendelea kutumia mfumo.
+</small>
+
+<br>
+
+<button
+id="maintenanceToggle"
+class="main"
+onclick="toggleMaintenance()">
+
+⏳ Maintenance: Inapakia...
+
+</button>
+
+<div id="maintenanceAdminMessage"></div>
+
+<div id="settingsMessage"></div>
+
+</div>
+
+<div class="card">
+
+<h2>💳 Malipo ya Matangazo</h2>
+
+<div id="adminAdPayments">
+
+<div class="loading">
+⏳ Inapakia...
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📢 Sponsored Ads</h2>
+
+<div id="adminSponsoredAds">
+
+<div class="loading">
+⏳ Inapakia...
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📦 Bidhaa zote</h2>
+
+<div id="adminProducts"></div>
+
+</div>
+
+<div class="card">
+
+<h2>🛒 Orders zote</h2>
+
+<div id="adminOrders"></div>
+
+</div>
+
+<!-- ================= USERS ================= -->
+
+<div class="card">
+
+<h2>👥 Watumiaji</h2>
+
+<div
+class="message success">
+
+<b>Udhibiti wa Akaunti</b>
+
+<br>
+
+🟢 Active = Akaunti inafanya kazi
+
+<br>
+
+🟡 Warning = Onyo
+
+<br>
+
+🟠 Suspended = Akaunti imesimamishwa
+
+<br>
+
+⚫ Banned = Akaunti imefungiwa
+
+</div>
+
+<div id="adminUsers"></div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<b>PLAM TANZANIA</b>
+
+<br>
+
+Jenga biashara yako. Fikia wateja zaidi.
+
+<br><br>
+
+📞 0625 053 021
+
+<br>
+
+<a
+style="color:white"
+href="https://wa.me/255625053021"
+target="_blank">
+
+💬 WhatsApp
+
+</a>
+
+</footer>
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL=
+"https://igcgcxkttzeaordqhqqy.supabase.co";
+
+const SUPABASE_KEY=
+"sb_publishable_9M77SZxUBNK1srWkuGP11w_Y4ES8s8D";
+
+const supabaseClient=
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+const ADMIN_EMAIL=
+"lucasmwingira323@gmail.com";
+
+
+/* =========================================================
+   LOCATIONS
+========================================================= */
+
+const LOCATIONS={
+
+"Mbeya":{
+"Mbeya Mjini":[
+"Soweto","Forest","Sisimba","Nonde",
+"Mabatini","Maendeleo","Ruanda","Iyunga"
+],
+"Rungwe":[
+"Tukuyu","Kiwira","Kisiba","Bulyaga"
+],
+"Kyela":[
+"Kyela Mjini","Ipinda","Matema","Busale"
+],
+"Chunya":[
+"Chunya Mjini","Makongolosi"
+]
+},
+
+"Ruvuma":{
+"Songea Mjini":[
+"Matarawe","Mashangano","Msamala",
+"Mjimwema","Ruhuwiko"
+],
+"Songea DC":[
+"Peramiho","Mpitimbi","Matimira"
+],
+"Mbinga":[
+"Mbinga Mjini","Kigonsera","Mikalanga"
+],
+"Tunduru":[
+"Tunduru Mjini","Namikango","Namasakata"
+]
+},
+
+"Dar es Salaam":{
+"Ilala":[
+"Kariakoo","Upanga","Tabata",
+"Buguruni","Vingunguti"
+],
+"Kinondoni":[
+"Sinza","Manzese","Mwananyamala",
+"Mikocheni","Kijitonyama"
+],
+"Temeke":[
+"Mbagala","Kurasini","Chang'ombe",
+"Yombo","Temeke"
+],
+"Ubungo":[
+"Ubungo","Kimara","Kibamba","Sinza"
+],
+"Kigamboni":[
+"Kigamboni","Mjimwema","Somangila"
+]
+},
+
+"Arusha":{
+"Arusha Mjini":[
+"Kaloleni","Sekei","Sakina",
+"Sanawari","Ngarenaro"
+],
+"Arusha DC":[
+"Usa River","Kikatiti",
+"Ngaramtoni","Kisongo"
+]
+},
+
+"Mwanza":{
+"Nyamagana":[
+"Pamba","Isamilo","Mabatini","Kirumba"
+],
+"Ilemela":[
+"Pasiansi","Nyakato",
+"Buzuruga","Mkolani"
+]
+},
+
+"Dodoma":{
+"Dodoma Mjini":[
+"Kikuyu","Majengo","Kisasa",
+"Area C","Miyuji"
+],
+"Bahi":[
+"Bahi Mjini","Chipanga","Mpalanga"
+],
+"Chamwino":[
+"Chamwino","Fufu","Buigiri"
+]
+},
+
+"Morogoro":{
+"Morogoro Mjini":[
+"Kihonda","Mazimbu","Mji Mpyа",
+"Sabasaba","Kingo"
+],
+"Morogoro DC":[
+"Mgeta","Mikese","Matombo"
+]
+},
+
+"Shinyanga":{
+"Shinyanga Mjini":[
+"Kambarage","Ibadakuli",
+"Kizumbi","Chibe"
+],
+"Kahama":[
+"Kahama Mjini","Isaka","Bugarama"
+]
+},
+
+"Tabora":{
+"Tabora Mjini":[
+"Chemchem","Ipuli","Isevya","Kanyenye"
+],
+"Nzega":[
+"Nzega Mjini","Mbutu","Nata"
+]
+},
+
+"Tanga":{
+"Tanga Mjini":[
+"Ngamiani","Mzingani",
+"Chumbageni","Mabawa"
+],
+"Muheza":[
+"Muheza Mjini","Amani","Magila"
+],
+"Korogwe":[
+"Korogwe Mjini","Mombo","Mkomazi"
+]
+},
+
+"Kilimanjaro":{
+"Moshi Mjini":[
+"Bondeni","Rau","Majengo","Kiboriloni"
+],
+"Moshi DC":[
+"Himo","Marangu","Uru","Machame"
+]
+},
+
+"Manyara":{
+"Babati":[
+"Babati Mjini","Gallapo","Dareda"
+],
+"Hanang":[
+"Katesh","Endasak"
+]
+},
+
+"Singida":{
+"Singida Mjini":[
+"Unyianga","Misuna","Ipembe","Kindai"
+],
+"Manyoni":[
+"Manyoni Mjini","Itigi","Sanjaranda"
+]
+},
+
+"Iringa":{
+"Iringa Mjini":[
+"Gangilonga","Mkwawa",
+"Kitanzini","Mshindo"
+],
+"Iringa DC":[
+"Kalenga","Izazi","Ilula"
+]
+},
+
+"Njombe":{
+"Njombe Mjini":[
+"Ramadhani","Mji Mpya",
+"Luponde","Matola"
+],
+"Makete":[
+"Makete Mjini","Ipelele","Tandala"
+]
+},
+
+"Pwani":{
+"Kibaha":[
+"Tumbi","Mailimoja","Mkuza","Visiga"
+],
+"Bagamoyo":[
+"Bagamoyo Mjini","Dunda","Zinga"
+]
+},
+
+"Zanzibar":{
+"Mjini Magharibi":[
+"Stone Town","Mwanakwerekwe",
+"Mombasa","Kisauni"
+],
+"Kaskazini Unguja":[
+"Kijini","Nungwi","Kendwa"
+]
+},
+
+"Rukwa":{
+"Sumbawanga Mjini":[
+"Sumbawanga Mjini","Mazwi",
+"Pito","Chanji"
+],
+"Sumbawanga DC":[
+"Laela","Muze","Msanda"
+]
+},
+
+"Kigoma":{
+"Kigoma Ujiji":[
+"Kibwe","Katubuka","Bangwe"
+],
+"Kigoma DC":[
+"Kibirizi","Kagongo"
+]
+},
+
+"Mara":{
+"Musoma Mjini":[
+"Mukendo","Mwigobero","Kitaji"
+],
+"Tarime":[
+"Tarime Mjini","Sirari","Nyamongo"
+]
+},
+
+"Kagera":{
+"Bukoba Mjini":[
+"Bilele","Kahororo","Miembeni"
+],
+"Muleba":[
+"Muleba Mjini","Kimwani","Magata"
+]
+},
+
+"Lindi":{
+"Lindi Mjini":[
+"Mtanda","Mnazimmoja","Mingumbi"
+],
+"Kilwa":[
+"Nanjirinji","Masoko","Njinjo"
+]
+},
+
+"Mtwara":{
+"Mtwara Mjini":[
+"Shangani","Majengo","Rahaleo"
+],
+"Masasi":[
+"Masasi Mjini","Mbuyuni","Chanikanguo"
+]
+},
+
+"Geita":{
+"Geita Mjini":[
+"Kalangalala","Bombambili","Nzera"
+],
+"Chato":[
+"Chato Mjini","Buziku","Kachwamba"
+]
+}
+
+};
+
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let plamSettings={
+sponsored_enabled:false,
+payment_enabled:false,
+commission_enabled:false,
+commission_percent:5,
+maintenance_enabled:false
+};
+
+let currentUser=null;
+let isAdmin=false;
+
+let sponsoredAds=[];
+let adTimer=null;
+let adIndex=0;
+let adPrices=[];
+let maintenancePollTimer=null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(v){
+
+if(v===null||v===undefined)return"";
+
+return String(v)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+function money(v){
+
+return Number(v||0)
+.toLocaleString("en-US");
+
+}
+
+function statusBadge(status){
+
+let s=
+String(status||"pending").toLowerCase();
+
+if(s==="accepted")
+return '<span class="badge accepted">ACCEPTED</span>';
+
+if(s==="rejected")
+return '<span class="badge rejected">REJECTED</span>';
+
+if(s==="active")
+return '<span class="badge active">ACTIVE</span>';
+
+if(s==="unpaid")
+return '<span class="badge unpaid">UNPAID</span>';
+
+return '<span class="badge pending">'+
+escapeHTML(status||"PENDING")+
+"</span>";
+
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS BADGE
+========================================================= */
+
+function accountStatusBadge(status){
+
+let s=
+String(status||"active").toLowerCase();
+
+if(s==="active"){
+
+return `
+<span class="account-status account-active">
+🟢 ACTIVE
+</span>
+`;
+
+}
+
+if(s==="warning"){
+
+return `
+<span class="account-status account-warning">
+🟡 WARNING
+</span>
+`;
+
+}
+
+if(s==="suspended"){
+
+return `
+<span class="account-status account-suspended">
+🟠 SUSPENDED
+</span>
+`;
+
+}
+
+if(s==="banned"){
+
+return `
+<span class="account-status account-banned">
+⚫ BANNED
+</span>
+`;
+
+}
+
+return `
+<span class="account-status account-active">
+${escapeHTML(status||"ACTIVE")}
+</span>
+`;
+
+}
+
+
+/* =========================================================
+   GET CURRENT USER CONTROL
+========================================================= */
+
+async function getUserControl(){
+
+if(!currentUser)return null;
+
+const {data,error}=
+await supabaseClient
+.from("user_control")
+.select("*")
+.eq("user_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+
+console.error(
+"User control:",
+error
+);
+
+return null;
+}
+
+return data;
+
+}
+
+
+/* =========================================================
+   CHECK ACCOUNT STATUS
+========================================================= */
+
+async function checkUserAccountStatus(){
+
+if(!currentUser)return true;
+
+/* Admin haruhusiwi kuzuiwa */
+
+if(isAdmin)return true;
+
+const control=
+await getUserControl();
+
+if(!control)return true;
+
+let status=
+String(control.status||"active")
+.toLowerCase();
+
+
+/* WARNING */
+
+if(status==="warning"){
+
+const reason=
+control.warning_reason||
+"Umepewa onyo na Admin.";
+
+setTimeout(()=>{
+
+alert(
+"⚠️ ONYO LA PLAM TANZANIA\n\n"+
+reason+
+"\n\nTafadhali fuata sheria za PLAM."
+);
+
+},300);
+
+return true;
+
+}
+
+
+/* SUSPENDED */
+
+if(status==="suspended"){
+
+if(
+control.suspended_until &&
+new Date(control.suspended_until)<=new Date()
+){
+
+/*
+   Hapa hatufanyi UPDATE moja kwa moja kwa user.
+   Admin ndiye mwenye ruhusa ya kubadilisha status.
+*/
+
+return true;
+
+}
+
+const reason=
+control.suspension_reason||
+"Akaunti yako imesimamishwa na Admin.";
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+
+alert(
+"🟠 AKAUNTI IMESIMAMISHWA\n\n"+
+reason+
+"\n\nTafadhali wasiliana na PLAM kwa 0625 053 021."
+);
+
+updateAccountUI();
+applyMaintenanceMode();
+
+return false;
+
+}
+
+
+/* BANNED */
+
+if(status==="banned"){
+
+const reason=
+control.banned_reason||
+"Akaunti yako imefungiwa na Admin.";
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+
+alert(
+"⚫ AKAUNTI IMEFUNGIWA\n\n"+
+reason+
+"\n\nKwa maelezo zaidi wasiliana na PLAM: 0625 053 021."
+);
+
+updateAccountUI();
+applyMaintenanceMode();
+
+return false;
+
+}
+
+return true;
+
+}
+
+
+/* =========================================================
+   CHANGE USER ACCOUNT STATUS
+========================================================= */
+
+async function changeUserAccountStatus(
+userId,
+status
+){
+
+if(!isAdmin){
+
+alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+return;
+
+}
+
+if(userId===currentUser?.id){
+
+alert(
+"❌ Huwezi kubadilisha status ya akaunti yako mwenyewe."
+);
+
+return;
+
+}
+
+let reason=null;
+let suspendedUntil=null;
+
+
+/* WARNING */
+
+if(status==="warning"){
+
+reason=prompt(
+"⚠️ Andika sababu ya kumpa mtumiaji WARNING:"
+);
+
+if(reason===null)return;
+
+reason=reason.trim();
+
+if(!reason){
+
+alert(
+"❌ Lazima uweke sababu."
+);
+
+return;
+
+}
+
+}
+
+
+/* SUSPEND */
+
+if(status==="suspended"){
+
+reason=prompt(
+"🟠 Andika sababu ya kusimamisha akaunti:"
+);
+
+if(reason===null)return;
+
+reason=reason.trim();
+
+if(!reason){
+
+alert(
+"❌ Lazima uweke sababu."
+);
+
+return;
+
+}
+
+const daysText=prompt(
+"⏱️ Akaunti isimamishwe kwa siku ngapi?\n\n"+
+"Kwa mfano: 7, 30, 90\n\n"+
+"Ukiacha wazi, suspension itakuwa bila muda maalum."
+);
+
+if(daysText===null)return;
+
+const days=
+Number(daysText);
+
+if(
+daysText.trim()!=="" &&
+(
+!Number.isFinite(days) ||
+days<=0
+)
+){
+
+alert(
+"❌ Idadi ya siku si sahihi."
+);
+
+return;
+
+}
+
+if(daysText.trim()!==""){
+
+const d=new Date();
+
+d.setDate(
+d.getDate()+days
+);
+
+suspendedUntil=
+d.toISOString();
+
+}
+
+}
+
+
+/* BAN */
+
+if(status==="banned"){
+
+reason=prompt(
+"⚫ Andika sababu ya kufungia akaunti kabisa:"
+);
+
+if(reason===null)return;
+
+reason=reason.trim();
+
+if(!reason){
+
+alert(
+"❌ Lazima uweke sababu."
+);
+
+return;
+
+}
+
+const confirmBan=confirm(
+"⚠️ UNA UHAKIKA?\n\n"+
+"Akaunti hii itawekwa BANNED.\n\n"+
+"Sababu: "+reason
+);
+
+if(!confirmBan)return;
+
+}
+
+
+/* ACTIVE */
+
+if(status==="active"){
+
+const confirmActive=confirm(
+"🔓 Unataka kumrudisha mtumiaji kwenye ACTIVE?"
+);
+
+if(!confirmActive)return;
+
+}
+
+
+try{
+
+const {data,error}=
+await supabaseClient.rpc(
+"admin_set_user_control",
+{
+p_user_id:userId,
+p_status:status,
+p_reason:reason,
+p_suspended_until:suspendedUntil
+}
+);
+
+if(error)throw error;
+
+if(data!==true){
+
+throw new Error(
+"Server haikukubali mabadiliko."
+);
+
+}
+
+if(status==="warning"){
+
+alert(
+"🟡 Mtumiaji amepewa WARNING."
+);
+
+}
+
+else if(status==="suspended"){
+
+alert(
+"🟠 Akaunti imesimamishwa."
+);
+
+}
+
+else if(status==="banned"){
+
+alert(
+"⚫ Akaunti imefungiwa."
+);
+
+}
+
+else if(status==="active"){
+
+alert(
+"🟢 Akaunti imerudishwa ACTIVE."
+);
+
+}
+
+await loadAdminUsers();
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"❌ Imeshindikana kubadilisha status:\n\n"+
+e.message
+);
+
+}
+
+}
+
+
+/* =========================================================
+   DELETE USER ACCOUNT
+========================================================= */
+
+async function deleteUserAccount(userId){
+
+if(!isAdmin){
+
+alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+return;
+
+}
+
+if(userId===currentUser?.id){
+
+alert(
+"❌ Huwezi kufuta akaunti yako mwenyewe."
+);
+
+return;
+
+}
+
+/*
+   DELETE ya Auth User haiwekwi moja kwa moja
+   kwenye browser kwa sababu inahitaji server-side
+   secret/service key.
+
+   Hatuweki secret key ndani ya admin.html.
+*/
+
+alert(
+"⚠️ Mfumo wa kufuta akaunti KABISA utaunganishwa kupitia server salama.\n\n"+
+"Kwa usalama wa PLAM, Service Role Key haiwekwi ndani ya admin.html.\n\n"+
+"Kwa sasa unaweza kutumia WARNING, SUSPEND au BAN."
+);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function show(id){
+
+document
+.querySelectorAll("section")
+.forEach(
+s=>s.classList.remove("active")
+);
+
+const el=
+document.getElementById(id);
+
+if(el)
+el.classList.add("active");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+if(id==="account")
+updateAccountUI();
+
+if(id==="add")
+updateAddArea();
+
+if(id==="admin"&&isAdmin)
+loadAdminData();
+
+}
+
+
+/* =========================================================
+   ADVERTISE
+========================================================= */
+
+function goToAdvertise(){
+
+show("add");
+
+setTimeout(()=>{
+
+const area=
+document.getElementById(
+"sellerAdArea"
+);
+
+if(area)
+area.scrollIntoView({
+behavior:"smooth"
+});
+
+},250);
+
+}
+
+
+/* =========================================================
+   LOCATIONS
+========================================================= */
+
+function fillRegions(){
+
+[
+"pRegion",
+"searchRegion"
+].forEach(id=>{
+
+const select=
+document.getElementById(id);
+
+if(!select)return;
+
+Object.keys(LOCATIONS)
+.forEach(region=>{
+
+const o=
+document.createElement("option");
+
+o.value=region;
+o.textContent=region;
+
+select.appendChild(o);
+
+});
+
+});
+
+}
+
+
+function productDistricts(){
+
+const region=
+document.getElementById(
+"pRegion"
+).value;
+
+const district=
+document.getElementById(
+"pDistrict"
+);
+
+const place=
+document.getElementById(
+"pPlace"
+);
+
+district.innerHTML=
+'<option value="">Chagua wilaya</option>';
+
+place.innerHTML=
+'<option value="">Chagua eneo</option>';
+
+if(!region)return;
+
+Object.keys(
+LOCATIONS[region]||{}
+)
+.forEach(d=>{
+
+const o=
+document.createElement("option");
+
+o.value=d;
+o.textContent=d;
+
+district.appendChild(o);
+
+});
+
+}
+
+
+function productPlaces(){
+
+const region=
+document.getElementById(
+"pRegion"
+).value;
+
+const district=
+document.getElementById(
+"pDistrict"
+).value;
+
+const place=
+document.getElementById(
+"pPlace"
+);
+
+place.innerHTML=
+'<option value="">Chagua eneo</option>';
+
+if(!region||!district)return;
+
+(
+LOCATIONS[region][district]||[]
+)
+.forEach(p=>{
+
+const o=
+document.createElement("option");
+
+o.value=p;
+o.textContent=p;
+
+place.appendChild(o);
+
+});
+
+}
+
+
+function searchDistricts(){
+
+const region=
+document.getElementById(
+"searchRegion"
+).value;
+
+const district=
+document.getElementById(
+"searchDistrict"
+);
+
+district.innerHTML=
+'<option value="">Wilaya zote</option>';
+
+if(!region)return;
+
+Object.keys(
+LOCATIONS[region]||{}
+)
+.forEach(d=>{
+
+const o=
+document.createElement("option");
+
+o.value=d;
+o.textContent=d;
+
+district.appendChild(o);
+
+});
+
+}
+
+
+/* =========================================================
+   MAINTENANCE
+========================================================= */
+
+function applyMaintenanceMode(){
+
+const overlay=
+document.getElementById(
+"maintenanceOverlay"
+);
+
+if(!overlay)return;
+
+if(
+plamSettings.maintenance_enabled===true &&
+!isAdmin
+){
+
+overlay.classList.add("active");
+
+}else{
+
+overlay.classList.remove("active");
+
+}
+
+updateMaintenanceButton();
+
+}
+
+
+function updateMaintenanceButton(){
+
+const btn=
+document.getElementById(
+"maintenanceToggle"
+);
+
+if(!btn)return;
+
+if(
+plamSettings.maintenance_enabled===true
+){
+
+btn.textContent=
+"🟢 Maintenance Mode: ON";
+
+btn.className="main";
+
+}else{
+
+btn.textContent=
+"🔴 Maintenance Mode: OFF";
+
+btn.className="main gray";
+
+}
+
+}
+
+
+async function loadMaintenanceStatus(){
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Settings")
+.select("maintenance_enabled")
+.eq("id",1)
+.maybeSingle();
+
+if(error)throw error;
+
+plamSettings.maintenance_enabled=
+data?.maintenance_enabled===true;
+
+applyMaintenanceMode();
+
+}catch(e){
+
+console.error(
+"Maintenance:",
+e
+);
+
+}
+
+}
+
+
+async function toggleMaintenance(){
+
+if(!isAdmin){
+
+alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+return;
+
+}
+
+const newStatus=
+!plamSettings.maintenance_enabled;
+
+const btn=
+document.getElementById(
+"maintenanceToggle"
+);
+
+const msg=
+document.getElementById(
+"maintenanceAdminMessage"
+);
+
+if(btn){
+
+btn.disabled=true;
+
+btn.textContent=
+"⏳ Inahifadhi...";
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.rpc(
+"set_plam_maintenance",
+{
+p_enabled:newStatus
+}
+);
+
+if(error)throw error;
+
+if(data!==true){
+
+throw new Error(
+"Server haikukubali mabadiliko."
+);
+
+}
+
+plamSettings.maintenance_enabled=
+newStatus;
+
+applyMaintenanceMode();
+
+if(msg){
+
+msg.innerHTML=
+'<div class="message success">'+
+(
+newStatus
+?
+"🟢 Maintenance Mode IMEWASHWA. Watumiaji wataona matengenezo."
+:
+"🔴 Maintenance Mode IMEZIMWA. Mfumo unapatikana."
+)+
+"</div>";
+
+}
+
+}catch(e){
+
+console.error(e);
+
+if(msg){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(e.message)+
+'</div>';
+
+}
+
+updateMaintenanceButton();
+
+}finally{
+
+if(btn)
+btn.disabled=false;
+
+}
+
+}
+
+
+function tryMaintenanceAdminLogin(){
+
+const overlay=
+document.getElementById(
+"maintenanceOverlay"
+);
+
+if(overlay)
+overlay.classList.remove("active");
+
+show("admin");
+
+const login=
+document.getElementById(
+"adminLoginArea"
+);
+
+if(login){
+
+setTimeout(
+()=>login.scrollIntoView({
+behavior:"smooth",
+block:"center"
+}),
+100
+);
+
+}
+
+}
+
+
+function startMaintenancePolling(){
+
+if(maintenancePollTimer)
+clearInterval(
+maintenancePollTimer
+);
+
+maintenancePollTimer=
+setInterval(
+loadMaintenanceStatus,
+15000
+);
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+function compressImage(file){
+
+return new Promise(
+(resolve,reject)=>{
+
+if(!file){
+
+resolve(null);
+return;
+
+}
+
+const reader=
+new FileReader();
+
+reader.onload=e=>{
+
+const img=
+new Image();
+
+img.onload=()=>{
+
+const max=1200;
+
+let w=img.width;
+let h=img.height;
+
+if(w>max||h>max){
+
+if(w>h){
+
+h=
+Math.round(
+h*max/w
+);
+
+w=max;
+
+}else{
+
+w=
+Math.round(
+w*max/h
+);
+
+h=max;
+
+}
+
+}
+
+const canvas=
+document.createElement(
+"canvas"
+);
+
+canvas.width=w;
+canvas.height=h;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+w,
+h
+);
+
+resolve(
+canvas.toDataURL(
+"image/jpeg",
+.75
+)
+);
+
+};
+
+img.onerror=reject;
+
+img.src=e.target.result;
+
+};
+
+reader.onerror=reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+async function loadProducts(){
+
+const box=
+document.getElementById(
+"products"
+);
+
+box.innerHTML=
+'<div class="loading">⏳ Inapakia bidhaa...</div>';
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+"</div>";
+
+return;
+
+}
+
+renderProducts(
+data||[],
+box
+);
+
+}
+
+
+function renderProducts(rows,box){
+
+if(!rows.length){
+
+box.innerHTML=
+'<div class="message">Hakuna bidhaa kwa sasa.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+rows.map(p=>{
+
+const phone=
+p.phone||"";
+
+const whatsapp=
+phone
+.replace(/\D/g,"")
+.replace(/^0/,"255");
+
+return`
+
+<div class="product">
+
+<div class="product-images">
+
+${
+p.image_url
+?
+`<img
+src="${escapeHTML(p.image_url)}"
+alt="${escapeHTML(p.name)}">`
+:""
+}
+
+${
+p.image_url_2
+?
+`<img
+src="${escapeHTML(p.image_url_2)}"
+alt="${escapeHTML(p.name)}">`
+:""
+}
+
+</div>
+
+<div class="product-body">
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+<div class="price">
+TSh ${money(p.price)}
+</div>
+
+<div class="meta">
+
+<b>Kategoria:</b>
+${escapeHTML(p.category||"")}
+
+<br>
+
+<b>Mahali:</b>
+${escapeHTML(p.place||"")},
+${escapeHTML(p.district||"")},
+${escapeHTML(p.region||"")}
+
+<br>
+
+<b>Muuzaji:</b>
+${escapeHTML(phone)}
+
+</div>
+
+<p>
+${escapeHTML(p.description||"")}
+</p>
+
+<div class="actions">
+
+<a
+class="main"
+href="tel:${escapeHTML(phone)}">
+
+📞 Piga Simu
+
+</a>
+
+<a
+class="main"
+style="background:#25D366"
+href="https://wa.me/${whatsapp}"
+target="_blank">
+
+💬 WhatsApp
+
+</a>
+
+${
+p.image_url
+?
+`<a
+class="main blue"
+href="${escapeHTML(p.image_url)}"
+download>
+⬇️ Picha
+</a>`
+:""
+}
+
+<button
+class="main orange"
+onclick="openOrder(${Number(p.id)})">
+
+🛒 Agiza
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function quickSearch(){
+
+const text=
+document.getElementById(
+"homeSearch"
+).value
+.toLowerCase()
+.trim();
+
+document
+.querySelectorAll(
+"#products .product"
+)
+.forEach(card=>{
+
+card.style.display=
+card.innerText
+.toLowerCase()
+.includes(text)
+?
+""
+:
+"none";
+
+});
+
+}
+
+
+async function searchProducts(){
+
+const text=
+document.getElementById(
+"searchText"
+).value.trim();
+
+const region=
+document.getElementById(
+"searchRegion"
+).value;
+
+const district=
+document.getElementById(
+"searchDistrict"
+).value;
+
+const box=
+document.getElementById(
+"searchResults"
+);
+
+let query=
+supabaseClient
+.from("Production")
+.select("*");
+
+if(text)
+
+query=
+query.or(
+`name.ilike.%${text}%,description.ilike.%${text}%,category.ilike.%${text}%`
+);
+
+if(region)
+query=query.eq(
+"region",
+region
+);
+
+if(district)
+query=query.eq(
+"district",
+district
+);
+
+const {data,error}=
+await query.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+"</div>";
+
+return;
+
+}
+
+renderProducts(
+data||[],
+box
+);
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+async function addProduct(e){
+
+e.preventDefault();
+
+if(!currentUser){
+
+alert(
+"Tafadhali ingia kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+const msg=
+document.getElementById(
+"productMessage"
+);
+
+msg.innerHTML=
+'<div class="message">⏳ Inapakia bidhaa...</div>';
+
+try{
+
+const image1=
+await compressImage(
+document.getElementById(
+"pImage1"
+).files[0]
+);
+
+const image2=
+await compressImage(
+document.getElementById(
+"pImage2"
+).files[0]
+);
+
+const product={
+
+name:
+document.getElementById(
+"pName"
+).value.trim(),
+
+price:
+Number(
+document.getElementById(
+"pPrice"
+).value
+),
+
+category:
+document.getElementById(
+"pCategory"
+).value,
+
+region:
+document.getElementById(
+"pRegion"
+).value,
+
+district:
+document.getElementById(
+"pDistrict"
+).value,
+
+place:
+document.getElementById(
+"pPlace"
+).value,
+
+phone:
+document.getElementById(
+"pPhone"
+).value.trim(),
+
+description:
+document.getElementById(
+"pDescription"
+).value.trim(),
+
+image_url:image1,
+
+image_url_2:image2,
+
+user_id:
+currentUser.id,
+
+status:"pending"
+
+};
+
+const {error}=
+await supabaseClient
+.from("Production")
+.insert(product);
+
+if(error)throw error;
+
+msg.innerHTML=
+'<div class="message success">✅ Bidhaa imewekwa kikamilifu.</div>';
+
+document
+.getElementById(
+"productForm"
+)
+.reset();
+
+await loadProducts();
+await loadMyProducts();
+
+}catch(e){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(e.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =========================================================
+   ORDERS
+========================================================= */
+
+async function openOrder(productId){
+
+if(!currentUser){
+
+alert(
+"Tafadhali ingia kwenye akaunti kwanza."
+);
+
+show("account");
+
+return;
+
+}
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("id",productId)
+.single();
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+const name=
+prompt(
+"Jina lako:",
+currentUser.user_metadata?.full_name||""
+);
+
+if(name===null)return;
+
+const phone=
+prompt(
+"Namba yako ya simu:"
+);
+
+if(phone===null)return;
+
+const quantity=
+prompt(
+"Idadi:",
+"1"
+);
+
+if(quantity===null)return;
+
+const message=
+prompt(
+"Ujumbe kwa muuzaji:",
+""
+);
+
+if(!data.user_id){
+
+alert(
+"Bidhaa hii haina taarifa ya muuzaji."
+);
+
+return;
+
+}
+
+const {error:orderError}=
+await supabaseClient
+.from("orders")
+.insert({
+
+buyer_name:name,
+
+buyer_phone:phone,
+
+product_id:data.id,
+
+seller_id:data.user_id,
+
+buyer_id:currentUser.id,
+
+quantity:Number(quantity)||1,
+
+message:message||"",
+
+status:"pending",
+
+product_name:data.name,
+
+buyer_email:currentUser.email,
+
+seller_phone:data.phone
+
+});
+
+if(orderError){
+
+alert(
+orderError.message
+);
+
+return;
+
+}
+
+alert(
+"✅ Order imetumwa kwa muuzaji."
+);
+
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+async function registerUser(){
+
+const name=
+document.getElementById(
+"regName"
+).value.trim();
+
+const phone=
+document.getElementById(
+"regPhone"
+).value.trim();
+
+const email=
+document.getElementById(
+"regEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"regPassword"
+).value;
+
+const msg=
+document.getElementById(
+"authMessage"
+);
+
+if(!email||!password){
+
+msg.innerHTML=
+'<div class="message error">Weka email na password.</div>';
+
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+
+email,
+
+password,
+
+options:{
+data:{
+full_name:name,
+phone:phone
+}
+}
+
+});
+
+if(error)throw error;
+
+if(data.user){
+
+await supabaseClient
+.from("profiles")
+.upsert({
+
+id:data.user.id,
+
+full_name:name,
+
+phone:phone,
+
+email:email
+
+});
+
+}
+
+msg.innerHTML=
+'<div class="message success">✅ Usajili umefanikiwa. Angalia email kama verification inahitajika.</div>';
+
+}catch(e){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(e.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function loginUser(){
+
+const email=
+document.getElementById(
+"loginEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"loginPassword"
+).value;
+
+const msg=
+document.getElementById(
+"authMessage"
+);
+
+const {data,error}=
+await supabaseClient.auth
+.signInWithPassword({
+email,
+password
+});
+
+if(error){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+currentUser=data.user;
+
+await checkAdmin();
+
+/* Admin anaendelea bila kuzuiwa */
+
+if(!isAdmin){
+
+const allowed=
+await checkUserAccountStatus();
+
+if(!allowed){
+
+return;
+
+}
+
+}
+
+await saveProfile();
+
+updateAccountUI();
+
+applyMaintenanceMode();
+
+msg.innerHTML=
+'<div class="message success">✅ Umeingia.</div>';
+
+}
+
+
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
+
+async function saveProfile(){
+
+if(!currentUser)return;
+
+await supabaseClient
+.from("profiles")
+.upsert({
+
+id:currentUser.id,
+
+full_name:
+currentUser.user_metadata?.full_name||"",
+
+phone:
+currentUser.user_metadata?.phone||"",
+
+email:
+currentUser.email
+
+});
+
+}
+
+
+/* =========================================================
+   LOGOUT USER
+========================================================= */
+
+async function logoutUser(){
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+
+updateAccountUI();
+
+applyMaintenanceMode();
+
+show("home");
+
+}
+
+
+/* =========================================================
+   ACCOUNT UI
+========================================================= */
+
+function updateAccountUI(){
+
+const out=
+document.getElementById(
+"loggedOutArea"
+);
+
+const logged=
+document.getElementById(
+"loggedInArea"
+);
+
+const content=
+document.getElementById(
+"accountContent"
+);
+
+const form=
+document.getElementById(
+"productForm"
+);
+
+const req=
+document.getElementById(
+"loginRequiredAdd"
+);
+
+if(currentUser){
+
+out.classList.add("hidden");
+
+logged.classList.remove(
+"hidden"
+);
+
+content.classList.remove(
+"hidden"
+);
+
+form.classList.remove(
+"hidden"
+);
+
+req.classList.add(
+"hidden"
+);
+
+document.getElementById(
+"userInfo"
+).innerHTML=
+"<b>Email:</b> "+
+escapeHTML(
+currentUser.email
+);
+
+loadMyProducts();
+loadMyOrders();
+loadSellerOrders();
+loadMyAds();
+updateAddArea();
+
+}else{
+
+out.classList.remove(
+"hidden"
+);
+
+logged.classList.add(
+"hidden"
+);
+
+content.classList.add(
+"hidden"
+);
+
+form.classList.add(
+"hidden"
+);
+
+req.classList.remove(
+"hidden"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   MY PRODUCTS
+========================================================= */
+
+async function loadMyProducts(){
+
+if(!currentUser)return;
+
+const box=
+document.getElementById(
+"myProducts"
+);
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.eq("user_id",currentUser.id)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+"</div>";
+
+return;
+
+}
+
+renderProducts(
+data||[],
+box
+);
+
+}
+
+
+/* =========================================================
+   MY ORDERS
+========================================================= */
+
+async function loadMyOrders(){
+
+if(!currentUser)return;
+
+const box=
+document.getElementById(
+"myOrders"
+);
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("buyer_id",currentUser.id)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+"</div>";
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Huna order ulizoagiza.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+data.map(o=>`
+
+<div class="card">
+
+<h3>
+${escapeHTML(
+o.product_name||"Bidhaa"
+)}
+</h3>
+
+<p>
+<b>Idadi:</b>
+${escapeHTML(o.quantity)}
+</p>
+
+<p>
+<b>Status:</b>
+${statusBadge(o.status)}
+</p>
+
+<p>
+<b>Ujumbe:</b>
+${escapeHTML(o.message||"")}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================================================
+   SELLER ORDERS
+========================================================= */
+
+async function loadSellerOrders(){
+
+if(!currentUser)return;
+
+const box=
+document.getElementById(
+"sellerOrders"
+);
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq("seller_id",currentUser.id)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+"</div>";
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Huna orders za wateja bado.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+data.map(o=>`
+
+<div class="card">
+
+<h3>
+${escapeHTML(
+o.product_name||"Bidhaa"
+)}
+</h3>
+
+<p>
+👤 <b>Mteja:</b>
+${escapeHTML(o.buyer_name)}
+</p>
+
+<p>
+📞 <b>Simu:</b>
+${escapeHTML(o.buyer_phone)}
+</p>
+
+<p>
+🔢 <b>Idadi:</b>
+${escapeHTML(o.quantity)}
+</p>
+
+<p>
+💬 <b>Ujumbe:</b>
+${escapeHTML(o.message||"")}
+</p>
+
+<p>
+<b>Status:</b>
+${statusBadge(o.status)}
+</p>
+
+${
+o.status==="pending"
+?
+`
+
+<button
+class="main"
+onclick="changeOrderStatus(${Number(o.id)},'accepted')">
+
+✅ Kubali
+
+</button>
+
+<button
+class="main red"
+onclick="changeOrderStatus(${Number(o.id)},'rejected')">
+
+❌ Kataa
+
+</button>
+
+`
+:
+""
+}
+
+</div>
+
+`).join("");
+
+}
+
+
+async function changeOrderStatus(id,status){
+
+if(!currentUser)return;
+
+const {error}=
+await supabaseClient
+.from("orders")
+.update({status})
+.eq("id",id)
+.eq("seller_id",currentUser.id);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+await loadSellerOrders();
+
+}
+
+
+/* =========================================================
+   PLAM SETTINGS
+========================================================= */
+
+async function loadPLAMSettings(){
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Settings")
+.select(
+"sponsored_enabled,payment_enabled,commission_enabled,commission_percent,maintenance_enabled"
+)
+.eq("id",1)
+.maybeSingle();
+
+if(error)throw error;
+
+if(data){
+
+plamSettings={
+...plamSettings,
+...data,
+maintenance_enabled:
+data.maintenance_enabled===true
+};
+
+}
+
+updateSettingsButtons();
+
+applyMaintenanceMode();
+
+updateAddArea();
+
+}catch(e){
+
+console.error(
+"Settings:",
+e
+);
+
+const box=
+document.getElementById(
+"settingsMessage"
+);
+
+if(box)
+
+box.innerHTML=
+'<div class="message error">❌ Imeshindikana kupakia settings.</div>';
+
+}
+
+}
+
+
+function updateSettingsButtons(){
+
+const s=
+document.getElementById(
+"sponsoredToggle"
+);
+
+const p=
+document.getElementById(
+"paymentToggle"
+);
+
+const c=
+document.getElementById(
+"commissionToggle"
+);
+
+if(s){
+
+s.textContent=
+plamSettings.sponsored_enabled
+?
+"🟢 Sponsored Ads: ON"
+:
+"🔴 Sponsored Ads: OFF";
+
+s.className=
+plamSettings.sponsored_enabled
+?
+"main"
+:
+"main gray";
+
+}
+
+if(p){
+
+p.textContent=
+plamSettings.payment_enabled
+?
+"🟢 Payment: ON"
+:
+"🔴 Payment: OFF";
+
+p.className=
+plamSettings.payment_enabled
+?
+"main"
+:
+"main gray";
+
+}
+
+if(c){
+
+c.textContent=
+plamSettings.commission_enabled
+?
+"🟢 Commission "+
+(plamSettings.commission_percent||5)+
+"%: ON"
+:
+"🔴 Commission: OFF";
+
+c.className=
+plamSettings.commission_enabled
+?
+"main"
+:
+"main gray";
+
+}
+
+updateMaintenanceButton();
+
+}
+
+
+async function savePLAMSettings(){
+
+const box=
+document.getElementById(
+"settingsMessage"
+);
+
+box.innerHTML=
+'<div class="message">⏳ Inahifadhi...</div>';
+
+try{
+
+const {error}=
+await supabaseClient.rpc(
+"set_plam_settings",
+{
+p_sponsored:
+plamSettings.sponsored_enabled,
+
+p_payment:
+plamSettings.payment_enabled,
+
+p_commission:
+plamSettings.commission_enabled
+}
+);
+
+if(error)throw error;
+
+box.innerHTML=
+'<div class="message success">✅ Mipangilio imehifadhiwa.</div>';
+
+updateSettingsButtons();
+
+updateAddArea();
+
+await loadSponsoredAds();
+
+if(isAdmin){
+
+await loadAdminSponsoredAds();
+
+await loadAdminAdPayments();
+
+}
+
+}catch(e){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(e.message)+
+'</div>';
+
+}
+
+}
+
+
+async function toggleSponsored(){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+plamSettings.sponsored_enabled=
+!plamSettings.sponsored_enabled;
+
+await savePLAMSettings();
+
+}
+
+
+async function togglePayment(){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+plamSettings.payment_enabled=
+!plamSettings.payment_enabled;
+
+await savePLAMSettings();
+
+}
+
+
+async function toggleCommission(){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+plamSettings.commission_enabled=
+!plamSettings.commission_enabled;
+
+await savePLAMSettings();
+
+}
+
+
+/* =========================================================
+   SELLER AD AREA
+========================================================= */
+
+async function updateAddArea(){
+
+const area=
+document.getElementById(
+"sellerAdArea"
+);
+
+const form=
+document.getElementById(
+"adForm"
+);
+
+const status=
+document.getElementById(
+"adStatusMessage"
+);
+
+const free=
+document.getElementById(
+"freeAdNotice"
+);
+
+const paid=
+document.getElementById(
+"paidAdFields"
+);
+
+if(!area||!form||!status)return;
+
+if(!currentUser){
+
+area.classList.add(
+"hidden"
+);
+
+return;
+
+}
+
+area.classList.remove(
+"hidden"
+);
+
+if(!plamSettings.sponsored_enabled){
+
+form.classList.add(
+"hidden"
+);
+
+free.classList.add(
+"hidden"
+);
+
+paid.classList.add(
+"hidden"
+);
+
+status.innerHTML=
+'<div class="message">🔴 <b>Sponsored Ads zimezimwa kwa sasa.</b></div>';
+
+return;
+
+}
+
+form.classList.remove(
+"hidden"
+);
+
+if(!plamSettings.payment_enabled){
+
+free.classList.remove(
+"hidden"
+);
+
+paid.classList.add(
+"hidden"
+);
+
+document.getElementById(
+"adPaymentMethod"
+).required=false;
+
+document.getElementById(
+"adPhone"
+).required=false;
+
+status.innerHTML=
+'<div class="message success">🟢 <b>Sponsored Ads zipo ON.</b><br>🆓 Matangazo ni BURE kwa sasa.</div>';
+
+}else{
+
+free.classList.add(
+"hidden"
+);
+
+paid.classList.remove(
+"hidden"
+);
+
+document.getElementById(
+"adPaymentMethod"
+).required=true;
+
+document.getElementById(
+"adPhone"
+).required=true;
+
+status.innerHTML=
+'<div class="message success">🟢 Sponsored Ads ON<br>💳 Payment ON<br>💰 Commission: '+
+(plamSettings.commission_percent||5)+
+'%</div>';
+
+}
+
+await loadAdPrices();
+
+await loadSellerAdProducts();
+
+}
+
+
+/* =========================================================
+   AD PRICES
+========================================================= */
+
+async function loadAdPrices(){
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Ad_Prices")
+.select("*")
+.eq("enabled",true)
+.order(
+"duration_days",
+{ascending:true}
+);
+
+const box=
+document.getElementById(
+"adPriceBox"
+);
+
+if(error){
+
+if(box)
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+adPrices=data||[];
+
+const select=
+document.getElementById(
+"adDuration"
+);
+
+if(!select)return;
+
+select.innerHTML=
+'<option value="">Chagua muda</option>';
+
+adPrices.forEach(p=>{
+
+const o=
+document.createElement(
+"option"
+);
+
+o.value=
+p.duration_days;
+
+o.textContent=
+plamSettings.payment_enabled
+?
+`${p.duration_days} siku - TSh ${money(p.amount)}`
+:
+`${p.duration_days} siku - BURE`;
+
+select.appendChild(o);
+
+});
+
+}
+
+
+function updateAdPrice(){
+
+const days=
+Number(
+document.getElementById(
+"adDuration"
+).value
+);
+
+const price=
+adPrices.find(
+p=>
+Number(p.duration_days)===days
+);
+
+const box=
+document.getElementById(
+"adPriceBox"
+);
+
+if(!price){
+
+box.innerHTML=
+"Chagua muda wa tangazo.";
+
+return;
+
+}
+
+if(!plamSettings.payment_enabled){
+
+box.innerHTML=
+`
+<b>⏱️ Muda:</b>
+${days} siku
+
+<br>
+
+<b>💰 Bei:</b>
+BURE
+
+<br>
+
+⏳ Pending Admin approval
+`;
+
+return;
+
+}
+
+const commission=
+plamSettings.commission_enabled
+?
+Number(price.amount)*
+Number(
+plamSettings.commission_percent||5
+)/100
+:
+0;
+
+box.innerHTML=
+`
+<b>💵 Bei:</b>
+TSh ${money(price.amount)}
+
+<br>
+
+<b>⏱️ Muda:</b>
+${days} siku
+
+<br>
+
+<b>💰 Commission:</b>
+TSh ${money(commission)}
+
+<br>
+
+<b>💵 Seller:</b>
+TSh ${
+money(
+Number(price.amount)-commission
+)
+}
+`;
+
+}
+
+
+/* =========================================================
+   SELLER AD PRODUCTS
+========================================================= */
+
+async function loadSellerAdProducts(){
+
+if(!currentUser)return;
+
+const select=
+document.getElementById(
+"adProduct"
+);
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select(
+"id,name,price"
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+select.innerHTML=
+"<option>Imeshindikana kupakia</option>";
+
+return;
+
+}
+
+select.innerHTML=
+'<option value="">Chagua bidhaa</option>';
+
+(data||[]).forEach(p=>{
+
+const o=
+document.createElement(
+"option"
+);
+
+o.value=p.id;
+
+o.textContent=
+`${p.name} - TSh ${money(p.price)}`;
+
+select.appendChild(o);
+
+});
+
+}
+
+
+/* =========================================================
+   CREATE AD
+========================================================= */
+
+async function createSponsoredAd(e){
+
+e.preventDefault();
+
+if(!currentUser)
+return alert(
+"Ingia kwanza."
+);
+
+if(!plamSettings.sponsored_enabled)
+return alert(
+"Sponsored Ads zimezimwa."
+);
+
+const msg=
+document.getElementById(
+"adMessage"
+);
+
+msg.innerHTML=
+'<div class="message">⏳ Inatuma ombi...</div>';
+
+try{
+
+const productId=
+Number(
+document.getElementById(
+"adProduct"
+).value
+);
+
+const days=
+Number(
+document.getElementById(
+"adDuration"
+).value
+);
+
+if(!productId||!days)
+
+throw new Error(
+"Chagua bidhaa na muda wa tangazo."
+);
+
+
+if(!plamSettings.payment_enabled){
+
+const {error}=
+await supabaseClient.rpc(
+"create_free_plam_ad",
+{
+p_product_id:productId,
+p_duration_days:days
+}
+);
+
+if(error)throw error;
+
+msg.innerHTML=
+'<div class="message success">✅ Ombi la tangazo limetumwa.<br>🆓 BURE<br>⏳ Pending Admin approval.</div>';
+
+document
+.getElementById(
+"adForm"
+)
+.reset();
+
+await loadMyAds();
+
+if(isAdmin)
+await loadAdminSponsoredAds();
+
+return;
+
+}
+
+
+const method=
+document.getElementById(
+"adPaymentMethod"
+).value;
+
+const phone=
+document.getElementById(
+"adPhone"
+).value.trim();
+
+const transaction=
+document.getElementById(
+"adTransaction"
+).value.trim();
+
+const price=
+adPrices.find(
+p=>
+Number(p.duration_days)===days
+);
+
+if(!price)
+
+throw new Error(
+"Chagua muda sahihi."
+);
+
+if(!method||!phone)
+
+throw new Error(
+"Jaza mtandao wa malipo na namba."
+);
+
+const commissionPercent=
+plamSettings.commission_enabled
+?
+Number(
+plamSettings.commission_percent||5
+)
+:
+0;
+
+const commission=
+Number(price.amount)*
+commissionPercent/100;
+
+const {data:ad,error:adError}=
+await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.insert({
+
+product_id:productId,
+
+seller_id:currentUser.id,
+
+duration_days:days,
+
+amount:Number(price.amount),
+
+commission_percent:
+commissionPercent,
+
+commission_amount:
+commission,
+
+seller_amount:
+Number(price.amount)-commission,
+
+status:"pending",
+
+payment_status:"unpaid"
+
+})
+.select()
+.single();
+
+if(adError)throw adError;
+
+const {error:payError}=
+await supabaseClient
+.from("PLAM_Ad_Payments")
+.insert({
+
+ad_id:ad.id,
+
+buyer_id:currentUser.id,
+
+amount:Number(price.amount),
+
+duration_days:days,
+
+payment_method:method,
+
+phone:phone,
+
+transaction_id:
+transaction||null,
+
+status:"pending",
+
+commission_percent:
+commissionPercent
+
+});
+
+if(payError)throw payError;
+
+msg.innerHTML=
+'<div class="message success">✅ Ombi limetumwa.<br>⏳ Admin atakagua malipo.</div>';
+
+document
+.getElementById(
+"adForm"
+)
+.reset();
+
+await loadMyAds();
+
+}catch(e){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(e.message)+
+'</div>';
+
+}
+
+}
+
+
+/* =========================================================
+   MY ADS
+========================================================= */
+
+async function loadMyAds(){
+
+if(!currentUser)return;
+
+const box=
+document.getElementById(
+"myAds"
+);
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.select("*")
+.eq(
+"seller_id",
+currentUser.id
+)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Huna tangazo lililotumwa.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+data.map(a=>`
+
+<div class="card">
+
+<h3>
+📢 Tangazo #${a.id}
+</h3>
+
+<p>
+<b>Bidhaa ID:</b>
+${a.product_id}
+</p>
+
+<p>
+<b>Muda:</b>
+${a.duration_days} siku
+</p>
+
+<p>
+<b>Kiasi:</b>
+${
+a.payment_status==="free"
+?
+"BURE"
+:
+"TSh "+money(a.amount)
+}
+</p>
+
+<p>
+<b>Status:</b>
+${statusBadge(a.status)}
+</p>
+
+<p>
+<b>Payment:</b>
+${escapeHTML(
+a.payment_status||"unpaid"
+)}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================================================
+   PUBLIC ADS
+========================================================= */
+
+async function loadSponsoredAds(){
+
+const box=
+document.getElementById(
+"publicAds"
+);
+
+if(!plamSettings.sponsored_enabled){
+
+box.innerHTML="";
+
+if(adTimer)
+clearInterval(adTimer);
+
+return;
+
+}
+
+const {data:ads,error}=
+await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.select("*")
+.eq(
+"status",
+"active"
+)
+.in(
+"payment_status",
+["paid","free"]
+)
+.gt(
+"expires_at",
+new Date().toISOString()
+)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error||!ads?.length){
+
+box.innerHTML="";
+
+return;
+
+}
+
+const ids=
+ads.map(
+a=>a.product_id
+);
+
+const {data:products,error:pe}=
+await supabaseClient
+.from("Production")
+.select("*")
+.in(
+"id",
+ids
+);
+
+if(pe){
+
+box.innerHTML="";
+
+return;
+
+}
+
+const map={};
+
+(products||[]).forEach(
+p=>map[p.id]=p
+);
+
+const valid=
+ads.filter(
+a=>map[a.product_id]
+);
+
+if(!valid.length){
+
+box.innerHTML="";
+
+return;
+
+}
+
+sponsoredAds=valid;
+adIndex=0;
+
+box.innerHTML=
+`
+
+<div class="card">
+
+<h2>📢 Sponsored Ads</h2>
+
+<div class="ad-wrap">
+
+<div
+id="adTrack"
+class="ad-track">
+
+${
+valid.map(a=>{
+
+const p=
+map[a.product_id];
+
+const phone=
+p.phone||"";
+
+const wa=
+phone
+.replace(/\D/g,"")
+.replace(/^0/,"255");
+
+return`
+
+<div class="ad-slide">
+
+<div class="product">
+
+<div class="product-images">
+
+${
+p.image_url
+?
+`<img src="${escapeHTML(p.image_url)}">`
+:
+""
+}
+
+${
+p.image_url_2
+?
+`<img src="${escapeHTML(p.image_url_2)}">`
+:
+""
+}
+
+</div>
+
+<div class="product-body">
+
+<span class="sponsored-label">
+📢 SPONSORED
+</span>
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+<div class="price">
+TSh ${money(p.price)}
+</div>
+
+<div class="meta">
+
+${escapeHTML(p.region||"")}
+-
+${escapeHTML(p.district||"")}
+-
+${escapeHTML(p.place||"")}
+
+</div>
+
+<p>
+${escapeHTML(p.description||"")}
+</p>
+
+<div class="actions">
+
+<a
+class="main"
+href="tel:${escapeHTML(phone)}">
+
+📞 Piga Simu
+
+</a>
+
+<a
+class="main"
+style="background:#25D366"
+href="https://wa.me/${wa}"
+target="_blank">
+
+💬 WhatsApp
+
+</a>
+
+<button
+class="main orange"
+onclick="openOrder(${Number(p.id)})">
+
+🛒 Agiza
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("")
+}
+
+</div>
+
+</div>
+
+<div
+id="adDots"
+class="ad-dots">
+
+${
+valid.map(
+(_,i)=>
+`<span class="ad-dot ${
+i===0?"active":""
+}"></span>`
+).join("")
+}
+
+</div>
+
+</div>
+
+`;
+
+if(adTimer)
+clearInterval(adTimer);
+
+if(valid.length>1){
+
+adTimer=
+setInterval(()=>{
+
+adIndex++;
+
+if(adIndex>=valid.length)
+adIndex=0;
+
+moveAd();
+
+},5000);
+
+}
+
+}
+
+
+function moveAd(){
+
+const track=
+document.getElementById(
+"adTrack"
+);
+
+if(!track)return;
+
+track.style.transform=
+`translateX(-${adIndex*100}%)`;
+
+document
+.querySelectorAll(
+"#adDots .ad-dot"
+)
+.forEach((d,i)=>{
+
+d.classList.toggle(
+"active",
+i===adIndex
+);
+
+});
+
+}
+
+
+/* =========================================================
+   ADMIN CHECK
+========================================================= */
+
+async function checkAdmin(){
+
+if(!currentUser){
+
+isAdmin=false;
+
+return false;
+
+}
+
+const {data,error}=
+await supabaseClient.rpc(
+"is_plam_admin"
+);
+
+isAdmin=
+!error&&data===true;
+
+return isAdmin;
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+async function adminLogin(){
+
+const email=
+document.getElementById(
+"adminEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"adminPassword"
+).value;
+
+const msg=
+document.getElementById(
+"adminMessage"
+);
+
+if(!email||!password){
+
+msg.innerHTML=
+'<div class="message error">Weka email na password.</div>';
+
+applyMaintenanceMode();
+
+return;
+
+}
+
+const {data,error}=
+await supabaseClient.auth
+.signInWithPassword({
+email,
+password
+});
+
+if(error){
+
+msg.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+'</div>';
+
+isAdmin=false;
+
+applyMaintenanceMode();
+
+return;
+
+}
+
+currentUser=data.user;
+
+const admin=
+await checkAdmin();
+
+if(!admin){
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+
+msg.innerHTML=
+'<div class="message error">❌ Akaunti hii si Admin.</div>';
+
+applyMaintenanceMode();
+
+return;
+
+}
+
+document
+.getElementById(
+"adminLoginArea"
+)
+.classList.add("hidden");
+
+document
+.getElementById(
+"adminDashboard"
+)
+.classList.remove("hidden");
+
+document
+.getElementById(
+"adminWelcome"
+)
+.innerHTML=
+"Karibu Admin: <b>"+
+escapeHTML(
+currentUser.email
+)+
+"</b>";
+
+await loadPLAMSettings();
+
+await loadAdminData();
+
+applyMaintenanceMode();
+
+}
+
+
+/* =========================================================
+   ADMIN DATA
+========================================================= */
+
+async function loadAdminData(){
+
+if(!isAdmin)return;
+
+await loadAdminAdPayments();
+
+await loadAdminSponsoredAds();
+
+await loadAdminProducts();
+
+await loadAdminOrders();
+
+await loadAdminUsers();
+
+}
+
+
+/* =========================================================
+   ADMIN PAYMENTS
+========================================================= */
+
+async function loadAdminAdPayments(){
+
+const box=
+document.getElementById(
+"adminAdPayments"
+);
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Ad_Payments")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Hakuna malipo ya matangazo.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Ad</th>
+<th>Amount</th>
+<th>Network</th>
+<th>Phone</th>
+<th>Transaction</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+data.map(p=>`
+
+<tr>
+
+<td>${p.id}</td>
+
+<td>${p.ad_id||"-"}</td>
+
+<td>
+TSh ${money(p.amount)}
+</td>
+
+<td>
+${escapeHTML(
+p.payment_method||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+p.phone||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+p.transaction_id||"HAIPO"
+)}
+</td>
+
+<td>
+${statusBadge(p.status)}
+</td>
+
+<td>
+
+${
+p.status==="pending"
+?
+`
+
+<button
+class="main"
+onclick="approveAdPayment(${Number(p.id)})">
+
+✅ Approve
+
+</button>
+
+<button
+class="main red"
+onclick="rejectAdPayment(${Number(p.id)})">
+
+❌ Reject
+
+</button>
+
+`
+:
+""
+}
+
+</td>
+
+</tr>
+
+`).join("")
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+async function approveAdPayment(id){
+
+if(!isAdmin)
+return alert(
+"Not authorized."
+);
+
+if(!confirm(
+"Una uhakika unataka ku-approve malipo haya?"
+))
+return;
+
+const {error}=
+await supabaseClient.rpc(
+"admin_update_plam_ad_payment",
+{
+p_payment_id:id,
+p_status:"approved"
+}
+);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert(
+"✅ Malipo yamekubaliwa."
+);
+
+await loadAdminAdPayments();
+
+await loadAdminSponsoredAds();
+
+await loadSponsoredAds();
+
+await loadMyAds();
+
+}
+
+
+async function rejectAdPayment(id){
+
+if(!isAdmin)
+return alert(
+"Not authorized."
+);
+
+if(!confirm(
+"Una uhakika unataka kukataa malipo haya?"
+))
+return;
+
+const {error}=
+await supabaseClient.rpc(
+"admin_update_plam_ad_payment",
+{
+p_payment_id:id,
+p_status:"rejected"
+}
+);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert(
+"❌ Malipo yamekataliwa."
+);
+
+await loadAdminAdPayments();
+
+await loadAdminSponsoredAds();
+
+await loadMyAds();
+
+}
+
+
+/* =========================================================
+   ADMIN SPONSORED ADS
+========================================================= */
+
+async function loadAdminSponsoredAds(){
+
+const box=
+document.getElementById(
+"adminSponsoredAds"
+);
+
+if(!isAdmin){
+
+box.innerHTML=
+'<div class="message error">❌ Ruhusa ya Admin inahitajika.</div>';
+
+return;
+
+}
+
+const {data,error}=
+await supabaseClient
+.from("PLAM_Sponsored_Ads")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Hakuna Sponsored Ads.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Seller</th>
+<th>Days</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Payment</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+data.map(a=>`
+
+<tr>
+
+<td>${a.id}</td>
+
+<td>${a.product_id}</td>
+
+<td>
+${escapeHTML(
+a.seller_id||""
+)}
+</td>
+
+<td>
+${a.duration_days}
+</td>
+
+<td>
+${
+a.payment_status==="free"
+?
+"BURE"
+:
+"TSh "+money(a.amount)
+}
+</td>
+
+<td>
+${statusBadge(a.status)}
+</td>
+
+<td>
+${escapeHTML(
+a.payment_status||""
+)}
+</td>
+
+<td>
+
+${
+a.status==="pending"
+?
+`
+
+<button
+class="main"
+onclick="approveSponsoredAd(${Number(a.id)})">
+
+✅ KUBALI
+
+</button>
+
+<button
+class="main red"
+onclick="rejectSponsoredAd(${Number(a.id)})">
+
+❌ KATAA
+
+</button>
+
+`
+:
+a.status==="active"
+?
+'<span class="badge active">IMEWASHWA</span>'
+:
+'<span class="badge rejected">IMEKATALIWA</span>'
+}
+
+</td>
+
+</tr>
+
+`).join("")
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+async function approveSponsoredAd(id){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+if(!confirm(
+"Unataka kuruhusu tangazo hili?"
+))
+return;
+
+const {error}=
+await supabaseClient.rpc(
+"admin_update_plam_sponsored_ad_status",
+{
+p_ad_id:Number(id),
+p_status:"active"
+}
+);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert(
+"✅ Tangazo limewashwa."
+);
+
+await loadAdminSponsoredAds();
+
+await loadSponsoredAds();
+
+await loadMyAds();
+
+}
+
+
+async function rejectSponsoredAd(id){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+if(!confirm(
+"Unataka kukataa tangazo hili?"
+))
+return;
+
+const {error}=
+await supabaseClient.rpc(
+"admin_update_plam_sponsored_ad_status",
+{
+p_ad_id:Number(id),
+p_status:"rejected"
+}
+);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert(
+"❌ Tangazo limekataliwa."
+);
+
+await loadAdminSponsoredAds();
+
+await loadMyAds();
+
+}
+
+
+/* =========================================================
+   ADMIN PRODUCTS
+========================================================= */
+
+async function loadAdminProducts(){
+
+const box=
+document.getElementById(
+"adminProducts"
+);
+
+const {data,error}=
+await supabaseClient
+.from("Production")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Hakuna bidhaa.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Price</th>
+<th>Category</th>
+<th>Location</th>
+<th>Phone</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+data.map(p=>`
+
+<tr>
+
+<td>${p.id}</td>
+
+<td>
+${escapeHTML(p.name)}
+</td>
+
+<td>
+TSh ${money(p.price)}
+</td>
+
+<td>
+${escapeHTML(p.category||"")}
+</td>
+
+<td>
+${escapeHTML(p.region||"")}
+/
+${escapeHTML(p.district||"")}
+/
+${escapeHTML(p.place||"")}
+</td>
+
+<td>
+${escapeHTML(p.phone||"")}
+</td>
+
+<td>
+${statusBadge(p.status)}
+</td>
+
+<td>
+
+<button
+class="main red"
+onclick="deleteProduct(${Number(p.id)})">
+
+🗑️ Futa
+
+</button>
+
+</td>
+
+</tr>
+
+`).join("")
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+async function deleteProduct(id){
+
+if(!isAdmin)
+return alert(
+"❌ Ruhusa ya Admin inahitajika."
+);
+
+if(!confirm(
+"⚠️ Una uhakika unataka kufuta bidhaa hii?"
+))
+return;
+
+const {error}=
+await supabaseClient.rpc(
+"admin_delete_plam_product",
+{
+p_product_id:Number(id)
+}
+);
+
+if(error){
+
+alert(
+"❌ "+error.message
+);
+
+return;
+
+}
+
+alert(
+"✅ Bidhaa imefutwa."
+);
+
+await loadAdminProducts();
+
+await loadProducts();
+
+await loadSponsoredAds();
+
+}
+
+
+/* =========================================================
+   ADMIN ORDERS
+========================================================= */
+
+async function loadAdminOrders(){
+
+const box=
+document.getElementById(
+"adminOrders"
+);
+
+const {data,error}=
+await supabaseClient
+.from("orders")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error){
+
+box.innerHTML=
+'<div class="message error">'+
+escapeHTML(error.message)+
+'</div>';
+
+return;
+
+}
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="message">Hakuna orders.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Buyer</th>
+<th>Buyer Phone</th>
+<th>Seller Phone</th>
+<th>Quantity</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+data.map(o=>`
+
+<tr>
+
+<td>${o.id}</td>
+
+<td>
+${escapeHTML(
+o.product_name||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+o.buyer_name||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+o.buyer_phone||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+o.seller_phone||""
+)}
+</td>
+
+<td>
+${escapeHTML(
+o.quantity||""
+)}
+</td>
+
+<td>
+${statusBadge(o.status)}
+</td>
+
+</tr>
+
+`).join("")
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   ADMIN USERS
+   MFUMO MPYA WA WARNING/SUSPEND/BAN
+========================================================= */
+
+async function loadAdminUsers(){
+
+const box=
+document.getElementById(
+"adminUsers"
+);
+
+if(!isAdmin){
+
+box.innerHTML=
+'<div class="message error">❌ Ruhusa ya Admin inahitajika.</div>';
+
+return;
+
+}
+
+
+/* GET PROFILES */
+
+const {data:profiles,error:profileError}=
+await supabaseClient
+.from("profiles")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(profileError){
+
+box.innerHTML=
+'<div class="message error">❌ '+
+escapeHTML(
+profileError.message
+)+
+'</div>';
+
+return;
+
+}
+
+
+/* GET USER CONTROL */
+
+const {data:controls,error:controlError}=
+await supabaseClient
+.from("user_control")
+.select("*");
+
+if(controlError){
+
+box.innerHTML=
+'<div class="message error">❌ Imeshindikana kupata status za akaunti: '+
+escapeHTML(
+controlError.message
+)+
+'</div>';
+
+return;
+
+}
+
+
+/* MAP */
+
+const controlMap={};
+
+(controls||[]).forEach(c=>{
+
+controlMap[c.user_id]=c;
+
+});
+
+
+if(!profiles||!profiles.length){
+
+box.innerHTML=
+'<div class="message">Hakuna profiles.</div>';
+
+return;
+
+}
+
+
+/* COUNTS */
+
+let activeCount=0;
+let warningCount=0;
+let suspendedCount=0;
+let bannedCount=0;
+
+profiles.forEach(u=>{
+
+const c=
+controlMap[u.id];
+
+const status=
+String(
+c?.status||"active"
+)
+.toLowerCase();
+
+if(status==="active")
+activeCount++;
+
+if(status==="warning")
+warningCount++;
+
+if(status==="suspended")
+suspendedCount++;
+
+if(status==="banned")
+bannedCount++;
+
+});
+
+
+/* TABLE */
+
+box.innerHTML=
+`
+
+<div class="message success">
+
+<b>
+👥 Watumiaji: ${profiles.length}
+</b>
+
+<br><br>
+
+🟢 Active:
+<b>${activeCount}</b>
+
+&nbsp;&nbsp;
+
+🟡 Warning:
+<b>${warningCount}</b>
+
+&nbsp;&nbsp;
+
+🟠 Suspended:
+<b>${suspendedCount}</b>
+
+&nbsp;&nbsp;
+
+⚫ Banned:
+<b>${bannedCount}</b>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Jina</th>
+
+<th>Simu</th>
+
+<th>Email</th>
+
+<th>Status</th>
+
+<th>Sababu</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+profiles.map(u=>{
+
+const c=
+controlMap[u.id]||{};
+
+const status=
+String(
+c.status||"active"
+)
+.toLowerCase();
+
+let reason="";
+
+if(status==="warning"){
+
+reason=
+c.warning_reason||"";
+
+}
+
+else if(status==="suspended"){
+
+reason=
+c.suspension_reason||"";
+
+}
+
+else if(status==="banned"){
+
+reason=
+c.banned_reason||"";
+
+}
+
+
+/* SUSPENSION END */
+
+let until="";
+
+if(
+status==="suspended" &&
+c.suspended_until
+){
+
+until=
+`
+
+<br>
+
+<small>
+
+⏱️ Mpaka:
+
+${escapeHTML(
+new Date(
+c.suspended_until
+).toLocaleString(
+"sw-TZ"
+)
+)}
+
+</small>
+
+`;
+
+}
+
+
+/* USER ROW */
+
+return`
+
+<tr>
+
+<td>
+
+<div class="user-id">
+
+${escapeHTML(
+u.id||""
+)}
+
+</div>
+
+</td>
+
+
+<td>
+
+<b>
+
+${escapeHTML(
+u.full_name||""
+)}
+
+</b>
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+u.phone||""
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+u.email||""
+)}
+
+</td>
+
+
+<td>
+
+${accountStatusBadge(
+status
+)}
+
+${until}
+
+</td>
+
+
+<td>
+
+<div class="user-reason">
+
+${
+reason
+?
+escapeHTML(reason)
+:
+'<span class="small">Hakuna</span>'
+}
+
+</div>
+
+</td>
+
+
+<td>
+
+<div class="user-actions">
+
+
+<button
+class="main"
+onclick="changeUserAccountStatus(
+'${escapeHTML(u.id)}',
+'warning'
+)">
+
+🟡 Warning
+
+</button>
+
+
+<button
+class="main orange"
+onclick="changeUserAccountStatus(
+'${escapeHTML(u.id)}',
+'suspended'
+)">
+
+🟠 Suspend
+
+</button>
+
+
+<button
+class="main"
+onclick="changeUserAccountStatus(
+'${escapeHTML(u.id)}',
+'active'
+)">
+
+🔓 Unblock
+
+</button>
+
+
+<button
+class="main red"
+onclick="changeUserAccountStatus(
+'${escapeHTML(u.id)}',
+'banned'
+)">
+
+⚫ Ban
+
+</button>
+
+
+<button
+class="main red"
+onclick="deleteUserAccount(
+'${escapeHTML(u.id)}'
+)">
+
+🗑️ Delete
+
+</button>
+
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+}).join("")
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   ADMIN LOGOUT
+========================================================= */
+
+async function adminLogout(){
+
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+isAdmin=false;
+
+document
+.getElementById(
+"adminDashboard"
+)
+.classList.add("hidden");
+
+document
+.getElementById(
+"adminLoginArea"
+)
+.classList.remove("hidden");
+
+document
+.getElementById(
+"adminMessage"
+)
+.innerHTML="";
+
+applyMaintenanceMode();
+
+show("home");
+
+}
+
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+async function startup(){
+
+fillRegions();
+
+try{
+
+const {data}=
+await supabaseClient.auth
+.getSession();
+
+if(data.session){
+
+currentUser=
+data.session.user;
+
+await checkAdmin();
+
+/* Usimzuie Admin */
+
+if(!isAdmin){
+
+const allowed=
+await checkUserAccountStatus();
+
+if(!allowed){
+
+return;
+
+}
+
+}
+
+}
+
+}catch(e){
+
+console.error(
+"Session:",
+e
+);
+
+}
+
+await loadPLAMSettings();
+
+await loadProducts();
+
+await loadSponsoredAds();
+
+updateAccountUI();
+
+applyMaintenanceMode();
+
+if(isAdmin){
+
+document
+.getElementById(
+"adminLoginArea"
+)
+.classList.add("hidden");
+
+document
+.getElementById(
+"adminDashboard"
+)
+.classList.remove("hidden");
+
+await loadAdminData();
+
+}
+
+startMaintenancePolling();
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+   LISTENER MOJA TU
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+async(event,session)=>{
+
+currentUser=
+session?.user||null;
+
+if(currentUser){
+
+await checkAdmin();
+
+}else{
+
+isAdmin=false;
+
+}
+
+updateAccountUI();
+
+applyMaintenanceMode();
+
+updateMaintenanceButton();
+
+}
+);
+
+/* =========================================================
+   START
+========================================================= */
+
+startup();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("PLAM App imeunganishwa"))
+      .catch(err => console.log("Service Worker Error:", err));
+  });
+}
+
+</script>
+
+</body>
+</html>
